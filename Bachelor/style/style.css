@@ -1,0 +1,87 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15.sep.2015, 08:40:11
+    Author     : Nesjen
+*/
+
+body, html { 
+    overflow-x: hidden; 
+    overflow-y: auto;
+}
+
+body
+{
+    border: 0;
+    margin:0;
+    padding:0;
+    background-color: #f2f2f2;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
+}
+
+
+header
+{
+    max-height: 66px;
+    width: 100%;
+    float: left;
+    background: #cce0ff;
+}
+
+#left-top-logo
+{
+    resize: both;
+    max-height: 100%;
+    max-width: 20%;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
+
+#left-menu
+{
+    width: 228px;
+    background: #1a53ff;
+    height: 94%;
+    position: absolute;
+    margin-top: 66px;
+}
+
+#main-wrapper
+{
+    float: left;
+    margin-left: 228px;
+    padding: 5%;
+}
+
+
+nav
+{
+    margin-top: 30px;
+}
+
+nav a
+{
+    color: #f2f2f2;
+    text-decoration: none;
+    
+}
+
+nav a:hover 
+{
+    color: activeborder;
+}
+
+ul
+{
+    list-style-type: none;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+ul:hover
+{
+        border:solid 1px #fff;
+}
