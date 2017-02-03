@@ -23,6 +23,19 @@ button {
     cursor: pointer;
     width: 100%;
 }
+header
+{
+    text-align: center;
+}
+IMG.index-bilde
+{
+    display: block;
+    
+    margin-left: auto;
+    margin-right: auto;
+    
+    
+}
 
 /* Extra style for the cancel button (red) */
 .cancelbtn {
