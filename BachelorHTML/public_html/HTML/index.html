@@ -17,12 +17,14 @@
             <h1>Velkommen til lagersystemet til tafjord</h1>
             <h2>Vennligst logg inn</h2>
         </header>
+
         <button onclick="document.getElementById('id01').style.display = 'block'">Login</button>
+
         <div id="id01" class="modal">
 
 
             <!-- Modal innhold -->
-            <form class="modal-content animate" id="login" action="action_page.php">
+            <form class="modal-content animate" id="login" action="home.html">
                 <div class="imgcontainer">
                     <img src="../image/TafjordLogo.png" alt="Avatar" class="avatar">
                 </div>
@@ -32,8 +34,8 @@
 
                     <label><b>Passord</b></label>
 
-                    <input type="text" id="psw" placeholder="Vennligst fyll inn passord" name="psw" required>
-                    <input type="checkbox" id="show-hide" name="show-hide" value="" checked="checked"> Show Password
+                    <input type="password" id="psw" placeholder="Vennligst fyll inn passord" name="psw" required>
+                    <input type="checkbox" id="show-hide" name="show-hide" value=""> Show Password
                     <button type="submit">Login</button>
 
 
