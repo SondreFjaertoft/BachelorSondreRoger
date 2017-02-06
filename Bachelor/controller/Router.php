@@ -24,12 +24,11 @@ class Router {
         $page = $this->getPage();
         switch ($page) {
             case "overview":
+            case "dummyAdd":    
                 return new OverviewController();
             
-            case "addDummy":
-            default:
-                return new OverviewController();
-            
+  //          case "dummyAdd":    
+  //              return new OverviewController();
         }
         
         

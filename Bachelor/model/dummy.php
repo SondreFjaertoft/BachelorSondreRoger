@@ -32,8 +32,10 @@ class Dummy{
         return $this->selStmt->fetchAll(PDO::FETCH_ASSOC);
     }   
     
-    public function addDummy($ID, $brukernavn, $tekst){
-        return $this->addStmt->execute(array("ID" =>$ID, "brukernavn" => $brukernavn, "tekst" => $tekst));
+   
+    
+    public function addDummy($givenID, $givenUser, $givenTekst){
+        return $this->addStmt->execute(array("ID" => $givenID, "Brukernavn" => $givenUser, "tekst" => $givenTekst));
     }
     
     
