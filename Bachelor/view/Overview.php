@@ -1,6 +1,6 @@
    
 <?php
-$results = $GLOBALS["dummy"];
+$results = $GLOBALS["dummyInfo"];
 ?>
 
 <div id="main-wrapper">
@@ -13,21 +13,16 @@ $results = $GLOBALS["dummy"];
 
     <br> <br>
     
-    <?php
-    $display = new Dummy();
-    $getRow = $display->getAll();
-    var_dump($getRow);
-    ?>
     
     <b>Opprett ny brukerting</b>
 
-    <form action="?page=addDummy" method="post">
+    <form action="?page=dummyAdd" method="post">
         ID:<br>
-        <input type="int" name="ID" value=""><br>
+        <input type="int" name="givenID" value=""><br>
         Brukernavn:<br>
-        <input type="text" name="brukernavn" value=""><br>
+        <input type="text" name="givenUser" value=""><br>
         Info:<br>
-        <input type="text" name="tekst" value=""><br><br>
+        <input type="text" name="givenTekst" value=""><br><br>
         <input type="submit" value="Submit">
     </form>
 </div>
