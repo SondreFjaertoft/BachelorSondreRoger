@@ -27,8 +27,6 @@ class Router {
             case "dummyAdd":    
                 return new OverviewController();
             
-  //          case "dummyAdd":    
-  //              return new OverviewController();
         }
         
         
