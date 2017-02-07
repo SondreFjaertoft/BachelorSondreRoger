@@ -1,0 +1,604 @@
+SQL creation of database
+
+CREATE DATABASE tafjord;
+USE tafjord;
+
+
+--- CREATE TABLES ----
+
+
+
+
+--- Create "categories" table ----
+
+CREATE TABLE IF NOT EXISTS `categories` (
+  `categoryID` int(11) unsigned NOT NULL,
+  `categoryName` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+--- Create "media" table ----
+
+CREATE TABLE IF NOT EXISTS `media` (
+  `mediaID` int(11) unsigned NOT NULL,
+  `mediaName` varchar(255) NOT NULL,
+  `fileType` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+--- Create "product" table ---
+
+CREATE TABLE IF NOT EXISTS `products` (
+  `productID` int(11) unsigned NOT NULL,
+  `productName` varchar(255) NOT NULL,
+  `buyPrice` decimal(25,2),
+  `salePrice` decimal(25,2) NOT NULL,
+  `categoryID` int(11) unsigned NOT NULL,
+  `mediaID` int(11) unsigned NOT NULL,
+  `productNumber` varchar(15) DEFAULT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+--- Create "sales" table ---
+
+CREATE TABLE IF NOT EXISTS `sales` (
+  `salesID` int(11) unsigned NOT NULL,
+  `productID` int(11) unsigned NOT NULL,
+  `date` date NOT NULL,
+  `customerNr` int(11) NOT NULL,
+  `comment` text,
+  `userID` int(11) unsigned NOT NULL,
+  `checkOutID` int(11) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+--- Create "trade" table ---
+
+CREATE TABLE IF NOT EXISTS `trade` (
+  `tradeID` int(11) unsigned NOT NULL,
+  `productID` int(11) unsigned NOT NULL,
+  `date` date NOT NULL,
+  `customerNr` int(11) NOT NULL,
+  `comment` text,
+  `userID` int(11) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+--- Create "users" table ---
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `userID` int(11) unsigned NOT NULL,
+  `name` varchar(60) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `userLevel` varchar(50) NOT NULL,
+  `image` varchar(255) DEFAULT 'tafjord.jpg',
+  `lastLogin` datetime DEFAULT NULL,
+  `email` VARCHAR(255)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+--- Create "inventory" table ---
+
+CREATE TABLE IF NOT EXISTS `inventory`(
+`inventoryID` int(11) unsigned NOT NULL,
+`storageID` int(11) unsigned NOT NULL,
+`productID` int(11) unsigned NOT NULL,
+`macAdresse` varchar(50)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+--- Create "storage" table ---
+
+CREATE TABLE IF NOT EXISTS `storage` (
+`storageID` int(11) unsigned NOT NULL,
+`storageName` varchar(60)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+--- Create "restrictions" table ---
+
+CREATE TABLE IF NOT EXISTS `restrictions` (
+`resID` int(11) unsigned NOT NULL,
+`userID` int(11) unsigned NOT NULL,
+`storageID` int(11) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+--- Create "logg" table ---
+
+CREATE TABLE IF NOT EXISTS `logg` (
+`loggID` int(11) unsigned NOT NULL,
+`userID` int(11) unsigned NOT NULL,
+`inventoryID` int(11) unsigned NOT NULL,
+`incidentDesc` text,
+`date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+--- Create "checkOut" tabel
+
+CREATE TABLE IF NOT EXISTS `checkOut` (
+`checkOutID` int(11) unsigned NOT NULL,
+`userID` int(11) unsigned NOT NULL,
+`inventoryID` int(11) unsigned NOT NULL,
+`date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+
+
+
+
+
+--- SET KEYS TO TABLES ---
+
+
+
+
+--- set KEYS to "madia" table ---
+
+ALTER TABLE `media`
+ADD PRIMARY KEY (`mediaID`),
+ADD UNIQUE (`mediaName`)
+
+
+
+--- set KEYS to "categories" table ---
+
+ALTER TABLE `categories`
+ADD PRIMARY KEY (`categoryID`),
+ADD UNIQUE (`categoryName`)
+
+
+
+--- set KEYS to "storage" table ---
+
+ALTER TABLE `storage`
+ADD PRIMARY KEY (`storageID`),
+ADD UNIQUE (`storageName`)
+
+
+
+--- set KEYS to "products" table ----
+
+ALTER TABLE `products`
+ADD PRIMARY KEY (`productID`),
+ADD UNIQUE (`productName`),
+ADD FOREIGN KEY (`categoryID`)
+REFERENCES `categories`(`categoryID`),
+ADD FOREIGN KEY (`mediaID`)
+REFERENCES `media`(`mediaID`)
+
+
+
+--- set KEYS to "inventory" table ---
+
+ALTER TABLE `inventory`
+ADD PRIMARY KEY (`inventoryID`),
+ADD UNIQUE (`macADresse`),
+ADD FOREIGN KEY (`storageID`)
+REFERENCES `storage`(`storageID`),
+ADD FOREIGN KEY (`productID`)
+REFERENCES `products`(`productID`)
+
+
+
+--- set KEYS to "users" table ---
+
+ALTER TABLE `users`
+ADD PRIMARY KEY (`userID`),
+ADD UNIQUE (`username`)
+
+
+
+--- set KEYS to "logg" table ---
+
+ALTER TABLE `logg`
+ADD PRIMARY KEY (`loggID`),
+ADD FOREIGN KEY (`userID`)
+REFERENCES `users`(`userID`),
+ADD FOREIGN KEY (`inventoryID`)
+REFERENCES `inventory`(`inventoryID`)
+
+
+
+--- set KEYS to "trade" table ---
+
+ALTER TABLE `trade`
+ADD PRIMARY KEY (`tradeID`),
+ADD FOREIGN KEY (`productID`)
+REFERENCES `products`(`productID`),
+ADD FOREIGN KEY (`userID`)
+REFERENCES `users`(`userID`)
+
+
+
+--- set KEYS to "restrictions" table ---
+
+ALTER TABLE `restrictions`
+ADD PRIMARY KEY (`resID`),
+ADD FOREIGN KEY (`userID`)
+REFERENCES `users`(`userID`),
+ADD FOREIGN KEY (`storageID`)
+REFERENCES `storage`(`storageID`)
+
+
+
+
+--- set KEYS to "checkOut" table ---
+
+ALTER TABLE `checkOut`
+ADD PRIMARY KEY (`checkOutID`),
+ADD FOREIGN KEY (`inventoryID`)
+REFERENCES `inventory`(`inventoryID`),
+ADD FOREIGN KEY (`userID`)
+REFERENCES `users`(`userID`)
+
+
+
+--- set KEYS to "sales" table ---
+
+ALTER TABLE `sales`
+ADD PRIMARY KEY (`salesID`),
+ADD FOREIGN KEY (`productID`)
+REFERENCES `products`(`productID`),
+ADD FOREIGN KEY (`userID`)
+REFERENCES `users`(`userID`),
+ADD FOREIGN KEY (`checkOutID`)
+REFERENCES `checkOut`(`checkOutID`)
+
+
+
+
+
+
+
+
+
+
+--------  MEDIA  --------
+
+
+CREATE TABLE IF NOT EXISTS `media` (
+  `mediaID` int(11) unsigned NOT NULL,
+  `mediaName` varchar(255) NOT NULL,
+  `fileType` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+ALTER TABLE `media`
+ADD PRIMARY KEY (`mediaID`),
+ADD UNIQUE (`mediaName`)
+
+
+
+ALTER TABLE `media`
+MODIFY `mediaID` int(11) unsigned NOT NULL AUTO_INCREMENT;
+
+
+
+
+
+
+--------- CATEGORIES ----------
+
+
+CREATE TABLE IF NOT EXISTS `categories` (
+  `categoryID` int(11) unsigned NOT NULL,
+  `categoryName` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+ALTER TABLE `categories`
+ADD PRIMARY KEY (`categoryID`),
+ADD UNIQUE (`categoryName`)
+
+
+
+ALTER TABLE `categories`
+MODIFY `categoryID` int(11) unsigned NOT NULL AUTO_INCREMENT;
+
+
+
+
+
+
+
+--------- STORAGE ---------
+
+
+CREATE TABLE IF NOT EXISTS `storage` (
+`storageID` int(11) unsigned NOT NULL,
+`storageName` varchar(60)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `storage`
+ADD PRIMARY KEY (`storageID`),
+ADD UNIQUE (`storageName`)
+
+ALTER TABLE `storage`
+MODIFY `storageID` int(11) unsigned NOT NULL AUTO_INCREMENT;
+
+
+
+
+
+
+
+--------- PRODUCTS -----------
+
+
+CREATE TABLE IF NOT EXISTS `products` (
+  `productID` int(11) unsigned NOT NULL,
+  `productName` varchar(255) NOT NULL,
+  `buyPrice` decimal(25,2),
+  `salePrice` decimal(25,2) NOT NULL,
+  `categoryID` int(11) unsigned NOT NULL,
+  `mediaID` int(11) unsigned NOT NULL,
+  `productNumber` varchar(15) DEFAULT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+ALTER TABLE `products`
+ADD PRIMARY KEY (`productID`),
+ADD UNIQUE (`productName`)
+
+ALTER TABLE `products`
+MODIFY `productID` int(11) unsigned NOT NULL AUTO_INCREMENT;
+
+
+ALTER TABLE `products`
+ADD FOREIGN KEY (`categoryID`)
+REFERENCES `categories`(`categoryID`),
+ADD FOREIGN KEY (`mediaID`)
+REFERENCES `media`(`mediaID`)
+
+
+
+
+
+
+--------- INVENTORY ------------
+
+
+CREATE TABLE IF NOT EXISTS `inventory`(
+`inventoryID` int(11) unsigned NOT NULL,
+`storageID` int(11) unsigned NOT NULL,
+`productID` int(11) unsigned NOT NULL,
+`macAdresse` varchar(50)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+ALTER TABLE `inventory`
+ADD PRIMARY KEY (`inventoryID`),
+ADD UNIQUE (`macADresse`)
+
+
+ALTER TABLE `inventory`
+MODIFY `inventoryID` int(11) unsigned NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `inventory`
+ADD FOREIGN KEY (`storageID`)
+REFERENCES `storage`(`storageID`),
+ADD FOREIGN KEY (`productID`)
+REFERENCES `products`(`productID`)
+
+
+
+
+
+
+
+--------- USERS -------------
+
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `userID` int(11) unsigned NOT NULL,
+  `name` varchar(60) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `userLevel` varchar(50) NOT NULL,
+  `image` varchar(255) DEFAULT 'tafjord.jpg',
+  `lastLogin` datetime DEFAULT NULL,
+  `email` VARCHAR(255)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `users`
+ADD PRIMARY KEY (`userID`),
+ADD UNIQUE (`username`)
+
+
+ALTER TABLE `users`
+MODIFY `userID` int(11) unsigned NOT NULL AUTO_INCREMENT;
+
+
+
+
+
+
+
+----------- CHECKOUT ------------
+
+
+CREATE TABLE IF NOT EXISTS `checkOut` (
+`checkOutID` int(11) unsigned NOT NULL,
+`userID` int(11) unsigned NOT NULL,
+`inventoryID` int(11) unsigned NOT NULL,
+`date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `checkOut`
+ADD PRIMARY KEY (`checkOutID`)
+
+
+ALTER TABLE `checkOut`
+MODIFY `checkOutID` int(11) unsigned NOT NULL AUTO_INCREMENT;
+
+
+ALTER TABLE `checkOut`
+ADD FOREIGN KEY (`inventoryID`)
+REFERENCES `inventory`(`inventoryID`),
+ADD FOREIGN KEY (`userID`)
+REFERENCES `users`(`userID`)
+
+
+
+
+
+
+
+----------- LOGG ------------
+
+
+CREATE TABLE IF NOT EXISTS `logg` (
+`loggID` int(11) unsigned NOT NULL,
+`userID` int(11) unsigned NOT NULL,
+`inventoryID` int(11) unsigned NOT NULL,
+`incidentDesc` text,
+`date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+ALTER TABLE `logg`
+ADD PRIMARY KEY (`loggID`)
+
+
+ALTER TABLE `logg`
+MODIFY `loggID` int(11) unsigned NOT NULL AUTO_INCREMENT;
+
+
+ALTER TABLE `logg`
+ADD FOREIGN KEY (`userID`)
+REFERENCES `users`(`userID`),
+ADD FOREIGN KEY (`inventoryID`)
+REFERENCES `inventory`(`inventoryID`)
+
+
+
+
+
+
+
+------------ SALES ------------
+
+
+CREATE TABLE IF NOT EXISTS `sales` (
+  `salesID` int(11) unsigned NOT NULL,
+  `productID` int(11) unsigned NOT NULL,
+  `date` date NOT NULL,
+  `customerNr` int(11) NOT NULL,
+  `comment` text,
+  `userID` int(11) unsigned NOT NULL,
+  `checkOutID` int(11) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `sales`
+ADD PRIMARY KEY (`salesID`)
+
+
+ALTER TABLE `sales`
+MODIFY `salesID` int(11) unsigned NOT NULL AUTO_INCREMENT;
+
+
+ALTER TABLE `sales`
+ADD FOREIGN KEY (`productID`)
+REFERENCES `products`(`productID`),
+ADD FOREIGN KEY (`userID`)
+REFERENCES `users`(`userID`),
+ADD FOREIGN KEY (`checkOutID`)
+REFERENCES `checkOut`(`checkOutID`)
+
+
+
+
+
+
+
+------------ RESTRICTIONS ------------
+
+
+CREATE TABLE IF NOT EXISTS `restrictions` (
+`resID` int(11) unsigned NOT NULL,
+`userID` int(11) unsigned NOT NULL,
+`storageID` int(11) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+ALTER TABLE `restrictions`
+ADD PRIMARY KEY (`resID`)
+
+
+ALTER TABLE `restrictions`
+MODIFY `resID` int(11) unsigned NOT NULL AUTO_INCREMENT;
+
+
+ALTER TABLE `restrictions`
+ADD FOREIGN KEY (`userID`)
+REFERENCES `users`(`userID`),
+ADD FOREIGN KEY (`storageID`)
+REFERENCES `storage`(`storageID`)
+
+
+
+
+
+
+
+
+------------ TRADE ------------
+
+
+CREATE TABLE IF NOT EXISTS `trade` (
+  `tradeID` int(11) unsigned NOT NULL,
+  `productID` int(11) unsigned NOT NULL,
+  `date` date NOT NULL,
+  `customerNr` int(11) NOT NULL,
+  `comment` text,
+  `userID` int(11) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+ALTER TABLE `trade`
+ADD PRIMARY KEY (`tradeID`)
+
+
+ALTER TABLE `trade`
+MODIFY `tradeID` int(11) unsigned NOT NULL AUTO_INCREMENT;
+
+
+ALTER TABLE `trade`
+ADD FOREIGN KEY (`productID`)
+REFERENCES `products`(`productID`),
+ADD FOREIGN KEY (`userID`)
+REFERENCES `users`(`userID`)
+
+
