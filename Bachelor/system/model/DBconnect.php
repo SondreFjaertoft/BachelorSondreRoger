@@ -2,6 +2,7 @@
 
 
   require_once("dummy.php");
+  require_once("UserModel.php");
 
 //connection to the database
 $dbConn = new PDO('mysql:host=localhost;dbname=tafjord;charset=utf8mb4', 'root', 'Tafjord123');

@@ -1,3 +1,5 @@
+
+<p> Dette er innloggingsiden <p>
 <?php
 
 // her kommer Logg inn siden
