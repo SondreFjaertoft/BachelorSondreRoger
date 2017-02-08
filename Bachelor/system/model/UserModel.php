@@ -6,7 +6,7 @@ class UserModel {
 
     const TABLE = "users";
     const SELECT_QUERY = "SELECT * FROM " . UserModel::TABLE;
-    const INSERT_QUERY = "INSERT INTO " . UserModel::TABLE . " (username, password) VALUES (:givenAdminUsername, :givenAdminPassword)";
+    const INSERT_QUERY = "INSERT INTO " . UserModel::TABLE . " (username, password) VALUES (:givenUsername, :givenPassword)";
     const DELETE_QUERY = "DELETE FROM " . UserModel::TABLE . " WHERE username= ?";
 
     private $selStmt;
