@@ -27,7 +27,7 @@
                             <a>Salg</a>
                         </li>
                         <li class="sideLi">
-                            <a>Salg</a>
+                            <a>Bruker Administrering</a>
                         </li>
                         
                         <li class="sideLi">
