@@ -8,7 +8,7 @@
 
     </head>
     <body>
-        <script type="text/javascript" src="../system/js/hide-show-password.js"></script>
+        <script type="text/javascript" src="system/js/hide-show-password.js"></script>
 
         <div>
             <img src="system/image/TafjordLogo.png" alt="Tafjord" class="index-bilde">
