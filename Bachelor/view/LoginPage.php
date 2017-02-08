@@ -11,7 +11,7 @@
         <script type="text/javascript" src="../system/js/hide-show-password.js"></script>
 
         <div>
-            <img src="../image/TafjordLogo.png" alt="Tafjord" class="index-bilde">
+            <img src="system/image/TafjordLogo.png" alt="Tafjord" class="index-bilde">
         </div>
         <header>
             <h1>Velkommen til lagersystemet til tafjord</h1>
@@ -26,7 +26,7 @@
             <!-- Modal innhold -->
             <form class="modal-content animate" id="login" action="?page=loginEngine" method="post">
                 <div class="imgcontainer">
-                    <img src="../image/TafjordLogo.png" alt="Avatar" class="avatar">
+                    <img src="system/image/TafjordLogo.png" alt="Avatar" class="avatar">
                 </div>
                 <div class="container">
                     <label><b>Brukernavn</b></label>
