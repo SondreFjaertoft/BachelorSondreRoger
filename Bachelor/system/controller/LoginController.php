@@ -9,6 +9,7 @@ class LoginController extends Controller {
             $this->loginEngine();
         } else {
             $this->displayLoginPage();
+            
         }
     }
 
@@ -24,8 +25,8 @@ class LoginController extends Controller {
         $Users = $userModel->getAll();
 
         foreach ($Users as $User) {
-            if ($User["Username"] == $givenUsername) {
-                if ($User["Password"] == sha1($givenPassword)) {
+            if ($User["username"] == $givenUsername) {
+                if ($User["password"] == $givenPassword) {
                     $_SESSION["AreLoggedIn"] = "true";
                     echo 'hello';
                 }

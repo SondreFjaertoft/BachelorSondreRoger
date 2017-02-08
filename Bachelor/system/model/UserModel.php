@@ -28,7 +28,7 @@ class UserModel {
     
     // kommer tilbake til, ved oppretting av bruker
     public function add($givenUsername,$givenPassword) {
-        return $this->addStmt->execute(array("givenUsername" => $givenUsername,"givenPassword" => sha1($givenPassword)));
+        return $this->addStmt->execute(array("givenUsername" => $givenUsername,"givenPassword" => $givenPassword));
     }
     
     
