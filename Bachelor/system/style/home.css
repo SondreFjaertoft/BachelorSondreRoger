@@ -1,0 +1,80 @@
+/* FOR Å TESTE TING SÅNN AT ME IKKJE ØDELEGGE DET SOM FUNKA
+
+SKAL SLETTES FØR ME E FERDIG */
+
+body
+{
+    margin: 0;
+    
+}
+#wrapper
+{
+    margin: auto;
+}
+
+#sidenav nav ul
+{
+    margin: 0;
+    padding: 0;
+}
+#sidenav nav ul li a
+{
+    
+    font-size: 1.3em;
+    color: #aaa;
+    display: block;
+    line-height: 2em;
+    padding: 0.5em 0.5em;
+    text-decoration: none;
+}
+#sidenav
+{
+    position: absolute;
+    text-align: center;
+    width: 14.2499em;
+    height: 100%;
+    background-color: #333;
+}
+
+#bildeli
+{
+    margin-bottom: -0.243em;
+}
+.sideLi a:hover
+{
+    background-color: #003366;
+}
+#header
+{
+    position: relative;
+    
+    background-color: #333;
+    margin-left: 14.2562em;
+    height: 4.12em;
+    overflow: auto;
+
+}
+#header div ul li
+{
+    display: inline-block;
+    overflow: auto;
+}
+
+#datetime
+{
+    color: #aaa;
+}
+#header #formwrapper
+{
+    padding-top: 1.3%;
+}
+form 
+{
+    position: relative;
+    width: 50%;
+    margin: 0 auto;
+    
+}
+
+
+

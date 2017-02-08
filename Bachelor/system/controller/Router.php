@@ -12,7 +12,7 @@ class Router {
             $page = $_REQUEST["page"];
         } else {
             // $page = GLOBALS["DEFAULT_PAGE"];
-            $page = "overview";
+            $page = "home";
         }
         return $page;
     }
@@ -30,8 +30,8 @@ class Router {
 
 
             switch ($page) {
-                case "overview":
-                    return new OverviewController();
+                case "home":
+                    return new HomeController();
                     
                 case "loginEngine":
                     return new LoginController();
