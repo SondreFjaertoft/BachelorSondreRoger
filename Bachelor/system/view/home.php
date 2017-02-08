@@ -29,6 +29,13 @@
                         <li class="sideLi">
                             <a>Salg</a>
                         </li>
+                        
+                        <li class="sideLi">
+                            <a href="../">Logout</a>
+                        </li>
+            <!--<li><a href="#about">Customer</a></li>
+            <li><a href="#contact">Support</a></li> -->
+     
                     </ul>
                 </nav>
             </div>
