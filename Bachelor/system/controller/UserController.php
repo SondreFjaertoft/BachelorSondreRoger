@@ -26,11 +26,11 @@ class UserController extends Controller {
         $userCreationInfo = $GLOBALS["userModel"];
         $added = $userCreationInfo->addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail);
         
-        $data = array(
-            "added"=>$added,
-            "givenUser"=>$givenUsername
-        );
-        return $this->render("createUser", $data);
+//        $data = array(
+//            "added"=>$added,
+//            "givenUser"=>$givenUsername
+//        );
+//        return $this->render("createUser", $data);
     }
 
 
