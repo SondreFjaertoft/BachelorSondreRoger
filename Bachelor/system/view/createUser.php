@@ -1,5 +1,6 @@
 
 
+
 <!-- FOR Å TESTE TING SÅNN AT ME IKKJE ØDELEGGE DET SOM FUNKA -->
 
 <!-- SKAL SLETTES FØR ME E FERDIG -->
@@ -69,6 +70,29 @@
 
 
         </div>
+        <br><br><br><br><br><br>
+            <p>Opprett ny bruker</p>
+
+    <form action="?page=addUserEngine" method="post">
+        Name:<br>
+        <input type="text" name="givenName" value=""><br>
+        Brukernavn:<br>
+        <input type="text" name="givenUsername" value=""><br>
+        Password:<br>
+        <input type="text" name="givenPassword" value=""><br>
+        UserLevel:<br>
+        <input type="text" name="givenUserLevel" value=""><br>
+        Email:<br>
+        <input type="text" name="givenEmail" value=""><br>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+<br><br>
+
+
+        
 
     </body>
 </html>

@@ -6,7 +6,7 @@ class UserModel {
 
     const TABLE = "users";
     const SELECT_QUERY = "SELECT * FROM " . UserModel::TABLE;
-    const INSERT_QUERY = "INSERT INTO " . UserModel::TABLE . " (username, password) VALUES (:givenUsername, :givenPassword)";
+    const INSERT_QUERY = "INSERT INTO " . UserModel::TABLE . " (name, username, password, userLevel, email) VALUES (:givenName, :givenUsername, :givenPassword, :givenUserLevel, :givenEmail)";
     const DELETE_QUERY = "DELETE FROM " . UserModel::TABLE . " WHERE username= ?";
 
     private $selStmt;
@@ -27,8 +27,8 @@ class UserModel {
 
     
     // kommer tilbake til, ved oppretting av bruker
-    public function add($givenUsername,$givenPassword) {
-        return $this->addStmt->execute(array("givenUsername" => $givenUsername,"givenPassword" => $givenPassword));
+    public function addUser($givenName, $givenUsername,$givenPassword, $givenUserLevel, $givenEmail) {
+        return $this->addStmt->execute(array("givenName" =>  $givenName, "givenUsername" => $givenUsername,"givenPassword" => $givenPassword, "givenUserLevel" => $givenUserLevel, "givenEmail" => $givenEmail));
     }
     
     
