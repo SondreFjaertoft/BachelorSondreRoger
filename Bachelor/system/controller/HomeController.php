@@ -16,12 +16,17 @@ class HomeController extends Controller {
     
     private function showInventory(){
         $inventoryInfo = $GLOBALS["inventory"];
+        $inventoryMac = $inventoryInfo->getAllInventoryMac();
         $inventory = $inventoryInfo->getAllInventory();
+  
+        $data = array("inventoryMacInfo" => $inventoryMac, "inventoryInfo" => $inventory);
         
-        $data = array("inventoryInfo" => $inventory);
         return $this->render("home", $data);
         
+        
     }
+    
+
 }    
     
 

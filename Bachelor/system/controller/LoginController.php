@@ -28,9 +28,9 @@ class LoginController extends Controller {
             if ($User["username"] == $givenUsername) {
                 if ($User["password"] == $givenPassword) {
                     $_SESSION["AreLoggedIn"] = "true";
-                    echo 'hello';
-                }
-            }
+                    
+                }  
+            }       
         }
         header("Location:system/");
     }

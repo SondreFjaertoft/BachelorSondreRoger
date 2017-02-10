@@ -1,10 +1,8 @@
 
 
-    <?php
-    $InvResults = $GLOBALS["inventoryInfo"];
-    
-    ?>
-
+<?php
+$InvResults = $GLOBALS["inventoryMacInfo"];
+?>
 
 
 
@@ -14,6 +12,8 @@
     <div class="col-sm-3 col-md-4">
 
 
+
+        
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -24,13 +24,14 @@
                     </tr>
                 </thead>
                 <tbody>
- <?php foreach ($InvResults as $InvResults): ?>  
-                    <tr>
-                        <td><?php  echo  $InvResults['storageID'];  ?></td>
-                        <td><?php  echo  $InvResults['productID'];  ?></td>
-                        <td><?php  echo  $InvResults['quantity'];  ?></td>
-                    </tr>
-  <?php endforeach; ?>
+
+                    <?php foreach ($InvResults as $InvResults): ?>  
+                        <tr>
+                            <td><?php echo $InvResults['productName']; ?></td>
+                            <td><?php echo $InvResults['storageName']; ?></td>
+                            <td><?php echo $InvResults['macAdresse']; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
 
                 </tbody>
             </table>
@@ -41,28 +42,25 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                        <th>Produkt</th>
-                        <th>Lager</th>
-                        <th>Antall</th>
+                    <th>Produkt</th>
+                    <th>Lager</th>
+                    <th>Antall</th>
 
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Sondre</td>
-                    <td>Fjærtoft</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Roger</td>
-                    <td>Kolseth</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Ole</td>
-                    <td>Lid aka Lidern</td>
-                </tr>
+
+                <?php
+                $InvResult2 = $GLOBALS["inventoryInfo"];
+                ?>             
+                <?php foreach ($InvResult2 as $InvResult2): ?>  
+                    <tr>
+                        <td><?php echo $InvResult2['productName']; ?></td>
+                        <td><?php echo $InvResult2['storageName']; ?></td>
+                        <td><?php echo $InvResult2['quantity']; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+
             </tbody>
         </table>
     </div>
@@ -70,36 +68,36 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                        <th>Produkt</th>
-                        <th>Lager</th>
-                        <th>Antall</th>
+                    <th>Produkt</th>
+                    <th>Lager</th>
+                    <th>Antall</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Sondre</td>
-                    <td>Fjærtoft</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Roger</td>
-                    <td>Kolseth</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Ole</td>
-                    <td>Lid aka Lidern</td>
-                </tr>
+
+                <?php
+                $InvResult3 = $GLOBALS["inventoryInfo"];
+                ?>               
+
+                <?php foreach ($InvResult3 as $InvResult3): ?>  
+                    <tr>
+                        <td><?php echo $InvResult3['productName']; ?></td>
+                        <td><?php echo $InvResult3['storageName']; ?></td>
+                        <td><?php echo $InvResult3['quantity']; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+
             </tbody>
         </table>
+        
+
     </div>
 
 
 
-    
-  
-    
+
+
+
 
     <!-- HER KOMMER INNHOLDET>   -->                
 

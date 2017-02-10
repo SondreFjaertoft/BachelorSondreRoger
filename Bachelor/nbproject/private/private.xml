@@ -6,7 +6,9 @@
             <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/model/UserModel.php</file>
             <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/HomeController.php</file>
             <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/Controller.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/Bootstrap/css/bootstrap.min.css</file>
             <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/OverviewController.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/model/InventoryModel.php</file>
             <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/view/LoginPage.php</file>
             <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/index.php</file>
             <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/Controllers.php</file>
@@ -17,6 +19,7 @@
             <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/index.php</file>
             <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/Router.php</file>
             <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/view/Overview.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/view/createUser.php</file>
             <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/model/dummy.php</file>
             <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/model/DBconnect.php</file>
         </group>
