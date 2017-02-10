@@ -8,7 +8,7 @@ class OverviewController extends Controller {
     // Render "Overview" view
 
     public function show($page) {
-        if ($page == "overview") {
+        if ($page == "dummy") {
             $this->showDummy();
          
         } else if ($page == "dummyAdd") {

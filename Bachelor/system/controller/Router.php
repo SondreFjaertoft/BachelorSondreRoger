@@ -39,7 +39,9 @@ class Router {
                 case "createUser"    :
                 case "addUserEngine" :
                     return new UserController();
-                    
+                
+                case "dummy" :
+                    return new OverviewController();
                     
                     
                     

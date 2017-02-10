@@ -602,3 +602,31 @@ ADD FOREIGN KEY (`userID`)
 REFERENCES `users`(`userID`)
 
 
+
+
+
+--------- INVENTORY QUANTITY ------------
+
+
+CREATE TABLE IF NOT EXISTS `inventory_quantity`(
+`inventoryQuantityID` int(11) unsigned NOT NULL,
+`storageID` int(11) unsigned NOT NULL,
+`productID` int(11) unsigned NOT NULL,
+`quantity` int(11)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+ALTER TABLE `inventory_quantity`
+ADD PRIMARY KEY (`inventoryQuantityID`)
+
+
+ALTER TABLE `inventory_quantity`
+MODIFY `inventoryQuantityID` int(11) unsigned NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `inventory_quantity`
+ADD FOREIGN KEY (`storageID`)
+REFERENCES `storage`(`storageID`),
+ADD FOREIGN KEY (`productID`)
+REFERENCES `products`(`productID`)
+
