@@ -30,7 +30,7 @@ class UserController extends Controller {
 //            "added"=>$added,
 //            "givenUser"=>$givenUsername
 //        );
-//        return $this->render("createUser", $data);
+        return $this->render("createUser");
     }
 
 
