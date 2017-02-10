@@ -1,0 +1,4 @@
+SELECT inventory.productID, inventory.storageID, COUNT(*) FROM inventory GROUP BY productID, storageID
+
+
+SQL for å få opp antall produkt per lager
