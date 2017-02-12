@@ -1,7 +1,7 @@
 
 
 <?php
-$InvResults = $GLOBALS["inventoryMacInfo"];
+$InvResults = $GLOBALS["inventoryKSInfo"];
 ?>
 
 
@@ -31,7 +31,7 @@ $InvResults = $GLOBALS["inventoryMacInfo"];
                         <tr>
                             <td><?php echo $InvResults['productName']; ?></td>
                             <td><?php echo $InvResults['storageName']; ?></td>
-                            <td><?php echo $InvResults['macAdresse']; ?></td>
+                            <td><?php echo $InvResults['COUNT(*)']; ?></td>
                         </tr>
                     <?php endforeach; ?>
 
@@ -52,16 +52,7 @@ $InvResults = $GLOBALS["inventoryMacInfo"];
             </thead>
             <tbody>
 
-                <?php
-                $InvResult2 = $GLOBALS["inventoryInfo"];
-                ?>             
-                <?php foreach ($InvResult2 as $InvResult2): ?>  
-                    <tr>
-                        <td><?php echo $InvResult2['productName']; ?></td>
-                        <td><?php echo $InvResult2['storageName']; ?></td>
-                        <td><?php echo $InvResult2['quantity']; ?></td>
-                    </tr>
-                <?php endforeach; ?>
+<!-- HER KOMMER TABELL INNHOLDET>   -->  
 
             </tbody>
         </table>
@@ -77,17 +68,7 @@ $InvResults = $GLOBALS["inventoryMacInfo"];
             </thead>
             <tbody>
 
-                <?php
-                $InvResult3 = $GLOBALS["inventoryInfo"];
-                ?>               
-
-                <?php foreach ($InvResult3 as $InvResult3): ?>  
-                    <tr>
-                        <td><?php echo $InvResult3['productName']; ?></td>
-                        <td><?php echo $InvResult3['storageName']; ?></td>
-                        <td><?php echo $InvResult3['quantity']; ?></td>
-                    </tr>
-                <?php endforeach; ?>
+<!-- HER KOMMER TABELL INNHOLDET>   -->  
 
             </tbody>
         </table>
