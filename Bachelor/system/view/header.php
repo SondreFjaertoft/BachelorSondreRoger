@@ -43,6 +43,10 @@
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
                         <li><a href="?page=home">Home</a></li>
+                        <li><a>Dine Salg</a></li>
+                        <li><a>Dine Returer</a></li>
+                        <li><a>Registrer Utlevering</a></li>
+                        <li><a>Registrer Retur</a></li>
                         <li><a href="?page=createUser">Bruker Administrering</a></li>
                         <li><a href="?page=storageAdm">Lager Administrering</a></li>
                         
