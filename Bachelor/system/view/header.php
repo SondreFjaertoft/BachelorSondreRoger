@@ -26,10 +26,10 @@
                     <a class="navbar-brand" href="?page=home">Tafjord Marked</a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Sondre Fjærtoft<span class="caret"></span></a>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#usernav"><span class="glyphicon glyphicon-user"></span> <?php echo  $_SESSION["nameOfUser"]; ?><span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li>Rediger profil</li>
-                            <li>Logg ut</li>
+                            <li><a>Rediger profil</a></li>
+                            <li><a href="../">Logout</a></li>
                         </ul>
                     </li> 
                 </ul>
@@ -44,7 +44,7 @@
                     <ul class="nav nav-sidebar">
                         <li><a href="?page=home">Home</a></li>
                         <li><a href="?page=createUser">Bruker Administrering</a></li>
-                        <li><a href="../">Logout</a></li>
+                        
                     </ul>
 
                 </div>
@@ -58,6 +58,6 @@
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="../Bootstrap/js/bootstrap.min.js"></script>
+        <script src="Bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>

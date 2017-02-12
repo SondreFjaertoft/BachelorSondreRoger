@@ -18,6 +18,7 @@ class LoginController extends Controller {
     }
 
     public function loginEngine() {
+        
         $givenUsername = $_REQUEST["givenUsername"];
         $givenPassword = $_REQUEST["givenPassword"];
 
@@ -28,7 +29,8 @@ class LoginController extends Controller {
             if ($User["username"] == $givenUsername) {
                 if ($User["password"] == $givenPassword) {
                     $_SESSION["AreLoggedIn"] = "true";
-                    
+                    $_SESSION["nameOfUser"] = $User["name"];  
+                    $_SESSION["userID"] = $User["userID"]; 
                 }  
             }       
         }
