@@ -4,6 +4,7 @@
   require_once("dummy.php");
   require_once("UserModel.php");
   require_once("InventoryModel.php");
+  require_once("storageModel.php");
 
 //connection to the database
 $dbConn = new PDO('mysql:host=localhost;dbname=tafjord;charset=utf8mb4', 'root', 'Tafjord123');
@@ -12,6 +13,7 @@ $dbConn = new PDO('mysql:host=localhost;dbname=tafjord;charset=utf8mb4', 'root',
 $dummy = new Dummy($dbConn);
 $userModel = new UserModel($dbConn);
 $inventory = new Inventory($dbConn);
+$storageModel = new StorageModel($dbConn);
 
 
 // TODO - create new models here. First create them as a new class

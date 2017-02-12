@@ -6,7 +6,7 @@ class UserController extends Controller {
 
     public function show($page) {
         if ($page == "createUser") {
-            $this->userCreationPAge();
+            $this->userCreationPage();
         } else if ($page == "addUserEngine"){
             $this->userCreationEngine();
         }

@@ -8,7 +8,7 @@ $InvResults = $GLOBALS["inventoryKSInfo"];
 
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <br> <br><br>     
+    <br> <br>     
 
     
     <div class="col-sm-3 col-md-4">
@@ -17,6 +17,7 @@ $InvResults = $GLOBALS["inventoryKSInfo"];
 
         
         <div class="table-responsive">
+            <h3> LAGERSTATUS </h3> 
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -41,6 +42,7 @@ $InvResults = $GLOBALS["inventoryKSInfo"];
         </div>
     </div>
     <div class="col-sm-3 col-md-4">
+        <h3> MEST SOLGTE PRODUKTER </h3> 
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -58,6 +60,7 @@ $InvResults = $GLOBALS["inventoryKSInfo"];
         </table>
     </div>
     <div class="col-sm-3 col-md-4">
+        <h3> SISTE SALG </h3> 
         <table class="table table-striped">
             <thead>
                 <tr>

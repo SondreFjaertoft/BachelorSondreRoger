@@ -43,6 +43,10 @@ class Router {
                 case "dummy" :
                     return new OverviewController();
                     
+                case "storageAdm":
+                case "addStorageEngine":
+                    return new StorageController();
+                    
                     
                     
                     
