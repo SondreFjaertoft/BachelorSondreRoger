@@ -34,3 +34,6 @@
 {
     background-color: #122b40;
 }
+.table-hover tbody tr:hover > td {
+  background-color: red;
+}
