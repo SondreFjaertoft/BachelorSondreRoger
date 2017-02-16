@@ -20,7 +20,7 @@ class UserModel {
     }
 
 
-    public function getAll() {
+    public function getAllUserInfo() {
         $this->selStmt->execute();
         return $this->selStmt->fetchAll(PDO::FETCH_ASSOC);
     }

@@ -13,7 +13,11 @@ class UserController extends Controller {
     }
 
     private function userCreationPage() {
-        return $this->render("createUser");
+        $userInfo = $GLOBALS["userModel"];
+        $userModel = $userInfo->getAllUserInfo();
+        
+        $data = array("userInfo" => $userModel);
+        return $this->render("createUser", $data);
     }
     
     private function userCreationEngine() {
@@ -30,7 +34,7 @@ class UserController extends Controller {
 //            "added"=>$added,
 //            "givenUser"=>$givenUsername
 //        );
-        return $this->render("createUser");
+        header("Location:index.php?page=createUser");
     }
 
 

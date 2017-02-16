@@ -2,11 +2,46 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/D:/Xampp/htdocs/BachelorSondreRoger/Bachelor/index.php</file>
             <file>file:/D:/Xampp/htdocs/BachelorSondreRoger/Bachelor/system/index.php</file>
             <file>file:/D:/Xampp/htdocs/BachelorSondreRoger/Bachelor/system/view/Overview.php</file>
             <file>file:/D:/Xampp/htdocs/BachelorSondreRoger/Bachelor/system/view/createUser.php</file>
         </group>
+=======
+<<<<<<< HEAD
+        <group>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/model/InventoryModel.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/view/LoginPage.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/view/home.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/style/index.css</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/view/dummyBoot.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/index.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/Bootstrap/css/bootstrap.css</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/Router.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/view/createUser.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/view/storageAdm.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/model/dummy.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/model/DBconnect.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/model/UserModel.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/HomeController.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/model/storageModel.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/Controller.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/Bootstrap/css/bootstrap.min.css</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/OverviewController.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/index.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/Controllers.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/UserController.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/LoginController.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/style/home.css</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/view/header.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/storageController.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/view/Overview.php</file>
+        </group>
+=======
+        <group/>
+>>>>>>> origin/master
+>>>>>>> 93bf2dde8e2aec6b50c1b52f0f887dcd0c45381c
     </open-files>
 </project-private>
