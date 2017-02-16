@@ -26,7 +26,7 @@
                     <a class="navbar-brand" href="?page=home">Tafjord Marked</a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#usernav"><span class="glyphicon glyphicon-user"></span> <?php echo  $_SESSION["nameOfUser"]; ?><span class="caret"></span></a>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#usernav"><span class="glyphicon glyphicon-user"></span> <?php echo  $_SESSION["nameOfUser"]; ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a>Rediger profil</a></li>
                             <li><a href="../">Logout</a></li>
