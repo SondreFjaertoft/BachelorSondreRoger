@@ -27,17 +27,40 @@
                         <td><?php echo $userResults['username']; ?></td>
 
                         <td class="text-center">
-                            <form  action="" method="post">
-                                <button  name="editUser" data-toggle="tooltip" value="<?php echo $userResults['userID']; ?>"><span class="glyphicon glyphicon-edit" style="color: green"></span> &nbsp;</button>
+                            <form id="brukerRedForm" action="" method="post">
                             </form>
+                            <span data-toggle="modal" data-target="#brukerModal" type="submit">
+                                <button form="brukerRedForm" type="button" name="editUser" data-toggle="tooltip" title="Rediger bruker" value="<?php echo $userResults['userID']; ?>" 
+                                        style="appearance: none;
+                                        -webkit-appearance: none;
+                                        -moz-appearance: none;
+                                        outline: none;
+                                        border: 0;
+                                        background: transparent;
+                                        display: inline;">
+                                    <span class="glyphicon glyphicon-edit" style="color: green"></span></button>
+                            </span>
 
-                            <form  action="" method="post">
-                                <button  name="showInfo" data-toggle="tooltip" value="<?php echo $userResults['userID']; ?>"><span class="glyphicon glyphicon-menu-hamburger"></span> &nbsp;</button>
-                            </form>
+                            <button form="brukerRedForm" name="showInfo" data-toggle="tooltip" title="Mer informasjon" value="<?php echo $userResults['userID']; ?>" 
+                                    style="appearance: none;
+                                    -webkit-appearance: none;
+                                    -moz-appearance: none;
+                                    outline: none;
+                                    border: 0;
+                                    background: transparent;
+                                    display: inline;">
+                                <span class="glyphicon glyphicon-menu-hamburger" style="color: #003366" ></span></button>
 
-                            <form  action="" method="post">
-                                <button  name="delete" data-toggle="tooltip" value="<?php echo $userResults['userID']; ?>"><span class="glyphicon glyphicon-remove" style="color: red"></span></button>
-                            </form>
+                            <button form="brukerRedForm" name="delete" data-toggle="tooltip" title="Slett bruker" value="<?php echo $userResults['userID']; ?>" 
+                                    style="appearance: none;
+                                    -webkit-appearance: none;
+                                    -moz-appearance: none;
+                                    outline: none;
+                                    border: 0;
+                                    background: transparent;
+                                    display: inline;">
+                                <span class="glyphicon glyphicon-remove" style="color: red"></span></button>
+
 
                         </td>
                     </tr>   
@@ -46,98 +69,66 @@
 
         </table>
     </div>
+
+
+
     <div class="col-sm-3 col-md-4">
-        <br><br><br><br>
 
 
+        <div class = "modal fade" id = "brukerModal" role = "dialog">
+            <div class = "modal-dialog">
+                <!--Innholdet til Modalen -->
+                <div class = "modal-content">
+                    <div class = "modal-header">
+                        <button type = "button" class = "close" data-dismiss = "modal">&times;
+                        </button>
+                        <h4 class = "modal-title">Bruker informasjon</h4>
+                    </div>
+                    <div class = "modal-body">
+                        <div>
+                            <p>Ditte her e en p</p>
+                            <?php
+                            echo"test";
+                            foreach ($userResults1 as $userResults1):
 
+                                if (isset($_POST['editUser'])) {
 
+                                    $givenUserID = $_REQUEST["editUser"];
 
+                                    if ($userResults1['userID'] == $givenUserID) {
+                                        ?>
+                                        <form action="?page=editUserEngine" method="post">
+                                            <input type="hidden" name="editUserID" value=="<?php echo $userResults1['userID']; ?>"><br>
+                                            Navn: <br>
+                                            <input type="text" name="editName" value="<?php echo $userResults1['name']; ?>"><br>
+                                            Brukernavn: <br>
+                                            <input type="text" name="editUsername" value="<?php echo $userResults1['username']; ?>"><br>
+                                            Passord: <br>
+                                            <input type="text" name="editPassword" value="<?php echo $userResults1['password']; ?>"><br>
+                                            Brukernivå: <br>
+                                            <input type="text" name="editUserLevel" value="<?php echo $userResults1['userLevel']; ?>"><br>
+                                            Epost: <br>
+                                            <input type="text" name="editEmail" value="<?php echo $userResults1['email']; ?>"><br>
+                                            <br>
+                                            <input type="submit" value="Lagre">
+                                        </form>
 
-        <!-- DET SOM SKAL INN I PLUPPOPP RUTA  --> 
-
-        <?php
-        foreach ($userResults1 as $userResults1):
-            
-            
-            
-            // Rediger Bruker
-
-            if (isset($_POST['editUser'])) {
-                $givenUserID = $_REQUEST["editUser"];
-
-                if ($userResults1['userID'] == $givenUserID) {
-                    ?>
-
-                    <form action="?page=editUserEngine" method="post">
-                        <input type="hidden" name="editUserID" value=="<?php echo $userResults1['userID']; ?>"><br>
-                        Navn: <br>
-                        <input type="text" name="editName" value="<?php echo $userResults1['name']; ?>"><br>
-                        Brukernavn: <br>
-                        <input type="text" name="editUsername" value="<?php echo $userResults1['username']; ?>"><br>
-                        Passord: <br>
-                        <input type="text" name="editPassword" value="<?php echo $userResults1['password']; ?>"><br>
-                        Brukernivå: <br>
-                        <input type="text" name="editUserLevel" value="<?php echo $userResults1['userLevel']; ?>"><br>
-                        Epost: <br>
-                        <input type="text" name="editEmail" value="<?php echo $userResults1['email']; ?>"><br>
-                        <br>
-                        <input type="submit" value="Lagre">
-                    </form>
-
-
-                    <?php
-                }
-            }
-
-            
-            // Vis Informasjon
-            
-            if (isset($_POST['showInfo'])) {
-                $givenUserID = $_REQUEST["showInfo"];
-
-                if ($userResults1['userID'] == $givenUserID) {
-                    echo "userID: " . $userResults1['userID'];
-                }
-            }
-
-            
-            
-            // Slett bruker
-
-            if (isset($_POST['delete'])) {
-                $givenUserID = $_REQUEST["delete"];
-
-                if ($userResults1['userID'] == $givenUserID) {
-                    ?>
-                    <p> Er du sikker på at du vil slette  <P>
-                        <?php
-                        echo "Brukernavn: " . $userResults1['username'];
-                        ?>
-
-                    <form action="?page=deleteUserEngine" method="post">
-                        <input type="hidden" name="deleteUser" value="<?php $userResults1['userID'] ?>"><br>
-                        <input type="submit" value="Slett">
-                    </form>
-
-                    <?php
-                }
-            }
-
-        endforeach;
-        ?>
-
-
-
-        <!-- SLUTTEN AV PLOPPOPPRUTA   --> 
-
-
-
-
+                                        <?php
+                                    }
+                                }
+                            endforeach;
+                            ?>
+                        </div>
+                    </div>
+                    <div class = "modal-footer">
+                        <button type = "button" class = "btn btn-default" data-dismiss = "modal">Avslutt</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     </div>
-
     <div class="col-sm-3 col-md-4">  
         <br><br><br><br>
 

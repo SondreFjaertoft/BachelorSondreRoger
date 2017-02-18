@@ -14,28 +14,28 @@ and open the template in the editor.
     </head>
     <body>
         <div class="col-md-3">
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Navn</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Sondre</td>
-                    <td class="text-center">
-                        <span data-toggle="modal" data-target="#brukerModal">
-                            <a href="#" data-toggle="tooltip" title="Rediger bruker"><span class="glyphicon glyphicon-edit" style="color: green"></span></a>
-                        </span> &nbsp;
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Navn</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sondre</td>
+                        <td class="text-center">
+                            <span data-toggle="modal" data-target="#brukerModal">
+                                <a href="#" data-toggle="tooltip" title="Rediger bruker"><span class="glyphicon glyphicon-edit" style="color: green"></span></a>
+                            </span> &nbsp;
                             <a href="#" data-toggle="tooltip" title="Mer info"><span class="glyphicon glyphicon-menu-hamburger"></span></a> &nbsp;
                             <a href="#" data-toggle="tooltip" title="Slett bruker"><span class="glyphicon glyphicon-remove" style="color: red"></span></a>
                         </td>
-                </tr>
-            </tbody>
+                    </tr>
+                </tbody>
 
-        </table>
-            
+            </table>
+
             <div class="modal fade" id="brukerModal" role="dialog">
                 <div class="modal-dialog">
                     <!-- Innholdet til Modalen -->
@@ -59,7 +59,7 @@ and open the template in the editor.
                                     </tr>
                                 </tbody>
                             </table>
-                            
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
@@ -75,3 +75,121 @@ and open the template in the editor.
         <script src="../Bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>
+
+<div class="col-sm-3 col-md-4">
+        <br><br><br><br>
+
+
+
+
+
+
+        <!-- DET SOM SKAL INN I PLUPPOPP RUTA  --> 
+
+        <?php
+        foreach ($userResults1 as $userResults1):
+
+
+
+// Rediger Bruker
+
+            if (isset($_POST['editUser'])) {
+                $givenUserID = $_REQUEST["editUser"];
+
+                if ($userResults1['userID'] == $givenUserID) {
+                    ?>
+
+                    <form action="?page=editUserEngine" method="post">
+                        <input type="hidden" name="editUserID" value=="<?php echo $userResults1['userID']; ?>"><br>
+                        Navn: <br>
+                        <input type="text" name="editName" value="<?php echo $userResults1['name']; ?>"><br>
+                        Brukernavn: <br>
+                        <input type="text" name="editUsername" value="<?php echo $userResults1['username']; ?>"><br>
+                        Passord: <br>
+                        <input type="text" name="editPassword" value="<?php echo $userResults1['password']; ?>"><br>
+                        Brukernivå: <br>
+                        <input type="text" name="editUserLevel" value="<?php echo $userResults1['userLevel']; ?>"><br>
+                        Epost: <br>
+                        <input type="text" name="editEmail" value="<?php echo $userResults1['email']; ?>"><br>
+                        <br>
+                        <input type="submit" value="Lagre">
+                    </form>
+
+
+                    <?php
+                }
+            }
+
+
+            // Vis Informasjon
+
+            if (isset($_POST['showInfo'])) {
+                $givenUserID = $_REQUEST["showInfo"];
+
+                if ($userResults1['userID'] == $givenUserID) {
+                    echo "userID: " . $userResults1['userID'];
+                }
+            }
+
+
+
+            // Slett bruker
+
+            if (isset($_POST['delete'])) {
+                $givenUserID = $_REQUEST["delete"];
+
+                if ($userResults1['userID'] == $givenUserID) {
+                    ?>
+                    <p> Er du sikker på at du vil slette  <P>
+                        <?php
+                        echo "Brukernavn: " . $userResults1['username'];
+                        ?>
+
+                    <form action="?page=deleteUserEngine" method="post">
+                        <input type="hidden" name="deleteUser" value="<?php $userResults1['userID'] ?>"><br>
+                        <input type="submit" value="Slett">
+                    </form>
+
+                    <?php
+                }
+            }
+
+        endforeach;
+        ?>
+
+
+
+        <!-- SLUTTEN AV PLOPPOPPRUTA   --> 
+<?php
+                            foreach ($userResults1 as $userResults1):
+
+                                if (isset($_POST['editUser'])) {
+                                    $givenUserID = $_REQUEST["editUser"];
+
+                                    if ($userResults1['userID'] == $givenUserID) {
+                                        ?>
+
+
+
+
+                                        <form action="?page=editUserEngine" method="post">
+                                            <input type="hidden" name="editUserID" value=="<?php echo $userResults1['userID']; ?>"><br>
+                                            Navn: <br>
+                                            <input type="text" name="editName" value="<?php echo $userResults1['name']; ?>"><br>
+                                            Brukernavn: <br>
+                                            <input type="text" name="editUsername" value="<?php echo $userResults1['username']; ?>"><br>
+                                            Passord: <br>
+                                            <input type="text" name="editPassword" value="<?php echo $userResults1['password']; ?>"><br>
+                                            Brukernivå: <br>
+                                            <input type="text" name="editUserLevel" value="<?php echo $userResults1['userLevel']; ?>"><br>
+                                            Epost: <br>
+                                            <input type="text" name="editEmail" value="<?php echo $userResults1['email']; ?>"><br>
+                                            <br>
+                                            <input type="submit" value="Lagre">
+                                        </form>
+
+                                        <?php
+                                    }
+                                }
+                            endforeach;
+                            ?>
