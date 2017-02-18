@@ -20,6 +20,19 @@ class UserController extends Controller {
         return $this->render("createUser", $data);
     }
     
+    private function userEditEngine() {
+        $editUserID = $_REQUEST["editUserID"];
+        $editName = $_REQUEST["editName"];
+        $editUsername = $_REQUEST["editUsername"];
+        $editPassword = $_REQUEST["editPassword"];
+        $editUserLevel = $_REQUEST["editUserLevel"];
+        $editEmail = $_REQUEST["editEmail"];
+        
+        $userEditInfo = $GLOBALS["userModel"];
+        $edited = $userEditInfo->editUser($editUserID, $editName, $editUsername, $editPassword, $editUserLevel, $editEmail   );
+        
+    }
+    
     private function userCreationEngine() {
         $givenName = $_REQUEST["givenName"];
         $givenUsername = $_REQUEST["givenUsername"];
