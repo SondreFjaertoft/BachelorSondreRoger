@@ -23,7 +23,6 @@ class LoginController extends Controller {
         $givenPassword = $_REQUEST["givenPassword"];
 
         $userModel = $GLOBALS["userModel"];
-        $Users = $userModel->getAll();
 
         foreach ($Users as $User) {
             if ($User["username"] == $givenUsername) {
