@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../Bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!--<link href="../CSS/LoginPageCss.css" rel="stylesheet">-->
+    </head>
+    <body>
+        <div class="col-md-3">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Navn</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Sondre</td>
+                    <td class="text-center">
+                        <span data-toggle="modal" data-target="#brukerModal">
+                            <a href="#" data-toggle="tooltip" title="Rediger bruker"><span class="glyphicon glyphicon-edit" style="color: green"></span></a>
+                        </span> &nbsp;
+                            <a href="#" data-toggle="tooltip" title="Mer info"><span class="glyphicon glyphicon-menu-hamburger"></span></a> &nbsp;
+                            <a href="#" data-toggle="tooltip" title="Slett bruker"><span class="glyphicon glyphicon-remove" style="color: red"></span></a>
+                        </td>
+                </tr>
+            </tbody>
+
+        </table>
+            
+            <div class="modal fade" id="brukerModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Innholdet til Modalen -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Bruker informasjon</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Testinfo</th>
+                                        <th>Testinfo2</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Her e infor om d her funka fint..</td>
+                                        <td> mer info</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../Bootstrap/js/bootstrap.min.js"></script>
+    </body>
+</html>
