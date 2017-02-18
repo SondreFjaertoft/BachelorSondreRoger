@@ -7,6 +7,7 @@
         <?php
         $userResults = $GLOBALS["userInfo"];
         $userResults1 = $GLOBALS["userInfo"];
+        $userResults2 = $GLOBALS["userInfo"];
         ?>
 
         <table class="table table-bordered table-striped"> 
@@ -61,16 +62,6 @@
                                     display: inline;">
                                 <span class="glyphicon glyphicon-remove" style="color: red"></span></button>
 
-
-                            <form  action="" method="post">
-                                <button name="showInfo" data-toggle="tooltip" value="<?php echo $userResults['userID']; ?>"><span class="glyphicon glyphicon-menu-hamburger"></span> &nbsp;</button>
-                            </form>
-
-                            <form  action="" method="post">
-                                <button  name="delete" data-toggle="tooltip" value="<?php echo $userResults['userID']; ?>"><span class="glyphicon glyphicon-remove" style="color: red"></span></button>
-                            </form>
-
-
                         </td>
                     </tr>   
                 <?php endforeach; ?> 
@@ -78,6 +69,7 @@
 
         </table>
     </div>
+
 
     <div class="col-sm-3 col-md-4">
 
@@ -99,26 +91,13 @@
                             foreach ($userResults1 as $userResults1):
 
                                 if (isset($_POST['editUser'])) {
+                                    echo"test22";
 
                                     $givenUserID = $_REQUEST["editUser"];
 
                                     if ($userResults1['userID'] == $givenUserID) {
                                         ?>
-                                        <form action="?page=editUserEngine" method="post">
-                                            <input type="hidden" name="editUserID" value=="<?php echo $userResults1['userID']; ?>"><br>
-                                            Navn: <br>
-                                            <input type="text" name="editName" value="<?php echo $userResults1['name']; ?>"><br>
-                                            Brukernavn: <br>
-                                            <input type="text" name="editUsername" value="<?php echo $userResults1['username']; ?>"><br>
-                                            Passord: <br>
-                                            <input type="text" name="editPassword" value="<?php echo $userResults1['password']; ?>"><br>
-                                            Brukernivå: <br>
-                                            <input type="text" name="editUserLevel" value="<?php echo $userResults1['userLevel']; ?>"><br>
-                                            Epost: <br>
-                                            <input type="text" name="editEmail" value="<?php echo $userResults1['email']; ?>"><br>
-                                            <br>
-                                            <input type="submit" value="Lagre">
-                                        </form>
+                                        
 
                                         <?php
                                     }
@@ -156,6 +135,3 @@
         <!-- HER KOMMER INNHOLDET>   --> 
     </div>
 </div>
-
-
-
