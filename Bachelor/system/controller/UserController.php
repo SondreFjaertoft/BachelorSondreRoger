@@ -9,6 +9,8 @@ class UserController extends Controller {
             $this->userCreationPage();
         } else if ($page == "addUserEngine"){
             $this->userCreationEngine();
+        } else if ($page == "editUserEngine"){
+            $this->userEditEngine();
         }
     }
 
@@ -29,8 +31,9 @@ class UserController extends Controller {
         $editEmail = $_REQUEST["editEmail"];
         
         $userEditInfo = $GLOBALS["userModel"];
-        $edited = $userEditInfo->editUser($editUserID, $editName, $editUsername, $editPassword, $editUserLevel, $editEmail   );
+        $edited = $userEditInfo->editUser($editUserID, $editName, $editUsername, $editPassword, $editUserLevel, $editEmail);
         
+        header("Location:index.php?page=createUser");
     }
     
     private function userCreationEngine() {

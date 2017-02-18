@@ -61,6 +61,16 @@
                                     display: inline;">
                                 <span class="glyphicon glyphicon-remove" style="color: red"></span></button>
 
+<<<<<<< HEAD
+=======
+                            <form  action="" method="post">
+                                <button name="showInfo" data-toggle="tooltip" value="<?php echo $userResults['userID']; ?>"><span class="glyphicon glyphicon-menu-hamburger"></span> &nbsp;</button>
+                            </form>
+
+                            <form  action="" method="post">
+                                <button  name="delete" data-toggle="tooltip" value="<?php echo $userResults['userID']; ?>"><span class="glyphicon glyphicon-remove" style="color: red"></span></button>
+                            </form>
+>>>>>>> 969644a918206792751a947b08c465133d154c2f
 
                         </td>
                     </tr>   
@@ -71,6 +81,87 @@
     </div>
 
 
+<<<<<<< HEAD
+=======
+        <!-- DET SOM SKAL INN I PLUPPOPP RUTA  --> 
+
+        <?php
+        foreach ($userResults1 as $userResults1):
+            
+            
+            
+            // Rediger Bruker
+
+            if (isset($_POST['editUser'])) {
+                $givenUserID = $_REQUEST["editUser"];
+
+                if ($userResults1['userID'] == $givenUserID) {
+                    ?>
+
+                    <form action="?page=editUserEngine" method="post">
+                        <input type="hidden" name="editUserID" value=="<?php echo $userResults1['userID']; ?>"><br>
+                        Navn: <br>
+                        <input type="text" name="editName" value="<?php echo $userResults1['name']; ?>"><br>
+                        Brukernavn: <br>
+                        <input type="text" name="editUsername" value="<?php echo $userResults1['username']; ?>"><br>
+                        Passord: <br>
+                        <input type="text" name="editPassword" value="<?php echo $userResults1['password']; ?>"><br>
+                        Brukernivå: <br>
+                        <input type="text" name="editUserLevel" value="<?php echo $userResults1['userLevel']; ?>"><br>
+                        Epost: <br>
+                        <input type="text" name="editEmail" value="<?php echo $userResults1['email']; ?>"><br>
+                        <br>
+                        <input type="submit" value="Lagre">
+                    </form>
+
+
+                    <?php
+                }
+            }
+
+            
+            // Vis Informasjon
+            
+            if (isset($_POST['showInfo'])) {
+                $givenUserID = $_REQUEST["showInfo"];
+
+                if ($userResults1['userID'] == $givenUserID) {
+                    echo "userID: " . $userResults1['userID'];
+                }
+            }
+
+            
+            
+            // Slett bruker
+
+            if (isset($_POST['delete'])) {
+                $givenUserID = $_REQUEST["delete"];
+
+                if ($userResults1['userID'] == $givenUserID) {
+                    ?>
+                    <p> Er du sikker på at du vil slette  <P>
+                        <?php
+                        echo "Brukernavn: " . $userResults1['username'];
+                        ?>
+
+                    <form action="?page=deleteUserEngine" method="post">
+                        <input type="hidden" name="deleteUser" value="<?php $userResults1['userID'] ?>"><br>
+                        <input type="submit" value="Slett">
+                    </form>
+
+                    <?php
+                }
+            }
+
+        endforeach;
+        
+        ?>
+
+
+
+        <!-- SLUTTEN AV PLOPPOPPRUTA   --> 
+
+>>>>>>> 969644a918206792751a947b08c465133d154c2f
 
     <div class="col-sm-3 col-md-4">
 
