@@ -16,7 +16,7 @@ class UserController extends Controller {
         $userInfo = $GLOBALS["userModel"];
         $userModel = $userInfo->getAllUserInfo();
         
-        $data = array("userInfo" => $userModel);
+        $data = array("userInfo" => $userModel, "page" => $page);
         return $this->render("createUser", $data);
     }
     
