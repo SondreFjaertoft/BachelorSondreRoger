@@ -27,16 +27,16 @@
                         <td><?php echo $userResults['username']; ?></td>
 
                         <td class="text-center">
-                            <form action="" method="post">
-                                <button name="editUser" data-toggle="tooltip" value="<?php echo $userResults['userID']; ?>"><span class="glyphicon glyphicon-edit" style="color: green"></span> &nbsp;</button>
+                            <form  action="" method="post">
+                                <button  name="editUser" data-toggle="tooltip" value="<?php echo $userResults['userID']; ?>"><span class="glyphicon glyphicon-edit" style="color: green"></span> &nbsp;</button>
                             </form>
 
-                            <form action="" method="post">
-                                <button name="showInfo" data-toggle="tooltip" value="<?php echo $userResults['userID']; ?>"><span class="glyphicon glyphicon-menu-hamburger"></span> &nbsp;</button>
+                            <form  action="" method="post">
+                                <button  name="showInfo" data-toggle="tooltip" value="<?php echo $userResults['userID']; ?>"><span class="glyphicon glyphicon-menu-hamburger"></span> &nbsp;</button>
                             </form>
 
-                            <form action="" method="post">
-                                <button name="delete" data-toggle="tooltip" value="<?php echo $userResults['userID']; ?>"><span class="glyphicon glyphicon-remove" style="color: red"></span></button>
+                            <form  action="" method="post">
+                                <button  name="delete" data-toggle="tooltip" value="<?php echo $userResults['userID']; ?>"><span class="glyphicon glyphicon-remove" style="color: red"></span></button>
                             </form>
 
                         </td>
