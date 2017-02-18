@@ -69,18 +69,18 @@
                 if ($userResults1['userID'] == $givenUserID) {
                     ?>
 
-                    <form action="?page=dummyAdd" method="post">
+                    <form action="?page=editUserEngine" method="post">
                         <input type="hidden" name="editUserID" value=="<?php echo $userResults1['userID']; ?>"><br>
                         Navn: <br>
-                        <input type="text" name="editUsername" value="<?php echo $userResults1['name']; ?>"><br>
+                        <input type="text" name="editName" value="<?php echo $userResults1['name']; ?>"><br>
                         Brukernavn: <br>
                         <input type="text" name="editUsername" value="<?php echo $userResults1['username']; ?>"><br>
                         Passord: <br>
-                        <input type="text" name="editUsername" value="<?php echo $userResults1['password']; ?>"><br>
+                        <input type="text" name="editPassword" value="<?php echo $userResults1['password']; ?>"><br>
                         Brukernivå: <br>
-                        <input type="text" name="editUsername" value="<?php echo $userResults1['userLevel']; ?>"><br>
+                        <input type="text" name="editUserLevel" value="<?php echo $userResults1['userLevel']; ?>"><br>
                         Epost: <br>
-                        <input type="text" name="editUsername" value="<?php echo $userResults1['email']; ?>"><br>
+                        <input type="text" name="editEmail" value="<?php echo $userResults1['email']; ?>"><br>
                         <br>
                         <input type="submit" value="Lagre">
                     </form>
@@ -115,7 +115,7 @@
                         echo "Brukernavn: " . $userResults1['username'];
                         ?>
 
-                    <form action="?page=dummyAdd" method="post">
+                    <form action="?page=deleteUserEngine" method="post">
                         <input type="hidden" name="deleteUser" value="<?php $userResults1['userID'] ?>"><br>
                         <input type="submit" value="Slett">
                     </form>
