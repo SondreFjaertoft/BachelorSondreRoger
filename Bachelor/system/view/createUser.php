@@ -32,7 +32,7 @@
                             </form>
 
                             <form  action="" method="post">
-                                <button  name="showInfo" data-toggle="tooltip" value="<?php echo $userResults['userID']; ?>"><span class="glyphicon glyphicon-menu-hamburger"></span> &nbsp;</button>
+                                <button name="showInfo" data-toggle="tooltip" value="<?php echo $userResults['userID']; ?>"><span class="glyphicon glyphicon-menu-hamburger"></span> &nbsp;</button>
                             </form>
 
                             <form  action="" method="post">
@@ -125,6 +125,7 @@
             }
 
         endforeach;
+        
         ?>
 
 

@@ -38,6 +38,7 @@ class Router {
                     
                 case "createUser"    :
                 case "addUserEngine" :
+                case "editUserEngine":    
                     return new UserController();
                 
                 case "dummy" :
