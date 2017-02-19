@@ -144,7 +144,7 @@
                                         Epost: <br>
                                         <input type="text" name="editEmail" value="<?php echo $userResults1['email']; ?>"><br>
                                         <br>
-                                        
+
                                     </form>
 
                                 </div>
@@ -267,7 +267,7 @@
 
                                     <form action="?page=deleteUserEngine" method="post" id="formS">
                                         <input type="hidden" name="deleteUserID" value="<?php echo $userResults1['userID'] ?>"><br>
-                                        
+
                                     </form>
 
 
@@ -305,7 +305,19 @@
         <!-- DIV som holder på all informasjon til høgre på skjermen  -->
 
         <br><br><br><br>
+        
+        
+        <!-- SØK ETTER BRUKER  -->
+        <form action="" method="post">
+            
+         <input type="text" name="givenSearchWord" value="">  
+         <input type="submit" value="Submit">
+        </form>
 
+        
+        
+        <!-- OPPRETT BRUKER  -->
+        
         <button type="button" data-toggle="modal" data-target="#opprettbruker">Opprett bruker</button>
         <div class="modal fade" id="opprettbruker" role="dialog">
             <div class="modal-dialog">
@@ -334,33 +346,18 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        
-                            <input class="btn btn-default" form="form12" type="submit" value="Opprett bruker">
-                        
-                        
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
-                        
+
+                        <input class="btn btn-default" form="form12" type="submit" value="Opprett bruker">
+
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+
                     </div>
 
                 </div>
             </div>
         </div> 
-        <!--
-        <form action="?page=addUserEngine" method="post">
-            Name:<br>
-            <input type="text" name="givenName" value=""><br>
-            Brukernavn:<br>
-            <input type="text" name="givenUsername" value=""><br>
-            Password:<br>
-            <input type="text" name="givenPassword" value=""><br>
-            UserLevel:<br>
-            <input type="text" name="givenUserLevel" value=""><br>
-            Email:<br>
-            <input type="text" name="givenEmail" value=""><br>
-            <br>
-            <input type="submit" value="Submit">
-        </form>       
-        <!-- HER KOMMER INNHOLDET>   --> 
+
     </div>
 
 

@@ -38,8 +38,9 @@ class Router {
                     
                 case "userAdm"    :
                 case "addUserEngine" :
-                case "editUserEngine":    
-                case "deleteUserEngine":    
+                case "editUserEngine" :    
+                case "deleteUserEngine" :    
+                case "searchUserEngine" :    
                     return new UserController();
                 
                 case "dummy" :
