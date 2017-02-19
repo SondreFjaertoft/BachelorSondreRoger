@@ -131,7 +131,7 @@
                                 </div>
                                 <div class="modal-body">
 
-                                    <form action="?page=editUserEngine" method="post">
+                                    <form action="?page=editUserEngine" method="post" id="formM">
                                         <input type="hidden" name="editUserID" value="<?php echo $userResults1['userID']; ?>"><br>
                                         Navn: <br>
                                         <input type="text" name="editName" value="<?php echo $userResults1['name']; ?>"><br>
@@ -144,11 +144,12 @@
                                         Epost: <br>
                                         <input type="text" name="editEmail" value="<?php echo $userResults1['email']; ?>"><br>
                                         <br>
-                                        <input type="submit" value="Lagre">
+                                        
                                     </form>
 
                                 </div>
                                 <div class="modal-footer">
+                                    <input class="btn btn-default" type="submit" value="Lagre" form="formM">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
                                 </div>
                             </div>
@@ -218,7 +219,7 @@
                                                     endforeach;
                                                     ?></td>
                                             </tr>
-                                        
+
 
                                         </tbody>
                                     </table>
@@ -264,14 +265,15 @@
                                         echo "Brukernavn: " . $userResults1['username'];
                                         ?>
 
-                                    <form action="?page=deleteUserEngine" method="post">
+                                    <form action="?page=deleteUserEngine" method="post" id="formS">
                                         <input type="hidden" name="deleteUserID" value="<?php echo $userResults1['userID'] ?>"><br>
-                                        <input type="submit" value="Slett">
+                                        
                                     </form>
 
 
                                 </div>
                                 <div class="modal-footer">
+                                    <input class="btn btn-default" type="submit" value="Slett" form="formS">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
                                 </div>
                             </div>
@@ -304,7 +306,45 @@
 
         <br><br><br><br>
 
-        <button>Opprett bruker</button>
+        <button type="button" data-toggle="modal" data-target="#opprettbruker">Opprett bruker</button>
+        <div class="modal fade" id="opprettbruker" role="dialog">
+            <div class="modal-dialog">
+                <!-- Innholdet til Modalen -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Opprett bruker</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div style="text-align: center">
+                            <form action="?page=addUserEngine" method="post" id="form12">
+                                <p style="font-weight: bold ">Name:</p>
+                                <input type="text" name="givenName" value=""><br>
+                                <p style="font-weight: bold ">Brukernavn:</p>
+                                <input type="text" name="givenUsername" value=""><br>
+                                <p style="font-weight: bold ">Passord:</p>
+                                <input type="text" name="givenPassword" value=""><br>
+                                <p style="font-weight: bold ">UserLevel:</p>
+                                <input type="text" name="givenUserLevel" value=""><br>
+                                <p style="font-weight: bold ">Email:</p>
+                                <input type="text" name="givenEmail" value=""><br>
+                                <br>
+
+                            </form> 
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        
+                            <input class="btn btn-default" form="form12" type="submit" value="Opprett bruker">
+                        
+                        
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                        
+                    </div>
+
+                </div>
+            </div>
+        </div> 
         <!--
         <form action="?page=addUserEngine" method="post">
             Name:<br>
