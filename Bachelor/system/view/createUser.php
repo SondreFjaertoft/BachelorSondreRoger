@@ -195,7 +195,7 @@
                                     <?php
                                     foreach ($restrictionResults as $restrictionResults):
                                         if ($restrictionResults['userID'] == $givenUserID) {
-                                            echo $restrictionResults["storageID"];
+                                            echo $restrictionResults["storageName"];
                                             ?> <br>
                                         <?php
                                         }

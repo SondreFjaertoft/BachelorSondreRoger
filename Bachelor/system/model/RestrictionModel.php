@@ -8,7 +8,7 @@ class RestritionModel{
     
     
     const TABLE = "restrictions";
-    const SELECT_QUERY = "SELECT * FROM " . RestritionModel::TABLE;
+    const SELECT_QUERY = "SELECT storage.storageName, restrictions.storageID, restrictions.userID FROM storage INNER JOIN " . RestritionModel::TABLE . " ON storage.storageID = restrictions.storageID";
     const INSERT_QUERY = "INSERT INTO " . RestritionModel::TABLE . " (ID, brukernavn, tekst) VALUES (:ID, :Brukernavn, :tekst)";
     
     /** @var PDOStatement Statement for selecting all entries */
