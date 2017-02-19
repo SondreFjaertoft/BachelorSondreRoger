@@ -182,27 +182,46 @@
                                     <h4 class="modal-title">Bruker informasjon</h4>
                                 </div>
                                 <div class="modal-body">
-
-                                    <?php echo "userID: " . $userResults1['userID']; ?> <br>
-                                    <?php echo "Brukernavn: " . $userResults1['username']; ?> <br>
-                                    <?php echo "Brukernivå: " . $userResults1['userLevel']; ?> <br>
-                                    <?php echo "Epost: " . $userResults1['email']; ?> <br>
-                                    <?php echo "Sist innlogget: " . $userResults1['lastLogin']; ?> <br>
-                                    <br><br>
-
-                                    <p> Har tilgang til følgende lager: </p>
-
-                                    <?php
-                                    foreach ($restrictionResults as $restrictionResults):
-                                        if ($restrictionResults['userID'] == $givenUserID) {
-                                            echo $restrictionResults["storageName"];
-                                            ?> <br>
-                                        <?php
-                                        }
-                                    endforeach;
-                                    ?>
+                                    <table class="table table-striped table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th>UserID: </th>
+                                                <td><?php echo $userResults1['userID']; ?></td>
+                                            </tr>
 
 
+                                            <tr>
+                                                <th>Brukernavn: </th>
+                                                <td><?php echo $userResults1['username']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Brukernivå: </th>
+                                                <td><?php echo $userResults1['userLevel']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>E-post: </th>
+                                                <td><?php echo $userResults1['email']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Sist inlogget: </th>
+                                                <td><?php echo $userResults1['lastLogin']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Lagertilgang: </th>
+                                                <td><?php
+                                                    foreach ($restrictionResults as $restrictionResults):
+                                                        if ($restrictionResults['userID'] == $givenUserID) {
+                                                            echo $restrictionResults["storageName"];
+                                                            ?> <br>
+                                                            <?php
+                                                        }
+                                                    endforeach;
+                                                    ?></td>
+                                            </tr>
+                                        
+
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
