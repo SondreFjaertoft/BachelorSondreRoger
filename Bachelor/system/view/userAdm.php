@@ -77,7 +77,7 @@
                             <!-- Knapp som aktiverer Model for sletting av bruker  --> 
 
 
-                            <button form="brukerRedForm" name="delete" data-toggle="tooltip" title="Slett bruker" value="<?php echo $userResults['userID']; ?>" 
+                            <button form="brukerRedForm" name="deleteUser" data-toggle="tooltip" title="Slett bruker" value="<?php echo $userResults['userID']; ?>" 
                                     style="appearance: none;
                                     -webkit-appearance: none;
                                     -moz-appearance: none;
@@ -218,8 +218,8 @@
 
             // Slett bruker
 
-            if (isset($_POST['delete'])) {
-                $givenUserID = $_REQUEST["delete"];
+            if (isset($_POST['deleteUser'])) {
+                $givenUserID = $_REQUEST["deleteUser"];
 
                 if ($userResults1['userID'] == $givenUserID) {
                     ?>
@@ -246,7 +246,7 @@
                                         ?>
 
                                     <form action="?page=deleteUserEngine" method="post">
-                                        <input type="hidden" name="deleteUser" value="<?php $userResults1['userID'] ?>"><br>
+                                        <input type="hidden" name="deleteUserID" value="<?php echo $userResults1['userID'] ?>"><br>
                                         <input type="submit" value="Slett">
                                     </form>
 

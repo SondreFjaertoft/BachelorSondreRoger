@@ -6,16 +6,17 @@ class UserModel {
    
 
     const TABLE = "users";
-    const UPDATE_QUERY = "UPDATE " . UserModel::TABLE . " SET (name, username, password, userLevel, email) VALUES (:editName, :editUsername, :editPassword, :editUserLevel, :editEmail) WHERE (userID)=(:editUserID)" ;
+    const UPDATE_QUERY = "UPDATE " . UserModel::TABLE . " SET (name, username, password, userLevel, email) VALUES (test, test, test, test, test) WHERE userID=4" ;
 
    
     const SELECT_QUERY = "SELECT * FROM " . UserModel::TABLE;
     const INSERT_QUERY = "INSERT INTO " . UserModel::TABLE . " (name, username, password, userLevel, email) VALUES (:givenName, :givenUsername, :givenPassword, :givenUserLevel, :givenEmail)";
-    const DELETE_QUERY = "DELETE FROM " . UserModel::TABLE . " WHERE username= ?";
+    const DELETE_QUERY = "DELETE FROM " . UserModel::TABLE . " WHERE userID = ?";
 
     private $selStmt;
     private $addStmt;
     private $editStmt;
+    private $delStmt;
 
     public function __construct(PDO $dbConn) {
         $this->dbConn = $dbConn;
@@ -42,9 +43,9 @@ class UserModel {
     
     
     // kommer tilbake til, ved sletting av bruker
-    public function remove($givenRemoveUser)
+    public function removeUser($removeUserID)
     {
-       return $this->delStmt->execute(array($givenRemoveUser));
+       return $this->delStmt->execute(array($removeUserID));
 
     }
 

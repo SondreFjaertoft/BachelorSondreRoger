@@ -5,24 +5,28 @@ require_once("Controller.php");
 class UserController extends Controller {
 
     public function show($page) {
-        if ($page == "createUser") {
+        if ($page == "userAdm") {
             $this->userCreationPage();
         } else if ($page == "addUserEngine"){
             $this->userCreationEngine();
         } else if ($page == "editUserEngine"){
             $this->userEditEngine();
+        } else if ($page == "deleteUserEngine"){
+            $this->deleteUserEngine();
         }
     }
 
     private function userCreationPage() {
         $userInfo = $GLOBALS["userModel"];
         $userModel = $userInfo->getAllUserInfo();
-        
+            
         $restrictionInfo = $GLOBALS["restrictionModel"];
         $restrictionModel = $restrictionInfo->getAllRestrictionInfo();
         
+        
+        
         $data = array("userInfo" => $userModel, "restrictionInfo" => $restrictionModel);
-        return $this->render("createUser", $data);
+        return $this->render("userAdm", $data);
     }
     
     private function userEditEngine() {
@@ -34,10 +38,10 @@ class UserController extends Controller {
         $editEmail = $_REQUEST["editEmail"];
         
         $userEditInfo = $GLOBALS["userModel"];
-        $edited = $userEditInfo->editUser($editUserID, $editName, $editUsername, $editPassword, $editUserLevel, $editEmail);
+        $userEditInfo->editUser($editUserID, $editName, $editUsername, $editPassword, $editUserLevel, $editEmail);
 
        
-        header("Location:index.php?page=createUser");
+        header("Location:index.php?page=userAdm");
     }
     
     private function userCreationEngine() {
@@ -54,7 +58,16 @@ class UserController extends Controller {
 //            "added"=>$added,
 //            "givenUser"=>$givenUsername
 //        );
-        header("Location:index.php?page=createUser");
+        header("Location:index.php?page=userAdm");
+    }
+    
+    private function deleteUserEngine(){
+        $removeUserID = $_REQUEST["deleteUserID"];
+        
+        $removeUser = $GLOBALS["userModel"];
+        $removeUser->removeUser($removeUserID);
+        
+       header("Location:index.php?page=userAdm"); 
     }
 
 

@@ -36,9 +36,10 @@ class Router {
                 case "loginEngine":
                     return new LoginController();
                     
-                case "createUser"    :
+                case "userAdm"    :
                 case "addUserEngine" :
                 case "editUserEngine":    
+                case "deleteUserEngine":    
                     return new UserController();
                 
                 case "dummy" :

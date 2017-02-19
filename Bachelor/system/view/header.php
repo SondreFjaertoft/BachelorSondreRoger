@@ -47,7 +47,7 @@
                         <li><a>Dine Returer</a></li>
                         <li><a>Registrer Utlevering</a></li>
                         <li><a>Registrer Retur</a></li>
-                        <li><a href="?page=createUser">Bruker Administrering</a></li>
+                        <li><a href="?page=userAdm">Bruker Administrering</a></li>
                         <li><a href="?page=storageAdm">Lager Administrering</a></li>
                         
                     </ul>
