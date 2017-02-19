@@ -38,10 +38,10 @@ class UserController extends Controller {
         $editEmail = $_REQUEST["editEmail"];
         
         $userEditInfo = $GLOBALS["userModel"];
-        $userEditInfo->editUser($editUserID, $editName, $editUsername, $editPassword, $editUserLevel, $editEmail);
-
-       
-        header("Location:index.php?page=userAdm");
+        $edited = $userEditInfo->editUser($editName, $editUsername, $editPassword, $editUserLevel, $editEmail, $editUserID);
+        
+            header("Location:index.php?page=userAdm");
+        
     }
     
     private function userCreationEngine() {
