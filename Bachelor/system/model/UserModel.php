@@ -6,17 +6,17 @@ class UserModel {
    
 
     const TABLE = "users";
-    const UPDATE_QUERY = "UPDATE " . UserModel::TABLE . " SET (name, username, password, userLevel, email) VALUES (test, test, test, test, test) WHERE userID=4" ;
+    const UPDATE_QUERY = "UPDATE " . UserModel::TABLE . " SET name = :editName, username = :editUsername, password = :editPassword, userLevel = :editUserLevel, email = :editEmail WHERE userID = :editUserID" ;
 
    
     const SELECT_QUERY = "SELECT * FROM " . UserModel::TABLE;
     const INSERT_QUERY = "INSERT INTO " . UserModel::TABLE . " (name, username, password, userLevel, email) VALUES (:givenName, :givenUsername, :givenPassword, :givenUserLevel, :givenEmail)";
-    const DELETE_QUERY = "DELETE FROM " . UserModel::TABLE . " WHERE userID = ?";
+    const DELETE_QUERY = "DELETE FROM " . UserModel::TABLE . " WHERE userID = :removeUserID";
 
     private $selStmt;
     private $addStmt;
-    private $editStmt;
     private $delStmt;
+    private $editStmt;
 
     public function __construct(PDO $dbConn) {
         $this->dbConn = $dbConn;
@@ -32,8 +32,8 @@ class UserModel {
         return $this->selStmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function editUser($editUserID, $editName, $editUsername, $editPassword, $editUserLevel, $editEmail) {
-       return $this->editStmt->execute(array("editUserID" => $editUserID, "editName" =>  $editName, "editUsername" => $editUsername, "editPassword" => $editPassword, "editUserLevel" => $editUserLevel, "editEmail" => $editEmail)); 
+    public function editUser($editName, $editUsername, $editPassword, $editUserLevel, $editEmail, $editUserID) {
+       return $this->editStmt->execute(array("editName" =>  $editName, "editUsername" => $editUsername, "editPassword" => $editPassword, "editUserLevel" => $editUserLevel, "editEmail" => $editEmail, "editUserID" => $editUserID)); 
     }
     
     // kommer tilbake til, ved oppretting av bruker
@@ -45,7 +45,7 @@ class UserModel {
     // kommer tilbake til, ved sletting av bruker
     public function removeUser($removeUserID)
     {
-       return $this->delStmt->execute(array($removeUserID));
+       return $this->delStmt->execute(array("removeUserID" => $removeUserID));
 
     }
 

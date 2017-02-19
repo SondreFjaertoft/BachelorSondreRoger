@@ -6,13 +6,18 @@
 
 <?php
 $results = $GLOBALS["dummyInfo"];
+$results1 = $GLOBALS["added"];
 ?>
 
     <?php
     var_dump($results);
     ?>
-<div id="main-wrapper">
     
+    
+<div id="main-wrapper">
+    <?php
+    var_dump($results1);
+    ?>
     <?php foreach ($results as $results): ?>   
     
         <?php echo "ID: " . $results['ID'] . ",  Brukernavn: " . $results['brukernavn'] . ",  Info: " . $results['tekst']; ?><br>

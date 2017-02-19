@@ -39,7 +39,7 @@ class OverviewController extends Controller {
             "added"=> $added,
             "givenUser"=>$givenUser
                 );
-        return $this->render("addDummy", $data);
+        return $this->render("overview", $data);
     }
 
 }
