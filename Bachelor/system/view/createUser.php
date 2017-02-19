@@ -31,7 +31,7 @@
                             <form id="brukerRedForm" action="" method="post">
                             </form>
                             <span data-toggle="modal" data-target="#brukerModal" type="submit">
-                                <button form="brukerRedForm" type="button" name="editUser" data-toggle="tooltip" title="Rediger bruker" value="<?php echo $userResults['userID']; ?>" 
+                                <button form="brukerRedForm" type="button" name="editUsers" data-toggle="tooltip" title="Rediger bruker" value="<?php echo $userResults['userID']; ?>" 
                                         style="appearance: none;
                                         -webkit-appearance: none;
                                         -moz-appearance: none;
@@ -42,7 +42,7 @@
                                     <span class="glyphicon glyphicon-edit" style="color: green"></span></button>
                             </span>
 
-                            <button form="brukerRedForm" name="showInfo" data-toggle="tooltip" title="Mer informasjon" value="<?php echo $userResults['userID']; ?>" 
+                            <button form="brukerShowForm" name="showInfo" data-toggle="tooltip" title="Mer informasjon" value="<?php echo $userResults['userID']; ?>" 
                                     style="appearance: none;
                                     -webkit-appearance: none;
                                     -moz-appearance: none;
@@ -52,7 +52,7 @@
                                     display: inline;">
                                 <span class="glyphicon glyphicon-menu-hamburger" style="color: #003366" ></span></button>
 
-                            <button form="brukerRedForm" name="delete" data-toggle="tooltip" title="Slett bruker" value="<?php echo $userResults['userID']; ?>" 
+                            <button form="brukerDelForm" name="delete" data-toggle="tooltip" title="Slett bruker" value="<?php echo $userResults['userID']; ?>" 
                                     style="appearance: none;
                                     -webkit-appearance: none;
                                     -moz-appearance: none;
@@ -63,6 +63,9 @@
                                 <span class="glyphicon glyphicon-remove" style="color: red"></span></button>
 
 
+                             <form  action="" method="post">
+                                <button  name="editUser"  value="<?php echo $userResults['userID']; ?>"></button>
+                            </form>
 
 
                         </td>
@@ -75,16 +78,16 @@
 
 
 
-        <!-- DET SOM SKAL INN I PLUPPOPP RUTA  --> 
+    <!-- DET SOM SKAL INN I PLUPPOPP RUTA  --> 
 
-        <?php
+<?php
         foreach ($userResults2 as $userResults2):
             
             
             
             // Rediger Bruker
 
-            if (isset($_POST['editUsers'])) {
+            if (isset($_POST['editUser'])) {
                 $givenUserID = $_REQUEST["editUser"];
 
                 if ($userResults2['userID'] == $givenUserID) {
@@ -149,9 +152,7 @@
         
         ?>
 
-
-
-        <!-- SLUTTEN AV PLOPPOPPRUTA   --> 
+    <!-- SLUTTEN AV PLOPPOPPRUTA   --> 
 
 
 
@@ -171,7 +172,6 @@
                         <div>
                             <p>Ditte her e en p</p>
                             <?php
-                            echo"test";
                             foreach ($userResults1 as $userResults1):
 
                                 if (isset($_POST['editUser'])) {
@@ -181,7 +181,7 @@
                                     if ($userResults1['userID'] == $givenUserID) {
                                         ?>
                                         <form action="?page=editUserEngine" method="post">
-                                            <input type="hidden" name="editUserID" value=="<?php echo $userResults1['userID']; ?>"><br>
+                                            <input type="hidden" name="editUserID" value="<?php echo $userResults1['userID']; ?>"><br>
                                             Navn: <br>
                                             <input type="text" name="editName" value="<?php echo $userResults1['name']; ?>"><br>
                                             Brukernavn: <br>
@@ -200,7 +200,8 @@
                                     }
                                 }
                             endforeach;
-                            ?>
+                            ?> 
+
                         </div>
                     </div>
                     <div class = "modal-footer">
@@ -232,6 +233,5 @@
         <!-- HER KOMMER INNHOLDET>   --> 
     </div>
 </div>
-
 
 

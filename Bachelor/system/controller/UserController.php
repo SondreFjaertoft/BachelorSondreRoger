@@ -32,7 +32,8 @@ class UserController extends Controller {
         
         $userEditInfo = $GLOBALS["userModel"];
         $edited = $userEditInfo->editUser($editUserID, $editName, $editUsername, $editPassword, $editUserLevel, $editEmail);
-        
+
+       
         header("Location:index.php?page=createUser");
     }
     

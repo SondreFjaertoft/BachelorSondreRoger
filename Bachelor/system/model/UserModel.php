@@ -3,9 +3,10 @@
 class UserModel {
     
     private $dbConn;
+   
 
     const TABLE = "users";
-    const UPDATE_QUERY = "UPDATE" . UserModel::TABLE . " SET `name` = :editName, `username` = :editUsername, `password` = :editPassword, `userLevel` = :editUserLevel, `email` = :editEmail WHERE `userID` = :editUserID";
+    const UPDATE_QUERY = "UPDATE " . UserModel::TABLE . " SET (name, username, password, userLevel, email) VALUES (:editName, :editUsername, :editPassword, :editUserLevel, :editEmail) WHERE (userID)=(:editUserID)" ;
 
    
     const SELECT_QUERY = "SELECT * FROM " . UserModel::TABLE;

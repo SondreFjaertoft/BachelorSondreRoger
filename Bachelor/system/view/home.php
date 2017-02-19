@@ -12,8 +12,7 @@ $InvResults = $GLOBALS["inventoryKSInfo"];
 
     
     <div class="col-sm-3 col-md-4">
-
-
+    
 
         
         <div class="table-responsive">
