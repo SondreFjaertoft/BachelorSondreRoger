@@ -1,4 +1,3 @@
-
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
     <div class="col-sm-3 col-md-4">
@@ -30,13 +29,8 @@
                         <td class="text-center">
                             <form id="brukerRedForm" action="" method="post">
                             </form>
-<<<<<<< HEAD
-                            <span data-toggle="modal" data-target="#brukerModal" type="submit">
-                                <button form="brukerRedForm" type="button" name="editUsers" data-toggle="tooltip" title="Rediger bruker" value="<?php echo $userResults['userID']; ?>" 
-=======
                             
                                 <button form="brukerRedForm" type="submit" name="editUser" data-toggle="tooltip" title="Rediger bruker" value="<?php echo $userResults['userID']; ?>" 
->>>>>>> origin/master
                                         style="appearance: none;
                                         -webkit-appearance: none;
                                         -moz-appearance: none;
@@ -48,7 +42,7 @@
                                 </button>
                            
 
-                            <button form="brukerShowForm" name="showInfo" data-toggle="tooltip" title="Mer informasjon" value="<?php echo $userResults['userID']; ?>" 
+                            <button form="brukerRedForm" name="showInfo" data-toggle="tooltip" title="Mer informasjon" value="<?php echo $userResults['userID']; ?>" 
                                     style="appearance: none;
                                     -webkit-appearance: none;
                                     -moz-appearance: none;
@@ -58,7 +52,7 @@
                                     display: inline;">
                                 <span class="glyphicon glyphicon-menu-hamburger" style="color: #003366" ></span></button>
 
-                            <button form="brukerDelForm" name="delete" data-toggle="tooltip" title="Slett bruker" value="<?php echo $userResults['userID']; ?>" 
+                            <button form="brukerRedForm" name="delete" data-toggle="tooltip" title="Slett bruker" value="<?php echo $userResults['userID']; ?>" 
                                     style="appearance: none;
                                     -webkit-appearance: none;
                                     -moz-appearance: none;
@@ -68,15 +62,6 @@
                                     display: inline;">
                                 <span class="glyphicon glyphicon-remove" style="color: red"></span></button>
 
-<<<<<<< HEAD
-
-                             <form  action="" method="post">
-                                <button  name="editUser"  value="<?php echo $userResults['userID']; ?>"></button>
-                            </form>
-
-
-=======
->>>>>>> origin/master
                         </td>
                     </tr>   
                 <?php endforeach; ?> 
@@ -88,20 +73,9 @@
 
     <div class="col-sm-3 col-md-4">
 
-<<<<<<< HEAD
-    <!-- DET SOM SKAL INN I PLUPPOPP RUTA  --> 
-
-<?php
-        foreach ($userResults2 as $userResults2):
-            
-            
-            
-            // Rediger Bruker
-=======
 
         <?php
         foreach ($userResults1 as $userResults1):
->>>>>>> origin/master
 
             if (isset($_POST['editUser'])) {
                 $givenUserID = $_REQUEST["editUser"];
@@ -155,68 +129,6 @@
         endforeach;
         ?>
 
-<<<<<<< HEAD
-    <!-- SLUTTEN AV PLOPPOPPRUTA   --> 
-
-
-
-    <div class="col-sm-3 col-md-4">
-
-
-        <div class = "modal fade" id = "brukerModal" role = "dialog">
-            <div class = "modal-dialog">
-                <!--Innholdet til Modalen -->
-                <div class = "modal-content">
-                    <div class = "modal-header">
-                        <button type = "button" class = "close" data-dismiss = "modal">&times;
-                        </button>
-                        <h4 class = "modal-title">Bruker informasjon</h4>
-                    </div>
-                    <div class = "modal-body">
-                        <div>
-                            <p>Ditte her e en p</p>
-                            <?php
-                            foreach ($userResults1 as $userResults1):
-
-                                if (isset($_POST['editUser'])) {
-
-                                    $givenUserID = $_REQUEST["editUser"];
-
-                                    if ($userResults1['userID'] == $givenUserID) {
-                                        ?>
-                                        <form action="?page=editUserEngine" method="post">
-                                            <input type="hidden" name="editUserID" value="<?php echo $userResults1['userID']; ?>"><br>
-                                            Navn: <br>
-                                            <input type="text" name="editName" value="<?php echo $userResults1['name']; ?>"><br>
-                                            Brukernavn: <br>
-                                            <input type="text" name="editUsername" value="<?php echo $userResults1['username']; ?>"><br>
-                                            Passord: <br>
-                                            <input type="text" name="editPassword" value="<?php echo $userResults1['password']; ?>"><br>
-                                            Brukernivå: <br>
-                                            <input type="text" name="editUserLevel" value="<?php echo $userResults1['userLevel']; ?>"><br>
-                                            Epost: <br>
-                                            <input type="text" name="editEmail" value="<?php echo $userResults1['email']; ?>"><br>
-                                            <br>
-                                            <input type="submit" value="Lagre">
-                                        </form>
-
-                                        <?php
-                                    }
-                                }
-                            endforeach;
-                            ?> 
-
-                        </div>
-                    </div>
-                    <div class = "modal-footer">
-                        <button type = "button" class = "btn btn-default" data-dismiss = "modal">Avslutt</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-=======
->>>>>>> origin/master
 
     </div>
     <div class="col-sm-3 col-md-4">  
