@@ -12,9 +12,12 @@
         $userResults = $GLOBALS["userInfo"];
         $userResults1 = $GLOBALS["userInfo"];
         $userResults2 = $GLOBALS["userInfo"];
+        $restrictionResults = $GLOBALS["restrictionInfo"];
         ?>
 
         <table class="table table-bordered table-striped"> 
+
+
             <h4> Brukeroversikt </h4> 
             <thead>
                 <tr>
@@ -188,6 +191,18 @@
                                     <br><br>
 
                                     <p> Har tilgang til følgende lager: </p>
+
+                                    <?php
+                                    foreach ($restrictionResults as $restrictionResults):
+                                        if ($restrictionResults['userID'] == $givenUserID) {
+                                            echo $restrictionResults["storageID"];
+                                            ?> <br>
+                                        <?php
+                                        }
+                                    endforeach;
+                                    ?>
+
+
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
@@ -264,12 +279,12 @@
 
     <div class="col-sm-3 col-md-4">  
 
-        
-        
+
+
         <!-- DIV som holder på all informasjon til høgre på skjermen  -->
 
         <br><br><br><br>
-        
+
         <button>Opprett bruker</button>
         <!--
         <form action="?page=addUserEngine" method="post">

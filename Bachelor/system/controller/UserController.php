@@ -18,7 +18,10 @@ class UserController extends Controller {
         $userInfo = $GLOBALS["userModel"];
         $userModel = $userInfo->getAllUserInfo();
         
-        $data = array("userInfo" => $userModel, "page" => $page);
+        $restrictionInfo = $GLOBALS["restrictionModel"];
+        $restrictionModel = $restrictionInfo->getAllRestrictionInfo();
+        
+        $data = array("userInfo" => $userModel, "restrictionInfo" => $restrictionModel);
         return $this->render("createUser", $data);
     }
     
