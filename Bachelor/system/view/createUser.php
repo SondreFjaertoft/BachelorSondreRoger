@@ -30,8 +30,8 @@
                         <td class="text-center">
                             <form id="brukerRedForm" action="" method="post">
                             </form>
-                            <span data-toggle="modal" data-target="#brukerModal" type="submit">
-                                <button form="brukerRedForm" type="button" name="editUser" data-toggle="tooltip" title="Rediger bruker" value="<?php echo $userResults['userID']; ?>" 
+                            
+                                <button form="brukerRedForm" type="submit" name="editUser" data-toggle="tooltip" title="Rediger bruker" value="<?php echo $userResults['userID']; ?>" 
                                         style="appearance: none;
                                         -webkit-appearance: none;
                                         -moz-appearance: none;
@@ -39,8 +39,9 @@
                                         border: 0;
                                         background: transparent;
                                         display: inline;">
-                                    <span class="glyphicon glyphicon-edit" style="color: green"></span></button>
-                            </span>
+                                    <span class="glyphicon glyphicon-edit" style="color: green"></span>
+                                </button>
+                           
 
                             <button form="brukerRedForm" name="showInfo" data-toggle="tooltip" title="Mer informasjon" value="<?php echo $userResults['userID']; ?>" 
                                     style="appearance: none;
@@ -74,44 +75,60 @@
     <div class="col-sm-3 col-md-4">
 
 
-        <div class = "modal fade" id = "brukerModal" role = "dialog">
-            <div class = "modal-dialog">
-                <!--Innholdet til Modalen -->
-                <div class = "modal-content">
-                    <div class = "modal-header">
-                        <button type = "button" class = "close" data-dismiss = "modal">&times;
-                        </button>
-                        <h4 class = "modal-title">Bruker informasjon</h4>
-                    </div>
-                    <div class = "modal-body">
-                        <div>
-                            <p>Ditte her e en p</p>
-                            <?php
-                            echo"test";
-                            foreach ($userResults1 as $userResults1):
+        <?php
+        foreach ($userResults1 as $userResults1):
 
-                                if (isset($_POST['editUser'])) {
-                                    echo"test22";
+            if (isset($_POST['editUser'])) {
+                $givenUserID = $_REQUEST["editUser"];
 
-                                    $givenUserID = $_REQUEST["editUser"];
+                if ($userResults1['userID'] == $givenUserID) {
+                    ?>
+                        <script>
+                            $(function(){
+                                $('#brukerModal').modal('show');
+                            });
+                            </script>
+        
+        
+        <div class="modal fade" id="brukerModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Innholdet til Modalen -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Bruker informasjon</h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                           <form action="?page=editUserEngine" method="post">
+                        <input type="hidden" name="editUserID" value="<?php echo $userResults1['userID']; ?>"><br>
+                        Navn: <br>
+                        <input type="text" name="editName" value="<?php echo $userResults1['name']; ?>"><br>
+                        Brukernavn: <br>
+                        <input type="text" name="editUsername" value="<?php echo $userResults1['username']; ?>"><br>
+                        Passord: <br>
+                        <input type="text" name="editPassword" value="<?php echo $userResults1['password']; ?>"><br>
+                        Brukernivå: <br>
+                        <input type="text" name="editUserLevel" value="<?php echo $userResults1['userLevel']; ?>"><br>
+                        Epost: <br>
+                        <input type="text" name="editEmail" value="<?php echo $userResults1['email']; ?>"><br>
+                        <br>
+                        <input type="submit" value="Lagre">
+                    </form>
 
-                                    if ($userResults1['userID'] == $givenUserID) {
-                                        ?>
-                                        
-
-                                        <?php
-                                    }
-                                }
-                            endforeach;
-                            ?>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
                         </div>
                     </div>
-                    <div class = "modal-footer">
-                        <button type = "button" class = "btn btn-default" data-dismiss = "modal">Avslutt</button>
-                    </div>
                 </div>
-            </div>
-        </div>
+            </div> 
+
+                    <?php
+                }
+            }
+        endforeach;
+        ?>
 
 
     </div>
@@ -134,4 +151,9 @@
         </form>       
         <!-- HER KOMMER INNHOLDET>   --> 
     </div>
+
+
 </div>
+
+
+
