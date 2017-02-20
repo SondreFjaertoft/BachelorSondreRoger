@@ -240,19 +240,19 @@ $storageInventory = $GLOBALS["storageInventory"];
                             </div>
                         </div>
                     </div> 
-                    <?php
-                }
-            }
+            <?php
+        }
+    }
 
 
 
-            // Slett LAger
+    // Slett LAger
 
-            if (isset($_POST['deleteStorage'])) {
-                $givenStorageID = $_REQUEST["deleteStorage"];
+    if (isset($_POST['deleteStorage'])) {
+        $givenStorageID = $_REQUEST["deleteStorage"];
 
-                if ($storageInfo['storageID'] == $givenStorageID) {
-                    ?>
+        if ($storageInfo['storageID'] == $givenStorageID) {
+            ?>
                     <script>
                         $(function () {
                             $('#storageModal').modal('show');
@@ -271,9 +271,9 @@ $storageInventory = $GLOBALS["storageInventory"];
                                 <div class="modal-body">
 
                                     <p> Er du sikker på at du vil slette  <P>
-                                        <?php
-                                        echo "Lagernavn: " . $storageInfo['storageName'];
-                                        ?>
+            <?php
+            echo "Lagernavn: " . $storageInfo['storageName'];
+            ?>
 
                                     <form action="?page=deleteStorageEngine" method="post" id="formS">
                                         <input type="hidden" name="deleteStorageID" value="<?php echo $storageInfo['storageID'] ?>"><br>
@@ -294,12 +294,12 @@ $storageInventory = $GLOBALS["storageInventory"];
 
 
 
-                    <?php
-                }
-            }
+            <?php
+        }
+    }
 
-        endforeach;
-        ?>
+endforeach;
+?>
 
 
     </div>
