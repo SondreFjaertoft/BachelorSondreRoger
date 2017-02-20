@@ -6,22 +6,30 @@ class StorageController extends Controller {
 
     public function show($page) {
         if ($page == "storageAdm") {
-            $this->storageCreationPage();
+            $this->storageAdmPage();
         } else if ($page == "addStorageEngine"){
             $this->storageCreationEngine();
         }
     }
 
-    private function storageCreationPage() {
+    private function storageAdmPage() {
         
-       $storageInfi = $_GLOBALS["storageModel"];
+       $storageInfo = $GLOBALS["storageModel"];
        
        if (isset($_POST['givenStorageSearchWord'])) {
            $givenStorageSearchWord = "%{$_REQUEST["givenStorageSearchWord"]}%";
+           $storageModel = $storageInfo->getSearchResult($givenStorageSearchWord);
+       } else {
+           $givenStorageSearchWord = "%%";
+           $storageModel = $storageInfo->getSearchResult($givenStorageSearchWord);
        }
        
        
-        return $this->render("storageAdm");
+       
+       $data = array("storageResult" => $storageModel);
+       
+       
+        return $this->render("storageAdm", $data);
     }
     
         private function storageCreationEngine() {

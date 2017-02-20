@@ -6,6 +6,7 @@ class StorageModel {
 
     const TABLE = "storage";
     const SELECT_QUERY = "SELECT * FROM " . StorageModel::TABLE;
+    const SEARCH_QUERY = "SELECT * FROM " . StorageModel::TABLE . " WHERE storageName LIKE :givenSearchWord ";
     const INSERT_QUERY = "INSERT INTO " . StorageModel::TABLE . " (storageName) VALUES (:givenStorageName)";
     const DELETE_QUERY = "DELETE FROM " . StorageModel::TABLE . " WHERE username= ?";
 
@@ -17,9 +18,14 @@ class StorageModel {
         $this->addStmt = $this->dbConn->prepare(StorageModel::INSERT_QUERY);
         $this->selStmt = $this->dbConn->prepare(StorageModel::SELECT_QUERY);
         $this->delStmt = $this->dbConn->prepare(StorageModel::DELETE_QUERY);
+        $this->searchStmt = $this->dbConn->prepare(StorageModel::SEARCH_QUERY);
     }
 
-
+    public function getSearchResult($givenSearchWord) {
+        $this->searchStmt->execute(array("givenSearchWord" => $givenSearchWord));
+        return $this->searchStmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     public function getAll() {
         $this->selStmt->execute();
         return $this->selStmt->fetchAll(PDO::FETCH_ASSOC);
