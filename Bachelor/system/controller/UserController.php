@@ -31,7 +31,7 @@ class UserController extends Controller {
         }
 
         $restrictionInfo = $GLOBALS["restrictionModel"];
-        $restrictionModel = $restrictionInfo->getAllRestrictionInfo();
+        $restrictionModel = $restrictionInfo->getAllStorageRestrictionInfo();
 
         //$givenSearchWord = $_REQUEST["givenSearchWord"];
         //if (isset($_POST['givenSearchWord'])) {

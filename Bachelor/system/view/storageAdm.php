@@ -2,23 +2,13 @@
 <?php
 $searchResult = $GLOBALS["storageResult"];
 $storageInfo = $GLOBALS["storageResult"];
+$storageAccess = $GLOBALS["storageAccess"];
 ?>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <br><br><br><br>
 
-    <div class="col-sm-3 col-md-4 form-group">
-
-
-        <form action="?page=addStorageEngine" method="post">
-            Navn på lager:<br>
-            <input type="text" name="givenStorageName" value=""><br>
-
-            <br>
-            <input type="submit" value="Submit">
-        </form>       
-
-
+    <div class="col-sm-3 col-md-4 form-group">     
 
         <!-- HER KOMMER INNHOLDET>   --> 
 
@@ -215,14 +205,14 @@ $storageInfo = $GLOBALS["storageResult"];
                                                 <th>Personer med tilgang: </th>
 
                                                 <td><?php
-                                                    //                foreach ($restrictionResults as $restrictionResults):
-                                                    //                    if ($restrictionResults['userID'] == $givenUserID) {
-                                                    //                        echo $restrictionResults["storageName"];
-                                                    //                        
+                                                                    foreach ($storageAccess as $storageAccess):
+                                                                        if ($storageAccess['storageID'] == $givenStorageID) {
+                                                                            echo $storageAccess["name"];
+                                                                            
                                                     ?> <br>
                                                     <?php
-                                                    //                    }
-                                                    //                endforeach;
+                                                                        }
+                                                                    endforeach;
                                                     ?></td>
                                             </tr>
 

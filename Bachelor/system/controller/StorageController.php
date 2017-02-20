@@ -28,9 +28,12 @@ class StorageController extends Controller {
            $storageModel = $storageInfo->getSearchResult($givenStorageSearchWord);
        }
        
+       $restrictionInfo = $GLOBALS["restrictionModel"];
+       $restrictionModel = $restrictionInfo->getAllUserRestrictionInfo();
        
        
-       $data = array("storageResult" => $storageModel);
+       
+       $data = array("storageResult" => $storageModel, "storageAccess" => $restrictionModel);
        
        
         return $this->render("storageAdm", $data);
