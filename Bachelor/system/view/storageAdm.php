@@ -125,7 +125,7 @@ $storageInfo = $GLOBALS["storageResult"];
 
 
 
-
+    <!-- REDIGER LAGER -->
 
 
     <div class="col-sm-3 col-md-4">
@@ -175,7 +175,7 @@ $storageInfo = $GLOBALS["storageResult"];
                 }
             }
 
-// Vis Informasjon
+// Vis Lager Informasjon
 
             if (isset($_POST['showStorageInfo'])) {
                 $givenStorageID = $_REQUEST["showStorageInfo"];
@@ -210,32 +210,34 @@ $storageInfo = $GLOBALS["storageResult"];
                                                 <th>lagernavn: </th>
                                                 <td><?php echo $storageInfo['storageName']; ?></td>
                                             </tr>
-         
+
                                             <tr>
                                                 <th>Personer med tilgang: </th>
-                                                
+
                                                 <td><?php
-                                    //                foreach ($restrictionResults as $restrictionResults):
-                                    //                    if ($restrictionResults['userID'] == $givenUserID) {
-                                    //                        echo $restrictionResults["storageName"];
-                                    //                        ?> <br>
-                                                            <?php
-                                    //                    }
-                                    //                endforeach;
+                                                    //                foreach ($restrictionResults as $restrictionResults):
+                                                    //                    if ($restrictionResults['userID'] == $givenUserID) {
+                                                    //                        echo $restrictionResults["storageName"];
+                                                    //                        
+                                                    ?> <br>
+                                                    <?php
+                                                    //                    }
+                                                    //                endforeach;
                                                     ?></td>
                                             </tr>
-                                            
+
                                             <tr>
                                                 <th>Utstyr i lageret: </th>
-                                                
+
                                                 <td><?php
-                                    //                foreach ($restrictionResults as $restrictionResults):
-                                    //                    if ($restrictionResults['userID'] == $givenUserID) {
-                                    //                        echo $restrictionResults["storageName"];
-                                    //                       ?> <br>
-                                                             <?php
-                                    //                    }
-                                    //                endforeach;
+                                                    //                foreach ($restrictionResults as $restrictionResults):
+                                                    //                    if ($restrictionResults['userID'] == $givenUserID) {
+                                                    //                        echo $restrictionResults["storageName"];
+                                                    //                       
+                                                    ?> <br>
+                                                    <?php
+                                                    //                    }
+                                                    //                endforeach;
                                                     ?></td>
                                             </tr>
 
@@ -255,7 +257,7 @@ $storageInfo = $GLOBALS["storageResult"];
 
 
 
-            // Slett bruker
+            // Slett LAger
 
             if (isset($_POST['deleteStorage'])) {
                 $givenStorageID = $_REQUEST["deleteStorage"];
@@ -311,17 +313,62 @@ $storageInfo = $GLOBALS["storageResult"];
         ?>
 
 
-
-
-
     </div>
 
 
 
 
 
+    <div class="col-sm-3 col-md-4">  
 
 
+
+        <!-- DIV som holder på all informasjon til høgre på skjermen  -->
+
+        <br><br><br><br>
+
+
+
+
+
+
+
+        <!-- OPPRETT Lager  -->
+
+        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#opprettlager">Opprett Lager</button>
+        <div class="modal fade" id="opprettlager" role="dialog">
+            <div class="modal-dialog">
+                <!-- Innholdet til Modalen -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Opprett bruker</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div style="text-align: center">
+                            <form action="?page=addStorageEngine" method="post" id="form13">
+                                Navn på lager:<br>
+                                <input type="text" name="givenStorageName" value=""><br>
+
+                                <br>
+                              
+                            </form> 
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <input class="btn btn-default" form="form13" type="submit" value="Opprett Lager">
+
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div> 
+
+    </div>
 
 
 

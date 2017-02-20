@@ -42,6 +42,6 @@ class StorageController extends Controller {
 //            "added"=>$added,
 //            "givenUser"=>$givenUsername
 //        );
-        return $this->render("storageAdm");
+        header("Location:index.php?page=storageAdm");
     }
 }
