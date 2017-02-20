@@ -5,8 +5,20 @@
     <!-- DIV som holder på all informasjon til venstre på skjermen  -->
 
 
-    <div class="col-sm-3 col-md-4">
-        <br><br><br><br>
+    <div class="col-sm-3 col-md-4 form-group">
+        <br><br><br>
+        <!-- SØK ETTER BRUKER  -->
+        <form class="form-inline" action="" method="post">
+            <div class="form-group">
+
+                <input class="form-control" type="text" name="givenSearchWord" value="" placeholder="Søk etter bruker..">  
+                <input class="form-control" type="submit" value="Søk">
+                <a href="?page=userAdm" class="btn btn-default">Alle brukere</a>
+
+            </div> 
+        </form>
+
+        <br>
 
         <?php
         $userResults = $GLOBALS["userInfo"];
@@ -305,6 +317,7 @@
         <!-- DIV som holder på all informasjon til høgre på skjermen  -->
 
         <br><br><br><br>
+<<<<<<< HEAD
         
         
         <!-- SØK ETTER BRUKER  -->
@@ -313,11 +326,16 @@
          <input type="text" name="givenUserSearchWord" value="">  
          <input type="submit" value="Submit">
         </form>
+=======
+>>>>>>> origin/master
 
-        
-        
+
+
+
+
+
         <!-- OPPRETT BRUKER  -->
-        
+
         <button type="button" data-toggle="modal" data-target="#opprettbruker">Opprett bruker</button>
         <div class="modal fade" id="opprettbruker" role="dialog">
             <div class="modal-dialog">
@@ -341,7 +359,6 @@
                                 <p style="font-weight: bold ">Email:</p>
                                 <input type="text" name="givenEmail" value=""><br>
                                 <br>
-
                             </form> 
                         </div>
                     </div>
