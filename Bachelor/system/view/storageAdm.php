@@ -206,14 +206,13 @@ $storageInventory = $GLOBALS["storageInventory"];
                                                 <th>Personer med tilgang: </th>
 
                                                 <td><?php
-                                                                    foreach ($storageAccess as $storageAccess):
-                                                                        if ($storageAccess['storageID'] == $givenStorageID) {
-                                                                            echo $storageAccess["name"];
-                                                                            
-                                                    ?> <br>
-                                                    <?php
-                                                                        }
-                                                                    endforeach;
+                                                    foreach ($storageAccess as $storageAccess):
+                                                        if ($storageAccess['storageID'] == $givenStorageID) {
+                                                            echo $storageAccess["name"];
+                                                            ?> <br>
+                                                            <?php
+                                                        }
+                                                    endforeach;
                                                     ?></td>
                                             </tr>
 
@@ -221,14 +220,13 @@ $storageInventory = $GLOBALS["storageInventory"];
                                                 <th>Utstyr i lageret: </th>
 
                                                 <td><?php
-                                                                    foreach ($storageInventory as $storageInventory):
-                                                                        if ($storageInventory['storageID'] == $givenStorageID) {
-                                                                            echo $storageInventory["productName"];
-                                                                           
-                                                    ?> <br>
-                                                    <?php
-                                                                        }
-                                                                    endforeach;
+                                                    foreach ($storageInventory as $storageInventory):
+                                                        if ($storageInventory['storageID'] == $givenStorageID) {
+                                                            echo $storageInventory["productName"] . ", Antall: " . $storageInventory["count(*)"];
+                                                            ?> <br>
+                                                            <?php
+                                                        }
+                                                    endforeach;
                                                     ?></td>
                                             </tr>
 
