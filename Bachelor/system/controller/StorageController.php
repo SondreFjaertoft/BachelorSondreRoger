@@ -13,6 +13,14 @@ class StorageController extends Controller {
     }
 
     private function storageCreationPage() {
+        
+       $storageInfi = $_GLOBALS["storageModel"];
+       
+       if (isset($_POST['givenStorageSearchWord'])) {
+           $givenStorageSearchWord = "%{$_REQUEST["givenStorageSearchWord"]}%";
+       }
+       
+       
         return $this->render("storageAdm");
     }
     

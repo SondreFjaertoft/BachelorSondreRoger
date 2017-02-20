@@ -310,7 +310,7 @@
         <!-- SØK ETTER BRUKER  -->
         <form action="" method="post">
             
-         <input type="text" name="givenSearchWord" value="">  
+         <input type="text" name="givenUserSearchWord" value="">  
          <input type="submit" value="Submit">
         </form>
 

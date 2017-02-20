@@ -22,8 +22,8 @@ class UserController extends Controller {
         $userInfo = $GLOBALS["userModel"];
         
 
-        if (isset($_POST['givenSearchWord'])) {
-            $givenSearchWord = "%{$_REQUEST["givenSearchWord"]}%";
+        if (isset($_POST['givenUserSearchWord'])) {
+            $givenSearchWord = "%{$_REQUEST["givenUserSearchWord"]}%";
             $userModel = $userInfo->getSearchResult($givenSearchWord);
         } else {
             $givenSearchWord = "%%";
