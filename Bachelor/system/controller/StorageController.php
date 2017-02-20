@@ -31,9 +31,10 @@ class StorageController extends Controller {
        $restrictionInfo = $GLOBALS["restrictionModel"];
        $restrictionModel = $restrictionInfo->getAllUserRestrictionInfo();
        
+       $inventoryInfo = $GLOBALS["inventoryModel"];
+       $inventoryModel = $inventoryInfo->getAllStorageInventory();
        
-       
-       $data = array("storageResult" => $storageModel, "storageAccess" => $restrictionModel);
+       $data = array("storageResult" => $storageModel, "storageAccess" => $restrictionModel, "storageInventory" => $inventoryModel);
        
        
         return $this->render("storageAdm", $data);

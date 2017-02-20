@@ -15,7 +15,7 @@ class HomeController extends Controller {
     }
     
     private function showInventory(){
-        $inventoryInfo = $GLOBALS["inventory"];
+        $inventoryInfo = $GLOBALS["inventoryQuantityModel"];
         $inventoryKS = $inventoryInfo->getAllInventoryKS();
         $inventory = $inventoryInfo->getAllInventory();
   

@@ -3,6 +3,7 @@
 $searchResult = $GLOBALS["storageResult"];
 $storageInfo = $GLOBALS["storageResult"];
 $storageAccess = $GLOBALS["storageAccess"];
+$storageInventory = $GLOBALS["storageInventory"];
 ?>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -220,14 +221,14 @@ $storageAccess = $GLOBALS["storageAccess"];
                                                 <th>Utstyr i lageret: </th>
 
                                                 <td><?php
-                                                    //                foreach ($restrictionResults as $restrictionResults):
-                                                    //                    if ($restrictionResults['userID'] == $givenUserID) {
-                                                    //                        echo $restrictionResults["storageName"];
-                                                    //                       
+                                                                    foreach ($storageInventory as $storageInventory):
+                                                                        if ($storageInventory['storageID'] == $givenStorageID) {
+                                                                            echo $storageInventory["productName"];
+                                                                           
                                                     ?> <br>
                                                     <?php
-                                                    //                    }
-                                                    //                endforeach;
+                                                                        }
+                                                                    endforeach;
                                                     ?></td>
                                             </tr>
 
