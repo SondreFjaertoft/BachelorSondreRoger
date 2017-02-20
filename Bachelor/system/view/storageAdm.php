@@ -159,7 +159,7 @@ $storageInfo = $GLOBALS["storageResult"];
                                     <form action="?page=editStorageEngine" method="post" id="formM">
                                         <input type="hidden" name="editStorageID" value="<?php echo $storageInfo['storageID']; ?>"><br>
                                         Lagernavn: <br>
-                                        <input type="text" name="editName" value="<?php echo $storageInfo['storageName']; ?>"><br>
+                                        <input type="text" name="editStorageName" value="<?php echo $storageInfo['storageName']; ?>"><br>
                                     </form>
 
                                 </div>
@@ -351,7 +351,7 @@ $storageInfo = $GLOBALS["storageResult"];
                                 <input type="text" name="givenStorageName" value=""><br>
 
                                 <br>
-                              
+
                             </form> 
                         </div>
                     </div>

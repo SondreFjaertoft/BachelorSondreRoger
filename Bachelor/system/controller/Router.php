@@ -48,6 +48,8 @@ class Router {
                     
                 case "storageAdm":
                 case "addStorageEngine":
+                case "editStorageEngine" :
+                case "deleteStorageEngine" :
                     return new StorageController();
                     
                 

@@ -9,6 +9,10 @@ class StorageController extends Controller {
             $this->storageAdmPage();
         } else if ($page == "addStorageEngine"){
             $this->storageCreationEngine();
+        } else if ($page == "editStorageEngine") {
+            $this->storageEditEngine();
+        } else if ($page == "deleteStorageEngine") {
+            $this->deleteStorageEngine();
         }
     }
 
@@ -32,6 +36,8 @@ class StorageController extends Controller {
         return $this->render("storageAdm", $data);
     }
     
+    
+    
         private function storageCreationEngine() {
         $givenStorageName = $_REQUEST["givenStorageName"];
   
@@ -44,4 +50,26 @@ class StorageController extends Controller {
 //        );
         header("Location:index.php?page=storageAdm");
     }
+    
+    
+        private function storageEditEngine()    {
+            $editStorageID = $_REQUEST["editStorageID"];
+            $editStorageName = $_REQUEST["editStorageName"];
+            
+            $storageEditInfo = $GLOBALS["storageModel"];
+            $edited = $storageEditInfo->editStorage($editStorageName, $editStorageID);
+            
+            header("Location:index.php?page=storageAdm");
+        }
+        
+        
+        private function deleteStorageEngine() {
+            $removeStorageID = $_REQUEST["deleteStorageID"];
+            
+            $removeStorage = $GLOBALS["storageModel"];
+            $removeStorage->removeStorage($removeStorageID);
+            
+            header("Location:index.php?page=storageAdm"); 
+        }
+    
 }
