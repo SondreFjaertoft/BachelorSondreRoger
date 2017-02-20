@@ -11,7 +11,7 @@
         <form class="form-inline" action="" method="post">
             <div class="form-group">
 
-                <input class="form-control" type="text" name="givenSearchWord" value="" placeholder="Søk etter bruker..">  
+                <input class="form-control" type="text" name="givenUserSearchWord" value="" placeholder="Søk etter bruker..">  
                 <input class="form-control" type="submit" value="Søk">
                 <a href="?page=userAdm" class="btn btn-default">Alle brukere</a>
 
@@ -317,17 +317,7 @@
         <!-- DIV som holder på all informasjon til høgre på skjermen  -->
 
         <br><br><br><br>
-<<<<<<< HEAD
-        
-        
-        <!-- SØK ETTER BRUKER  -->
-        <form action="" method="post">
-            
-         <input type="text" name="givenUserSearchWord" value="">  
-         <input type="submit" value="Submit">
-        </form>
-=======
->>>>>>> origin/master
+
 
 
 
