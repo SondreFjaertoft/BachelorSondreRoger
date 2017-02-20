@@ -336,7 +336,7 @@
 
         <!-- OPPRETT BRUKER  -->
 
-        <button type="button" data-toggle="modal" data-target="#opprettbruker">Opprett bruker</button>
+        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#opprettbruker">Opprett bruker</button>
         <div class="modal fade" id="opprettbruker" role="dialog">
             <div class="modal-dialog">
                 <!-- Innholdet til Modalen -->
