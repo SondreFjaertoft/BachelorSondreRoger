@@ -10,7 +10,7 @@ $storageInventory = $GLOBALS["storageInventory"];
     
     <br><br><br><br>
 
-    <div class="col-sm-3 col-md-4 form-group">     
+    <div class="col-sm-3 col-sm-offset-1 col-md-6 col-md-offset-2 form-group">     
 
         <!-- HER KOMMER INNHOLDET>   --> 
         
@@ -18,17 +18,20 @@ $storageInventory = $GLOBALS["storageInventory"];
             <!-- SØK ETTER LAGER -->
 
             <form class="form-inline" action="" method="post">
-                <div class="form-group">
-
+            <div class="form-group">
+                <div class="col-md-9">
                     <input class="form-control" type="text" name="givenStorageSearchWord" value="" placeholder="Søk etter bruker..">  
                     <input class="form-control" type="submit" value="Søk">
                     <a href="?page=storageAdm" class="btn btn-default">Vis alle lagrer</a>
+                </div>
+                <div class="col-md-1 col-md-offset-2">
+                    <button class="btn btn-default" type="button" data-toggle="modal" data-target="#opprettlager">Opprett Lager</button>
+                </div>
+            </div> 
+        </form>
 
-                </div> 
-            </form>
 
-
-        <table class="table table-bordered table-striped"> 
+        <table class="table table-bordered table-striped table-responsive"> 
 
 
             <br><br>
@@ -39,22 +42,14 @@ $storageInventory = $GLOBALS["storageInventory"];
 
 
             <h4> Lgeroversikt </h4> 
-            <thead>
-                <tr>
-                    <th>Navn</th>
-                    <th>Handlinger</th>
-                </tr>
-            </thead>
-
-
             <tbody>
+                
+            
+
+
+            
                 <?php foreach ($searchResult as $searchResult): ?>  
                     <tr>
-                        <td><?php echo $searchResult['storageName']; ?></td>
-
-
-
-
                         <!-- Oppretter et form som knappene blir linket til  --> 
 
 
@@ -107,6 +102,12 @@ $storageInventory = $GLOBALS["storageInventory"];
                                 <span class="glyphicon glyphicon-remove" style="color: red"></span></button>
 
                         </td>
+                        <td><?php echo $searchResult['storageName']; ?></td>
+
+
+
+
+                        
                     </tr>   
                 <?php endforeach; ?> 
             </tbody>
@@ -327,7 +328,7 @@ endforeach;
 
         <!-- OPPRETT Lager  -->
 
-        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#opprettlager">Opprett Lager</button>
+        
         <div class="modal fade" id="opprettlager" role="dialog">
             <div class="modal-dialog">
                 <!-- Innholdet til Modalen -->
@@ -349,7 +350,7 @@ endforeach;
                     </div>
                     <div class="modal-footer">
 
-                        <input class="btn btn-default" form="form13" type="submit" value="Opprett Lager">
+                        <input class="btn btn-default" form="form13" type="submit" value="Opprett Lager" href="?page=storageAdm">
 
 
                         <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>

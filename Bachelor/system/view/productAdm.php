@@ -6,15 +6,18 @@
     $productResults1 = $GLOBALS["productResult"];
     ?>
     <br><br><br><br>
-    <div class="col-sm-3 col-md-4 form-group">
+    <div class="col-sm-3 col-sm-offset-1 col-md-6 col-md-offset-2 form-group">
 
         <form class="form-inline" action="" method="post">
             <div class="form-group">
-
-                <input class="form-control" type="text" name="givenProductSearchWord" value="" placeholder="Søk etter produkt..">  
-                <input class="form-control" type="submit" value="Søk">
-                <a href="?page=productAdm" class="btn btn-default">Vis alle</a>
-
+                <div class="col-md-9">
+                    <input class="form-control" type="text" name="givenProductSearchWord" value="" placeholder="Søk etter produkt..">  
+                    <input class="form-control" type="submit" value="Søk">
+                    <a href="?page=productAdm" class="btn btn-default">Vis alle</a>
+                </div>
+                <div class="col-md-1 col-md-offset-2">
+                    <button class="btn btn-default" type="button" data-toggle="modal" data-target="#opprettProdukt">Opprett Produkt</button>
+                </div>
             </div> 
         </form>
 
@@ -293,50 +296,50 @@
 
     </div>
 
-    
-    
-            <!-- OPPRETT PRODUKT  -->
 
-        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#opprettProdukt">Opprett Produkt</button>
-        <div class="modal fade" id="opprettProdukt" role="dialog">
-            <div class="modal-dialog">
-                <!-- Innholdet til Modalen -->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Opprett Produkt</h4>
+
+    <!-- OPPRETT PRODUKT  -->
+
+
+    <div class="modal fade" id="opprettProdukt" role="dialog">
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Opprett Produkt</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: center">
+                        <form action="?page=addProductEngine" method="post" id="form12">
+                            <p style="font-weight: bold ">Produktnavn:</p>
+                            <input type="text" name="givenProductName" value=""><br>
+                            <p style="font-weight: bold ">Kjøpspris:</p>
+                            <input type="int" name="givenBuyPrice" value=""><br>
+                            <p style="font-weight: bold ">Salgspris:</p>
+                            <input type="int" name="givenSalePrice" value=""><br>
+                            <p style="font-weight: bold ">Kategori:</p>
+                            <input type="int" name="givenCategoryID" value=""><br>
+                            <p style="font-weight: bold ">Meda:</p>
+                            <input type="int" name="givenMediaID" value=""><br>
+                            <p style="font-weight: bold ">Produktnummer:</p>
+                            <input type="text" name="givenProductNumber" value=""><br>
+                            <br>
+                        </form> 
                     </div>
-                    <div class="modal-body">
-                        <div style="text-align: center">
-                            <form action="?page=addProductEngine" method="post" id="form12">
-                                <p style="font-weight: bold ">Produktnavn:</p>
-                                <input type="text" name="givenProductName" value=""><br>
-                                <p style="font-weight: bold ">Kjøpspris:</p>
-                                <input type="int" name="givenBuyPrice" value=""><br>
-                                <p style="font-weight: bold ">Salgspris:</p>
-                                <input type="int" name="givenSalePrice" value=""><br>
-                                <p style="font-weight: bold ">Kategori:</p>
-                                <input type="int" name="givenCategoryID" value=""><br>
-                                <p style="font-weight: bold ">Meda:</p>
-                                <input type="int" name="givenMediaID" value=""><br>
-                                <p style="font-weight: bold ">Produktnummer:</p>
-                                <input type="text" name="givenProductNumber" value=""><br>
-                                <br>
-                            </form> 
-                        </div>
-                    </div>
-                    <div class="modal-footer">
+                </div>
+                <div class="modal-footer">
 
-                        <input class="btn btn-default" form="form12" type="submit" value="Opprett Produkt">
+                    <input class="btn btn-default" form="form12" type="submit" value="Opprett Produkt">
 
 
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
-
-                    </div>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
 
                 </div>
+
             </div>
         </div>
+    </div>
 
 
 
