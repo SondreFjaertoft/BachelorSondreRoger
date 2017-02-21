@@ -7,19 +7,14 @@ $storageInventory = $GLOBALS["storageInventory"];
 ?>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    
     <br><br><br><br>
 
     <div class="col-sm-3 col-md-4 form-group">     
 
         <!-- HER KOMMER INNHOLDET>   --> 
-
-
-
-        <table class="table table-bordered table-striped"> 
-
-
-            <br><br>
-
+        
+        
             <!-- SØK ETTER LAGER -->
 
             <form class="form-inline" action="" method="post">
@@ -33,9 +28,17 @@ $storageInventory = $GLOBALS["storageInventory"];
             </form>
 
 
+        <table class="table table-bordered table-striped"> 
 
 
-            <h4> Brukeroversikt </h4> 
+            <br><br>
+
+
+
+
+
+
+            <h4> Lgeroversikt </h4> 
             <thead>
                 <tr>
                     <th>Navn</th>
@@ -314,7 +317,7 @@ endforeach;
 
         <!-- DIV som holder på all informasjon til høgre på skjermen  -->
 
-        <br><br><br><br>
+        
 
 
 
@@ -360,8 +363,8 @@ endforeach;
     </div>
 
 
-
-
+    
+    
 
 
 

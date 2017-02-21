@@ -49,6 +49,7 @@
                         <li><a>Registrer Retur</a></li>
                         <li><a href="?page=userAdm">Bruker Administrering</a></li>
                         <li><a href="?page=storageAdm">Lager Administrering</a></li>
+                        <li><a href="?page=productAdm">Produkt Administrering</a></li>
                         
                     </ul>
 

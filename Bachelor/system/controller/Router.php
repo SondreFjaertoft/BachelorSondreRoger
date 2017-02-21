@@ -52,13 +52,13 @@ class Router {
                 case "deleteStorageEngine" :
                     return new StorageController();
                     
-                
+                case "productAdm" :
+                case "addProductEngine" :
+                case "editProductEngine" :
+                case "deleteProductEngine" :   
+                    return new ProductController();
                     
-                    
-                    
-                    
-                    
-                    
+        
                     
             }
             

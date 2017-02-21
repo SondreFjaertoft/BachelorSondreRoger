@@ -1,50 +1,43 @@
+
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-<br><br><br><br>
 
-
-    <!-- DIV som holder på all informasjon til venstre på skjermen  -->
-
-
+    <?php
+    $productResults = $GLOBALS["productResult"];
+    $productResults1 = $GLOBALS["productResult"];
+    ?>
+    <br><br><br><br>
     <div class="col-sm-3 col-md-4 form-group">
-        
-        <!-- SØK ETTER BRUKER  -->
+
         <form class="form-inline" action="" method="post">
             <div class="form-group">
 
-                <input class="form-control" type="text" name="givenUserSearchWord" value="" placeholder="Søk etter bruker..">  
+                <input class="form-control" type="text" name="givenProductSearchWord" value="" placeholder="Søk etter produkt..">  
                 <input class="form-control" type="submit" value="Søk">
-                <a href="?page=userAdm" class="btn btn-default">Alle brukere</a>
+                <a href="?page=productAdm" class="btn btn-default">Vis alle</a>
 
             </div> 
         </form>
 
-        <br>
 
-        <?php
-        $userResults = $GLOBALS["userInfo"];
-        $userResults1 = $GLOBALS["userInfo"];
-        $userResults2 = $GLOBALS["userInfo"];
-        $restrictionResults = $GLOBALS["restrictionInfo"];
-        ?>
 
         <table class="table table-bordered table-striped"> 
 
 
-            <h4> Brukeroversikt </h4> 
+            <h4> Productoversikt </h4> 
             <thead>
                 <tr>
-                    <th>Navn</th>
-                    <th>Brukernavn</th>
+                    <th>Produktnavn</th>
+                    <th>Kategori</th>
                     <th>Handlinger</th>
                 </tr>
             </thead>
 
 
             <tbody>
-                <?php foreach ($userResults as $userResults): ?>  
+                <?php foreach ($productResults as $productResults): ?>  
                     <tr>
-                        <td><?php echo $userResults['name']; ?></td>
-                        <td><?php echo $userResults['username']; ?></td>
+                        <td><?php echo $productResults['productName']; ?></td>
+                        <td><?php echo $productResults['categoryID']; ?></td>
 
 
 
@@ -53,14 +46,14 @@
 
 
                         <td class="text-center">
-                            <form id="brukerRedForm" action="" method="post">
+                            <form id="productRedForm" action="" method="post">
                             </form>
 
 
 
-                            <!-- Knapp som aktiverer Model for brukerredigering  --> 
+                            <!-- Knapp som aktiverer Model for produktredigering  --> 
 
-                            <button form="brukerRedForm" type="submit" name="editUser" data-toggle="tooltip" title="Rediger bruker" value="<?php echo $userResults['userID']; ?>" 
+                            <button form="productRedForm" type="submit" name="editProduct" data-toggle="tooltip" title="Rediger product" value="<?php echo $productResults['productID']; ?>" 
                                     style="appearance: none;
                                     -webkit-appearance: none;
                                     -moz-appearance: none;
@@ -73,9 +66,9 @@
 
 
 
-                            <!-- Knapp som aktiverer Model for å vise brukerinformasjon  --> 
+                            <!-- Knapp som aktiverer Model for å vise productinformasjon  --> 
 
-                            <button form="brukerRedForm" type="submit" name="showInfo" data-toggle="tooltip" title="Mer informasjon" value="<?php echo $userResults['userID']; ?>" 
+                            <button form="productRedForm" type="submit" name="showProductInfo" data-toggle="tooltip" title="Mer informasjon" value="<?php echo $productResults['productID']; ?>" 
                                     style="appearance: none;
                                     -webkit-appearance: none;
                                     -moz-appearance: none;
@@ -86,10 +79,10 @@
                                 <span class="glyphicon glyphicon-menu-hamburger" style="color: #003366" ></span></button>
 
 
-                            <!-- Knapp som aktiverer Model for sletting av bruker  --> 
+                            <!-- Knapp som aktiverer Model for sletting av product  --> 
 
 
-                            <button form="brukerRedForm" name="deleteUser" data-toggle="tooltip" title="Slett bruker" value="<?php echo $userResults['userID']; ?>" 
+                            <button form="productRedForm" name="deleteProduct" data-toggle="tooltip" title="Slett product" value="<?php echo $productResults['productID']; ?>" 
                                     style="appearance: none;
                                     -webkit-appearance: none;
                                     -moz-appearance: none;
@@ -108,32 +101,30 @@
     </div>
 
 
-
-
     <!-- DIV som holder på all informasjon i midten av skjermen  -->
 
 
-
+    <!-- rediger bruker -->
 
     <div class="col-sm-3 col-md-4">
 
 
         <?php
-        foreach ($userResults1 as $userResults1):
+        foreach ($productResults1 as $productResults1):
 
-            if (isset($_POST['editUser'])) {
-                $givenUserID = $_REQUEST["editUser"];
+            if (isset($_POST['editProduct'])) {
+                $givenProductID = $_REQUEST["editProduct"];
 
-                if ($userResults1['userID'] == $givenUserID) {
+                if ($productResults1['productID'] == $givenProductID) {
                     ?>
                     <script>
                         $(function () {
-                            $('#brukerModal').modal('show');
+                            $('#produktModal').modal('show');
                         });
                     </script>
 
 
-                    <div class="modal fade" id="brukerModal" role="dialog">
+                    <div class="modal fade" id="produktModal" role="dialog">
                         <div class="modal-dialog">
                             <!-- Innholdet til Modalen -->
                             <div class="modal-content">
@@ -143,19 +134,20 @@
                                 </div>
                                 <div class="modal-body">
 
-                                    <form action="?page=editUserEngine" method="post" id="formM">
-                                        <input type="hidden" name="editUserID" value="<?php echo $userResults1['userID']; ?>"><br>
-                                        Navn: <br>
-                                        <input type="text" name="editName" value="<?php echo $userResults1['name']; ?>"><br>
-                                        Brukernavn: <br>
-                                        <input type="text" name="editUsername" value="<?php echo $userResults1['username']; ?>"><br>
-                                        Passord: <br>
-                                        <input type="text" name="editPassword" value="<?php echo $userResults1['password']; ?>"><br>
-                                        Brukernivå: <br>
-                                        <input type="text" name="editUserLevel" value="<?php echo $userResults1['userLevel']; ?>"><br>
-                                        Epost: <br>
-                                        <input type="text" name="editEmail" value="<?php echo $userResults1['email']; ?>"><br>
-                                        <br>
+                                    <form action="?page=editProductEngine" method="post" id="formM">
+                                        <input type="hidden" name="editProductID" value="<?php echo $productResults1['productID']; ?>"><br>
+                                        Produktnavn: <br>
+                                        <input type="text" name="editProductName" value="<?php echo $productResults1['productName']; ?>"><br>
+                                        Kjøpspris: <br>
+                                        <input type="int" name="editBuyPrice" value="<?php echo $productResults1['buyPrice']; ?>"><br>
+                                        Salgspris: <br>
+                                        <input type="int" name="editSalePrice" value="<?php echo $productResults1['salePrice']; ?>"><br>
+                                        Kategori: <br>
+                                        <input type="int" name="editCategoryID" value="<?php echo $productResults1['categoryID']; ?>"><br>
+                                        Media: <br>
+                                        <input type="int" name="editMediaID" value="<?php echo $productResults1['mediaID']; ?>"><br>
+                                        Produktnummer: <br>
+                                        <input type="text" name="editProductNumber" value="<?php echo $productResults1['productNumber']; ?>"><br>
 
                                     </form>
 
@@ -172,21 +164,21 @@
                 }
             }
 
-// Vis Informasjon
+// Vis produktInformasjon
 
-            if (isset($_POST['showInfo'])) {
-                $givenUserID = $_REQUEST["showInfo"];
+            if (isset($_POST['showProductInfo'])) {
+                $givenProductID = $_REQUEST["showProductInfo"];
 
-                if ($userResults1['userID'] == $givenUserID) {
+                if ($productResults1['productID'] == $givenProductID) {
                     ?>
                     <script>
                         $(function () {
-                            $('#brukerModal').modal('show');
+                            $('#produktModal').modal('show');
                         });
                     </script>
 
 
-                    <div class="modal fade" id="brukerModal" role="dialog">
+                    <div class="modal fade" id="produktModal" role="dialog">
                         <div class="modal-dialog">
                             <!-- Innholdet til Modalen -->
                             <div class="modal-content">
@@ -198,39 +190,32 @@
                                     <table class="table table-striped table-bordered">
                                         <tbody>
                                             <tr>
-                                                <th>UserID: </th>
-                                                <td><?php echo $userResults1['userID']; ?></td>
+                                                <th>Produktnavn: </th>
+                                                <td><?php echo $productResults1['productName']; ?></td>
                                             </tr>
 
 
                                             <tr>
-                                                <th>Brukernavn: </th>
-                                                <td><?php echo $userResults1['username']; ?></td>
+                                                <th>Kjøpspris: </th>
+                                                <td><?php echo $productResults1['buyPrice']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>Brukernivå: </th>
-                                                <td><?php echo $userResults1['userLevel']; ?></td>
+                                                <th>Salgspris: </th>
+                                                <td><?php echo $productResults1['salePrice']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>E-post: </th>
-                                                <td><?php echo $userResults1['email']; ?></td>
+                                                <th>Kategori: </th>
+                                                <td><?php echo $productResults1['categoryID']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>Sist inlogget: </th>
-                                                <td><?php echo $userResults1['lastLogin']; ?></td>
+                                                <th>Media: </th>
+                                                <td><?php echo $productResults1['mediaID']; ?></td>
                                             </tr>
                                             <tr>
-                                                <th>Lagertilgang: </th>
-                                                <td><?php
-                                                    foreach ($restrictionResults as $restrictionResults):
-                                                        if ($restrictionResults['userID'] == $givenUserID) {
-                                                            echo $restrictionResults["storageName"];
-                                                            ?> <br>
-                                                            <?php
-                                                        }
-                                                    endforeach;
-                                                    ?></td>
+                                                <th>Produktnummer: </th>
+                                                <td><?php echo $productResults1['productNumber']; ?></td>
                                             </tr>
+
 
 
                                         </tbody>
@@ -248,21 +233,21 @@
 
 
 
-            // Slett bruker
+            // Slett produkt
 
-            if (isset($_POST['deleteUser'])) {
-                $givenUserID = $_REQUEST["deleteUser"];
+            if (isset($_POST['deleteProduct'])) {
+                $givenProductIDID = $_REQUEST["deleteProduct"];
 
-                if ($userResults1['userID'] == $givenUserID) {
+                if ($productResults1['productID'] == $givenProductIDID) {
                     ?>
                     <script>
                         $(function () {
-                            $('#brukerModal').modal('show');
+                            $('#produktModal').modal('show');
                         });
                     </script>
 
 
-                    <div class="modal fade" id="brukerModal" role="dialog">
+                    <div class="modal fade" id="produktModal" role="dialog">
                         <div class="modal-dialog">
                             <!-- Innholdet til Modalen -->
                             <div class="modal-content">
@@ -274,11 +259,11 @@
 
                                     <p> Er du sikker på at du vil slette  <P>
                                         <?php
-                                        echo "Brukernavn: " . $userResults1['username'];
+                                        echo "Produkt: " . $productResults1['productName'];
                                         ?>
 
-                                    <form action="?page=deleteUserEngine" method="post" id="formS">
-                                        <input type="hidden" name="deleteUserID" value="<?php echo $userResults1['userID'] ?>"><br>
+                                    <form action="?page=deleteProductEngine" method="post" id="formS">
+                                        <input type="hidden" name="deleteProductID" value="<?php echo $productResults1['productID'] ?>"><br>
 
                                     </form>
 
@@ -306,55 +291,43 @@
 
 
 
-
     </div>
 
+    
+    
+            <!-- OPPRETT PRODUKT  -->
 
-    <div class="col-sm-3 col-md-4">  
-
-
-
-        <!-- DIV som holder på all informasjon til høgre på skjermen  -->
-
-        
-
-
-
-
-
-
-
-        <!-- OPPRETT BRUKER  -->
-
-        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#opprettbruker">Opprett bruker</button>
-        <div class="modal fade" id="opprettbruker" role="dialog">
+        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#opprettProdukt">Opprett Produkt</button>
+        <div class="modal fade" id="opprettProdukt" role="dialog">
             <div class="modal-dialog">
                 <!-- Innholdet til Modalen -->
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Opprett bruker</h4>
+                        <h4 class="modal-title">Opprett Produkt</h4>
                     </div>
                     <div class="modal-body">
                         <div style="text-align: center">
-                            <form action="?page=addUserEngine" method="post" id="form12">
-                                <p style="font-weight: bold ">Name:</p>
-                                <input type="text" name="givenName" value=""><br>
-                                <p style="font-weight: bold ">Brukernavn:</p>
-                                <input type="text" name="givenUsername" value=""><br>
-                                <p style="font-weight: bold ">Passord:</p>
-                                <input type="text" name="givenPassword" value=""><br>
-                                <p style="font-weight: bold ">UserLevel:</p>
-                                <input type="text" name="givenUserLevel" value=""><br>
-                                <p style="font-weight: bold ">Email:</p>
-                                <input type="text" name="givenEmail" value=""><br>
+                            <form action="?page=addProductEngine" method="post" id="form12">
+                                <p style="font-weight: bold ">Produktnavn:</p>
+                                <input type="text" name="givenProductName" value=""><br>
+                                <p style="font-weight: bold ">Kjøpspris:</p>
+                                <input type="int" name="givenBuyPrice" value=""><br>
+                                <p style="font-weight: bold ">Salgspris:</p>
+                                <input type="int" name="givenSalePrice" value=""><br>
+                                <p style="font-weight: bold ">Kategori:</p>
+                                <input type="int" name="givenCategoryID" value=""><br>
+                                <p style="font-weight: bold ">Meda:</p>
+                                <input type="int" name="givenMediaID" value=""><br>
+                                <p style="font-weight: bold ">Produktnummer:</p>
+                                <input type="text" name="givenProductNumber" value=""><br>
                                 <br>
                             </form> 
                         </div>
                     </div>
                     <div class="modal-footer">
 
-                        <input class="btn btn-default" form="form12" type="submit" value="Opprett bruker">
+                        <input class="btn btn-default" form="form12" type="submit" value="Opprett Produkt">
 
 
                         <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
@@ -363,13 +336,13 @@
 
                 </div>
             </div>
-        </div> 
+        </div>
 
-    </div>
+
+
+
+
+
 
 
 </div>
-
-
-
-
