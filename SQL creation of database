@@ -356,7 +356,8 @@ CREATE TABLE IF NOT EXISTS `products` (
   `categoryID` int(11) unsigned NOT NULL,
   `mediaID` int(11) unsigned NOT NULL,
   `productNumber` varchar(15) DEFAULT NULL,
-  `date` datetime NOT NULL
+  `date` datetime NOT NULL,
+  `macAdresse` varchar(8)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -380,27 +381,27 @@ REFERENCES `media`(`mediaID`)
 
 
 
---------- INVENTORY ------------
+--------- MACADRESSE ------------
 
 
-CREATE TABLE IF NOT EXISTS `inventory`(
-`inventoryID` int(11) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `macAdresse`(
+`macAdresseID` int(11) unsigned NOT NULL,
 `storageID` int(11) unsigned NOT NULL,
 `productID` int(11) unsigned NOT NULL,
-`macAdresse` varchar(50)
+`macAdresse` varchar(50
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
-ALTER TABLE `inventory`
-ADD PRIMARY KEY (`inventoryID`),
-ADD UNIQUE (`macADresse`)
+ALTER TABLE `macAdresse`
+ADD PRIMARY KEY (`macAdresseID`),
+ADD UNIQUE (`macAdresse`)
 
 
-ALTER TABLE `inventory`
-MODIFY `inventoryID` int(11) unsigned NOT NULL AUTO_INCREMENT;
+ALTER TABLE `macAdresse`
+MODIFY `macAdresseID` int(11) unsigned NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `inventory`
+ALTER TABLE `macAdresse`
 ADD FOREIGN KEY (`storageID`)
 REFERENCES `storage`(`storageID`),
 ADD FOREIGN KEY (`productID`)
@@ -447,7 +448,7 @@ MODIFY `userID` int(11) unsigned NOT NULL AUTO_INCREMENT;
 CREATE TABLE IF NOT EXISTS `checkOut` (
 `checkOutID` int(11) unsigned NOT NULL,
 `userID` int(11) unsigned NOT NULL,
-`inventoryID` int(11) unsigned NOT NULL,
+`macAdresseID` int(11) unsigned NOT NULL,
 `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -461,10 +462,41 @@ MODIFY `checkOutID` int(11) unsigned NOT NULL AUTO_INCREMENT;
 
 
 ALTER TABLE `checkOut`
-ADD FOREIGN KEY (`inventoryID`)
-REFERENCES `inventory`(`inventoryID`),
+ADD FOREIGN KEY (`macAdresseID`)
+REFERENCES `macAdresse`(`macAdresseID`),
 ADD FOREIGN KEY (`userID`)
 REFERENCES `users`(`userID`)
+
+
+
+
+
+
+--------- INVENTORY ------------
+
+
+CREATE TABLE IF NOT EXISTS `inventory`(
+`inventoryID` int(11) unsigned NOT NULL,
+`storageID` int(11) unsigned NOT NULL,
+`productID` int(11) unsigned NOT NULL,
+`quantity` int(11)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+ALTER TABLE `inventory`
+ADD PRIMARY KEY (`inventoryID`)
+
+
+ALTER TABLE `inventory`
+MODIFY `inventoryID` int(11) unsigned NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `inventory`
+ADD FOREIGN KEY (`storageID`)
+REFERENCES `storage`(`storageID`),
+ADD FOREIGN KEY (`productID`)
+REFERENCES `products`(`productID`)
+
 
 
 
@@ -605,28 +637,5 @@ REFERENCES `users`(`userID`)
 
 
 
---------- INVENTORY QUANTITY ------------
 
-
-CREATE TABLE IF NOT EXISTS `inventory_quantity`(
-`inventoryQuantityID` int(11) unsigned NOT NULL,
-`storageID` int(11) unsigned NOT NULL,
-`productID` int(11) unsigned NOT NULL,
-`quantity` int(11)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-ALTER TABLE `inventory_quantity`
-ADD PRIMARY KEY (`inventoryQuantityID`)
-
-
-ALTER TABLE `inventory_quantity`
-MODIFY `inventoryQuantityID` int(11) unsigned NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `inventory_quantity`
-ADD FOREIGN KEY (`storageID`)
-REFERENCES `storage`(`storageID`),
-ADD FOREIGN KEY (`productID`)
-REFERENCES `products`(`productID`)
 
