@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Tafjord</title>
-        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        
 
         <!-- Bootstrap -->
         <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -41,7 +41,7 @@
         </nav>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-3 col-md-2 sidebar">
+                <div id="sidebar" class="col-sm-3 col-md-2 sidebar">
                     <br><br>
                     <ul class="nav nav-sidebar list-group">
                         <li><a class="list-group-item active" href="?page=home">Home</a></li><br>
@@ -52,7 +52,7 @@
                         <li><a class="list-group-item active" href="?page=userAdm">Bruker Administrering</a></li><br>
                         <li><a class="list-group-item active" href="?page=storageAdm">Lager Administrering</a></li><br>
                         <li><a class="list-group-item active" href="?page=productAdm">Produkt Administrering</a></li>
-                        
+                        -
                     </ul>
 
                 </div>

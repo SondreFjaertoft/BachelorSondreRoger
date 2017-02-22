@@ -18,19 +18,19 @@
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto;
-    background-color: #6b6b6b;
+    background-color: #003366;
     border-right: 1px solid #eee;
 
 }
 
-.sidebar .nav a
-{
-    font-weight: 900;
-    
-}
+
+
 .main
 {
     padding: 20px;
 
 }
-
+.nav .nav-sidebar .list-group
+{
+    background-color: #003366;
+}

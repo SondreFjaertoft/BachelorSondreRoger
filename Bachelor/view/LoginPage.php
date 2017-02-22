@@ -1,69 +1,52 @@
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
     <head>
-        <title>Tafjord</title>
-        <link rel="stylesheet" type="text/css" href="system/style/index.css">
+        <title>Login Tafjord</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="system/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="system/style/LoginPageCss.css" rel="stylesheet">
 
     </head>
     <body>
         <script type="text/javascript" src="system/js/hide-show-password.js"></script>
+        
+            <div class="container">
+            
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-md-offset-4">
+                    <h1 class="text-center login-title">Rogers DØME paradise!!</h1>
+                    <div class="account-wall">
+                        <img class="profile-img" src="system/image/TafjordLogo.png"
+                             alt="">
+                        <form class="form-signin" id="login" action="?page=loginEngine" method="post">
+                            <input type="text" class="form-control" placeholder="Brukernavn" name="givenUsername" required autofocus>
+                            <input type="password" id="psw" autocomplete="off" class="form-control" placeholder="Passord" name="givenPassword" required>
+                            <label class="checkbox">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="show-hide" value="">
+                                Vis passord
+                            </label>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">
+                                Logg inn</button>
 
-        <div>
-            <img src="system/image/TafjordLogo.png" alt="Tafjord" class="index-bilde">
+
+
+                        </form>
+                    </div>
+                    <a href="http://www.google.com" class="text-center new-account">I dont work at Tafjord wtf am i doing here?? </a>
+                </div>
+            </div>
+            
         </div>
-        <header>
-            <h1>Velkommen til lagersystemet til tafjord</h1>
-            <h2>Vennligst logg inn</h2>
-        </header>
 
-        <button onclick="document.getElementById('id01').style.display = 'block'">Login</button>
-
-        <div id="id01" class="modal">
-
-
-            <!-- Modal innhold -->
-            <form class="modal-content animate" id="login" action="?page=loginEngine" method="post">
-                <div class="imgcontainer">
-                    <img src="system/image/TafjordLogo.png" alt="Avatar" class="avatar">
-                </div>
-                <div class="container">
-                    <label><b>Brukernavn</b></label>
-                    <input type="text" placeholder="Vennligst fyll inn brukernavn" name="givenUsername" required>
-
-                    <label><b>Passord</b></label>
-
-                    <input type="password" id="psw" placeholder="Vennligst fyll inn passord" name="givenPassword" required>
-                    <input type="checkbox" id="show-hide" name="show-hide" value=""> Show Password
-                    <button type="submit">Login</button>
-
-
-
-                </div>
-                <div class="container" style="background-color: #f1f1f1">
-                    <button type="button" onclick="document.getElementById('id01').style.display = 'none'" class="cancelbtn">Avbryt</button>
-                    <span class="psw"><a href="#">Glemt passord</a></span>
-                </div>
-            </form>
-        </div>
-        <script>
-            var modal = document.getElementById("id01");
-
-            window.onclick = function (event)
-            {
-                if (event.target === modal)
-                {
-                    modal.style.display = "none";
-                }
-            };
-
-        </script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../Bootstrap/js/bootstrap.min.js"></script>
     </body>
-
-
 </html>
-
-
-
-
