@@ -357,7 +357,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `mediaID` int(11) unsigned NOT NULL,
   `productNumber` varchar(15) DEFAULT NULL,
   `date` datetime NOT NULL,
-  `macAdresse` varchar(8)
+  `macAdresse` varchar(8) DEFAULT ‘FALSE’
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

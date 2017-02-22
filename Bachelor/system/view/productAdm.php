@@ -320,11 +320,14 @@
                             <input type="int" name="givenSalePrice" value=""><br>
                             <p style="font-weight: bold ">Kategori:</p>
                             <input type="int" name="givenCategoryID" value=""><br>
-                            <p style="font-weight: bold ">Meda:</p>
+                            <p style="font-weight: bold ">Media:</p>
                             <input type="int" name="givenMediaID" value=""><br>
                             <p style="font-weight: bold ">Produktnummer:</p>
                             <input type="text" name="givenProductNumber" value=""><br>
+                            <p style="font-weight: bold ">MacAdresse:</p>
+                            <input type="checkbox" name="givenMacAdresse" value="TRUE"><br>
                             <br>
+                            
                         </form> 
                     </div>
                 </div>

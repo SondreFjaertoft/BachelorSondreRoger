@@ -43,9 +43,10 @@ class ProductController extends Controller {
         $givenMediaID = $_REQUEST["givenMediaID"];
         $givenProductNumber = $_REQUEST["givenProductNumber"];
         $givenProductDate = "2017-02-21 00:00:00";
+        $givenMacAdresse = $_REQUEST["givenMacAdresse"];
 
         $productCreationInfo = $GLOBALS["productModel"];
-        $productCreationInfo->addProduct($givenProductName, $givenBuyPrice, $givenSalePrice, $givenCategoryID, $givenMediaID, $givenProductNumber, $givenProductDate);
+        $productCreationInfo->addProduct($givenProductName, $givenBuyPrice, $givenSalePrice, $givenCategoryID, $givenMediaID, $givenProductNumber, $givenProductDate, $givenMacAdresse);
 
         header("Location:index.php?page=productAdm");
     }
