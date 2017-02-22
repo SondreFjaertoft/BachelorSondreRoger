@@ -29,8 +29,10 @@ class ProductController extends Controller {
             $givenProductSearchWord = "%%";
             $productModel = $productInfo->getSearchResult($givenProductSearchWord);
         }
+        
+        $findWhereInfo = $productInfo->findWhereProductInfo();
 
-        $data = array("productResult" => $productModel);
+        $data = array("productResult" => $productModel, "findWhereResult" => $findWhereInfo);
 
         return $this->render("productAdm", $data);
     }
