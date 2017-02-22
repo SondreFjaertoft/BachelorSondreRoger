@@ -2,3 +2,8 @@ SELECT inventory.productID, inventory.storageID, COUNT(*) FROM inventory GROUP B
 
 
 SQL for å få opp antall produkt per lager
+
+
+
+Øke / minske med 1
+UPDATE inventory SET quantity = quantity + 1 WHERE productID = 1 AND storageID = 1

@@ -8,7 +8,7 @@ class InventoryModel {
     
     const TABLE = "inventory";
     
-    const SELECT_QUERY = "SELECT storageID, products.productName, products.productID, count(*) FROM " . InventoryModel::TABLE . " INNER JOIN products ON products.productID = inventory.productID GROUP BY products.productName";
+    const SELECT_QUERY = "SELECT storageID, products.productName, products.productID, quantity FROM " . InventoryModel::TABLE . " INNER JOIN products ON products.productID = inventory.productID GROUP BY products.productName";
 
     private $selStmt;
 

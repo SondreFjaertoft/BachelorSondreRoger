@@ -388,7 +388,7 @@ CREATE TABLE IF NOT EXISTS `macAdresse`(
 `macAdresseID` int(11) unsigned NOT NULL,
 `storageID` int(11) unsigned NOT NULL,
 `productID` int(11) unsigned NOT NULL,
-`macAdresse` varchar(50
+`macAdresse` varchar(50)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

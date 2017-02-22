@@ -10,7 +10,7 @@ class InventoryQuantityModel {
     
     const TABLE = "inventory_quantity";
     
-    const SELECT_KS_QUERY = "SELECT products.productName, storage.storageName, COUNT(*) FROM products INNER JOIN inventory ON inventory.productID = products.productID INNER JOIN storage ON inventory.storageID = storage.storageID LIKE 1 GROUP BY products.productName, storage.storageName" ;
+    const SELECT_KS_QUERY = "SELECT products.productName, storage.storageName, quantity FROM products INNER JOIN inventory ON inventory.productID = products.productID INNER JOIN storage ON inventory.storageID = storage.storageID LIKE 1 GROUP BY products.productName, storage.storageName" ;
     const SELECT_QUERY = "SELECT products.productName, storage.storageName, inventory_quantity.quantity FROM products INNER JOIN inventory_quantity ON inventory_quantity.productID = products.productID INNER JOIN storage ON inventory_quantity.storageID = storage.storageID LIKE 1" ;
     const INSERT_QUERY = "INSERT INTO " . InventoryQuantityModel::TABLE . " (name, username, password, userLevel, email) VALUES (:givenName, :givenUsername, :givenPassword, :givenUserLevel, :givenEmail)";
     const DELETE_QUERY = "DELETE FROM " . InventoryQuantityModel::TABLE . " WHERE username= ?";

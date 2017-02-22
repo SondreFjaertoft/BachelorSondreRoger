@@ -31,7 +31,7 @@ $InvResults = $GLOBALS["inventoryKSInfo"];
                         <tr>
                             <td><?php echo $InvResults['productName']; ?></td>
                             <td><?php echo $InvResults['storageName']; ?></td>
-                            <td><?php echo $InvResults['COUNT(*)']; ?></td>
+                            <td><?php echo $InvResults['quantity']; ?></td>
                         </tr>
                     <?php endforeach; ?>
 

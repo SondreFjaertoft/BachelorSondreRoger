@@ -226,7 +226,7 @@ $storageInventory = $GLOBALS["storageInventory"];
                                                 <td><?php
                                                     foreach ($storageInventory as $storageInventory):
                                                         if ($storageInventory['storageID'] == $givenStorageID) {
-                                                            echo $storageInventory["productName"] . ", Antall: " . $storageInventory["count(*)"];
+                                                            echo $storageInventory["productName"] . ", Antall: " . $storageInventory["quantity"];
                                                             ?> <br>
                                                             <?php
                                                         }
