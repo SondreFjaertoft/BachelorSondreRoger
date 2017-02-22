@@ -79,7 +79,7 @@
 
 
             <tbody>
-                
+
                 <?php foreach ($userResults as $userResults): ?>
                     <tr>
                         <td class="text-center">
@@ -130,6 +130,8 @@
                                     display: inline;">
                                 <span class="glyphicon glyphicon-remove" style="color: red"></span></button>
 
+
+
                         </td>
 
 
@@ -139,21 +141,39 @@
                         <th>Brukernavn: </th>
                         <td><?php echo $userResults['username']; ?></td>
 
+                        
+                        
+                        <!-- Legger inn chackbox for fler valg (ved lagertilganggiving -->
 
 
-                        <!-- Oppretter et form som knappene blir linket til  --> 
+                <form id="restriction" method="post">        </form>
+
+                <td> <input form="restriction" id="<?php echo $userResults['userID']; ?>" value="<?php echo $userResults['userID']; ?>"  name="restrictions[]" type="checkbox"></td>
 
 
-                    </tr>   
-                <?php endforeach; ?>
+                <!-- Oppretter et form som knappene blir linket til  --> 
+
+
+                </tr>   
+            <?php endforeach; ?>
 
             </tbody>
 
         </table>
 
+        <button form="restriction" type="submit">Velg lagertilgang</button> 
 
 
+        <?php
+        if (isset($_POST['restrictions'])) {
+            $invite = $_POST['restrictions'];
 
+
+            foreach ($invite as $invite) :
+                echo $invite;
+            endforeach;
+        }
+        ?>
 
 
         <!-- DIV som holder på all informasjon i midten av skjermen  -->
