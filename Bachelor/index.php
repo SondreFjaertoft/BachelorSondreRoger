@@ -14,6 +14,7 @@ session_start();
 $_SESSION["AreLoggedIn"] = false;
 $_SESSION["nameOfUser"] = "";
 $_SESSION["userID"] = "";
+$_SESSION["userLevel"] = "";
 
  
 // Controller layer - select page to display (controller will handle it)

@@ -49,10 +49,12 @@
                         <li><a class="list-group-item active">Dine Returer</a></li><br>
                         <li><a class="list-group-item active">Registrer Utlevering</a></li><br>
                         <li><a class="list-group-item active">Registrer Retur</a></li><br>
+                        
+                        <?php if ($_SESSION["userLevel"] == "Administrator") {?>
                         <li><a class="list-group-item active" href="?page=userAdm">Bruker Administrering</a></li><br>
                         <li><a class="list-group-item active" href="?page=storageAdm">Lager Administrering</a></li><br>
                         <li><a class="list-group-item active" href="?page=productAdm">Produkt Administrering</a></li>
-                        
+                        <?php }?>
                     </ul>
 
                 </div>

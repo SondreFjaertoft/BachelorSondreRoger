@@ -31,6 +31,7 @@ class LoginController extends Controller {
                     $_SESSION["AreLoggedIn"] = "true";
                     $_SESSION["nameOfUser"] = $User["name"];  
                     $_SESSION["userID"] = $User["userID"]; 
+                    $_SESSION["userLevel"] = $User["userLevel"];
                 }  
             }       
         }
