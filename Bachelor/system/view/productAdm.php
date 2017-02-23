@@ -4,6 +4,7 @@
     <?php
     $productResults = $GLOBALS["productResult"];
     $productResults1 = $GLOBALS["productResult"];
+    $findWhereResult = $GLOBALS["findWhereResult"];
     ?>
     <br><br><br><br>
     <div class="col-sm-3 col-sm-offset-1 col-md-6 col-md-offset-2 form-group">
@@ -25,8 +26,9 @@
 
         <table class="table table-bordered table-striped"> 
 
+           
 
-            <h4> Productoversikt </h4> 
+            <h4> Produktoversikt </h4> 
             <thead>
                 <tr>
                     <th>Produktnavn</th>
@@ -218,7 +220,20 @@
                                                 <th>Produktnummer: </th>
                                                 <td><?php echo $productResults1['productNumber']; ?></td>
                                             </tr>
+                                                        
+                                            <tr>
+                                                <th>Lager med dette produktet: </th>
 
+                                                <td><?php
+                                                    foreach ($findWhereResult as $findWhereResult):
+                                                        if ($findWhereResult['productID'] == $givenProductID) {
+                                                            echo $findWhereResult["storageName"] . ",   Antall: " . $findWhereResult["quantity"];
+                                                            ?> <br>
+                                                            <?php
+                                                        }
+                                                    endforeach;
+                                                    ?></td>
+                                            </tr>
 
 
                                         </tbody>

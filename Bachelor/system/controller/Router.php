@@ -36,15 +36,21 @@ class Router {
                 case "loginEngine":
                     return new LoginController();
                     
-                case "userAdm"    :
-                case "addUserEngine" :
-                case "editUserEngine" :    
-                case "deleteUserEngine" :    
-                case "searchUserEngine" :    
-                    return new UserController();
                 
                 case "dummy" :
                     return new OverviewController();
+                    
+                
+                        
+            }
+            
+            if ($_SESSION["userLevel"] == "Administrator") {   
+                    switch ($page) {
+                case "productAdm" :
+                case "addProductEngine" :
+                case "editProductEngine" :
+                case "deleteProductEngine" :   
+                    return new ProductController();
                     
                 case "storageAdm":
                 case "addStorageEngine":
@@ -52,15 +58,17 @@ class Router {
                 case "deleteStorageEngine" :
                     return new StorageController();
                     
-                case "productAdm" :
-                case "addProductEngine" :
-                case "editProductEngine" :
-                case "deleteProductEngine" :   
-                    return new ProductController();
+                case "userAdm"    :
+                case "addUserEngine" :
+                case "editUserEngine" :    
+                case "deleteUserEngine" :    
+                case "searchUserEngine" :    
+                    return new UserController();    
                     
-        
                     
-            }
+                    
+                    }
+                }
             
             
         } else {

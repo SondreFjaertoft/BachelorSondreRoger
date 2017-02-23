@@ -41,7 +41,7 @@ $storageInventory = $GLOBALS["storageInventory"];
 
 
 
-            <h4> Lgeroversikt </h4> 
+            <h4> Lageroversikt </h4> 
             <tbody>
                 
             
