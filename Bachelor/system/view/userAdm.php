@@ -166,7 +166,7 @@
         <!-- drop down meny -->
 
         <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Velg Lager
                 <span class="caret"></span></button>
             <ul class="dropdown-menu">
                 <table>

@@ -66,6 +66,9 @@ class Router {
                 case "addRestriction" :    
                     return new UserController();    
                     
+                case "transfer" :
+                    return new transferController();
+                    
                     
                     
                     }
