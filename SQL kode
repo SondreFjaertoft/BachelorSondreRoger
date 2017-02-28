@@ -7,3 +7,24 @@ SQL for å få opp antall produkt per lager
 
 Øke / minske med 1
 UPDATE inventory SET quantity = quantity + 1 WHERE productID = 1 AND storageID = 1
+
+
+
+Salg/lager historikk med graf
+varsling ved nesten tomt på lager (mailvarsel)
+Graf til mest solgte produkter
+
+graf på logg
+
+bizagi
+
+help ploppopp rute
+
+
+
+
+
+om tafjord, 
+prosjektplan,
+skisse av programmet
+arbeidsflyt diagram,
