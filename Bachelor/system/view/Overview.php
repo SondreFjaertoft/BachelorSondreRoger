@@ -5,44 +5,19 @@
     
 
 <?php
-$results = $GLOBALS["dummyInfo"];
-$results1 = $GLOBALS["added"];
+
+$testest = $GLOBALS["testting"];
+$teststo = $GLOBALS["storage"];
 ?>
 
     <?php
-    var_dump($results);
+    var_dump($testest);
+    ?>
+     <?php
+    var_dump($teststo);
     ?>
     
     
 <div id="main-wrapper">
-    <?php
-    var_dump($results1);
-    ?>
-    <?php foreach ($results as $results): ?>   
-    
-        <?php echo "ID: " . $results['ID'] . ",  Brukernavn: " . $results['brukernavn'] . ",  Info: " . $results['tekst']; ?><br>
 
-
-    <?php endforeach; ?>
-
-
-    <br> <br>
-    
-    
-    <b>Opprett ny brukerting</b>
-
-    <form action="?page=dummyAdd" method="post">
-        ID:<br>
-        <input type="int" name="givenID" value=""><br>
-        Brukernavn:<br>
-        <input type="text" name="givenUser" value=""><br>
-        Info:<br>
-        <input type="text" name="givenTekst" value=""><br><br>
-        <input type="submit" value="Submit">
-    </form>
-</div>
-
-    
-    
-    </div>
 

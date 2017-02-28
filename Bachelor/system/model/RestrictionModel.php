@@ -10,7 +10,7 @@ class RestritionModel{
     const TABLE = "restrictions";
     const SELECT_STORAGE_QUERY = "SELECT storage.storageName, restrictions.storageID, restrictions.userID FROM storage INNER JOIN " . RestritionModel::TABLE . " ON storage.storageID = restrictions.storageID";
     const SELECT_USER_QUERY = "SELECT users.name, restrictions.storageID, restrictions.userID FROM users INNER JOIN " . RestritionModel::TABLE . " ON users.userID = restrictions.userID";
-    const INSERT_QUERY = "INSERT INTO " . RestritionModel::TABLE . " (ID, brukernavn, tekst) VALUES (:ID, :Brukernavn, :tekst)";
+    const INSERT_QUERY = "INSERT INTO " . RestritionModel::TABLE . " (userID, storageID) VALUES (:givenUserID, :givenStorageID)";
     
     /** @var PDOStatement Statement for selecting all entries */
 
@@ -44,8 +44,8 @@ class RestritionModel{
     
    // Er ikke i bruk for øyeblikket:
     
-    public function addRestriction($givenID, $givenUser, $givenTekst){
-        return $this->addStmt->execute(array("ID" => $givenID, "Brukernavn" => $givenUser, "tekst" => $givenTekst));
+    public function addRestriction($givenUserID, $givenStorageID){
+        return $this->addStmt->execute(array("givenUserID" => $givenUserID, "givenStorageID" => $givenStorageID));
     }
     
     

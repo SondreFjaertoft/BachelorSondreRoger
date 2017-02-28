@@ -15,6 +15,8 @@ class UserController extends Controller {
             $this->deleteUserEngine();
         } else if ($page == "searchUserEngine") {
             $this->searchUserEngine();
+        } else if ($page == "addRestriction") {
+            $this->addRestriction();
         }
     }
 
@@ -32,6 +34,9 @@ class UserController extends Controller {
 
         $restrictionInfo = $GLOBALS["restrictionModel"];
         $restrictionModel = $restrictionInfo->getAllStorageRestrictionInfo();
+        
+        $storageInfo = $GLOBALS["storageModel"];
+        $storageModel = $storageInfo->getAll();
 
         //$givenSearchWord = $_REQUEST["givenSearchWord"];
         //if (isset($_POST['givenSearchWord'])) {
@@ -39,7 +44,7 @@ class UserController extends Controller {
         //}
 
 
-        $data = array("userInfo" => $userModel, "restrictionInfo" => $restrictionModel);
+        $data = array("userInfo" => $userModel, "restrictionInfo" => $restrictionModel, "storageInfo" => $storageModel);
         return $this->render("userAdm", $data);
     }
 
@@ -81,6 +86,32 @@ class UserController extends Controller {
         $removeUser->removeUser($removeUserID);
 
         header("Location:index.php?page=userAdm");
+    }
+    
+    
+    private function addRestriction() {
+        if (isset($_POST['userRestrictions']) && isset($_POST['storageRestrictions'])) {
+            $givenUserArray = $_REQUEST['userRestrictions'];
+            $givenStorageArray = $_REQUEST['storageRestrictions'];
+            
+            $addRestriction = $GLOBALS["restrictionModel"];
+   
+            
+            foreach ($givenUserArray as $givenUserID) :
+                
+                foreach ($givenStorageArray as $givenStorageID) :
+                $addRestriction->addRestriction($givenUserID, $givenStorageID);
+                endforeach;
+            endforeach;
+            
+            
+            
+            
+            
+        }
+        
+        header("Location:index.php?page=userAdm");
+        
     }
 
 }

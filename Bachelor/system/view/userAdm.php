@@ -69,6 +69,7 @@
         $userResults1 = $GLOBALS["userInfo"];
         $userResults2 = $GLOBALS["userInfo"];
         $restrictionResults = $GLOBALS["restrictionInfo"];
+        $dropdownMeny = $GLOBALS["storageInfo"];
         ?>
 
         <table class="table table-bordered table-striped table-responsive"> 
@@ -141,14 +142,14 @@
                         <th>Brukernavn: </th>
                         <td><?php echo $userResults['username']; ?></td>
 
-                        
-                        
+
+
                         <!-- Legger inn chackbox for fler valg (ved lagertilganggiving -->
 
 
-                <form id="restriction" method="post">        </form>
+            <form action="?page=addRestriction" id="restriction" method="post">        </form>
 
-                <td> <input form="restriction" id="<?php echo $userResults['userID']; ?>" value="<?php echo $userResults['userID']; ?>"  name="restrictions[]" type="checkbox"></td>
+                <td> <input form="restriction" id="<?php echo $userResults['userID']; ?>" value="<?php echo $userResults['userID']; ?>"  name="userRestrictions[]" type="checkbox"></td>
 
 
                 <!-- Oppretter et form som knappene blir linket til  --> 
@@ -161,16 +162,43 @@
 
         </table>
 
-        <button form="restriction" type="submit">Velg lagertilgang</button> 
+        
+        <!-- drop down meny -->
 
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <table>
+                <?php foreach ($dropdownMeny as $dropdownMeny) : ?>
+                    <tr>
+                        <td><?php echo $dropdownMeny['storageName'];?> </td>
+                
+                <td><input form="restriction" id="<?php echo $dropdownMeny['storageID']; ?>" value="<?php echo $dropdownMeny['storageID']; ?>"  name="storageRestrictions[]" type="checkbox"></td>
+                    </tr>
+                    <?php endforeach;?>
+                    
+                </table>
+                <button form="restriction" type="submit">Velg lagertilgang</button> 
+            </ul>
+        </div>
 
+        
+        
+        
+        
         <?php
-        if (isset($_POST['restrictions'])) {
-            $invite = $_POST['restrictions'];
+        if (isset($_POST['userRestrictions']) && isset($_POST['storageRestrictions'])) {
+            $userRes = $_REQUEST['userRestrictions'];
+            $storageRes = $_REQUEST['storageRestrictions'];
 
-
-            foreach ($invite as $invite) :
-                echo $invite;
+            foreach ($userRes as $users) :
+                
+            
+                foreach ($storageRes as $storages):
+                echo "   brukerID: " . $users;
+                echo ",   Lager: " . $storages;  
+                 endforeach;
             endforeach;
         }
         ?>
