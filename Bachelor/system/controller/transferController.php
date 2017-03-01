@@ -14,11 +14,11 @@ class transferController extends Controller {
     }
     
     private function transferPage() {
+        $givenUserID = $_SESSION["userID"];
+        $restrictionInfo = $GLOBALS["restrictionModel"];
+        $restrictionModel = $restrictionInfo->getAllRestrictionInfoFromUserID($givenUserID);
         
-        $storageInfo = $GLOBALS["storageModel"];
-        $storageModel = $storageInfo->getAll();
-        
-        $data = array("storageInfo" => $storageModel);
+        $data = array("restrictionInfo" => $restrictionModel);
         
     return $this->render("transfer", $data);
     }

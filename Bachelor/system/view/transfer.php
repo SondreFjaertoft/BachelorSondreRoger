@@ -1,58 +1,75 @@
 
 <?php
-$storageInfo =  $GLOBALS["storageInfo"];
+$restrictionInfo = $GLOBALS["restrictionInfo"];
+
 ?>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <br><br><br><br><br>
     <div class="col-sm-3 col-sm-offset-1 col-md-6 col-md-offset-2 form-group">
-    
-    <p> Velg Lager å overføre fra </p>
-         <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Velg lager   
-                <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-                <table>
-                    <form id="choosenStorage" action="" method="post">        </form>
-                <?php foreach ($storageInfo as $fromStorage) : ?>
-                    <tr>
-                        <td><button form="choosenStorage" name="fromStorage" type="submit" value="<?php echo $fromStorage['storageID'];?>"><?php echo $fromStorage['storageName'];?></button> </td>
-                    </tr>
-                    <?php endforeach;?>
+
+ 
+        <form action="" id="foo" method="post">
+
+            <p>Velg et lager og overføre fra</p>
+            <select name="fromStorage" id="fraLager" class="update">
+                <option value="">Velg et lager</option>
+                <?php foreach ($restrictionInfo as $fromStorage) : ?>
                     
-                </table>
-               
-            </ul>
-        </div>
-    
-    
-    <br><br>
-    
-    
-        <p> Velg Lager å overføre til </p>
-                 <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Velg Lager
-                <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-                <table>
-                <?php foreach ($storageInfo as $toStorage) : ?>
                     <tr>
-                        <td><button value="<?php echo $toStorage['storageID'];?>"><?php echo $toStorage['storageName'];?></button> </td>
+                    <option value="<?php echo $fromStorage['storageName']; ?>" onclick="$.fromStorage(this);"><?php echo $fromStorage['storageName']; ?></option>
                     </tr>
-                    <?php endforeach;?>
-                    
-                </table>
-               
-            </ul>
+                <?php endforeach; ?>
+
+            </select>
+
+            <br><br>
+
+            <p>Velg et lager og overføre til</p>
+            <select name="toStorage" id="tilLager" class="update">
+                <option value="">Velg et lager</option>
+                <?php foreach ($restrictionInfo as $toStorage) : ?>
+                    <tr>
+                    <option value="<?php echo $toStorage['storageName']; ?>" onclick="$.toStorage(this);"><?php echo $toStorage['storageName']; ?></option>
+                    </tr>
+                <?php endforeach; ?>
+
+            </select>
+
+        </form>
+
+        <div id="output-fromstorage">
+            <!-- Viser Lagernavn som er valgt i FRA lager -->
+            
+           
         </div>
-        
-        
-        <?php if (isset($_POST["fromStorage"])) {
-            $choosenStorage = $_POST['fromStorage'];
-            echo $choosenStorage;
-                   
-        } ?>
-        
+
+        <div id="output-tostorage">
+            <!-- Viser Lagernavn som er valgt i TIL lager -->
+            
+        </div>
+
+        <script>
+            $.fromStorage = function (query) {
+                $("#output-fromstorage").html("you have choosen to transfer from: "+this.value);
+            }
+            $('select[name=fromStorage]').on('change', $.fromStorage);
+        </script>
+
+        <script>
+            $.toStorage = function (query) {
+                $("#output-tostorage").html("you have choosen to transfer to: "+this.value);
+            }
+            $('select[name=toStorage]').on('change', $.toStorage);
+        </script>
+
+
+
+
+
+
+
+
     </div>
 </div>    
 
