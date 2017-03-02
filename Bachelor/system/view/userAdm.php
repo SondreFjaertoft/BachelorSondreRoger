@@ -450,7 +450,7 @@
 <script>
 $(function POSTuserInfo() {
     
-    var $displayUsers = $('#displayUsers');
+  
     $('#createUser').submit(function() {
        var url = $(this).attr('action'); 
        var data = $(this).serialize();
@@ -461,9 +461,9 @@ $(function POSTuserInfo() {
        function (data) {
              var items = jQuery.parseJSON(data);
              $("#createUser")[0].reset();
+             $('#opprettbruker').modal('hide');
              $.each(items, function(i, item){
-           $displayUsers.append('<tr><th>navn:</th><td>' + item.name + '</td><th>Brukernav:</th><td>' + item.username + '</td></tr>'); 
-           $('#opprettbruker').modal('hide');
+                 displayUsers(item);
            });
       
        });
@@ -479,9 +479,7 @@ $(function POSTuserInfo() {
 <!-- SCRIPT FOR Å HENTE BRUKERINFORMASJON -->
 
 <script>
-$(function GETuserInfo() {
-   var $displayUsers = $('#displayUsers');
-   
+$(function () {
    $.ajax({
       type: 'GET',
       url: '?page=getUserInfo',
@@ -489,12 +487,23 @@ $(function GETuserInfo() {
       success: function(data) { 
           
           $.each(data, function(i, item){
-            $displayUsers.append('<tr><th>navn:</th><td>' + item.name + '</td><th>Brukernav:</th><td>' + item.username + '</td></tr>'); 
+              displayUsers(item);
         });
       }
    });
 });
 </script>
+
+
+<!-- SCRIPT SOM FÅR TILSENDT DATA, OG PRINTER DENNE UT I ID=displayUsers-->
+<script>
+   function displayUsers(item) {
+       var $displayUsers = $('#displayUsers');
+        $displayUsers.append('<tr><th>navn:</th><td>' + item.name + '</td><th>Brukernav:</th><td>' + item.username + '</td></tr>'); 
+
+    }
+</script>
+
 
 
 
