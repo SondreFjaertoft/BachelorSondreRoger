@@ -60,6 +60,7 @@ class UserController extends Controller {
         $edited = $userEditInfo->editUser($editName, $editUsername, $editPassword, $editUserLevel, $editEmail, $editUserID);
 
         header("Location:index.php?page=userAdm");
+        
     }
 
     private function userCreationEngine() {

@@ -9,6 +9,7 @@
   require_once("InventoryModel.php");
   require_once("ProductModel.php");
 
+
 //connection to the database
 $dbConn = new PDO('mysql:host=localhost;dbname=tafjord;charset=utf8mb4', 'root', 'Tafjord123');
 

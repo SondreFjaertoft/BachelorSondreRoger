@@ -46,6 +46,7 @@ class RestritionModel{
     public function getAllRestrictionInfoFromUserID($givenUserID) {
         $this->SelFromUserID->execute(array("givenUserID" => $givenUserID));
         return $this->SelFromUserID->fetchAll(PDO::FETCH_ASSOC);
+        
     }   
     
     
@@ -54,8 +55,15 @@ class RestritionModel{
    // Er ikke i bruk for øyeblikket:
     
     public function addRestriction($givenUserID, $givenStorageID){
-        return $this->addStmt->execute(array("givenUserID" => $givenUserID, "givenStorageID" => $givenStorageID));
+        $this->addStmt->execute(array("givenUserID" => $givenUserID, "givenStorageID" => $givenStorageID));
+        echo $givenUserID;
+        
     }
     
+    
+    public function testingAjax(){
+        echo "dette er en test";
+      
+    }
     
 }
