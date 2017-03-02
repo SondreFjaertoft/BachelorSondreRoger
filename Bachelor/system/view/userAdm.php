@@ -25,6 +25,9 @@
             </div> 
         </form>
 
+        
+        
+        
         <!-- OPPRETT BRUKER  -->
         <div class="modal fade" id="opprettbruker" role="dialog">
             <div class="modal-dialog">
@@ -36,7 +39,7 @@
                     </div>
                     <div class="modal-body">
                         <div style="text-align: center">
-                            <form action="?page=addUserEngine" method="post" id="form12">
+                            <form action="?page=addUserEngine" method="post" id="createUser">
                                 <p style="font-weight: bold ">Name:</p>
                                 <input type="text" name="givenName" value=""><br>
                                 <p style="font-weight: bold ">Brukernavn:</p>
@@ -53,7 +56,7 @@
                     </div>
                     <div class="modal-footer">
 
-                        <input class="btn btn-default" form="form12" type="submit" value="Opprett bruker">
+                        <input class="btn btn-default" form="createUser" type="submit" value="Opprett bruker">
 
 
                         <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
@@ -136,7 +139,9 @@
 
 
                         </td>
-
+                
+                        
+            
 
 
                         <th>Navn: </th>
@@ -144,7 +149,7 @@
                         <th>Brukernavn: </th>
                         <td><?php echo $userResults['username']; ?></td>
 
-
+                        
 
                         <!-- Legger inn chackbox for fler valg (ved lagertilganggiving -->
 
@@ -164,6 +169,10 @@
 
         </table>
 
+        
+      
+        
+        
         
         <!-- drop down meny -->
 
@@ -185,6 +194,29 @@
             </ul>
         </div>
 
+        
+        
+        
+        
+        <!-- TESTING AJAX DISPLAY USERS     --->       
+        <br>
+        <p> dette er hentet inn med Ajax, skal snart erstatte det som er hentet inn ovenfor med php </p>
+            <table  class="table table-bordered table-striped table-responsive"> 
+                <tbody id="displayUsers">
+                    
+                    
+                </tbody>    
+              
+                
+            </table>
+            
+            
+            <!-- SLUTT PÅ TESTDIV --->
+        
+        
+        
+        
+        
         
         
         
@@ -411,6 +443,52 @@
 
     </div>
 </div>
+
+
+
+<!-- SCRIPT FOR OPPRETTELSE AV BRUKER (POST createUser Form) -->
+<script>
+$(function () {
+    $('#createUser').submit(function() {
+       var url = $(this).attr('action'); 
+       var data = $(this).serialize();
+       
+       $.post(
+       url,
+       data,
+       function () {
+      
+           $('#opprettbruker').modal('hide');
+       });
+       return false;
+    });
+});
+
+
+</script>
+
+
+
+<!-- SCRIPT FOR Å HENTE BRUKERINFORMASJON -->
+
+<script>
+$(function() {
+   var $displayUsers = $('#displayUsers');
+   
+   $.ajax({
+      type: 'GET',
+      url: '?page=getUserInfo',
+      dataType: 'json',
+      success: function(data) { 
+          
+          $.each(data, function(i, item){
+            $displayUsers.append('<tr><th>navn:</th><td>' + item.name + '</td><th>Brukernav:</th><td>' + item.username + '</td></tr>'); 
+        });
+      }
+   });
+});
+</script>
+
 
 
 

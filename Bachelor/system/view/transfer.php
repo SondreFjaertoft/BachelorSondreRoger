@@ -87,26 +87,14 @@ $restrictionInfo = $GLOBALS["restrictionInfo"];
 
 <script>
     $(function () {
-
-//        $.get("?page=getAjaxResult", function(test) {
-    
-            // alert("Load was performed.");
-            
-//            for (var i = 0; i < test.length; i++)
-//            {
-//                $('#listInserts').append('<div>' + test[i] + '</div>');
-//            }
-
-
-
-//        });
-
-
-        $('#randomInsert').submit(function () {
+            $('#randomInsert').submit(function () {
             var url = $(this).attr('action');
             var data = $(this).serialize();
 
-            $.post(url, data, function (test) {
+            $.post(
+            url, 
+            data, 
+            function (test) {
 
                 $('#listInserts').append('<div>' + test + '</div>');
 
@@ -130,10 +118,7 @@ $(function() {
       type: 'GET',
       url: '?page=getAjaxResult',
       dataType: 'json',
-      success: function(data) {
-          
-          
-     //     $listInserts.append('<div>' + data[0].name + '</div>'); 
+      success: function(data) { 
           $.each(data, function(i, item){
           $listInserts.append('<div>navn:  ' + item.name + ', Lager: ' + item.storageID + '</div>'); 
         });

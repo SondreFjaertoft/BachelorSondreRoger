@@ -18,6 +18,12 @@ class UserController extends Controller {
         } else if ($page == "addRestriction") {
             $this->addRestriction();
         }
+        
+        //AJAX CALL
+        else if ($page == "getUserInfo") {
+            $this->getUserInfo(); 
+        }
+            
     }
 
     private function userAdmPage() {
@@ -77,7 +83,7 @@ class UserController extends Controller {
 //            "added"=>$added,
 //            "givenUser"=>$givenUsername
 //        );
-        header("Location:index.php?page=userAdm");
+      //  header("Location:index.php?page=userAdm");
     }
 
     private function deleteUserEngine() {
@@ -113,6 +119,18 @@ class UserController extends Controller {
         
         header("Location:index.php?page=userAdm");
         
+    }
+    
+    
+    
+    private function getUserInfo() {
+        $userInfo = $GLOBALS["userModel"];
+        $givenSearchWord = "%%";
+        $userModel = $userInfo->getSearchResult($givenSearchWord);     
+        
+        $data = json_encode($userModel);
+        
+        echo $data;
     }
 
 }

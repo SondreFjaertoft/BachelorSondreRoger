@@ -64,6 +64,9 @@ class Router {
                 case "deleteUserEngine" :    
                 case "searchUserEngine" :    
                 case "addRestriction" :    
+                    
+                // AJAX CALL
+                case "getUserInfo" :    
                     return new UserController();    
                     
                 case "transfer" :
