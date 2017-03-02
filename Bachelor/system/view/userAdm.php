@@ -460,10 +460,12 @@ $(function POSTuserInfo() {
        data,
        function (data) {
              var items = jQuery.parseJSON(data);
+             $("#createUser")[0].reset();
              $.each(items, function(i, item){
            $displayUsers.append('<tr><th>navn:</th><td>' + item.name + '</td><th>Brukernav:</th><td>' + item.username + '</td></tr>'); 
            $('#opprettbruker').modal('hide');
            });
+      
        });
        return false;
     });
