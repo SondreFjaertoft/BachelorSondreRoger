@@ -1,3 +1,4 @@
+<?php require("view/header.php");?>
 
 <?php
 $searchResult = $GLOBALS["storageResult"];

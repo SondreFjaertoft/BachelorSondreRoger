@@ -1,4 +1,4 @@
-
+<?php require("view/header.php");?>
 
 <?php
 $InvResults = $GLOBALS["inventoryKSInfo"];

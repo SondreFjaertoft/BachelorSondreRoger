@@ -1,6 +1,6 @@
 
 
-
+<?php require("view/header.php");?>
 
 
 
@@ -80,12 +80,7 @@ $restrictionInfo = $GLOBALS["restrictionInfo"];
             <input type="submit" />
         </form>
 
-        <div id="listInserts">
-
-            
-
-
-        </div>
+        <div id="listInserts"></div>
 
 
 
@@ -93,18 +88,18 @@ $restrictionInfo = $GLOBALS["restrictionInfo"];
 <script>
     $(function () {
 
-        $.get("?page=getAjaxResult", function(test) {
+//        $.get("?page=getAjaxResult", function(test) {
     
             // alert("Load was performed.");
             
-            for (var i = 0; i < test.length; i++)
-            {
-                $('#listInsert').append('<div<' + test[i].userID + '</div>')
-            }
+//            for (var i = 0; i < test.length; i++)
+//            {
+//                $('#listInserts').append('<div>' + test[i] + '</div>');
+//            }
 
 
 
-        });
+//        });
 
 
         $('#randomInsert').submit(function () {
@@ -113,7 +108,7 @@ $restrictionInfo = $GLOBALS["restrictionInfo"];
 
             $.post(url, data, function (test) {
 
-                $('listInserts').append('<div>' + test + '</div>');
+                $('#listInserts').append('<div>' + test + '</div>');
 
             });
 
@@ -126,7 +121,26 @@ $restrictionInfo = $GLOBALS["restrictionInfo"];
     });
 </script>
 
+<script>
+        
+$(function() {
+   var $listInserts = $('#listInserts');
 
+   $.ajax({
+      type: 'GET',
+      url: '?page=getAjaxResult',
+      success: function(data) {
+          $listInserts.append('<div>' + data + '</div>'); 
+          $.each(data, function(i, item){
+          $listInserts.append('<div>' + item + '</div>'); 
+        });
+      }
+   });
+});        
+        
+        
+</script>
+    
 
 
     </div>

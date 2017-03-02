@@ -14,7 +14,7 @@ if(($_SESSION["AreLoggedIn"]== false)||(!isset($_SESSION["AreLoggedIn"])))
 }
 
 // View layer - The Same header for all pages
-require("view/header.php");
+// require("view/header.php");
  
 // Controller layer - select page to display (controller will handle it)
 // This will select necassary $template and $data
