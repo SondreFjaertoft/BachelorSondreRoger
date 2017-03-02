@@ -47,8 +47,9 @@ class transferController extends Controller {
         $restrictionInfo = $GLOBALS["restrictionModel"];
         $restrictionModel = $restrictionInfo->getAllUserRestrictionInfo();   
         
-        var_dump($restrictionModel);
+        $data = json_encode($restrictionModel);
         
+        echo $data;
        
             
         

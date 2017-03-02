@@ -129,10 +129,13 @@ $(function() {
    $.ajax({
       type: 'GET',
       url: '?page=getAjaxResult',
+      dataType: 'json',
       success: function(data) {
-          $listInserts.append('<div>' + data + '</div>'); 
+          
+          
+     //     $listInserts.append('<div>' + data[0].name + '</div>'); 
           $.each(data, function(i, item){
-          $listInserts.append('<div>' + item + '</div>'); 
+          $listInserts.append('<div>navn:  ' + item.name + ', Lager: ' + item.storageID + '</div>'); 
         });
       }
    });
