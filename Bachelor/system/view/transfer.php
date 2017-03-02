@@ -70,7 +70,9 @@ $restrictionInfo = $GLOBALS["restrictionInfo"];
 
 
         <!-- TESTING -->
-
+        
+        <br><br><br><br>
+        <p> TESTING AV AJAX</p>
 
         <form id="randomInsert" action="?page=testingAjax" method="POST">
             <input type="int" name="givenStorageID" />
@@ -93,7 +95,7 @@ $restrictionInfo = $GLOBALS["restrictionInfo"];
 
         $.get("?page=getAjaxResult", function(test) {
     
-            alert("Load was performed.");
+            // alert("Load was performed.");
             
             for (var i = 0; i < test.length; i++)
             {
