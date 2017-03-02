@@ -1,13 +1,13 @@
 <?php
 
 class UserModel {
-    
+
     private $dbConn;
-   
 
     const TABLE = "users";
-    const UPDATE_QUERY = "UPDATE " . UserModel::TABLE . " SET name = :editName, username = :editUsername, password = :editPassword, userLevel = :editUserLevel, email = :editEmail WHERE userID = :editUserID" ;
+    const UPDATE_QUERY = "UPDATE " . UserModel::TABLE . " SET name = :editName, username = :editUsername, password = :editPassword, userLevel = :editUserLevel, email = :editEmail WHERE userID = :editUserID";
     const SELECT_QUERY = "SELECT * FROM " . UserModel::TABLE;
+    const SELECT_QUERY_USERID = "SELECT * FROM " . UserModel::TABLE . " WHERE userID = :givenUserID";
     const SEARCH_QUERY = "SELECT * FROM " . UserModel::TABLE . " WHERE name LIKE :givenSearchWord OR username LIKE :givenSearchWord";
     const INSERT_QUERY = "INSERT INTO " . UserModel::TABLE . " (name, username, password, userLevel, email) VALUES (:givenName, :givenUsername, :givenPassword, :givenUserLevel, :givenEmail)";
     const DELETE_QUERY = "DELETE FROM " . UserModel::TABLE . " WHERE userID = :removeUserID";
@@ -25,36 +25,38 @@ class UserModel {
         $this->searchStmt = $this->dbConn->prepare(UserModel::SEARCH_QUERY);
         $this->delStmt = $this->dbConn->prepare(UserModel::DELETE_QUERY);
         $this->editStmt = $this->dbConn->prepare(UserModel::UPDATE_QUERY);
+        $this->selUserID = $this->dbConn->prepare(UserModel::SELECT_QUERY_USERID);
     }
-
 
     public function getSearchResult($givenSearchWord) {
         $this->searchStmt->execute(array("givenSearchWord" => $givenSearchWord));
         return $this->searchStmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     public function getAllUserInfo() {
         $this->selStmt->execute();
         return $this->selStmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getAllUserInfoFromID($givenUserUD) {
+        $this->selUserID->execute(array("givenUserID" => $givenUserUD));
+        return $this->selUserID->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function editUser($editName, $editUsername, $editPassword, $editUserLevel, $editEmail, $editUserID) {
-       return $this->editStmt->execute(array("editName" =>  $editName, "editUsername" => $editUsername, "editPassword" => $editPassword, "editUserLevel" => $editUserLevel, "editEmail" => $editEmail, "editUserID" => $editUserID)); 
+        return $this->editStmt->execute(array("editName" => $editName, "editUsername" => $editUsername, "editPassword" => $editPassword, "editUserLevel" => $editUserLevel, "editEmail" => $editEmail, "editUserID" => $editUserID));
     }
-    
+
     // kommer tilbake til, ved oppretting av bruker
-    public function addUser($givenName, $givenUsername,$givenPassword, $givenUserLevel, $givenEmail) {
-        return $this->addStmt->execute(array("givenName" =>  $givenName, "givenUsername" => $givenUsername, "givenPassword" => $givenPassword, "givenUserLevel" => $givenUserLevel, "givenEmail" => $givenEmail));
+    public function addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail) {
+        $this->addStmt->execute(array("givenName" => $givenName, "givenUsername" => $givenUsername, "givenPassword" => $givenPassword, "givenUserLevel" => $givenUserLevel, "givenEmail" => $givenEmail));
+        $lastAdded = $this->dbConn->lastInsertId('users');
+        return $lastAdded;
     }
-    
-    
+
     // kommer tilbake til, ved sletting av bruker
-    public function removeUser($removeUserID)
-    {
-       return $this->delStmt->execute(array("removeUserID" => $removeUserID));
-
+    public function removeUser($removeUserID) {
+        return $this->delStmt->execute(array("removeUserID" => $removeUserID));
     }
-    
-
 
 }

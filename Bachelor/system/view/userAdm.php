@@ -448,7 +448,9 @@
 
 <!-- SCRIPT FOR OPPRETTELSE AV BRUKER (POST createUser Form) -->
 <script>
-$(function () {
+$(function POSTuserInfo() {
+    
+    var $displayUsers = $('#displayUsers');
     $('#createUser').submit(function() {
        var url = $(this).attr('action'); 
        var data = $(this).serialize();
@@ -456,9 +458,12 @@ $(function () {
        $.post(
        url,
        data,
-       function () {
-      
+       function (data) {
+             var items = jQuery.parseJSON(data);
+             $.each(items, function(i, item){
+           $displayUsers.append('<tr><th>navn:</th><td>' + item.name + '</td><th>Brukernav:</th><td>' + item.username + '</td></tr>'); 
            $('#opprettbruker').modal('hide');
+           });
        });
        return false;
     });
@@ -472,7 +477,7 @@ $(function () {
 <!-- SCRIPT FOR Å HENTE BRUKERINFORMASJON -->
 
 <script>
-$(function() {
+$(function GETuserInfo() {
    var $displayUsers = $('#displayUsers');
    
    $.ajax({
