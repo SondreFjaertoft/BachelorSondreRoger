@@ -80,8 +80,7 @@ class UserController extends Controller {
         $added = $userCreationInfo->addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail);
         
         $addedUser = $userCreationInfo->getAllUserInfoFromID($added);
-        
-        $data = json_encode($addedUser);
+        $data = json_encode(array("addedUser" => $addedUser));
         
         echo $data;
         

@@ -1,4 +1,4 @@
-<?php require("view/header.php");?>
+<?php require("view/header.php"); ?>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <br><br><br><br>
@@ -25,9 +25,9 @@
             </div> 
         </form>
 
-        
-        
-        
+
+
+
         <!-- OPPRETT BRUKER  -->
         <div class="modal fade" id="opprettbruker" role="dialog">
             <div class="modal-dialog">
@@ -77,103 +77,6 @@
         $dropdownMeny = $GLOBALS["storageInfo"];
         ?>
 
-        <table class="table table-bordered table-striped table-responsive"> 
-
-
-            <h4> Brukeroversikt </h4> 
-
-
-
-            <tbody>
-
-                <?php foreach ($userResults as $userResults): ?>
-                    <tr>
-                        <td class="text-center">
-
-                            <form id="brukerRedForm" action="" method="post">
-                            </form>
-
-
-
-                            <!-- Knapp som aktiverer Model for brukerredigering  --> 
-
-                            <button form="brukerRedForm" type="submit" name="editUser" data-toggle="tooltip" title="Rediger bruker" value="<?php echo $userResults['userID']; ?>" 
-                                    style="appearance: none;
-                                    -webkit-appearance: none;
-                                    -moz-appearance: none;
-                                    outline: none;
-                                    border: 0;
-                                    background: transparent;
-                                    display: inline;">
-                                <span class="glyphicon glyphicon-edit" style="color: green"></span>
-                            </button>
-
-
-
-                            <!-- Knapp som aktiverer Model for å vise brukerinformasjon  --> 
-
-                            <button form="brukerRedForm" type="submit" name="showInfo" data-toggle="tooltip" title="Mer informasjon" value="<?php echo $userResults['userID']; ?>" 
-                                    style="appearance: none;
-                                    -webkit-appearance: none;
-                                    -moz-appearance: none;
-                                    outline: none;
-                                    border: 0;
-                                    background: transparent;
-                                    display: inline;">
-                                <span class="glyphicon glyphicon-menu-hamburger" style="color: #003366" ></span></button>
-
-
-                            <!-- Knapp som aktiverer Model for sletting av bruker  --> 
-
-
-                            <button form="brukerRedForm" name="deleteUser" data-toggle="tooltip" title="Slett bruker" value="<?php echo $userResults['userID']; ?>" 
-                                    style="appearance: none;
-                                    -webkit-appearance: none;
-                                    -moz-appearance: none;
-                                    outline: none;
-                                    border: 0;
-                                    background: transparent;
-                                    display: inline;">
-                                <span class="glyphicon glyphicon-remove" style="color: red"></span></button>
-
-
-
-                        </td>
-                
-                        
-            
-
-
-                        <th>Navn: </th>
-                        <td><?php echo $userResults['name']; ?></td>
-                        <th>Brukernavn: </th>
-                        <td><?php echo $userResults['username']; ?></td>
-
-                        
-
-                        <!-- Legger inn chackbox for fler valg (ved lagertilganggiving -->
-
-
-            <form action="?page=addRestriction" id="restriction" method="post">        </form>
-
-                <td> <input form="restriction" id="<?php echo $userResults['userID']; ?>" value="<?php echo $userResults['userID']; ?>"  name="userRestrictions[]" type="checkbox"></td>
-
-
-                <!-- Oppretter et form som knappene blir linket til  --> 
-
-
-                </tr>   
-            <?php endforeach; ?>
-
-            </tbody>
-
-        </table>
-
-        
-      
-        
-        
-        
         <!-- drop down meny -->
 
         <div class="dropdown">
@@ -181,62 +84,66 @@
                 <span class="caret"></span></button>
             <ul class="dropdown-menu">
                 <table>
-                <?php foreach ($dropdownMeny as $dropdownMeny) : ?>
-                    <tr>
-                        <td><?php echo $dropdownMeny['storageName'];?> </td>
-                
-                <td><input form="restriction" id="<?php echo $dropdownMeny['storageID']; ?>" value="<?php echo $dropdownMeny['storageID']; ?>"  name="storageRestrictions[]" type="checkbox"></td>
-                    </tr>
-                    <?php endforeach;?>
-                    
+                    <?php foreach ($dropdownMeny as $dropdownMeny) : ?>
+                        <tr>
+                            <td><?php echo $dropdownMeny['storageName']; ?> </td>
+
+                            <td><input form="restriction" id="<?php echo $dropdownMeny['storageID']; ?>" value="<?php echo $dropdownMeny['storageID']; ?>"  name="storageRestrictions[]" type="checkbox"></td>
+                        </tr>
+                    <?php endforeach; ?>
+
                 </table>
                 <button form="restriction" type="submit">Velg lagertilgang</button> 
             </ul>
         </div>
 
-        
-        
-        
-        
+
+
+
+
         <!-- TESTING AJAX DISPLAY USERS     --->       
         <br>
         <p> dette er hentet inn med Ajax, skal snart erstatte det som er hentet inn ovenfor med php </p>
-            <table  class="table table-bordered table-striped table-responsive"> 
-                <tbody id="displayUsers">
-                    
-                    
-                </tbody>    
-              
-                
+        <table  class="table table-bordered table-striped table-responsive"> 
+            <tbody id="displayUsers">
+
+
+            </tbody>    
+
+
+        </table>
+            <table class="table table-bordered table-striped table-responsive">
+
+            <tbody id="testingHandlebars">
+    
+            </tbody>    
+        <tbody id="UpdateTable">
+            
+
+            </tbody>
             </table>
-        
-        <div id="testingHandlebars">
-            
-        </div>
-        
-            
-            <!-- SLUTT PÅ TESTDIV --->
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        <!-- SLUTT PÅ TESTDIV --->
+
+
+
+
+
+
+
+
+
         <?php
         if (isset($_POST['userRestrictions']) && isset($_POST['storageRestrictions'])) {
             $userRes = $_REQUEST['userRestrictions'];
             $storageRes = $_REQUEST['storageRestrictions'];
 
             foreach ($userRes as $users) :
-                
-            
+
+
                 foreach ($storageRes as $storages):
-                echo "   brukerID: " . $users;
-                echo ",   Lager: " . $storages;  
-                 endforeach;
+                    echo "   brukerID: " . $users;
+                    echo ",   Lager: " . $storages;
+                endforeach;
             endforeach;
         }
         ?>
@@ -451,77 +358,156 @@
 
 <!-- HANDLEBARS TEMPLATES-->
 
-<script id="userTemplate" type="text/x-handlebars-template">
-    {{#each users}}
+<script id="displayUserTemplate" type="text/x-handlebars-template">
     
-    <h2>{{name}}</h2>
+        {{#each users}}
+            <tr>
+                <td class="text-center"> 
+                            
+                    <form id="brukerRedForm" action="" method="post">
+                    </form>
+
+        <!-- Knapp som aktiverer Model for brukerredigering  --> 
+
+                    <button form="brukerRedForm" type="submit" name="editUser" data-toggle="tooltip" title="Rediger bruker" value="{{userID}}" 
+                        style="appearance: none;
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        outline: none;
+                        border: 0;
+                        background: transparent;
+                        display: inline;">
+                         <span class="glyphicon glyphicon-edit" style="color: green"></span>
+                    </button>
+                     
+                    
+        <!-- Knapp som aktiverer Model for å vise brukerinformasjon  --> 
+
+                    <button form="brukerRedForm" type="submit" name="showInfo" data-toggle="tooltip" title="Mer informasjon" value="{{userID}}" 
+                        style="appearance: none;
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        outline: none;
+                        border: 0;
+                        background: transparent;
+                        display: inline;">
+                        <span class="glyphicon glyphicon-menu-hamburger" style="color: #003366" ></span>
+                    </button>
+                     
+        
+        <!-- Knapp som aktiverer Model for sletting av bruker  --> 
+
+
+                    <button form="brukerRedForm" name="deleteUser" data-toggle="tooltip" title="Slett bruker" value="{{userID}}" 
+                        style="appearance: none;
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        outline: none;
+                        border: 0;
+                        background: transparent;
+                        display: inline;">
+                        <span class="glyphicon glyphicon-remove" style="color: red"></span>
+                    </button>
+
+                </td>
+                     
+        <!-- Printer ut navn og brukernavn inn i tabellen -->
+        
+                <th>Navn: </th>
+                <td>{{name}}</td>
+                <th>Brukernavn: </th>
+                <td>{{username}}</td>
+                    
+                     
+        <!-- Legger inn chackbox for fler valg (ved lagertilganggiving -->
+
+
+                <form action="?page=addRestriction" id="restriction" method="post">        </form>
+                <td> <input form="restriction" id="{{userID}}" value="{{userID}}"  name="userRestrictions[]" type="checkbox"></td>
+
+   
     
+
     {{/each}}
-         
+    </tr>
+          
+
 </script>
-
-
-
 
 
 <!-- SCRIPT FOR OPPRETTELSE AV BRUKER (POST createUser Form) -->
 <script>
-$(function POSTuserInfo() {
-    
-  
-    $('#createUser').submit(function() {
-       var url = $(this).attr('action'); 
-       var data = $(this).serialize();
-       
-       $.post(
-       url,
-       data,
-       function (data) {
-             var items = jQuery.parseJSON(data);
-             $("#createUser")[0].reset();
-             $('#opprettbruker').modal('hide');
-             $.each(items, function(i, item){
-                 displayUsers(item);
-           });
-      
-       });
-       return false;
+    $(function POSTuserInfo() {
+
+
+        $('#createUser').submit(function () {
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+
+            $.post(
+                    url,
+                    data,
+                    function () {
+                        
+                        $("#createUser")[0].reset();
+                        $('#opprettbruker').modal('hide');
+                        displayAddedUser();
+
+                    });
+            return false;
+        });
     });
-});
 
 
+</script>
+
+<script>
+    function displayAddedUser() {
+            $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getUserInfo',
+            dataType: 'json',
+            success: function (data) {
+                createHTML(data);
+            }
+        });
+    });
+    }
 </script>
 
 
 
 <!-- SCRIPT FOR Å HENTE BRUKERINFORMASJON -->
 
-<script>
-$(function () {
-   $.ajax({
-      type: 'GET',
-      url: '?page=getUserInfo',
-      dataType: 'json',
-      success: function(data) { 
-          createHTML(data);
-      }
-   });
-});
+<script>      
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getUserInfo',
+            dataType: 'json',
+            success: function (data) {
+                createHTML(data);
+            }
+        });
+    });
 </script>
 
 
 <!-- TESTING HANDLEBARSS -->
 <script>
-  function createHTML(data){ 
-  
-    var rawTemplate = document.getElementById("userTemplate").innerHTML;
-    var compiledTemplate = Handlebars.compile(rawTemplate);
-    var ourGeneratedHTML = compiledTemplate(data);
-    
-    var userContainer = document.getElementById("testingHandlebars");
-    userContainer.innerHTML = ourGeneratedHTML;
+    function createHTML(data) {
+
+        var rawTemplate = document.getElementById("displayUserTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var ourGeneratedHTML = compiledTemplate(data);
+
+        var userContainer = document.getElementById("UpdateTable");
+        userContainer.innerHTML = ourGeneratedHTML;
     }
 </script>
+
+
 
 
 
