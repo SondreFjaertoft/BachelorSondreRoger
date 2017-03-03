@@ -103,24 +103,12 @@
 
         <!-- TESTING AJAX DISPLAY USERS     --->       
         <br>
-        <p> dette er hentet inn med Ajax, skal snart erstatte det som er hentet inn ovenfor med php </p>
-        <table  class="table table-bordered table-striped table-responsive"> 
-            <tbody id="displayUsers">
-
-
-            </tbody>    
-
-
-        </table>
             <table class="table table-bordered table-striped table-responsive">
 
-            <tbody id="testingHandlebars">
+            <tbody id="userTable">
     
             </tbody>    
-        <tbody id="UpdateTable">
-            
-
-            </tbody>
+   
             </table>
         <!-- SLUTT PÅ TESTDIV --->
 
@@ -461,6 +449,8 @@
 
 </script>
 
+
+<!-- Rerun the GET fuc -->
 <script>
     function displayAddedUser() {
             $(function () {
@@ -502,7 +492,7 @@
         var compiledTemplate = Handlebars.compile(rawTemplate);
         var ourGeneratedHTML = compiledTemplate(data);
 
-        var userContainer = document.getElementById("UpdateTable");
+        var userContainer = document.getElementById("userTable");
         userContainer.innerHTML = ourGeneratedHTML;
     }
 </script>
