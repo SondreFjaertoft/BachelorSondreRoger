@@ -209,7 +209,7 @@
               
                 
             </table>
-            
+        
             
             <!-- SLUTT PÅ TESTDIV --->
         
@@ -488,6 +488,7 @@ $(function () {
           
           $.each(data, function(i, item){
               displayUsers(item);
+              selectedUser(item);
         });
       }
    });
@@ -499,10 +500,24 @@ $(function () {
 <script>
    function displayUsers(item) {
        var $displayUsers = $('#displayUsers');
-        $displayUsers.append('<tr><th>navn:</th><td>' + item.name + '</td><th>Brukernav:</th><td>' + item.username + '</td></tr>'); 
-
+       $displayUsers.append('<tr><th>navn:</th><td>' + item.name + '</td><th>Brukernav:</th><td>' + item.username + '</td></tr>'); 
+   
     }
 </script>
+
+
+
+<!-- Døme på if setning i Jquery -->
+<script>
+   function selectedUser(item) {
+       var $displayUsers = $('#displayUsers');
+       
+       if(item.userID === '1'){
+        $displayUsers.append('<tr><th>navn:</th><td>' + item.name + '</td><th>Brukernav:</th><td>' + item.username + '</td></tr>'); 
+    }
+    }
+</script>
+
 
 
 
