@@ -459,7 +459,7 @@
             url: '?page=getUserInfo',
             dataType: 'json',
             success: function (data) {
-                createHTML(data);
+                usersTable(data);
             }
         });
     });
@@ -477,7 +477,7 @@
             url: '?page=getUserInfo',
             dataType: 'json',
             success: function (data) {
-                createHTML(data);
+                usersTable(data);
             }
         });
     });
@@ -486,14 +486,14 @@
 
 <!-- TESTING HANDLEBARSS -->
 <script>
-    function createHTML(data) {
+    function usersTable(data) {
 
         var rawTemplate = document.getElementById("displayUserTemplate").innerHTML;
         var compiledTemplate = Handlebars.compile(rawTemplate);
-        var ourGeneratedHTML = compiledTemplate(data);
+        var UserTableGeneratedHTML = compiledTemplate(data);
 
         var userContainer = document.getElementById("userTable");
-        userContainer.innerHTML = ourGeneratedHTML;
+        userContainer.innerHTML = UserTableGeneratedHTML;
     }
 </script>
 
