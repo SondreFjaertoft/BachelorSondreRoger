@@ -210,6 +210,10 @@
                 
             </table>
         
+        <div id="testingHandlebars">
+            
+        </div>
+        
             
             <!-- SLUTT PÅ TESTDIV --->
         
@@ -445,6 +449,20 @@
 </div>
 
 
+<!-- HANDLEBARS TEMPLATES-->
+
+<script id="userTemplate" type="text/x-handlebars-template">
+    {{#each users}}
+    
+    <h2>{{name}}</h2>
+    
+    {{/each}}
+         
+</script>
+
+
+
+
 
 <!-- SCRIPT FOR OPPRETTELSE AV BRUKER (POST createUser Form) -->
 <script>
@@ -485,39 +503,25 @@ $(function () {
       url: '?page=getUserInfo',
       dataType: 'json',
       success: function(data) { 
-          
-          $.each(data, function(i, item){
-              displayUsers(item);
-              selectedUser(item);
-        });
+          createHTML(data);
       }
    });
 });
 </script>
 
 
-<!-- SCRIPT SOM FÅR TILSENDT DATA, OG PRINTER DENNE UT I ID=displayUsers-->
+<!-- TESTING HANDLEBARSS -->
 <script>
-   function displayUsers(item) {
-       var $displayUsers = $('#displayUsers');
-       $displayUsers.append('<tr><th>navn:</th><td>' + item.name + '</td><th>Brukernav:</th><td>' + item.username + '</td></tr>'); 
-   
+  function createHTML(data){ 
+  
+    var rawTemplate = document.getElementById("userTemplate").innerHTML;
+    var compiledTemplate = Handlebars.compile(rawTemplate);
+    var ourGeneratedHTML = compiledTemplate(data);
+    
+    var userContainer = document.getElementById("testingHandlebars");
+    userContainer.innerHTML = ourGeneratedHTML;
     }
 </script>
-
-
-
-<!-- Døme på if setning i Jquery -->
-<script>
-   function selectedUser(item) {
-       var $displayUsers = $('#displayUsers');
-       
-       if(item.userID === '1'){
-        $displayUsers.append('<tr><th>navn:</th><td>' + item.name + '</td><th>Brukernav:</th><td>' + item.username + '</td></tr>'); 
-    }
-    }
-</script>
-
 
 
 

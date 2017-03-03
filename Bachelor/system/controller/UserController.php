@@ -130,9 +130,8 @@ class UserController extends Controller {
         $userInfo = $GLOBALS["userModel"];
         $givenSearchWord = "%%";
         $userModel = $userInfo->getSearchResult($givenSearchWord);     
-        
-        $data = json_encode($userModel);
-        
+
+        $data = json_encode(array("users" => $userModel));
         echo $data;
     }
 
