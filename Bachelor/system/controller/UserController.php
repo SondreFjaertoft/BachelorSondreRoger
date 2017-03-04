@@ -7,21 +7,21 @@ class UserController extends Controller {
     public function show($page) {
         if ($page == "userAdm") {
             $this->userAdmPage();
-        } else if ($page == "addUserEngine") {
-            $this->userCreationEngine();
-        } else if ($page == "editUserEngine") {
+        }  else if ($page == "editUserEngine") {
             $this->userEditEngine();
         } else if ($page == "deleteUserEngine") {
             $this->deleteUserEngine();
-        } else if ($page == "searchUserEngine") {
-            $this->searchUserEngine();
         } else if ($page == "addRestriction") {
             $this->addRestriction();
         }
         
         //AJAX CALL
-        else if ($page == "getUserInfo") {
+          else if ($page == "getUserInfo") {
             $this->getUserInfo(); 
+        } else if ($page == "addUserEngine") {
+            $this->userCreationEngine();
+        } else if ($page== "getUserByID"){
+            $this->getUserByID();
         }
             
     }
@@ -69,33 +69,6 @@ class UserController extends Controller {
         
     }
 
-    private function userCreationEngine() {
-        $givenName = $_REQUEST["givenName"];
-        $givenUsername = $_REQUEST["givenUsername"];
-        $givenPassword = $_REQUEST["givenPassword"];
-        $givenUserLevel = $_REQUEST["givenUserLevel"];
-        $givenEmail = $_REQUEST["givenEmail"];
-
-        $userCreationInfo = $GLOBALS["userModel"];
-        $added = $userCreationInfo->addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail);
-        
-        $addedUser = $userCreationInfo->getAllUserInfoFromID($added);
-        $data = json_encode(array("addedUser" => $addedUser));
-        
-        echo $data;
-        
-        
-       
-    }
-
-    private function deleteUserEngine() {
-        $removeUserID = $_REQUEST["deleteUserID"];
-
-        $removeUser = $GLOBALS["userModel"];
-        $removeUser->removeUser($removeUserID);
-
-        header("Location:index.php?page=userAdm");
-    }
     
     
     private function addRestriction() {
@@ -123,7 +96,7 @@ class UserController extends Controller {
         
     }
     
-    
+    // FORESPØRSLER GJOR VED AJAX
     
     private function getUserInfo() {
         $userInfo = $GLOBALS["userModel"];
@@ -140,6 +113,42 @@ class UserController extends Controller {
         echo $data;
     }
 
+    
+    private function userCreationEngine() {
+        $givenName = $_REQUEST["givenName"];
+        $givenUsername = $_REQUEST["givenUsername"];
+        $givenPassword = $_REQUEST["givenPassword"];
+        $givenUserLevel = $_REQUEST["givenUserLevel"];
+        $givenEmail = $_REQUEST["givenEmail"];
+
+        $userCreationInfo = $GLOBALS["userModel"];
+        $added = $userCreationInfo->addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail);
+        
+        $addedUser = $userCreationInfo->getAllUserInfoFromID($added);
+        $data = json_encode(array("addedUser" => $addedUser));
+        
+        echo $data;
+    }
+    
+    private function getUserByID(){
+        $givenUserID = $_REQUEST["givenUserID"];
+        
+        $userInfo = $GLOBALS["userModel"];
+        $userModel = $userInfo->getAllUserInfoFromID($givenUserID);
+        
+        $data = json_encode(array("user" => $userModel));
+        echo $data;
+        
+    }
+    
+        private function deleteUserEngine() {
+        $removeUserID = $_REQUEST["deleteUserID"];
+
+        $removeUser = $GLOBALS["userModel"];
+        $removeUser->removeUser($removeUserID); 
+        
+        echo json_encode("success");
+    }
 }
 
 /* 

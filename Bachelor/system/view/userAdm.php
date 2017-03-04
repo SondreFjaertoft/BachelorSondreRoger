@@ -15,16 +15,16 @@
                 <div class="col-md-9">
                     <input class="form-control" form="searchForUser" type="text" name="givenUserSearchWord" value="" placeholder="Søk etter bruker..">  
                     <input class="form-control" form="searchForUser" type="submit" value="Søk">
-                    </form>            
-                    <button onclick="AllUsers()" class="btn btn-default " type="button">Alle brukere</button
+        </form>                           
+                    <button onclick="UpdateUsersTable()" class="btn btn-default " type="button">Alle brukere</button
                 </div>    
-
-                
-                <div class="col-md-1 col-md-offset-2">
-                    <button class="btn btn-default " type="button" data-toggle="modal" data-target="#opprettbruker">Opprett bruker</button>
-                </div>
             </div> 
+            
+            <div class="col-md-1 col-md-offset-15">
+                <button class="btn btn-default " type="button" data-toggle="modal" data-target="#opprettbruker">Opprett bruker</button>
+            </div>
 
+   
 
 
 
@@ -67,7 +67,8 @@
                     </div>
                 </div>
             </div> 
-
+    </div>
+ 
             <br>
 
             <?php
@@ -79,7 +80,7 @@
             ?>
 
             <!-- drop down meny -->
-
+            <br><br>
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Velg Lager
                     <span class="caret"></span></button>
@@ -101,41 +102,14 @@
 
 
 
-
             <!-- TESTING AJAX DISPLAY USERS     --->       
             <br>
             <table class="table table-bordered table-striped table-responsive">
-
-                <tbody id="userTable">
-
+                <tbody id="displayUserContainer">
+                    <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
                 </tbody>    
-
             </table>
             <!-- SLUTT PÅ TESTDIV --->
-
-
-
-
-
-
-
-
-
-            <?php
-            if (isset($_POST['userRestrictions']) && isset($_POST['storageRestrictions'])) {
-                $userRes = $_REQUEST['userRestrictions'];
-                $storageRes = $_REQUEST['storageRestrictions'];
-
-                foreach ($userRes as $users) :
-
-
-                    foreach ($storageRes as $storages):
-                        echo "   brukerID: " . $users;
-                        echo ",   Lager: " . $storages;
-                    endforeach;
-                endforeach;
-            }
-            ?>
 
 
             <!-- DIV som holder på all informasjon i midten av skjermen  -->
@@ -285,12 +259,12 @@
                             ?>
                             <script>
                                 $(function () {
-                                    $('#brukerModal').modal('show');
+                                    $('#deleteUserModal').modal('show');
                                 });
                             </script>
 
 
-                            <div class="modal fade" id="brukerModal" role="dialog">
+                            <div class="modal fade" id="deleteUserModal" role="dialog">
                                 <div class="modal-dialog">
                                     <!-- Innholdet til Modalen -->
                                     <div class="modal-content">
@@ -338,6 +312,40 @@
             </div>
 
 
+            
+            
+            
+            <div class="modal fade" id="deleteUserModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Innholdet til Modalen -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Bruker informasjon</h4>
+                        </div>
+                        <form action="?page=deleteUserEngine" method="post" id="deleteUser"></form>
+                        <div class="modal-body" id="deleteUserContainer">
+
+                            
+
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <input form="deleteUser" class="btn btn-default" type="submit" value="Slett">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                        </div>
+                    </div>
+                </div>
+            </div>     
+            
+            
+            
+            
+            
+    
+            
+            
+            
 
 
 
@@ -346,85 +354,96 @@
 
 
 <!-- HANDLEBARS TEMPLATES-->
+<script id="userByIdTemplate" type="text/x-handlebars-template">
+   <p> Er du sikker på at du vil slette:  <P>
+    {{#each user}}           
+        {{name}} 
+    <input form="deleteUser" type="hidden" name="deleteUserID" value="{{userID}}"><br>
+    {{/each}}    
+</script>    
+
 
 <script id="displayUserTemplate" type="text/x-handlebars-template">
+
+    {{#each users}}
+    <tr>
+    <td class="text-center">  
+
+    <form id="brukerRedForm" action="" method="post">
+    </form>
     
-        {{#each users}}
-            <tr>
-                <td class="text-center"> 
-                            
-                    <form id="brukerRedForm" action="" method="post">
-                    </form>
+    
+    
+    <!-- Knapp som aktiverer Model for brukerredigering  --> 
 
-        <!-- Knapp som aktiverer Model for brukerredigering  --> 
+    <button form="brukerRedForm" type="submit" name="editUser" data-toggle="tooltip" title="Rediger bruker" value="{{userID}}" 
+    style="appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: 0;
+    background: transparent;
+    display: inline;">
+    <span class="glyphicon glyphicon-edit" style="color: green"></span>
+    </button>
+ 
 
-                    <button form="brukerRedForm" type="submit" name="editUser" data-toggle="tooltip" title="Rediger bruker" value="{{userID}}" 
-                        style="appearance: none;
-                        -webkit-appearance: none;
-                        -moz-appearance: none;
-                        outline: none;
-                        border: 0;
-                        background: transparent;
-                        display: inline;">
-                         <span class="glyphicon glyphicon-edit" style="color: green"></span>
-                    </button>
-                     
-                     
-        <!-- Knapp som aktiverer Model for å vise brukerinformasjon  --> 
+    <!-- Knapp som aktiverer Model for å vise brukerinformasjon  --> 
 
-                    <button form="brukerRedForm" type="submit" name="showInfo" data-toggle="tooltip" title="Mer informasjon" value="{{userID}}" 
-                        style="appearance: none;
-                        -webkit-appearance: none;
-                        -moz-appearance: none;
-                        outline: none;
-                        border: 0;
-                        background: transparent;
-                        display: inline;">
-                        <span class="glyphicon glyphicon-menu-hamburger" style="color: #003366" ></span>
-                    </button>
-                     
-        
-        <!-- Knapp som aktiverer Model for sletting av bruker  --> 
+    <button form="brukerRedForm" type="submit" name="showInfo" data-toggle="tooltip" title="Mer informasjon" value="{{userID}}" 
+    style="appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: 0;
+    background: transparent;
+    display: inline;">
+    <span class="glyphicon glyphicon-menu-hamburger" style="color: #003366" ></span>
+    </button>
 
 
-                    <button form="brukerRedForm" name="deleteUser" data-toggle="tooltip" title="Slett bruker" value="{{userID}}" 
-                        style="appearance: none;
-                        -webkit-appearance: none;
-                        -moz-appearance: none;
-                        outline: none;
-                        border: 0;
-                        background: transparent;
-                        display: inline;">
-                        <span class="glyphicon glyphicon-remove" style="color: red"></span>
-                    </button>
+    <!-- Knapp som aktiverer Model for sletting av bruker  --> 
 
-                </td>
-                     
-        <!-- Printer ut navn og brukernavn inn i tabellen -->
-        
-                <th>Navn: </th>
-                <td>{{name}}</td>
-                <th>Brukernavn: </th>
-                <td>{{username}}</td>
-                    
-                     
-        <!-- Legger inn chackbox for fler valg (ved lagertilganggiving -->
-
-
-                <form action="?page=addRestriction" id="restriction" method="post">        </form>
-                <td> <input form="restriction" id="{{userID}}" value="{{userID}}"  name="userRestrictions[]" type="checkbox"></td>
-
+    
    
-    
+    <button data-id="{{userID}}" class="remove" data-toggle="tooltip" 
+    style="appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: 0;
+    background: transparent;
+    display: inline;">
+    <span class="glyphicon glyphicon-remove" style="color: red"></span>
+    </button>
+
+    </td>
+ 
+    <!-- Printer ut navn og brukernavn inn i tabellen -->
+
+    <th>Navn: </th>
+    <td>{{name}}</td>
+    <th>Brukernavn: </th>
+    <td>{{username}}</td>
+
+
+    <!-- Legger inn chackbox for fler valg (ved lagertilganggiving -->
+
+ 
+    <form action="?page=addRestriction" id="restriction" method="post">        </form>
+    <td> <input form="restriction" id="{{userID}}" value="{{userID}}"  name="userRestrictions[]" type="checkbox"></td>
+
+
+
 
     {{/each}}
     </tr>
-          
+
 
 </script>
 
 
-<!-- SCRIPT FOR OPPRETTELSE AV BRUKER (POST createUser Form) -->
+<!-- CREATE USER -->
 <script>
     $(function POSTuserInfo() {
 
@@ -440,7 +459,7 @@
                 success: function () {
                     $("#createUser")[0].reset();
                     $('#opprettbruker').modal('hide');
-                    displayAddedUser();
+                    UpdateUsersTable();
                 }
             });
             return false;
@@ -448,6 +467,7 @@
     });
 
 </script>
+
 
 <!-- SEARCH FOR USERS -->
 <script>
@@ -464,7 +484,7 @@
                 dataType: 'json',
                 success: function (data) {
                     $("#searchForUser")[0].reset();
-                    usersTable(data);
+                    usersTableTemplate(data);
                 }
             });
             return false;
@@ -474,25 +494,17 @@
 </script>
 
 
+
+<!-- UPDATE USER INFOMARTION -->
 <script>
-    function AllUsers() {
-      displayAddedUser();
-      }  
-    
-
-</script>
-
-
-<!-- Rerun the GET fuc -->
-<script>
-    function displayAddedUser() {
+    function UpdateUsersTable() {
         $(function () {
             $.ajax({
                 type: 'GET',
                 url: '?page=getUserInfo',
                 dataType: 'json',
                 success: function (data) {
-                    usersTable(data);
+                    usersTableTemplate(data);
                 }
             });
         });
@@ -501,7 +513,7 @@
 
 
 
-<!-- SCRIPT FOR Å HENTE BRUKERINFORMASJON -->
+<!-- GET USER INFOROMATION -->
 
 <script>
     $(function () {
@@ -510,22 +522,22 @@
             url: '?page=getUserInfo',
             dataType: 'json',
             success: function (data) {
-                usersTable(data);
+                usersTableTemplate(data);
             }
         });
     });
 </script>
 
 
-<!-- TESTING HANDLEBARSS -->
+<!-- DISPLAY USER TEMPLATE -->
 <script>
-    function usersTable(data) {
+    function usersTableTemplate(data) {
 
         var rawTemplate = document.getElementById("displayUserTemplate").innerHTML;
         var compiledTemplate = Handlebars.compile(rawTemplate);
         var UserTableGeneratedHTML = compiledTemplate(data);
 
-        var userContainer = document.getElementById("userTable");
+        var userContainer = document.getElementById("displayUserContainer");
         userContainer.innerHTML = UserTableGeneratedHTML;
 
     }
@@ -535,6 +547,67 @@
 
 
 
+<!--    DELETE USER     -->
 
+
+<!-- DELETE USER MODAL -->
+<script>
+ $(function POSTdeleteUserModal() {
+     
+    $('#displayUserContainer').delegate('.remove','click', function(){ 
+        var givenUserID = $(this).attr('data-id');
+        
+        $.ajax({
+                type: 'POST',
+                url: '?page=getUserByID',
+                data: {givenUserID: givenUserID},
+                dataType: 'json',
+                success: function (data) {
+                    deleteUserTemplate(data);
+                    $('#deleteUserModal').modal('show');
+                }
+            });
+            return false;
+
+        });
+    });  
+</script>   
+
+<!-- DELETE USER TEMPLATE-->         
+<script>
+   function deleteUserTemplate(data) {
+       var rawTemplate = document.getElementById("userByIdTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var UserTableGeneratedHTML = compiledTemplate(data);
+
+        var userContainer = document.getElementById("deleteUserContainer");
+        userContainer.innerHTML = UserTableGeneratedHTML;
+   }
+</script>
+
+<script>
+    $(function deleteUserByID() {
+
+        $('#deleteUser').submit(function () {
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+           
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+                   
+                    UpdateUsersTable();
+                    $('#deleteUserModal').modal('hide');
+                    
+                }
+            });
+            return false;
+        });
+    });
+
+</script>
 
 

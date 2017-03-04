@@ -3,12 +3,39 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Xampp/htdocs/BachelorSondreRoger/Bachelor/system/view/productAdm.php</file>
-            <file>file:/D:/Xampp/htdocs/BachelorSondreRoger/Bachelor/system/style/home.css</file>
-            <file>file:/D:/Xampp/htdocs/BachelorSondreRoger/Bachelor/system/view/userAdm.php</file>
-            <file>file:/D:/Xampp/htdocs/BachelorSondreRoger/Bachelor/system/index.php</file>
-            <file>file:/D:/Xampp/htdocs/BachelorSondreRoger/Bachelor/system/view/header.php</file>
-            <file>file:/D:/Xampp/htdocs/BachelorSondreRoger/Bachelor/system/view/storageAdm.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/model/InventoryQuantityModel.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/model/ProductModel.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/model/StorageModel.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/model/InventoryModel.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/view/LoginPage.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/view/productAdm.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/view/home.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/style/index.css</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/view/transfer.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/view/dummyBoot.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/index.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/Bootstrap/css/bootstrap.css</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/Router.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/view/storageAdm.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/model/dummy.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/transferController.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/model/DBconnect.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/model/UserModel.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/HomeController.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/Controller.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/Bootstrap/css/bootstrap.min.css</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/OverviewController.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/index.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/Controllers.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/UserController.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/LoginController.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/style/home.css</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/view/header.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/productController.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/view/userAdm.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/controller/StorageController.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/model/RestrictionModel.php</file>
+            <file>file:/G:/XAMPP/htdocs/BachelorSondreRoger/Bachelor/system/view/Overview.php</file>
         </group>
     </open-files>
 </project-private>

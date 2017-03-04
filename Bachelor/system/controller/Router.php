@@ -59,14 +59,14 @@ class Router {
                     return new StorageController();
                     
                 case "userAdm"    :
-                case "addUserEngine" :
                 case "editUserEngine" :    
-                case "deleteUserEngine" :    
-                case "searchUserEngine" :    
+                case "deleteUserEngine" :        
                 case "addRestriction" :    
                     
                 // AJAX CALL
-                case "getUserInfo" :    
+                case "getUserInfo" :
+                case "addUserEngine" :   
+                case "getUserByID" :    
                     return new UserController();    
                     
                 case "transfer" :
