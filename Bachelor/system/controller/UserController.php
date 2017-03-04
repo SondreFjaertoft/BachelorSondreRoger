@@ -127,9 +127,15 @@ class UserController extends Controller {
     
     private function getUserInfo() {
         $userInfo = $GLOBALS["userModel"];
+          
+        if (isset($_POST['givenUserSearchWord'])) {
+        $givenSearchWord = "%{$_REQUEST["givenUserSearchWord"]}%";
+        $userModel = $userInfo->getSearchResult($givenSearchWord);
+        } else {
         $givenSearchWord = "%%";
-        $userModel = $userInfo->getSearchResult($givenSearchWord);     
-
+        $userModel = $userInfo->getSearchResult($givenSearchWord);
+        }
+        
         $data = json_encode(array("users" => $userModel));
         echo $data;
     }

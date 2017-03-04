@@ -10,13 +10,14 @@
     <div class="col-sm-3 col-sm-offset-1 col-md-6 col-md-offset-2 form-group">
 
         <!-- SØK ETTER BRUKER  -->
-        <form class="form-inline" action="" method="post">
+        <form class="form-inline" id="searchForUser" action="?page=getUserInfo" method="post">
 
 
             <div class="form-group">
                 <div class="col-md-9">
                     <input class="form-control" type="text" name="givenUserSearchWord" value="" placeholder="Søk etter bruker..">  
-                    <input class="form-control" type="submit" value="Søk">
+                    <input class="form-control" form="searchForUser" type="submit" value="Søk">
+                    
                     <a href="?page=userAdm" class="btn btn-default">Alle brukere</a>
                 </div>
                 <div class="col-md-1 col-md-offset-2">
@@ -427,27 +428,51 @@
 <script>
     $(function POSTuserInfo() {
 
-
         $('#createUser').submit(function () {
             var url = $(this).attr('action');
             var data = $(this).serialize();
 
-            $.post(
-                    url,
-                    data,
-                    function () {
-                        
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function () {
                         $("#createUser")[0].reset();
                         $('#opprettbruker').modal('hide');
                         displayAddedUser();
-
-                    });
+                    }
+                });
             return false;
         });
     });
 
+</script>
+
+<!-- SEARCH FOR USERS -->
+<script>
+    $(function POSTsearchForUser() {
+
+        $('#searchForUser').submit(function () {
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+            
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+                        $("#searchForUser")[0].reset();
+                        usersTable(data);
+                    }
+                });
+            return false;
+        });
+    });
 
 </script>
+
 
 
 <!-- Rerun the GET fuc -->
@@ -491,9 +516,10 @@
         var rawTemplate = document.getElementById("displayUserTemplate").innerHTML;
         var compiledTemplate = Handlebars.compile(rawTemplate);
         var UserTableGeneratedHTML = compiledTemplate(data);
-
+        
         var userContainer = document.getElementById("userTable");
         userContainer.innerHTML = UserTableGeneratedHTML;
+        
     }
 </script>
 
