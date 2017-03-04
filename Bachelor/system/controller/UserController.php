@@ -7,50 +7,30 @@ class UserController extends Controller {
     public function show($page) {
         if ($page == "userAdm") {
             $this->userAdmPage();
-        }  else if ($page == "editUserEngine") {
-            $this->userEditEngine();
-        } else if ($page == "deleteUserEngine") {
-            $this->deleteUserEngine();
-        } else if ($page == "addRestriction") {
+        }    else if ($page == "addRestriction") {
             $this->addRestriction();
-        }
-        
-        //AJAX CALL
-          else if ($page == "getUserInfo") {
+        } else if ($page == "getUserInfo") {
             $this->getUserInfo(); 
         } else if ($page == "addUserEngine") {
             $this->userCreationEngine();
-        } else if ($page== "getUserByID"){
+        } else if ($page == "getUserByID"){
             $this->getUserByID();
+        } else if ($page == "getUserRestriction"){
+            $this->getUserRestriction();
+        } else if ($page == "deleteUserEngine") {
+            $this->deleteUserEngine();
+        } else if ($page == "editUserEngine") {
+            $this->userEditEngine();
         }
             
     }
 
     private function userAdmPage() {
-        $userInfo = $GLOBALS["userModel"];
-        
-
-        if (isset($_POST['givenUserSearchWord'])) {
-            $givenSearchWord = "%{$_REQUEST["givenUserSearchWord"]}%";
-            $userModel = $userInfo->getSearchResult($givenSearchWord);
-        } else {
-            $givenSearchWord = "%%";
-            $userModel = $userInfo->getSearchResult($givenSearchWord);
-        }
-
-        $restrictionInfo = $GLOBALS["restrictionModel"];
-        $restrictionModel = $restrictionInfo->getAllStorageRestrictionInfo();
-        
         $storageInfo = $GLOBALS["storageModel"];
         $storageModel = $storageInfo->getAll();
 
-        //$givenSearchWord = $_REQUEST["givenSearchWord"];
-        //if (isset($_POST['givenSearchWord'])) {
-        //      $givenSearchResult = $givenSearchWord->getSearchResults();  
-        //}
 
-
-        $data = array("userInfo" => $userModel, "restrictionInfo" => $restrictionModel, "storageInfo" => $storageModel);
+        $data = array("storageInfo" => $storageModel);
         return $this->render("userAdm", $data);
     }
 
@@ -63,9 +43,9 @@ class UserController extends Controller {
         $editEmail = $_REQUEST["editEmail"];
 
         $userEditInfo = $GLOBALS["userModel"];
-        $edited = $userEditInfo->editUser($editName, $editUsername, $editPassword, $editUserLevel, $editEmail, $editUserID);
+        $userEditInfo->editUser($editName, $editUsername, $editPassword, $editUserLevel, $editEmail, $editUserID);
 
-        header("Location:index.php?page=userAdm");
+        echo json_encode("success");
         
     }
 
@@ -84,11 +64,7 @@ class UserController extends Controller {
                 foreach ($givenStorageArray as $givenStorageID) :
                 $addRestriction->addRestriction($givenUserID, $givenStorageID);
                 endforeach;
-            endforeach;
-            
-            
-            
-            
+            endforeach;  
             
         }
         
@@ -124,8 +100,7 @@ class UserController extends Controller {
         $userCreationInfo = $GLOBALS["userModel"];
         $added = $userCreationInfo->addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail);
         
-        $addedUser = $userCreationInfo->getAllUserInfoFromID($added);
-        $data = json_encode(array("addedUser" => $addedUser));
+        $data = json_encode("success");
         
         echo $data;
     }
@@ -141,7 +116,7 @@ class UserController extends Controller {
         
     }
     
-        private function deleteUserEngine() {
+    private function deleteUserEngine() {
         $removeUserID = $_REQUEST["deleteUserID"];
 
         $removeUser = $GLOBALS["userModel"];
@@ -149,6 +124,16 @@ class UserController extends Controller {
         
         echo json_encode("success");
     }
+    
+    private function getUserRestriction(){
+        $givenUserID = $_REQUEST['givenUserID'];
+        $restrictionInfo = $GLOBALS["restrictionModel"];
+        $restrictionModel = $restrictionInfo->getAllRestrictionInfoFromUserID($givenUserID);
+        
+        $data = json_encode(array("restriction" => $restrictionModel));
+        echo $data;
+    }
+    
 }
 
 /* 

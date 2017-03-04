@@ -72,10 +72,6 @@
             <br>
 
             <?php
-            $userResults = $GLOBALS["userInfo"];
-            $userResults1 = $GLOBALS["userInfo"];
-            $userResults2 = $GLOBALS["userInfo"];
-            $restrictionResults = $GLOBALS["restrictionInfo"];
             $dropdownMeny = $GLOBALS["storageInfo"];
             ?>
 
@@ -102,270 +98,190 @@
 
 
 
-            <!-- TESTING AJAX DISPLAY USERS     --->       
+            <!-- DISPLAY USER CONTAINER    --->       
             <br>
             <table class="table table-bordered table-striped table-responsive">
                 <tbody id="displayUserContainer">
+                    
                     <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
+                    
                 </tbody>    
             </table>
-            <!-- SLUTT PÅ TESTDIV --->
-
-
-            <!-- DIV som holder på all informasjon i midten av skjermen  -->
+          
 
 
 
-
-            <div class="col-sm-3 col-md-4">
-
-
-                <?php
-                foreach ($userResults1 as $userResults1):
-
-                    if (isset($_POST['editUser'])) {
-                        $givenUserID = $_REQUEST["editUser"];
-
-                        if ($userResults1['userID'] == $givenUserID) {
-                            ?>
-                            <script>
-                                $(function () {
-                                    $('#brukerModal').modal('show');
-                                });
-                            </script>
-
-
-                            <div class="modal fade" id="brukerModal" role="dialog">
-                                <div class="modal-dialog">
+            <!-- DELETE USER MODAL -->
+            
+<div class="modal fade" id="deleteUserModal" role="dialog">
+    <div class="modal-dialog">
+                    <!-- Innholdet til Modalen -->
+        <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Bruker informasjon</h4>
+            </div>
+                <form action="?page=deleteUserEngine" method="post" id="deleteUser"></form>
+                <div class="modal-body" id="deleteUserContainer">
+                    
+                    <!-- Innhold fra Handlebars Template-->
+                    
+                </div>
+            <div class="modal-footer">
+                <input form="deleteUser" class="btn btn-default" type="submit" value="Slett">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+            </div>
+        </div>
+    </div>
+</div>  
+            
+            
+            
+            
+            <!-- SHOW USER INFORMATION MODAL-->     
+            
+<div class="modal fade" id="showUserInformationModal" role="dialog">
+    <div class="modal-dialog">
                                     <!-- Innholdet til Modalen -->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Bruker informasjon</h4>
-                                        </div>
-                                        <div class="modal-body">
-
-                                            <form action="?page=editUserEngine" method="post" id="formM">
-                                                <input type="hidden" name="editUserID" value="<?php echo $userResults1['userID']; ?>"><br>
-                                                Navn: <br>
-                                                <input type="text" name="editName" value="<?php echo $userResults1['name']; ?>"><br>
-                                                Brukernavn: <br>
-                                                <input type="text" name="editUsername" value="<?php echo $userResults1['username']; ?>"><br>
-                                                Passord: <br>
-                                                <input type="text" name="editPassword" value="<?php echo $userResults1['password']; ?>"><br>
-                                                Brukernivå: <br>
-                                                <input type="text" name="editUserLevel" value="<?php echo $userResults1['userLevel']; ?>"><br>
-                                                Epost: <br>
-                                                <input type="text" name="editEmail" value="<?php echo $userResults1['email']; ?>"><br>
-                                                <br>
-
-                                            </form>
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <input class="btn btn-default" type="submit" value="Lagre" form="formM">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-
-                            <?php
-                        }
-                    }
-
-// Vis Informasjon
-
-                    if (isset($_POST['showInfo'])) {
-                        $givenUserID = $_REQUEST["showInfo"];
-
-                        if ($userResults1['userID'] == $givenUserID) {
-                            ?>
-                            <script>
-                                $(function () {
-                                    $('#brukerModal').modal('show');
-                                });
-                            </script>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Bruker informasjon</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-bordered">
+                    <tbody id="userInformationContainer">
+                       
+                                 <!-- Innhold fra Handlebars Template-->
+               
+                     </tbody>   
+                </table> 
+                <table class="table table-striped table-bordered">   
+                    <tbody > 
+                        <tr> 
+                            <th>Lagertilgang:</th>
+                            <td id="userRestriotionContainer">
+                                
+                                <!-- Innhold fra Handlebars Template-->
+                                
+                            </td>
+                        </tr>  
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+            </div>
+        </div>
+    </div>
+</div> 
 
 
-                            <div class="modal fade" id="brukerModal" role="dialog">
-                                <div class="modal-dialog">
-                                    <!-- Innholdet til Modalen -->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Bruker informasjon</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <table class="table table-striped table-bordered">
-                                                <tbody>
-                                                    <tr>
-                                                        <th>UserID: </th>
-                                                        <td><?php echo $userResults1['userID']; ?></td>
-                                                    </tr>
+            <!-- SHOW EDIT USER MODAL -->
+            
+            
+<div class="modal fade" id="editUserModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Innholdet til Modalen -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Bruker informasjon</h4>
+            </div>
+            <form action="?page=editUserEngine" method="post" id="editUser"></form>
+            <div class="modal-body" id="editUserContainer">
 
-
-                                                    <tr>
-                                                        <th>Brukernavn: </th>
-                                                        <td><?php echo $userResults1['username']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Brukernivå: </th>
-                                                        <td><?php echo $userResults1['userLevel']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>E-post: </th>
-                                                        <td><?php echo $userResults1['email']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Sist inlogget: </th>
-                                                        <td><?php echo $userResults1['lastLogin']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Lagertilgang: </th>
-                                                        <td><?php
-                                                            foreach ($restrictionResults as $restrictionResults):
-                                                                if ($restrictionResults['userID'] == $givenUserID) {
-                                                                    echo $restrictionResults["storageName"];
-                                                                    ?> <br>
-                                                                    <?php
-                                                                }
-                                                            endforeach;
-                                                            ?></td>
-                                                    </tr>
-
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-                            <?php
-                        }
-                    }
-
-
-
-                    // Slett bruker
-
-                    if (isset($_POST['deleteUser'])) {
-                        $givenUserID = $_REQUEST["deleteUser"];
-
-                        if ($userResults1['userID'] == $givenUserID) {
-                            ?>
-                            <script>
-                                $(function () {
-                                    $('#deleteUserModal').modal('show');
-                                });
-                            </script>
-
-
-                            <div class="modal fade" id="deleteUserModal" role="dialog">
-                                <div class="modal-dialog">
-                                    <!-- Innholdet til Modalen -->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Bruker informasjon</h4>
-                                        </div>
-                                        <div class="modal-body">
-
-                                            <p> Er du sikker på at du vil slette  <P>
-                                                <?php
-                                                echo "Brukernavn: " . $userResults1['username'];
-                                                ?>
-
-                                            <form action="?page=deleteUserEngine" method="post" id="formS">
-                                                <input type="hidden" name="deleteUserID" value="<?php echo $userResults1['userID'] ?>"><br>
-
-                                            </form>
-
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <input class="btn btn-default" type="submit" value="Slett" form="formS">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>               
-
-
-
-
-
-                            <?php
-                        }
-                    }
-
-                endforeach;
-                ?>
-
-
-
-
+                   <!-- Innhold fra Handlebars Template--> 
 
             </div>
-
-
+            <div class="modal-footer">
+                <input class="btn btn-default" type="submit" value="Lagre" form="editUser">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+            </div>
+        </div>
+    </div>
+</div>             
             
             
-            
-            <div class="modal fade" id="deleteUserModal" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Innholdet til Modalen -->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Bruker informasjon</h4>
-                        </div>
-                        <form action="?page=deleteUserEngine" method="post" id="deleteUser"></form>
-                        <div class="modal-body" id="deleteUserContainer">
-
-                            
-
-                            
-                        </div>
-                        <div class="modal-footer">
-                            <input form="deleteUser" class="btn btn-default" type="submit" value="Slett">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
-                        </div>
-                    </div>
-                </div>
-            </div>     
-            
-            
-            
-            
-            
-    
-            
-            
-            
-
-
 
     </div>
 </div>
 
 
 <!-- HANDLEBARS TEMPLATES-->
-<script id="userByIdTemplate" type="text/x-handlebars-template">
-   <p> Er du sikker på at du vil slette:  <P>
-    {{#each user}}           
-        {{name}} 
-    <input form="deleteUser" type="hidden" name="deleteUserID" value="{{userID}}"><br>
-    {{/each}}    
+
+<!-- edit user template-->
+<script id="editUserTemplate" type="text/x-handlebars-template">
+    
+{{#each user}}    
+        <input form="editUser" type="hidden" name="editUserID" value="{{userID}}"><br>
+        Navn: <br>
+        <input form="editUser" type="text" name="editName" value="{{name}}"><br>
+        Brukernavn: <br>
+        <input form="editUser" type="text" name="editUsername" value="{{username}}"><br>
+        Passord: <br>
+        <input form="editUser" type="text" name="editPassword" value="{{password}}"><br>
+        Brukernivå: <br>
+        <input form="editUser" type="text" name="editUserLevel" value="{{userLevel}}"><br>
+        Epost: <br>
+        <input form="editUser" type="text" name="editEmail" value="{{email}}"><br>
+        <br>    
+{{/each}}
+</script>   
+
+
+<!-- show user restriction template-->
+<script id="userRestrictionTemplate" type="text/x-handlebars-template">
+{{#each restriction}}
+{{storageName}} <br>
+{{/each}}      
+</script>
+
+<!-- Show user information template -->
+<script id="userInformationTemplate" type="text/x-handlebars-template">
+{{#each user}} 
+    <tr>
+        <th>Navn</th>
+        <td>{{name}}</td>            
+    </tr> 
+    <tr>
+        <th>UserID:</th> 
+        <td>{{userID}}</td>
+    </tr>
+    <tr>
+        <th>Brukernavn:</th>
+        <td>{{username}}</td>
+    </tr>
+    <tr>
+        <th>Brukernivå:</th>
+        <td>{{userLevel}}</td>
+    </tr>
+    <tr>
+        <th>E-post:</th>
+        <td>{{email}}</td>
+    </tr>
+    <tr>
+        <th>Sist inlogget: </th>
+        <td>{{lastLogin}}</td>
+    </tr> 
+{{/each}}     
 </script>    
 
 
+<!-- delete user template -->
+
+<script id="deleteUserTemplate" type="text/x-handlebars-template">
+<p> Er du sikker på at du vil slette:  <P>
+{{#each user}}           
+    {{name}}  
+    <input form="deleteUser" type="hidden" name="deleteUserID" value="{{userID}}"><br>
+{{/each}}    
+</script>    
+
+<!-- display all users template -->
 <script id="displayUserTemplate" type="text/x-handlebars-template">
 
-    {{#each users}}
+    {{#each users}} 
     <tr>
     <td class="text-center">  
 
@@ -376,7 +292,7 @@
     
     <!-- Knapp som aktiverer Model for brukerredigering  --> 
 
-    <button form="brukerRedForm" type="submit" name="editUser" data-toggle="tooltip" title="Rediger bruker" value="{{userID}}" 
+    <button data-id="{{userID}}" class="edit" data-toggle="tooltip"
     style="appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -390,7 +306,7 @@
 
     <!-- Knapp som aktiverer Model for å vise brukerinformasjon  --> 
 
-    <button form="brukerRedForm" type="submit" name="showInfo" data-toggle="tooltip" title="Mer informasjon" value="{{userID}}" 
+    <button data-id="{{userID}}" class="information" data-toggle="tooltip" 
     style="appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -404,9 +320,9 @@
 
     <!-- Knapp som aktiverer Model for sletting av bruker  --> 
 
-    
+     
    
-    <button data-id="{{userID}}" class="remove" data-toggle="tooltip" 
+    <button data-id="{{userID}}" class="delete" data-toggle="tooltip" 
     style="appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -433,8 +349,7 @@
     <form action="?page=addRestriction" id="restriction" method="post">        </form>
     <td> <input form="restriction" id="{{userID}}" value="{{userID}}"  name="userRestrictions[]" type="checkbox"></td>
 
-
-
+ 
 
     {{/each}}
     </tr>
@@ -539,10 +454,76 @@
 
         var userContainer = document.getElementById("displayUserContainer");
         userContainer.innerHTML = UserTableGeneratedHTML;
-
     }
 </script>
 
+
+
+
+<!--    SHOW USER INFORMATION      -->
+
+<script>
+ $(function POSTuserInformationModal() {
+     
+    $('#displayUserContainer').delegate('.information','click', function(){ 
+        
+        var givenUserID = $(this).attr('data-id');
+        POSTuserRestriction(givenUserID);
+        $.ajax({
+                type: 'POST',
+                url: '?page=getUserByID',
+                data: {givenUserID: givenUserID},
+                dataType: 'json',
+                success: function (data) {
+                    $('#showUserInformationModal').modal('show');
+                    userInformationTemplate(data);
+                    
+                }
+            });
+            return false;
+
+        });
+    });                     
+</script>
+
+<script>
+    function POSTuserRestriction(data){
+        var givenUserID = data;
+      $(function () {
+            $.ajax({
+                type: 'POST',
+                url: '?page=getUserRestriction',
+                data: {givenUserID: givenUserID},
+                dataType: 'json',
+                success: function (data) {
+                   userRestrictionTemplate(data); 
+                }
+            });
+        });  
+    }
+</script>
+
+<script>
+   function userRestrictionTemplate(data) {
+       var rawTemplate = document.getElementById("userRestrictionTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var UserRestrictionGeneratedHTML = compiledTemplate(data);
+
+        var userContainer = document.getElementById("userRestriotionContainer");
+        userContainer.innerHTML = UserRestrictionGeneratedHTML;
+   }
+</script>
+
+<script>
+   function userInformationTemplate(data) {
+       var rawTemplate = document.getElementById("userInformationTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var UserInformationGeneratedHTML = compiledTemplate(data);
+
+        var userContainer = document.getElementById("userInformationContainer");
+        userContainer.innerHTML = UserInformationGeneratedHTML;
+   }
+</script>
 
 
 
@@ -554,7 +535,7 @@
 <script>
  $(function POSTdeleteUserModal() {
      
-    $('#displayUserContainer').delegate('.remove','click', function(){ 
+    $('#displayUserContainer').delegate('.delete','click', function(){ 
         var givenUserID = $(this).attr('data-id');
         
         $.ajax({
@@ -576,7 +557,7 @@
 <!-- DELETE USER TEMPLATE-->         
 <script>
    function deleteUserTemplate(data) {
-       var rawTemplate = document.getElementById("userByIdTemplate").innerHTML;
+       var rawTemplate = document.getElementById("deleteUserTemplate").innerHTML;
         var compiledTemplate = Handlebars.compile(rawTemplate);
         var UserTableGeneratedHTML = compiledTemplate(data);
 
@@ -611,3 +592,61 @@
 </script>
 
 
+<!-- EDIT USER -->
+
+<script>
+ $(function POSTeditUserModal() {
+     
+    $('#displayUserContainer').delegate('.edit','click', function(){ 
+        var givenUserID = $(this).attr('data-id');
+        
+        $.ajax({
+                type: 'POST',
+                url: '?page=getUserByID',
+                data: {givenUserID: givenUserID},
+                dataType: 'json',
+                success: function (data) {
+                    editUserTemplate(data);
+                    $('#editUserModal').modal('show');
+                }
+            });
+            return false;
+
+        });
+    });  
+</script> 
+
+
+<!-- EDIT USER TEMPLATE-->         
+<script>
+   function editUserTemplate(data) {
+       var rawTemplate = document.getElementById("editUserTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var editUserGeneratedHTML = compiledTemplate(data);
+
+        var userContainer = document.getElementById("editUserContainer");
+        userContainer.innerHTML = editUserGeneratedHTML;
+   }
+</script>
+
+<script>
+    $(function POSTeditUserInfo() {
+
+        $('#editUser').submit(function () {
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function () {
+                    $('#editUserModal').modal('hide');
+                    UpdateUsersTable();
+                }
+            });
+            return false;
+        });
+    });
+
+</script>
