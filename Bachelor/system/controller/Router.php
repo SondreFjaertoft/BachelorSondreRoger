@@ -57,14 +57,14 @@ class Router {
                 case "editStorageEngine" :
                 case "deleteStorageEngine" :
                 case "getAllStorageInfo" :  
-                case "getStorageByID" :    
+                case "getStorageByID" :
+                case "getStorageRestriction" :
+                case "getStorageProduct" :    
                     return new StorageController();
                     
                 case "userAdm"    :
                 case "editUserEngine" :           
                 case "addRestriction" :    
-                    
-                // AJAX CALL
                 case "getUserInfo" :
                 case "addUserEngine" :   
                 case "getUserByID" :

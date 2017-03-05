@@ -8,6 +8,7 @@ class RestritionModel{
     
     
     const TABLE = "restrictions";
+    const SELECT_FROM_STORAGEID = "SELECT users.name, restrictions.storageID, restrictions.userID FROM users INNER JOIN " . RestritionModel::TABLE . " ON users.userID = restrictions.userID WHERE storageID = :givenStorageID";
     const SELECT_FROM_USERID = "SELECT storage.storageName, restrictions.storageID, restrictions.userID FROM storage INNER JOIN " . RestritionModel::TABLE . " ON storage.storageID = restrictions.storageID WHERE userID = :givenUserID";
 
     const SELECT_STORAGE_QUERY = "SELECT storage.storageName, restrictions.storageID, restrictions.userID FROM storage INNER JOIN " . RestritionModel::TABLE . " ON storage.storageID = restrictions.storageID";
@@ -25,6 +26,7 @@ class RestritionModel{
     $this->selStoStmt = $this->dbConn->prepare(RestritionModel::SELECT_STORAGE_QUERY);
     $this->selUserStmt = $this->dbConn->prepare(RestritionModel::SELECT_USER_QUERY);
     $this->SelFromUserID = $this->dbConn->prepare(RestritionModel::SELECT_FROM_USERID);
+    $this->SelFromStorageID = $this->dbConn->prepare(RestritionModel::SELECT_FROM_STORAGEID);
     }
     
     /**
@@ -37,7 +39,7 @@ class RestritionModel{
         return $this->selStoStmt->fetchAll(PDO::FETCH_ASSOC);
     }   
     
-        public function getAllUserRestrictionInfo() {
+    public function getAllUserRestrictionInfo() {
         // Fetch all customers as associative arrays
         $this->selUserStmt->execute();
         return $this->selUserStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -46,8 +48,12 @@ class RestritionModel{
     public function getAllRestrictionInfoFromUserID($givenUserID) {
         $this->SelFromUserID->execute(array("givenUserID" => $givenUserID));
         return $this->SelFromUserID->fetchAll(PDO::FETCH_ASSOC);
-        
-    }   
+    } 
+    
+    public function getAllRestrictionInfoFromStorageID($givenStorageID){
+        $this->SelFromStorageID->execute(array("givenStorageID" => $givenStorageID));
+        return $this->SelFromStorageID->fetchAll(PDO::FETCH_ASSOC);
+    }
     
     
     

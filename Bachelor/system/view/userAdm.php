@@ -15,20 +15,22 @@
                 <div class="col-md-9">
                     <input class="form-control" form="searchForUser" type="text" name="givenUserSearchWord" value="" placeholder="Søk etter bruker..">  
                     <input class="form-control" form="searchForUser" type="submit" value="Søk">
-                    </form>                           
-                    <button onclick="UpdateUsersTable()" class="btn btn-default " type="button">Alle brukere</button
+                                             
+                <button onclick="UpdateUsersTable()" class="btn btn-default " type="button">Alle brukere</button>
                 </div>    
-            </div> 
+             
 
             <div class="col-md-1 col-md-offset-15">
-                <button class="btn btn-default " type="button" data-toggle="modal" data-target="#opprettbruker">Opprett bruker</button>
+                <button class="btn btn-default " type="button" data-toggle="modal" data-target="#createUserModal">Opprett bruker</button>
             </div>
-
-
+            </div>
+            
+            <button  id="setRestriction" onclick="getStorageInfo()" data-toggle="modal" data-target="#userRestrictionModal" class="btn btn-default" type="button">Velg Lager</button>
+        </form> 
 
             <!-- OPPRETT BRUKER  -->
 
-            <div class="modal fade" id="opprettbruker" role="dialog">
+            <div class="modal fade" id="createUserModal" role="dialog">
                 <div class="modal-dialog">
                     <!-- Innholdet til Modalen -->
                     <div class="modal-content">
@@ -65,28 +67,28 @@
                     </div>
                 </div>
             </div> 
-    </div>
+    
 
     <br>
 
-
+    
 
     <!-- DISPLAY USER CONTAINER    --->       
     <br>
-    <table class="table table-bordered table-striped table-responsive">
-        <h4> Brukeroversikt </h4>
-        <tbody id="displayUserContainer">
+        <table class="table table-bordered table-striped table-responsive">
+            <h4> Brukeroversikt </h4>
+            <tbody id="displayUserContainer">
 
             <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
 
-        </tbody>    
-    </table>
-
+            </tbody>    
+        </table>
+    </div>
 </div>
 
     <!-- Set restrictions -->
 
-    <button  id="setRestriction" onclick="getStorageInfo()" data-toggle="modal" data-target="#userRestrictionModal" class="btn btn-default" type="button">Velg Lager</button>
+    
     <div class="modal fade" id="userRestrictionModal" role="dialog">
         <div class="modal-dialog">
             <!-- Innholdet til Modalen -->
@@ -232,7 +234,7 @@
 <!-- edit user template-->
 <script id="editUserTemplate" type="text/x-handlebars-template">
 
-    {{#each user}}    
+    {{#each user}}     
     <input form="editUser" type="hidden" name="editUserID" value="{{userID}}"><br>
     Navn: <br>
     <input form="editUser" type="text" name="editName" value="{{name}}"><br>
@@ -393,7 +395,7 @@
                 dataType: 'json',
                 success: function () {
                     $("#createUser")[0].reset();
-                    $('#opprettbruker').modal('hide');
+                    $('#createUserModal').modal('hide');
                     UpdateUsersTable();
                 }
             });
@@ -675,7 +677,7 @@
 </script>
 
 
-<!-- Set Restriction -->
+<!-- SET RESTRICTION -->
 
 <!-- Make button visible when clicked-->
 <script>
