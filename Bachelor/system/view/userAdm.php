@@ -15,21 +15,19 @@
                 <div class="col-md-9">
                     <input class="form-control" form="searchForUser" type="text" name="givenUserSearchWord" value="" placeholder="Søk etter bruker..">  
                     <input class="form-control" form="searchForUser" type="submit" value="Søk">
-        </form>                           
+                    </form>                           
                     <button onclick="UpdateUsersTable()" class="btn btn-default " type="button">Alle brukere</button
                 </div>    
             </div> 
-            
+
             <div class="col-md-1 col-md-offset-15">
                 <button class="btn btn-default " type="button" data-toggle="modal" data-target="#opprettbruker">Opprett bruker</button>
             </div>
 
-   
-
-
-
+            
 
             <!-- OPPRETT BRUKER  -->
+            
             <div class="modal fade" id="opprettbruker" role="dialog">
                 <div class="modal-dialog">
                     <!-- Innholdet til Modalen -->
@@ -67,145 +65,145 @@
                     </div>
                 </div>
             </div> 
-            </div>
- 
-            <br>
+    </div>
 
-            <?php
-            $dropdownMeny = $GLOBALS["storageInfo"];
-            ?>
+    <br>
 
 
 
+    <!-- DISPLAY USER CONTAINER    --->       
+    <br>
+    <table class="table table-bordered table-striped table-responsive">
+        <tbody id="displayUserContainer">
 
-            <!-- DISPLAY USER CONTAINER    --->       
-            <br>
-            <table class="table table-bordered table-striped table-responsive">
-                <tbody id="displayUserContainer">
-                    
-                    <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
-                    
-                </tbody>    
+            <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
+
+        </tbody>    
+    </table>
+
+
+
+    <!-- drop down meny -->
+    
+    <?php
+    $dropdownMeny = $GLOBALS["storageInfo"];
+    ?>
+
+    <br><br>
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" id="setRestriction" type="button" data-toggle="dropdown">Velg Lager
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <table>
+                <?php foreach ($dropdownMeny as $dropdownMeny) : ?>
+                    <tr>
+                        <td><?php echo $dropdownMeny['storageName']; ?> </td>
+
+                        <td><input form="restriction" id="<?php echo $dropdownMeny['storageID']; ?>" value="<?php echo $dropdownMeny['storageID']; ?>"  name="storageRestrictions[]" type="checkbox"></td>
+                    </tr>
+                <?php endforeach; ?>
+
             </table>
-          
-            
-            
-                        <!-- drop down meny -->
-            <br><br>
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" id="setRestriction" type="button" data-toggle="dropdown">Velg Lager
-                    <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <table>
-                        <?php foreach ($dropdownMeny as $dropdownMeny) : ?>
-                            <tr>
-                                <td><?php echo $dropdownMeny['storageName']; ?> </td>
-
-                                <td><input form="restriction" id="<?php echo $dropdownMeny['storageID']; ?>" value="<?php echo $dropdownMeny['storageID']; ?>"  name="storageRestrictions[]" type="checkbox"></td>
-                            </tr>
-                        <?php endforeach; ?>
-
-                    </table>
-                    <button form="restriction" type="submit">Velg lagertilgang</button> 
-                </ul>
-            </div>
+            <button form="restriction" type="submit">Velg lagertilgang</button> 
+        </ul>
+    </div>
 
 
 
-            <!-- DELETE USER MODAL -->
-            
-<div class="modal fade" id="deleteUserModal" role="dialog">
-    <div class="modal-dialog">
-                    <!-- Innholdet til Modalen -->
-        <div class="modal-content">
-             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Bruker informasjon</h4>
-            </div>
+    <!-- DELETE USER MODAL -->
+
+    <div class="modal fade" id="deleteUserModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Bruker informasjon</h4>
+                </div>
                 <form action="?page=deleteUserEngine" method="post" id="deleteUser"></form>
                 <div class="modal-body" id="deleteUserContainer">
-                    
+
                     <!-- Innhold fra Handlebars Template-->
-                    
+
                 </div>
-            <div class="modal-footer">
-                <input form="deleteUser" class="btn btn-default" type="submit" value="Slett">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                <div class="modal-footer">
+                    <input form="deleteUser" class="btn btn-default" type="submit" value="Slett">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>  
-            
-            
-            
-            
-            <!-- SHOW USER INFORMATION MODAL-->     
-            
-<div class="modal fade" id="showUserInformationModal" role="dialog">
-    <div class="modal-dialog">
-                                    <!-- Innholdet til Modalen -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Bruker informasjon</h4>
-            </div>
-            <div class="modal-body">
-                <table class="table table-striped table-bordered">
-                    <tbody id="userInformationContainer">
-                       
-                                 <!-- Innhold fra Handlebars Template-->
-               
-                     </tbody>   
-                </table> 
-                <table class="table table-striped table-bordered">   
-                    <tbody > 
-                        <tr> 
-                            <th>Lagertilgang:</th>
-                            <td id="userRestriotionContainer">
-                                
-                                <!-- Innhold fra Handlebars Template-->
-                                
-                            </td>
-                        </tr>  
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+    </div>  
+
+
+
+
+    <!-- SHOW USER INFORMATION MODAL-->     
+
+    <div class="modal fade" id="showUserInformationModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Bruker informasjon</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped table-bordered">
+                        <tbody id="userInformationContainer">
+
+                            <!-- Innhold fra Handlebars Template-->
+
+                        </tbody>   
+                    </table> 
+                    <table class="table table-striped table-bordered">   
+                        <tbody > 
+                            <tr> 
+                                <th>Lagertilgang:</th>
+                                <td id="userRestriotionContainer">
+
+                                    <!-- Innhold fra Handlebars Template-->
+
+                                </td>
+                            </tr>  
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                </div>
             </div>
         </div>
-    </div>
-</div> 
+    </div> 
 
 
-            <!-- SHOW EDIT USER MODAL -->
-            
-            
-<div class="modal fade" id="editUserModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Innholdet til Modalen -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Bruker informasjon</h4>
-            </div>
-            <form action="?page=editUserEngine" method="post" id="editUser"></form>
-            <div class="modal-body" id="editUserContainer">
+    <!-- SHOW EDIT USER MODAL -->
 
-                   <!-- Innhold fra Handlebars Template--> 
 
-            </div>
-            <div class="modal-footer">
-                <input class="btn btn-default" type="submit" value="Lagre" form="editUser">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+    <div class="modal fade" id="editUserModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Bruker informasjon</h4>
+                </div>
+                <form action="?page=editUserEngine" method="post" id="editUser"></form>
+                <div class="modal-body" id="editUserContainer">
+
+                    <!-- Innhold fra Handlebars Template--> 
+
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-default" type="submit" value="Lagre" form="editUser">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>             
-            
-            
+    </div>             
 
-    </div>
+
+
+</div>
 </div>
 
 
