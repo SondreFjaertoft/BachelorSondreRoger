@@ -49,7 +49,10 @@ class Router {
                 case "productAdm" :
                 case "addProductEngine" :
                 case "editProductEngine" :
-                case "deleteProductEngine" :   
+                case "deleteProductEngine" :  
+                case "getAllProductInfo" :
+                case "getProductByID" :
+                case "getProductLocation" :    
                     return new ProductController();
                     
                 case "storageAdm":

@@ -16,25 +16,18 @@ class ProductController extends Controller {
             $this->editProductEngine();
         } else if ($page == "deleteProductEngine") {
             $this->deleteProductEngine();
+        } else if ($page == "getAllProductInfo"){
+            $this->getAllProductInfo();
+        } else if ($page == "getProductByID"){
+            $this->getProductByID();
+        } else if ($page == "getProductLocation") {
+            $this->getProductLocation();
         }
     }
+    
 
     private function productAdmPage() {
-        $productInfo = $GLOBALS["productModel"];
-
-        if (isset($_POST['givenProductSearchWord'])) {
-            $givenProductSearchWord = "%{$_REQUEST["givenProductSearchWord"]}%";
-            $productModel = $productInfo->getSearchResult($givenProductSearchWord);
-        } else {
-            $givenProductSearchWord = "%%";
-            $productModel = $productInfo->getSearchResult($givenProductSearchWord);
-        }
-        
-        $findWhereInfo = $productInfo->findWhereProductInfo();
-
-        $data = array("productResult" => $productModel, "findWhereResult" => $findWhereInfo);
-
-        return $this->render("productAdm", $data);
+        return $this->render("productAdm");
     }
 
     private function addProductEngine() {
@@ -45,12 +38,16 @@ class ProductController extends Controller {
         $givenMediaID = $_REQUEST["givenMediaID"];
         $givenProductNumber = $_REQUEST["givenProductNumber"];
         $givenProductDate = "2017-02-21 00:00:00";
+        if (isset($_POST['givenMacAdresse'])) {
         $givenMacAdresse = $_REQUEST["givenMacAdresse"];
-
+        } else {
+        $givenMacAdresse = "FALSE";    
+        }
+        
         $productCreationInfo = $GLOBALS["productModel"];
         $productCreationInfo->addProduct($givenProductName, $givenBuyPrice, $givenSalePrice, $givenCategoryID, $givenMediaID, $givenProductNumber, $givenProductDate, $givenMacAdresse);
 
-        header("Location:index.php?page=productAdm");
+        echo json_encode("success");
     }
 
     private function editProductEngine() {
@@ -65,7 +62,7 @@ class ProductController extends Controller {
         $productEditInfo = $GLOBALS["productModel"];
         $productEditInfo->editProduct($editProductName, $editBuyPrice, $editSalePrice, $editCategoryID, $editMediaID, $editProductNumber, $editProductID);
 
-        header("Location:index.php?page=productAdm");
+        echo json_encode("success");
     }
 
     private function deleteProductEngine() {
@@ -74,7 +71,43 @@ class ProductController extends Controller {
         $removeProduct = $GLOBALS["productModel"];
         $removeProduct->removeProduct($removeProductID);
         
-        header("Location:index.php?page=productAdm");
+        echo json_encode("success");
+    }
+    
+    private function getAllProductInfo() {
+        $productInfo = $GLOBALS["productModel"];
+
+        if (isset($_POST['givenProductSearchWord'])) {
+            $givenProductSearchWord = "%{$_REQUEST["givenProductSearchWord"]}%";
+            $productModel = $productInfo->getSearchResult($givenProductSearchWord);
+        } else {
+            $givenProductSearchWord = "%%";
+            $productModel = $productInfo->getSearchResult($givenProductSearchWord);
+        }
+        
+        $data = json_encode(array("productInfo" => $productModel));
+
+        echo $data;
+    }
+    
+    private function getProductByID(){
+        $givenProductID = $_REQUEST["givenProductID"];
+
+        $productInfo = $GLOBALS["productModel"];
+        $productModel = $productInfo->getAllProductInfoFromID($givenProductID);
+
+        $data = json_encode(array("product" => $productModel));
+        echo $data;
+    }
+    
+    private function getProductLocation(){
+        $givenProductID = $_REQUEST['givenProductID'];
+
+        $inventoryInfo = $GLOBALS["inventoryModel"];
+        $inventoryModel = $inventoryInfo->getAllProductLocationByProductID($givenProductID);
+
+        $data = json_encode(array("productLocation" => $inventoryModel));
+        echo $data; 
     }
 
 }

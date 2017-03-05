@@ -306,10 +306,6 @@
     <tr>
     <td class="text-center">  
 
-    <form id="brukerRedForm" action="" method="post">
-    </form>
-    
-    
      
     <!-- Knapp som aktiverer Model for brukerredigering  --> 
 

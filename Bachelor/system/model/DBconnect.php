@@ -3,7 +3,6 @@
 
   require_once("dummy.php");
   require_once("UserModel.php");
-  require_once("InventoryQuantityModel.php");
   require_once("StorageModel.php");
   require_once("RestrictionModel.php");
   require_once("InventoryModel.php");
@@ -18,7 +17,6 @@ $dummy = new Dummy($dbConn);
 $userModel = new UserModel($dbConn);
 $storageModel = new StorageModel($dbConn);
 $restrictionModel = new RestritionModel($dbConn);
-$inventoryQuantityModel = new InventoryQuantityModel($dbConn);
 $inventoryModel = new InventoryModel($dbConn);
 $productModel = new ProductModel($dbConn);
 

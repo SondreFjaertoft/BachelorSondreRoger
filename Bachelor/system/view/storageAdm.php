@@ -6,15 +6,13 @@
 
     <div class="col-sm-3 col-sm-offset-1 col-md-6 col-md-offset-2 form-group">     
 
-        <!-- HER KOMMER INNHOLDET>   --> 
-
 
         <!-- SØK ETTER LAGER -->
 
         <form class="form-inline" id="searchForStorage" action="?page=getAllStorageInfo" method="post">
             <div class="form-group">
                 <div class="col-md-9">
-                    <input class="form-control" type="text" name="givenStorageSearchWord" value="" placeholder="Søk etter Lager..">  
+                    <input class="form-control" form="searchForStorage"type="text" name="givenStorageSearchWord" value="" placeholder="Søk etter Lager..">  
                     <input class="form-control" form="searchForStorage" type="submit" value="Søk">
 
                     <button onclick="UpdateStorageTable()" class="btn btn-default " type="button">Alle lagrer</button>
@@ -49,7 +47,7 @@
 <!-- DIV som holder på all informasjon til høgre på skjermen  -->
 
 
-<!-- OPPRETT Lager  -->
+<!-- CREATE STORAGE MODAL -->
 
 
 <div class="modal fade" id="createStorageModal" role="dialog">
@@ -197,6 +195,7 @@
 
 
 
+<!-- TEMPLATES -->
 
 <!-- Display editStorage-->                    
 <script id="editStorageTemplate" type="text/x-handlebars-template">
@@ -211,7 +210,7 @@
 <!-- Display StorageInformation-->
 <script id="storageInformationTemplate" type="text/x-handlebars-template">
 {{#each storage}}    
-    <tr> 
+    <tr>  
         <th>LagerID: </th>
         <td>{{storageID}}</td> 
     </tr>
@@ -255,12 +254,8 @@
     <tr>
     <td class="text-center">  
 
-    <form id="brukerRedForm" action="" method="post">
-    </form>
 
-
-
-    <!-- Knapp som aktiverer Model for brukerredigering  --> 
+    <!-- Knapp som aktiverer Model for lagerredigering  --> 
 
     <button data-id="{{storageID}}" class="edit" data-toggle="tooltip"
     style="appearance: none;
@@ -274,7 +269,7 @@
     </button>
 
 
-    <!-- Knapp som aktiverer Model for å vise brukerinformasjon  --> 
+    <!-- Knapp som aktiverer Model for å vise lagerinformasjon  --> 
 
     <button data-id="{{storageID}}" class="information" data-toggle="tooltip" 
     style="appearance: none;
@@ -288,7 +283,7 @@
     </button>
 
 
-    <!-- Knapp som aktiverer Model for sletting av bruker  --> 
+    <!-- Knapp som aktiverer Model for sletting av lager  --> 
 
 
 
@@ -305,7 +300,7 @@
 
     </td>
 
-    <!-- Printer ut navn og brukernavn inn i tabellen -->
+    <!-- Printer ut lagernavn inn i tabellen -->
 
     <th>Lagernavn: </th>
     <td>{{storageName}}</td>
@@ -368,12 +363,12 @@
 
 
 
-<!--    DELETE USER     -->
+<!--    DELETE STORAGE     -->
 
 
-<!-- Delete user modal -->
+<!-- Delete storage modal -->
 <script>
-    $(function POSTdeleteUserModal() {
+    $(function POSTdeleteStorageModal() {
 
         $('#displayStorageContainer').delegate('.delete', 'click', function () {
             var givenStorageID = $(this).attr('data-id');
@@ -604,7 +599,7 @@
 
 
 <script>
-    $(function POSTuserInfo() {
+    $(function POSTstorageInfo() {
 
         $('#createStorage').submit(function () {
             var url = $(this).attr('action');
@@ -631,7 +626,7 @@
 <!-- SEARCH FOR STORAGE -->
 
 <script>
-    $(function POSTsearchForUser() {
+    $(function POSTsearchForStorage() {
 
         $('#searchForStorage').submit(function () {
             var url = $(this).attr('action');
