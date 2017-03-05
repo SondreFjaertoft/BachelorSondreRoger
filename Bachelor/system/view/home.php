@@ -1,11 +1,5 @@
 <?php require("view/header.php");?>
 
-<?php
-$InvResults = $GLOBALS["inventoryKSInfo"];
-?>
-
-
-
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <br> <br>     
@@ -27,13 +21,6 @@ $InvResults = $GLOBALS["inventoryKSInfo"];
                 </thead>
                 <tbody>
 
-                    <?php foreach ($InvResults as $InvResults): ?>  
-                        <tr>
-                            <td><?php echo $InvResults['productName']; ?></td>
-                            <td><?php echo $InvResults['storageName']; ?></td>
-                            <td><?php echo $InvResults['quantity']; ?></td>
-                        </tr>
-                    <?php endforeach; ?>
 
                 </tbody>
             </table>

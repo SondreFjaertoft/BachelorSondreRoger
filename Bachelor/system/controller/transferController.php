@@ -27,32 +27,4 @@ class transferController extends Controller {
         return $this->render("transfer", $data);
     }
 
-    // TESTING:
-    
-    
-
-   private function testingajax() {
-       
-             $givenUserID = $_REQUEST["givenUserID"];       //name value sent from form in transfer.php
-             $givenStorageID = $_REQUEST["givenStorageID"];   //name value sent from form in transfer.php
-             
-             //connecte opp mot model for testing (restriction model)
-            $restrictionInfo = $GLOBALS["restrictionModel"];
-            $restrictionInfo->addRestriction($givenUserID, $givenStorageID);   
-            
-
-    }
-    
-    private function getAjaxResult() {
-        $restrictionInfo = $GLOBALS["restrictionModel"];
-        $restrictionModel = $restrictionInfo->getAllUserRestrictionInfo();   
-        
-        $data = json_encode($restrictionModel);
-        
-        echo $data;
-       
-            
-        
-    }
-
 }

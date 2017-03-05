@@ -69,68 +69,6 @@ $restrictionInfo = $GLOBALS["restrictionInfo"];
 
 
 
-        <!-- TESTING -->
-        
-        <br><br><br><br>
-        <p> TESTING AV AJAX</p>
-
-        <form id="randomInsert" action="?page=testingAjax" method="POST">
-            <input type="int" name="givenStorageID" />
-            <input tyoe="int" name="givenUserID" />
-            <input type="submit" />
-        </form>
-
-        <div id="listInserts"></div>
-
-
-
-
-<script>
-    $(function () {
-            $('#randomInsert').submit(function () {
-            var url = $(this).attr('action');
-            var data = $(this).serialize();
-
-            $.post(
-            url, 
-            data, 
-            function (test) {
-
-                $('#listInserts').append('<div>' + test + '</div>');
-
-            });
-
-
-            return false;
-        });
-        
-        
-
-    });
-</script>
-
-<script>
-        
-$(function() {
-   var $listInserts = $('#listInserts');
-
-   $.ajax({
-      type: 'GET',
-      url: '?page=getAjaxResult',
-      dataType: 'json',
-      success: function(data) { 
-          $.each(data, function(i, item){
-          $listInserts.append('<div>navn:  ' + item.name + ', Lager: ' + item.storageID + '</div>'); 
-        });
-      }
-   });
-});        
-        
-        
-</script>
-    
-
-
     </div>
 </div>    
 
