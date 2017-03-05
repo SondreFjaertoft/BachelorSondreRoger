@@ -67,7 +67,7 @@
                     </div>
                 </div>
             </div> 
-    </div>
+            </div>
  
             <br>
 
@@ -75,10 +75,25 @@
             $dropdownMeny = $GLOBALS["storageInfo"];
             ?>
 
-            <!-- drop down meny -->
+
+
+
+            <!-- DISPLAY USER CONTAINER    --->       
+            <br>
+            <table class="table table-bordered table-striped table-responsive">
+                <tbody id="displayUserContainer">
+                    
+                    <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
+                    
+                </tbody>    
+            </table>
+          
+            
+            
+                        <!-- drop down meny -->
             <br><br>
             <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Velg Lager
+                <button class="btn btn-primary dropdown-toggle" id="setRestriction" type="button" data-toggle="dropdown">Velg Lager
                     <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <table>
@@ -94,20 +109,6 @@
                     <button form="restriction" type="submit">Velg lagertilgang</button> 
                 </ul>
             </div>
-
-
-
-
-            <!-- DISPLAY USER CONTAINER    --->       
-            <br>
-            <table class="table table-bordered table-striped table-responsive">
-                <tbody id="displayUserContainer">
-                    
-                    <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
-                    
-                </tbody>    
-            </table>
-          
 
 
 
@@ -347,7 +348,7 @@
 
  
     <form action="?page=addRestriction" id="restriction" method="post">        </form>
-    <td> <input form="restriction" id="{{userID}}" value="{{userID}}"  name="userRestrictions[]" type="checkbox"></td>
+    <td> <input form="restriction" class="selectRestriction" id="{{userID}}" value="{{userID}}"  name="userRestrictions[]" type="checkbox"></td>
 
  
 
@@ -357,6 +358,20 @@
 
 </script>
 
+
+
+<!-- SET RESTRICTION -->
+
+<script>
+$('#setRestriction').hide();
+$('#displayUserContainer').delegate('.selectRestriction','click', function(){   
+    if($(".selectRestriction").is(":checked") === true){
+         $('#setRestriction').show();
+    } else {
+         $('#setRestriction').hide(); 
+    }
+});
+</script>
 
 <!-- CREATE USER -->
 <script>
@@ -650,3 +665,6 @@
     });
 
 </script>
+
+
+
