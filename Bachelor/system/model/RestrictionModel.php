@@ -56,8 +56,6 @@ class RestritionModel{
     
     public function addRestriction($givenUserID, $givenStorageID){
         $this->addStmt->execute(array("givenUserID" => $givenUserID, "givenStorageID" => $givenStorageID));
-        echo $givenUserID;
-        
     }
     
     

@@ -13,6 +13,8 @@ class StorageController extends Controller {
             $this->storageEditEngine();
         } else if ($page == "deleteStorageEngine") {
             $this->deleteStorageEngine();
+        } else if ($page == "getAllStorageInfo"){
+            $this->getAllStorageInfo();
         }
     }
 
@@ -53,7 +55,7 @@ class StorageController extends Controller {
 //            "givenUser"=>$givenUsername
 //        );
         header("Location:index.php?page=storageAdm");
-    }
+        }
     
     
         private function storageEditEngine()    {
@@ -75,5 +77,18 @@ class StorageController extends Controller {
             
             header("Location:index.php?page=storageAdm"); 
         }
+        
+        private function getAllStorageInfo() {
+        $storageInfo = $GLOBALS["storageModel"];
+        $storageModel = $storageInfo->getAll();
+
+        $data = json_encode(array("storageInfo" => $storageModel));
+        
+        echo $data;
+        
+            
+        }
+        
+        
     
 }

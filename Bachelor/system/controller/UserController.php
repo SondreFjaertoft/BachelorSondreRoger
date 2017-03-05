@@ -26,12 +26,7 @@ class UserController extends Controller {
     }
 
     private function userAdmPage() {
-        $storageInfo = $GLOBALS["storageModel"];
-        $storageModel = $storageInfo->getAll();
-
-
-        $data = array("storageInfo" => $storageModel);
-        return $this->render("userAdm", $data);
+        return $this->render("userAdm");
     }
 
     private function userEditEngine() {
@@ -62,15 +57,15 @@ class UserController extends Controller {
             foreach ($givenUserArray as $givenUserID) :
                 
                 foreach ($givenStorageArray as $givenStorageID) :
-                $addRestriction->addRestriction($givenUserID, $givenStorageID);
+                $data = $addRestriction->addRestriction($givenUserID, $givenStorageID);
                 endforeach;
             endforeach;  
+        echo json_encode("success");
             
-        }
-        
-        header("Location:index.php?page=userAdm");
+        } 
         
     }
+    
     
     // FORESPØRSLER GJOR VED AJAX
     

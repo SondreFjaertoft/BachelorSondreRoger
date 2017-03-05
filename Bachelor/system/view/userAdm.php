@@ -83,32 +83,41 @@
 
 
 
-    <!-- drop down meny -->
+    <!-- Set restrictions -->
+
+    <button  id="setRestriction" onclick="getStorageInfo()" data-toggle="modal" data-target="#userRestrictionModal" class="btn btn-default" type="button">Velg Lager</button>
+    <div class="modal fade" id="userRestrictionModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Velg lager tilgang(er)</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="?page=addRestriction" id="editRestriction" method="post"></form>
+                    <table class="table table-striped table-bordered" id="storageRestrictionContainer">
+                        
+                        <!-- Handlebars information -->
+                        
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+
+                    <button form="editRestriction" class="btn btn-default" type="submit">Velg lagertilgang</button> 
+
+                </div>
+
+            </div>
+        </div>
+    </div> 
+
+
+
+
     
-    <?php
-    $dropdownMeny = $GLOBALS["storageInfo"];
-    ?>
-
-    <br><br>
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" id="setRestriction" type="button" data-toggle="dropdown">Velg Lager
-            <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <table>
-                <?php foreach ($dropdownMeny as $dropdownMeny) : ?>
-                    <tr>
-                        <td><?php echo $dropdownMeny['storageName']; ?> </td>
-
-                        <td><input form="restriction" id="<?php echo $dropdownMeny['storageID']; ?>" value="<?php echo $dropdownMeny['storageID']; ?>"  name="storageRestrictions[]" type="checkbox"></td>
-                    </tr>
-                <?php endforeach; ?>
-
-            </table>
-            <button form="restriction" type="submit">Velg lagertilgang</button> 
-        </ul>
-    </div>
-
-
+    
 
     <!-- DELETE USER MODAL -->
 
@@ -159,7 +168,7 @@
                         <tbody > 
                             <tr> 
                                 <th>Lagertilgang:</th>
-                                <td id="userRestriotionContainer">
+                                <td id="userRestrictionContainer">
 
                                     <!-- Innhold fra Handlebars Template-->
 
@@ -209,9 +218,19 @@
 
 <!-- HANDLEBARS TEMPLATES-->
 
+<script id="storageRestrictionTemplate" type="text/x-handlebars-template">
+{{#each storageInfo}}
+    <tr>
+        <td>{{storageName}}</td>
+
+        <td><input form="editRestriction" class="selectStorageRestriction" id="{{storageID}}" value="{{storageID}}"  name="storageRestrictions[]" type="checkbox"></td>
+    </tr>
+{{/each}}
+</script>     
+
 <!-- edit user template-->
 <script id="editUserTemplate" type="text/x-handlebars-template">
-    
+     
 {{#each user}}    
         <input form="editUser" type="hidden" name="editUserID" value="{{userID}}"><br>
         Navn: <br>
@@ -344,11 +363,11 @@
 
     <!-- Legger inn chackbox for fler valg (ved lagertilganggiving -->
 
- 
-    <form action="?page=addRestriction" id="restriction" method="post">        </form>
-    <td> <input form="restriction" class="selectRestriction" id="{{userID}}" value="{{userID}}"  name="userRestrictions[]" type="checkbox"></td>
+  
+    
+    <td> <input form="editRestriction" class="selectRestriction" id="{{userID}}" value="{{userID}}"  name="userRestrictions[]" type="checkbox"></td>
 
- 
+  
 
     {{/each}}
     </tr>
@@ -357,19 +376,6 @@
 </script>
 
 
-
-<!-- SET RESTRICTION -->
-
-<script>
-$('#setRestriction').hide();
-$('#displayUserContainer').delegate('.selectRestriction','click', function(){   
-    if($(".selectRestriction").is(":checked") === true){
-         $('#setRestriction').show();
-    } else {
-         $('#setRestriction').hide(); 
-    }
-});
-</script>
 
 <!-- CREATE USER -->
 <script>
@@ -522,7 +528,7 @@ $('#displayUserContainer').delegate('.selectRestriction','click', function(){
         var compiledTemplate = Handlebars.compile(rawTemplate);
         var UserRestrictionGeneratedHTML = compiledTemplate(data);
 
-        var userContainer = document.getElementById("userRestriotionContainer");
+        var userContainer = document.getElementById("userRestrictionContainer");
         userContainer.innerHTML = UserRestrictionGeneratedHTML;
    }
 </script>
@@ -605,7 +611,10 @@ $('#displayUserContainer').delegate('.selectRestriction','click', function(){
 </script>
 
 
+
 <!-- EDIT USER -->
+
+
 
 <script>
  $(function POSTeditUserModal() {
@@ -665,4 +674,66 @@ $('#displayUserContainer').delegate('.selectRestriction','click', function(){
 </script>
 
 
+<!-- Set Restriction -->
 
+<!-- Make button visible when clicked-->
+<script>
+$('#setRestriction').hide();
+$('#displayUserContainer').delegate('.selectRestriction','click', function(){   
+    if($(".selectRestriction").is(":checked") === true){
+         $('#setRestriction').show();
+    } else {
+         $('#setRestriction').hide(); 
+    }
+});
+</script>
+
+<!-- Get storage information-->
+<script>
+    function getStorageInfo(){
+        $(function () {
+            $.ajax({
+            type: 'GET',
+            url: '?page=getAllStorageInfo',
+            dataType: 'json',
+            success: function (data) {
+               storageRestrictionTemplate(data); 
+            }
+        });
+    });    
+    }
+</script>    
+
+<!-- Genereate userRestriciton template and display it in contaioner-->
+<script>
+   function storageRestrictionTemplate(data) {
+       var rawTemplate = document.getElementById("storageRestrictionTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var userRestrictionGeneratedHTML = compiledTemplate(data);
+
+        var userContainer = document.getElementById("storageRestrictionContainer");
+        userContainer.innerHTML = userRestrictionGeneratedHTML;
+   }
+</script>
+
+<!-- Post new restriction-->
+<script>
+    $(function POSTrestrictionInfo() {
+        $('#editRestriction').submit(function () {
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function () {
+                    $('#userRestrictionModal').modal('hide');
+                    UpdateUsersTable();
+                }
+            });
+            return false;
+        });
+    });
+
+</script>
