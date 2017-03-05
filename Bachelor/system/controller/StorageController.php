@@ -25,27 +25,7 @@ class StorageController extends Controller {
     }
 
     private function storageAdmPage() {
-
-        $storageInfo = $GLOBALS["storageModel"];
-
-        if (isset($_POST['givenStorageSearchWord'])) {
-            $givenStorageSearchWord = "%{$_REQUEST["givenStorageSearchWord"]}%";
-            $storageModel = $storageInfo->getSearchResult($givenStorageSearchWord);
-        } else {
-            $givenStorageSearchWord = "%%";
-            $storageModel = $storageInfo->getSearchResult($givenStorageSearchWord);
-        }
-
-        $restrictionInfo = $GLOBALS["restrictionModel"];
-        $restrictionModel = $restrictionInfo->getAllUserRestrictionInfo();
-
-        $inventoryInfo = $GLOBALS["inventoryModel"];
-        $inventoryModel = $inventoryInfo->getAllStorageInventory();
-
-        $data = array("storageResult" => $storageModel, "storageAccess" => $restrictionModel, "storageInventory" => $inventoryModel);
-
-
-        return $this->render("storageAdm", $data);
+        return $this->render("storageAdm");
     }
 
     private function storageCreationEngine() {

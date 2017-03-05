@@ -46,13 +46,6 @@
 
 
 
-
-
-
-
-
-
-
 <!-- DIV som holder på all informasjon til høgre på skjermen  -->
 
 
@@ -201,6 +194,9 @@
         </div>
     </div>
 </div>   
+
+
+
 
 <!-- Display editStorage-->                    
 <script id="editStorageTemplate" type="text/x-handlebars-template">
