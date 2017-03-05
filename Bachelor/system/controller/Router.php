@@ -56,7 +56,8 @@ class Router {
                 case "addStorageEngine":
                 case "editStorageEngine" :
                 case "deleteStorageEngine" :
-                case "getAllStorageInfo" :    
+                case "getAllStorageInfo" :  
+                case "getStorageByID" :    
                     return new StorageController();
                     
                 case "userAdm"    :

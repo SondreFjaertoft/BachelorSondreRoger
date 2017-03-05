@@ -33,85 +33,16 @@ $storageInventory = $GLOBALS["storageInventory"];
         </form>
 
 
+        <br>
+            
+        <!-- DISPLAY STORAGE CONTAINER -->
+        <br>
         <table class="table table-bordered table-striped table-responsive"> 
-
-
-            <br><br>
-
-
-
-
-
-
             <h4> Lageroversikt </h4> 
-            <tbody>
-                
-            
-
-
-            
-                <?php foreach ($searchResult as $searchResult): ?>  
-                    <tr>
-                        <!-- Oppretter et form som knappene blir linket til  --> 
-
-
-
-                        <td class="text-center">
-                            <form id="storageRedForm" action="" method="post">
-                            </form>
-
-
-
-                            <!-- Knapp som aktiverer Model for lagerredigering  --> 
-
-                            <button form="storageRedForm" type="submit" name="editStorage" data-toggle="tooltip" title="Rediger lager" value="<?php echo $searchResult['storageID']; ?>" 
-                                    style="appearance: none;
-                                    -webkit-appearance: none;
-                                    -moz-appearance: none;
-                                    outline: none;
-                                    border: 0;
-                                    background: transparent;
-                                    display: inline;">
-                                <span class="glyphicon glyphicon-edit" style="color: green"></span>
-                            </button>
-
-
-
-                            <!-- Knapp som aktiverer Model for å vise lagerinformasjon  --> 
-
-                            <button form="storageRedForm" type="submit" name="showStorageInfo" data-toggle="tooltip" title="Mer informasjon" value="<?php echo $searchResult['storageID']; ?>" 
-                                    style="appearance: none;
-                                    -webkit-appearance: none;
-                                    -moz-appearance: none;
-                                    outline: none;
-                                    border: 0;
-                                    background: transparent;
-                                    display: inline;">
-                                <span class="glyphicon glyphicon-menu-hamburger" style="color: #003366" ></span></button>
-
-
-                            <!-- Knapp som aktiverer Model for sletting av lager  --> 
-
-
-                            <button form="storageRedForm" name="deleteStorage" data-toggle="tooltip" title="Slett lager" value="<?php echo $searchResult['storageID']; ?>" 
-                                    style="appearance: none;
-                                    -webkit-appearance: none;
-                                    -moz-appearance: none;
-                                    outline: none;
-                                    border: 0;
-                                    background: transparent;
-                                    display: inline;">
-                                <span class="glyphicon glyphicon-remove" style="color: red"></span></button>
-
-                        </td>
-                        <td><?php echo $searchResult['storageName']; ?></td>
-
-
-
-
-                        
-                    </tr>   
-                <?php endforeach; ?> 
+            <tbody id="displayStorageContainer">
+              
+                <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
+           
             </tbody>
 
         </table>
@@ -259,42 +190,10 @@ $storageInventory = $GLOBALS["storageInventory"];
 
         if ($storageInfo['storageID'] == $givenStorageID) {
             ?>
-                    <script>
-                        $(function () {
-                            $('#storageModal').modal('show');
-                        });
-                    </script>
 
 
-                    <div class="modal fade" id="storageModal" role="dialog">
-                        <div class="modal-dialog">
-                            <!-- Innholdet til Modalen -->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Lager informasjon</h4>
-                                </div>
-                                <div class="modal-body">
 
-                                    <p> Er du sikker på at du vil slette  <P>
-            <?php
-            echo "Lagernavn: " . $storageInfo['storageName'];
-            ?>
-
-                                    <form action="?page=deleteStorageEngine" method="post" id="formS">
-                                        <input type="hidden" name="deleteStorageID" value="<?php echo $storageInfo['storageID'] ?>"><br>
-
-                                    </form>
-
-
-                                </div>
-                                <div class="modal-footer">
-                                    <input class="btn btn-default" type="submit" value="Slett" form="formS">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>               
+            
 
 
 
@@ -365,15 +264,215 @@ endforeach;
 
     </div>
 
-
-    
-    
-
-
-
-
-
-
 </div>
 
 
+<div class="modal fade" id="deleteStorageModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Innholdet til Modalen -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Lager informasjon</h4>
+            </div>
+            <form action="?page=deleteStorageEngine" method="post" id="deleteStorage"></form>
+            <div class="modal-body" id="deleteStorageContainer">
+
+                <!-- Innhold fra Handlebars Template -->
+                
+            </div>
+            <div class="modal-footer">
+                <input form="deleteStorage" class="btn btn-default" type="submit" value="Slett">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+            </div>
+        </div>
+    </div>
+</div>   
+
+<script id="deleteStorageTemplate" type="text/x-handlebars-template">
+    <p> Er du sikker på at du vil slette  <P>
+    {{#each storage}}
+        {{storageName}}
+        <input type="hidden" form="deleteStorage" name="deleteStorageID" value="{{storageID}}">    
+    {{/each}} 
+</script>   
+                
+
+
+<!-- display all users template -->
+<script id="displayStorageTemplate" type="text/x-handlebars-template">
+
+    {{#each storageInfo}} 
+    <tr>
+    <td class="text-center">  
+
+    <form id="brukerRedForm" action="" method="post">
+    </form>
+    
+    
+     
+    <!-- Knapp som aktiverer Model for brukerredigering  --> 
+
+    <button data-id="{{storageID}}" class="edit" data-toggle="tooltip"
+    style="appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: 0;
+    background: transparent;
+    display: inline;">
+    <span class="glyphicon glyphicon-edit" style="color: green"></span>
+    </button>
+ 
+
+    <!-- Knapp som aktiverer Model for å vise brukerinformasjon  --> 
+
+    <button data-id="{{storageID}}" class="information" data-toggle="tooltip" 
+    style="appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: 0;
+    background: transparent;
+    display: inline;">
+    <span class="glyphicon glyphicon-menu-hamburger" style="color: #003366" ></span>
+    </button>
+
+
+    <!-- Knapp som aktiverer Model for sletting av bruker  --> 
+
+     
+   
+    <button data-id="{{storageID}}" class="delete" data-toggle="tooltip" 
+    style="appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: 0;
+    background: transparent;
+    display: inline;">
+    <span class="glyphicon glyphicon-remove" style="color: red"></span>
+    </button>
+
+    </td>
+ 
+    <!-- Printer ut navn og brukernavn inn i tabellen -->
+
+    <th>Lagernavn: </th>
+    <td>{{storageName}}</td>
+
+    {{/each}}
+    </tr>
+
+
+</script>
+
+
+
+<!-- GET STORAGE INFOROMATION -->
+
+<script>
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getAllStorageInfo',
+            dataType: 'json',
+            success: function (data) {
+                storageTableTemplate(data);
+            }
+        });
+    });
+</script>
+
+<!-- UPDATE USER INFOMARTION -->
+<script>
+    function UpdateStorageTable() {
+        $(function () {
+            $.ajax({
+                type: 'GET',
+                url: '?page=getAllStorageInfo',
+                dataType: 'json',
+                success: function (data) {
+                    storageTableTemplate(data);
+                }
+            });
+        });
+    }
+</script>
+
+<!-- DISPLAY STORAGE TEMPLATE -->
+<script>
+    function storageTableTemplate(data) {
+
+        var rawTemplate = document.getElementById("displayStorageTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var storageTableGeneratedHTML = compiledTemplate(data);
+
+        var storageContainer = document.getElementById("displayStorageContainer");
+        storageContainer.innerHTML = storageTableGeneratedHTML;
+    }
+</script>
+
+
+<!--    DELETE USER     -->
+
+
+<!-- DELETE USER MODAL -->
+<script>
+    $(function POSTdeleteUserModal() {
+
+        $('#displayStorageContainer').delegate('.delete', 'click', function () {
+            var givenStorageID = $(this).attr('data-id');
+            
+            $.ajax({
+                type: 'POST',
+                url: '?page=getStorageByID',
+                data: {givenStorageID: givenStorageID},
+                dataType: 'json',
+                success: function (data) {
+                    deleteStorageTemplate(data);
+                    $('#deleteStorageModal').modal('show');
+                }
+            });
+            return false;
+
+        });
+    });
+</script>   
+
+<!-- DELETE STORAGE TEMPLATE-->         
+<script>
+    function deleteStorageTemplate(data) {
+        var rawTemplate = document.getElementById("deleteStorageTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var deleteStorageGeneratedHTML = compiledTemplate(data);
+
+        var storageContainer = document.getElementById("deleteStorageContainer");
+        storageContainer.innerHTML = deleteStorageGeneratedHTML;
+    }
+</script>
+
+<script>
+    $(function deleteStorageByID() {
+
+        $('#deleteStorage').submit(function () {
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+
+                    UpdateStorageTable();
+                    $('#deleteStorageModal').modal('hide');
+
+                }
+            });
+            return false;
+        });
+    });
+
+</script>

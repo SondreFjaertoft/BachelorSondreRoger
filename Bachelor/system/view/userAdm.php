@@ -24,10 +24,10 @@
                 <button class="btn btn-default " type="button" data-toggle="modal" data-target="#opprettbruker">Opprett bruker</button>
             </div>
 
-            
+
 
             <!-- OPPRETT BRUKER  -->
-            
+
             <div class="modal fade" id="opprettbruker" role="dialog">
                 <div class="modal-dialog">
                     <!-- Innholdet til Modalen -->
@@ -74,6 +74,7 @@
     <!-- DISPLAY USER CONTAINER    --->       
     <br>
     <table class="table table-bordered table-striped table-responsive">
+        <h4> Brukeroversikt </h4>
         <tbody id="displayUserContainer">
 
             <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
@@ -81,7 +82,7 @@
         </tbody>    
     </table>
 
-
+</div>
 
     <!-- Set restrictions -->
 
@@ -97,9 +98,9 @@
                 <div class="modal-body">
                     <form action="?page=addRestriction" id="editRestriction" method="post"></form>
                     <table class="table table-striped table-bordered" id="storageRestrictionContainer">
-                        
+
                         <!-- Handlebars information -->
-                        
+
 
                     </table>
                 </div>
@@ -116,8 +117,8 @@
 
 
 
-    
-    
+
+
 
     <!-- DELETE USER MODAL -->
 
@@ -212,7 +213,7 @@
 
 
 
-</div>
+
 </div>
 
 
@@ -230,21 +231,21 @@
 
 <!-- edit user template-->
 <script id="editUserTemplate" type="text/x-handlebars-template">
-     
-{{#each user}}    
-        <input form="editUser" type="hidden" name="editUserID" value="{{userID}}"><br>
-        Navn: <br>
-        <input form="editUser" type="text" name="editName" value="{{name}}"><br>
-        Brukernavn: <br>
-        <input form="editUser" type="text" name="editUsername" value="{{username}}"><br>
-        Passord: <br>
-        <input form="editUser" type="text" name="editPassword" value="{{password}}"><br>
-        Brukernivå: <br>
-        <input form="editUser" type="text" name="editUserLevel" value="{{userLevel}}"><br>
-        Epost: <br>
-        <input form="editUser" type="text" name="editEmail" value="{{email}}"><br>
-        <br>    
-{{/each}}
+
+    {{#each user}}    
+    <input form="editUser" type="hidden" name="editUserID" value="{{userID}}"><br>
+    Navn: <br>
+    <input form="editUser" type="text" name="editName" value="{{name}}"><br>
+    Brukernavn: <br>
+    <input form="editUser" type="text" name="editUsername" value="{{username}}"><br>
+    Passord: <br>
+    <input form="editUser" type="text" name="editPassword" value="{{password}}"><br>
+    Brukernivå: <br>
+    <input form="editUser" type="text" name="editUserLevel" value="{{userLevel}}"><br>
+    Epost: <br>
+    <input form="editUser" type="text" name="editEmail" value="{{email}}"><br>
+    <br>    
+    {{/each}}
 </script>   
 
 
@@ -257,43 +258,43 @@
 
 <!-- Show user information template -->
 <script id="userInformationTemplate" type="text/x-handlebars-template">
-{{#each user}} 
+    {{#each user}} 
     <tr>
-        <th>Navn</th>
-        <td>{{name}}</td>            
+    <th>Navn</th>
+    <td>{{name}}</td>            
     </tr> 
     <tr>
-        <th>UserID:</th> 
-        <td>{{userID}}</td>
+    <th>UserID:</th> 
+    <td>{{userID}}</td>
     </tr>
     <tr>
-        <th>Brukernavn:</th>
-        <td>{{username}}</td>
+    <th>Brukernavn:</th>
+    <td>{{username}}</td>
     </tr>
     <tr>
-        <th>Brukernivå:</th>
-        <td>{{userLevel}}</td>
+    <th>Brukernivå:</th>
+    <td>{{userLevel}}</td>
     </tr>
     <tr>
-        <th>E-post:</th>
-        <td>{{email}}</td>
+    <th>E-post:</th>
+    <td>{{email}}</td>
     </tr>
     <tr>
-        <th>Sist inlogget: </th>
-        <td>{{lastLogin}}</td>
+    <th>Sist inlogget: </th>
+    <td>{{lastLogin}}</td>
     </tr> 
-{{/each}}     
+    {{/each}}     
 </script>    
 
 
 <!-- delete user template -->
 
 <script id="deleteUserTemplate" type="text/x-handlebars-template">
-<p> Er du sikker på at du vil slette:  <P>
-{{#each user}}           
+    <p> Er du sikker på at du vil slette:  <P>
+    {{#each user}}           
     {{name}}  
     <input form="deleteUser" type="hidden" name="deleteUserID" value="{{userID}}"><br>
-{{/each}}    
+    {{/each}}    
 </script>    
 
 <!-- display all users template -->
@@ -307,7 +308,7 @@
     </form>
     
     
-    
+     
     <!-- Knapp som aktiverer Model for brukerredigering  --> 
 
     <button data-id="{{userID}}" class="edit" data-toggle="tooltip"
@@ -482,13 +483,13 @@
 <!--    SHOW USER INFORMATION      -->
 
 <script>
- $(function POSTuserInformationModal() {
-     
-    $('#displayUserContainer').delegate('.information','click', function(){ 
-        
-        var givenUserID = $(this).attr('data-id');
-        POSTuserRestriction(givenUserID);
-        $.ajax({
+    $(function POSTuserInformationModal() {
+
+        $('#displayUserContainer').delegate('.information', 'click', function () {
+
+            var givenUserID = $(this).attr('data-id');
+            POSTuserRestriction(givenUserID);
+            $.ajax({
                 type: 'POST',
                 url: '?page=getUserByID',
                 data: {givenUserID: givenUserID},
@@ -496,52 +497,52 @@
                 success: function (data) {
                     $('#showUserInformationModal').modal('show');
                     userInformationTemplate(data);
-                    
+
                 }
             });
             return false;
 
         });
-    });                     
+    });
 </script>
 
 <script>
-    function POSTuserRestriction(data){
+    function POSTuserRestriction(data) {
         var givenUserID = data;
-      $(function () {
+        $(function () {
             $.ajax({
                 type: 'POST',
                 url: '?page=getUserRestriction',
                 data: {givenUserID: givenUserID},
                 dataType: 'json',
                 success: function (data) {
-                   userRestrictionTemplate(data); 
+                    userRestrictionTemplate(data);
                 }
             });
-        });  
+        });
     }
 </script>
 
 <script>
-   function userRestrictionTemplate(data) {
-       var rawTemplate = document.getElementById("userRestrictionTemplate").innerHTML;
+    function userRestrictionTemplate(data) {
+        var rawTemplate = document.getElementById("userRestrictionTemplate").innerHTML;
         var compiledTemplate = Handlebars.compile(rawTemplate);
         var UserRestrictionGeneratedHTML = compiledTemplate(data);
 
         var userContainer = document.getElementById("userRestrictionContainer");
         userContainer.innerHTML = UserRestrictionGeneratedHTML;
-   }
+    }
 </script>
 
 <script>
-   function userInformationTemplate(data) {
-       var rawTemplate = document.getElementById("userInformationTemplate").innerHTML;
+    function userInformationTemplate(data) {
+        var rawTemplate = document.getElementById("userInformationTemplate").innerHTML;
         var compiledTemplate = Handlebars.compile(rawTemplate);
         var UserInformationGeneratedHTML = compiledTemplate(data);
 
         var userContainer = document.getElementById("userInformationContainer");
         userContainer.innerHTML = UserInformationGeneratedHTML;
-   }
+    }
 </script>
 
 
@@ -552,12 +553,12 @@
 
 <!-- DELETE USER MODAL -->
 <script>
- $(function POSTdeleteUserModal() {
-     
-    $('#displayUserContainer').delegate('.delete','click', function(){ 
-        var givenUserID = $(this).attr('data-id');
-        
-        $.ajax({
+    $(function POSTdeleteUserModal() {
+
+        $('#displayUserContainer').delegate('.delete', 'click', function () {
+            var givenUserID = $(this).attr('data-id');
+
+            $.ajax({
                 type: 'POST',
                 url: '?page=getUserByID',
                 data: {givenUserID: givenUserID},
@@ -570,19 +571,19 @@
             return false;
 
         });
-    });  
+    });
 </script>   
 
 <!-- DELETE USER TEMPLATE-->         
 <script>
-   function deleteUserTemplate(data) {
-       var rawTemplate = document.getElementById("deleteUserTemplate").innerHTML;
+    function deleteUserTemplate(data) {
+        var rawTemplate = document.getElementById("deleteUserTemplate").innerHTML;
         var compiledTemplate = Handlebars.compile(rawTemplate);
         var UserTableGeneratedHTML = compiledTemplate(data);
 
         var userContainer = document.getElementById("deleteUserContainer");
         userContainer.innerHTML = UserTableGeneratedHTML;
-   }
+    }
 </script>
 
 <script>
@@ -591,17 +592,17 @@
         $('#deleteUser').submit(function () {
             var url = $(this).attr('action');
             var data = $(this).serialize();
-           
+
             $.ajax({
                 type: 'POST',
                 url: url,
                 data: data,
                 dataType: 'json',
                 success: function (data) {
-                   
+
                     UpdateUsersTable();
                     $('#deleteUserModal').modal('hide');
-                    
+
                 }
             });
             return false;
@@ -617,12 +618,12 @@
 
 
 <script>
- $(function POSTeditUserModal() {
-     
-    $('#displayUserContainer').delegate('.edit','click', function(){ 
-        var givenUserID = $(this).attr('data-id');
-        
-        $.ajax({
+    $(function POSTeditUserModal() {
+
+        $('#displayUserContainer').delegate('.edit', 'click', function () {
+            var givenUserID = $(this).attr('data-id');
+
+            $.ajax({
                 type: 'POST',
                 url: '?page=getUserByID',
                 data: {givenUserID: givenUserID},
@@ -635,20 +636,20 @@
             return false;
 
         });
-    });  
+    });
 </script> 
 
 
 <!-- EDIT USER TEMPLATE-->         
 <script>
-   function editUserTemplate(data) {
-       var rawTemplate = document.getElementById("editUserTemplate").innerHTML;
+    function editUserTemplate(data) {
+        var rawTemplate = document.getElementById("editUserTemplate").innerHTML;
         var compiledTemplate = Handlebars.compile(rawTemplate);
         var editUserGeneratedHTML = compiledTemplate(data);
 
         var userContainer = document.getElementById("editUserContainer");
         userContainer.innerHTML = editUserGeneratedHTML;
-   }
+    }
 </script>
 
 <script>
@@ -678,42 +679,42 @@
 
 <!-- Make button visible when clicked-->
 <script>
-$('#setRestriction').hide();
-$('#displayUserContainer').delegate('.selectRestriction','click', function(){   
-    if($(".selectRestriction").is(":checked") === true){
-         $('#setRestriction').show();
-    } else {
-         $('#setRestriction').hide(); 
-    }
-});
+    $('#setRestriction').hide();
+    $('#displayUserContainer').delegate('.selectRestriction', 'click', function () {
+        if ($(".selectRestriction").is(":checked") === true) {
+            $('#setRestriction').show();
+        } else {
+            $('#setRestriction').hide();
+        }
+    });
 </script>
 
 <!-- Get storage information-->
 <script>
-    function getStorageInfo(){
+    function getStorageInfo() {
         $(function () {
             $.ajax({
-            type: 'GET',
-            url: '?page=getAllStorageInfo',
-            dataType: 'json',
-            success: function (data) {
-               storageRestrictionTemplate(data); 
-            }
+                type: 'GET',
+                url: '?page=getAllStorageInfo',
+                dataType: 'json',
+                success: function (data) {
+                    storageRestrictionTemplate(data);
+                }
+            });
         });
-    });    
     }
 </script>    
 
 <!-- Genereate userRestriciton template and display it in contaioner-->
 <script>
-   function storageRestrictionTemplate(data) {
-       var rawTemplate = document.getElementById("storageRestrictionTemplate").innerHTML;
+    function storageRestrictionTemplate(data) {
+        var rawTemplate = document.getElementById("storageRestrictionTemplate").innerHTML;
         var compiledTemplate = Handlebars.compile(rawTemplate);
         var userRestrictionGeneratedHTML = compiledTemplate(data);
 
         var userContainer = document.getElementById("storageRestrictionContainer");
         userContainer.innerHTML = userRestrictionGeneratedHTML;
-   }
+    }
 </script>
 
 <!-- Post new restriction-->

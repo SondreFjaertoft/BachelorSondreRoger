@@ -15,6 +15,8 @@ class StorageController extends Controller {
             $this->deleteStorageEngine();
         } else if ($page == "getAllStorageInfo"){
             $this->getAllStorageInfo();
+        } else if ($page == "getStorageByID") {
+            $this->getStorageByID();
         }
     }
 
@@ -75,8 +77,9 @@ class StorageController extends Controller {
             $removeStorage = $GLOBALS["storageModel"];
             $removeStorage->removeStorage($removeStorageID);
             
-            header("Location:index.php?page=storageAdm"); 
+            echo json_encode("success");
         }
+        
         
         private function getAllStorageInfo() {
         $storageInfo = $GLOBALS["storageModel"];
@@ -86,6 +89,17 @@ class StorageController extends Controller {
         
         echo $data;
         
+            
+        }
+        
+        private function getStorageByID() {
+            $givenStorageID = $_REQUEST["givenStorageID"];
+            
+            $storageInfo = $GLOBALS["storageModel"];           
+            $storageModel = $storageInfo->getAllStorageInfoFromID($givenStorageID);
+            
+            $data = json_encode(array("storage" => $storageModel));
+            echo $data;
             
         }
         
