@@ -43,8 +43,7 @@ class transferController extends Controller {
         $toStorageID = $_REQUEST["toStorageID"];
         
         if($fromStorageID == 0 || $toStorageID == 0){
-            $data = json_encode("velg et lager");
-        echo $data;
+           return false;
         } else $data = json_encode("success");
         echo $data;
     }

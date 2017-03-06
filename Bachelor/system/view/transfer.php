@@ -24,6 +24,7 @@
                 <!-- Her kommer Handlebars Template-->
                 
             </select>
+            <p id="errorMessage"></p>
         </div>     
     
         <br><br><br><br>
@@ -226,9 +227,14 @@ $(function () {
                 url: url,
                 data: data,
                 dataType: 'json',
+                error: function() {         
+                    var $displayUsers = $('#errorMessage');
+                    $displayUsers.append("Du må velge et TIL lager");
+                },
                 success: function (data) {
                    $('.product').remove();
                    $('.selectQuantity').remove();
+                   $('#errorMessage').remove();
                    updateTransfer();
                 }
             });
@@ -247,7 +253,7 @@ $(function () {
         dataType: 'json',
         success: function (data) {
             transferRestrictionTemplate(data);
-            } 
+            }  
         });
     });
 }
