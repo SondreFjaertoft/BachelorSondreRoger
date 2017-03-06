@@ -16,7 +16,7 @@
                     <input class="form-control" form="searchForUser" type="text" name="givenUserSearchWord" value="" placeholder="Søk etter bruker..">  
                     <input class="form-control" form="searchForUser" type="submit" value="Søk">
                                              
-                <button onclick="UpdateUsersTable()" class="btn btn-default " type="button">Alle brukere</button>
+                <button onclick="UpdateUsersTable()" class="btn btn-default" type="button">Alle brukere</button>
                 </div>    
              
 
@@ -224,7 +224,7 @@
 <script id="storageRestrictionTemplate" type="text/x-handlebars-template">
 {{#each storageInfo}}
     <tr>
-        <td>{{storageName}}</td>
+        <td>{{storageName}}</td> 
 
         <td><input form="editRestriction" class="selectStorageRestriction" id="{{storageID}}" value="{{storageID}}"  name="storageRestrictions[]" type="checkbox"></td>
     </tr>
@@ -348,7 +348,7 @@
     background: transparent;
     display: inline;">
     <span class="glyphicon glyphicon-remove" style="color: red"></span>
-    </button>
+    </button> 
 
     </td>
  

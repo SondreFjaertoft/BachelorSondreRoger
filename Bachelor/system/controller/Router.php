@@ -76,8 +76,7 @@ class Router {
                     return new UserController();    
                     
                 case "transfer" :
-                case "testingAjax" :
-                case "getAjaxResult" :    
+                case "getTransferRestriction" :
                     return new transferController();
                     
                     
