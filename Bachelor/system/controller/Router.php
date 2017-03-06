@@ -77,6 +77,7 @@ class Router {
                     
                 case "transfer" :
                 case "getTransferRestriction" :
+                case "transferProduct" :    
                     return new transferController();
                     
                     

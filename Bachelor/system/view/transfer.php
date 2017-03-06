@@ -8,8 +8,8 @@
 
         
         <div class="col-sm-3 col-md-4">
-            <p>Velg et lager og overføre fra</p>
-            <select  id="fromTransferRestrictionContainer">
+            <label>Overfør Fra:</label>
+            <select name="fromStorageID" form="transferProducts" id="fromTransferRestrictionContainer" class="form-control">
                 
                 <!-- Her kommer Handlebars Template-->
 
@@ -18,8 +18,8 @@
       
 
         <div class="col-sm-3 col-md-4">   
-            <p>Velg et lager og overføre til</p>
-            <select name="toStorage" id="toTransferRestrictionContainer" class="selectpicker" class="update">
+            <label>Overfør Til:</label>
+            <select name="toStorageID" form="transferProducts" id="toTransferRestrictionContainer" class="form-control update">
 
                 <!-- Her kommer Handlebars Template-->
                 
@@ -29,6 +29,7 @@
         <br><br><br><br>
 
         <div id="transferProductContainer">
+            
             
             <!-- Viser Product som er valgt i FRA lager -->
 
@@ -40,15 +41,19 @@
         <div>
             <table class="table table-bordered table-striped table-responsive" id="transferQuantityContainer">
 
-            <!-- Viser Product som er valgt i FRA lager -->
+            <!-- Lar deg velge antall enheter -->
+            
             </table>
+            
+            
+            <form id="transferProducts" action="?page=transferProduct" method="post"></form>
+            <button form="transferProducts" type="submit" class="btn btn-default" id="transferButton">Overfør</button>
 
         </div>    
 
-        <div id="output-tostorage">
-            <!-- Viser Lagernavn som er valgt i TIL lager -->
-
-        </div>
+            
+   
+ 
 
   
         
@@ -59,15 +64,19 @@
 </div>  
 
 <script id="transferQuantityTemplate" type="text/x-handlebars-template">
+    
 {{#each product}}   
     <tr class="selectQuantity">
         <th>Produkt:   </th>
         <td>{{productName}}</td>
-        <input type="hidden" value="{{productID}}"/>
+        <input name="transferProductID[]" form="transferProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
-        <td><input type="int" value=""/></td> 
+        <td><input name="transferQuantity[]" form="transferProducts" type="int" value=""/></td> 
+        <th>Tilgjengelig</th>
+        <td>{{quantity}} stk</td>    
     </tr>
 {{/each}}
+       
 </script>
 
 <script id="transferProductTemplate" type="text/x-handlebars-template">
@@ -78,16 +87,17 @@
 </script>
 
 <script id="transferRestrictionTemplate" type="text/x-handlebars-template">
-<option value="">Velg et lager</option>
+<option data-id="0" value="0" class="transferStorage">Velg et lager</option>
 {{#each transferRestriction}}    
 <tr>
-    <option data-id="{{storageID}}" class="transferStorage">{{storageName}}</option>
+    <option data-id="{{storageID}}" value="{{storageID}}" class="transferStorage">{{storageName}}</option>
 </tr>   
 {{/each}} 
 </script>    
 
 <!-- Get storage information with user restriction -->
-<script>  
+<script> 
+$('#transferButton').hide(); // hides transferbutton                    
 $(function () {
     $.ajax({
         type: 'GET',
@@ -122,19 +132,27 @@ $(function () {
 
         $('#fromTransferRestrictionContainer').on('change', function () {
             var givenStorageID = $(this).find("option:selected").data('id');
-
-            $.ajax({
-                type: 'POST',
-                url: '?page=getStorageProduct',
-                data: {givenStorageID: givenStorageID},
-                dataType: 'json',
-                success: function (data) {
-                transferProductTemplate(data);
-                $('.selectQuantity').remove();
+            
+            if(givenStorageID > 0){
+                $.ajax({
+                    type: 'POST',
+                    url: '?page=getStorageProduct',
+                    data: {givenStorageID: givenStorageID},
+                    dataType: 'json',
+                    success: function (data) {
+                    transferProductTemplate(data);
+                    $('.selectQuantity').remove();
+                    $('#transferButton').hide();
                 
-                }
-            });
-            return false;
+                    }
+                });
+            } else  {
+                $('.product').remove();
+                $('.selectQuantity').remove();
+            }
+            
+        return false;
+
         });
     });
 </script>
@@ -157,12 +175,13 @@ $(function () {
         
         $('#transferProductContainer').delegate('.product', 'click', function () {
             if($(this).data('clicked')) { 
-                return;
+                return false;
             }    
              
             $(this).data('clicked', true);
-             
+            
             var givenProductID = $(this).attr('data-id');
+            
             
             $.ajax({
                 type: 'POST',
@@ -172,8 +191,7 @@ $(function () {
                 success: function (data) {
                     
                     transferQuantityTemplate(data);
-                    $(this).data('clicked', true);
-            
+                     $('#transferButton').show();        
                 }
             });
             return false;
@@ -196,22 +214,41 @@ $(function () {
 
 
 
-
-
-
-
-
-
-
 <script>
-    $(function POSTtoTransferModal() {
+    $(function POSTtransferProducts() {
 
-        $('#toTransferRestrictionContainer').on('change', function () {
-            var givenStorageID = $(this).find("option:selected").data('id');
-
-            alert(givenStorageID);
+        $('#transferProducts').submit(function () {
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+ 
+                $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+                   $('.product').remove();
+                   $('.selectQuantity').remove();
+                   updateTransfer();
+                }
+            });
+            return false;
         });
-    });
+     });    
 </script>
 
-        
+<script> 
+function updateTransfer() {                            
+$('#transferButton').hide(); // hides transferbutton                    
+$(function () {
+    $.ajax({
+        type: 'GET',
+        url: '?page=getTransferRestriction',
+        dataType: 'json',
+        success: function (data) {
+            transferRestrictionTemplate(data);
+            } 
+        });
+    });
+}
+</script>
