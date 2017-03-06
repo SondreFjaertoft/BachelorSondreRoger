@@ -38,14 +38,30 @@ class transferController extends Controller {
     
     private function transferProduct(){
         $fromStorageID = $_REQUEST["fromStorageID"];
-        $transferProductID = $_REQUEST["transferProductID"];
-        $transferQuantity = $_REQUEST["transferQuantity"];
+        $transferProductIDArray = $_REQUEST["transferProductID"];
+        $transferQuantityArray = $_REQUEST["transferQuantity"];
         $toStorageID = $_REQUEST["toStorageID"];
         
         if($fromStorageID == 0 || $toStorageID == 0){
            return false;
-        } else $data = json_encode("success");
+        } else { 
+        
+        $inventoryInfo = $GLOBALS["inventoryModel"];
+        
+        foreach ($transferProductIDArray as $transferProductID) :
+            
+            foreach ($transferQuantityArray as $transferQuantity) :
+                
+                $inventoryInfo->transferFromStorage($fromStorageID, $transferProductID, $transferQuantity);
+                $inventoryInfo->transferToStorage($toStorageID, $transferProductID, $transferQuantity); 
+            
+            endforeach;
+        endforeach;
+        $data = json_encode("success");
         echo $data;
+        }
     }
+    
+    
 
 }
