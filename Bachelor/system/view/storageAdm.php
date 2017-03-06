@@ -118,48 +118,98 @@
 <!-- GET STORAGE INFORMATION MODAL-->
 
 <div class="modal fade" id="showStorageInformationModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width: 70%">
         <!-- Innholdet til Modalen -->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Lager Informasjon</h4>
             </div>
-            <div class="modal-body">
-                <table class="table table-striped table-bordered">
-                    <tbody id="storageInformationContainer">
+            <div class="modal-body row">
+                <div class="col-sm-3 col-md-5">
+                    <table class="table table-striped table-bordered">
+                        <tbody id="storageInformationContainer">
 
-                        <!-- Her kommer handlebars Template -->
+                            <!-- Her kommer handlebars Template -->
 
-                    </tbody>
-                </table>
-                <table class="table table-striped table-bordered">
-                    <tbody>
-                        <tr>
-                            <th>Personer med tilgang: </th>
-                            <td id="storageRestrictionContainer">
+                        </tbody>
+                    </table>
+                    <table class="table table-striped table-bordered">
+                        <tbody>
+                            <tr>
+                                <th class="col-md-5">Personer med tilgang: </th>
+                                <td id="storageRestrictionContainer">
 
-                                <!-- Her kommer handlebars Template -->
+                                    <!-- Her kommer handlebars Template -->
 
-                            </td>
-                        </tr>                      
-                    </tbody>    
-                </table> 
-                <table class="table table-striped table-bordered">
-                    <tbody>
-                        <tr>
-                            <th>Utstyr i lageret: </th>
-                            <td id="storageProductContainer">
+                                </td>
+                            </tr>                      
+                        </tbody>    
+                    </table> 
+                    <table class="table table-striped table-bordered">
+                        <tbody>
+                            <tr>
+                                <th class="col-md-5">Utstyr i lageret: </th>
+                                <td id="storageProductContainer">
 
-                                <!-- Her kommer handlebars Template -->
+                                    <!-- Her kommer handlebars Template -->
 
-                            </td>
-                        </tr>                      
-                    </tbody>
-                </table>
+                                </td>
+                            </tr>                      
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-9 col-md-7">
+
+                    <canvas id="myChart"></canvas>
+                    <script>
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["FMG", "Dekoder", "Roger", "Sondre", "Ole", "Tafjord", "DØØMEEE"],
+                                datasets: [
+                                    {
+                                        label: "Antall produkter i lageret",
+                                        backgroundColor: [
+                                            'rgba(0, 46, 96, 0.7)',
+                                            'rgba(255, 211, 0, 0.7)',
+                                            'rgba(0, 46, 96, 0.7)',
+                                            'rgba(255, 211, 0, 0.7)',
+                                            'rgba(0, 46, 96, 0.7)',
+                                            'rgba(255, 211, 0, 0.7)',
+                                            'rgba(0, 46, 96, 0.7)'
+
+                                        ],
+                                        borderColor: [
+                                            'rgba(0, 46, 96, 1)',
+                                            'rgba(255, 211, 0, 1)',
+                                            'rgba(0, 46, 96, 1)',
+                                            'rgba(255, 211, 0, 1)',
+                                            'rgba(0, 46, 96, 1)',
+                                            'rgba(255, 211, 0, 1)',
+                                            'rgba(0, 46, 96, 1)'
+                                        ],
+                                        borderWidth: 1,
+                                        data: [65, 59, 80, 81, 56, 55, 0]
+                                    }
+                                ]
+                            },
+                            options: {
+                                legend: {
+                                    display: false
+                                }
+                            }
+
+                        });
+                    </script>
+
+                </div>
             </div>
             <div class="modal-footer">
+
                 <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+
             </div>
         </div>
     </div>
@@ -199,31 +249,31 @@
 
 <!-- Display editStorage-->                    
 <script id="editStorageTemplate" type="text/x-handlebars-template">
-{{#each storage}}     
+    {{#each storage}}     
     <input form="editStorage" type="hidden" name="editStorageID" value="{{storageID}}"><br>
     Lagernavn: <br> 
     <input form="editStorage" type="text" name="editStorageName" value="{{storageName}}"><br> 
-{{/each}}            
+    {{/each}}            
 </script>  
 
 
 <!-- Display StorageInformation-->
 <script id="storageInformationTemplate" type="text/x-handlebars-template">
-{{#each storage}}    
+    {{#each storage}}    
     <tr>  
-        <th>LagerID: </th>
-        <td>{{storageID}}</td> 
+    <th class="col-md-1">LagerID: </th>
+    <td>{{storageID}}</td> 
     </tr>
     <tr>
-        <th>lagernavn: </th>
-        <td>{{storageName}}</td>
+    <th class="col-md-1">lagernavn: </th>
+    <td>{{storageName}}</td>
     </tr>
-{{/each}}                
+    {{/each}}                
 </script>   
 
 <!-- Display StorageRetricton-->
 <script id="storageRestrictionTemplate" type="text/x-handlebars-template">
-    {{#each storageRestriction}}    
+    {{#each storageRestriction}}  
     {{name}}<br>
     {{/each}}       
 </script>

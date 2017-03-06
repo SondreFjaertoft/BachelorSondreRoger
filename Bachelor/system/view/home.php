@@ -5,7 +5,7 @@
     <br> <br>     
 
     
-    <div class="col-sm-3 col-md-4">
+    <div class="col-sm-3 col-md-4" style="border: solid black 1px">
     
 
         
@@ -20,7 +20,6 @@
                     </tr>
                 </thead>
                 <tbody>
-
 
                 </tbody>
             </table>
