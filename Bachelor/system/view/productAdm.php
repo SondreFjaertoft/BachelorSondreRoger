@@ -263,7 +263,7 @@
 
     {{#each productInfo}} 
     <tr> 
-    <td class="text-center">  
+    <td class="text-center col-md-2">  
 
 
     <!-- Knapp som aktiverer Model for produktredigering  --> 

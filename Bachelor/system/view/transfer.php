@@ -9,7 +9,7 @@
         
         <div class="col-sm-3 col-md-4">
             <label>Overfør Fra:</label>
-            <select name="fromStorageID" form="transferProducts" id="fromTransferRestrictionContainer" class="form-control">
+            <select name="fromStorageID" form="transferProducts" id="fromTransferRestrictionContainer" class="form-control" placeholder="Halloja">
                 
                 <!-- Her kommer Handlebars Template-->
 
