@@ -12,6 +12,8 @@ class transferController extends Controller {
             $this->transferPage();
         } else if ($page == "getTransferRestriction"){
             $this->getTransferRestriction();
+        } else if ($page == "transferProduct"){
+            $this->transferProduct();
         }
     }
 
@@ -31,6 +33,20 @@ class transferController extends Controller {
         $restrictionModel = $restrictionInfo->getAllRestrictionInfoFromUserID($givenUserID);
     
         $data = json_encode(array("transferRestriction" => $restrictionModel));
+        echo $data;
+    }
+    
+    private function transferProduct(){
+        $fromStorageID = $_REQUEST["fromStorageID"];
+        $transferProductID = $_REQUEST["transferProductID"];
+        $transferQuantity = $_REQUEST["transferQuantity"];
+        $tostorageID = $_REQUEST["toStorageID"];
+        
+        if($fromStorageID == 0 || $toStorageID == 0){
+            $data = json_encode("velg et lager");
+        echo $data;
+        }
+        $data = json_encode("success");
         echo $data;
     }
 
