@@ -6,8 +6,8 @@ class ProductModel {
     
     const TABLE = "products";
     
+    const SELECT_QUERY_PRODUCTID = "SELECT * FROM " . ProductModel::TABLE . " WHERE productID = :givenProductID";
     const SELECT_QUERY = "SELECT * FROM " . ProductModel::TABLE;
-    const WHERE_QUERY = "SELECT storage.storageName, inventory.productID, inventory.quantity FROM storage INNER JOIN inventory ON storage.storageID = inventory.storageID INNER JOIN " . ProductModel::TABLE . " ON products.productID = inventory.productID";
     const UPDATE_QUERY = "UPDATE " . ProductModel::TABLE . " SET productName = :editProductName, buyPrice = :editBuyPrice, salePrice = :editSalePrice, categoryID = :editCategoryID, mediaID = :editMediaID, productNumber = :editProductNumber WHERE productID = :editProductID" ;
     const SEARCH_QUERY = "SELECT * FROM " . ProductModel::TABLE . " WHERE productName LIKE :givenSearchWord";
     const INSERT_QUERY = "INSERT INTO " . ProductModel::TABLE . " (productName, BuyPrice, SalePrice, CategoryID, MediaID, ProductNumber, date, macAdresse) VALUES (:givenProductName, :givenBuyPrice, :givenSalePrice, :givenCategoryID, :givenMediaID, :givenProductNumber, :givenProductDate, :givenMacAdresse)";
@@ -20,18 +20,14 @@ class ProductModel {
       $this->addStmt = $this->dbConn->prepare(ProductModel::INSERT_QUERY);
       $this->selStmt = $this->dbConn->prepare(ProductModel::SELECT_QUERY);
       $this->delStmt = $this->dbConn->prepare(ProductModel::DELETE_QUERY);
-      $this->whereStmt = $this->dbConn->prepare(ProductModel::WHERE_QUERY);
+      $this->selProductID = $this->dbConn->prepare(ProductModel::SELECT_QUERY_PRODUCTID);
+
       
     }
     
     public function getSearchResult($givenSearchWord) {
         $this->searchStmt->execute(array("givenSearchWord" => $givenSearchWord));
         return $this->searchStmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    
-    public function findWhereProductInfo() {
-       $this->whereStmt->execute();
-        return $this->whereStmt->fetchAll(PDO::FETCH_ASSOC); 
     }
     
     public function getAllProductInfo() {
@@ -50,7 +46,11 @@ class ProductModel {
     public function removeProduct($removeProductID)
     {
        return $this->delStmt->execute(array("removeProductID" => $removeProductID));
-
     }
+    
+    public function getAllProductInfoFromID($givenProductID) {
+        $this->selProductID->execute(array("givenProductID" => $givenProductID));
+        return $this->selProductID->fetchAll(PDO::FETCH_ASSOC);
+    } 
     
 }

@@ -49,29 +49,34 @@ class Router {
                 case "productAdm" :
                 case "addProductEngine" :
                 case "editProductEngine" :
-                case "deleteProductEngine" :   
+                case "deleteProductEngine" :  
+                case "getAllProductInfo" :
+                case "getProductByID" :
+                case "getProductLocation" :    
                     return new ProductController();
                     
                 case "storageAdm":
                 case "addStorageEngine":
                 case "editStorageEngine" :
                 case "deleteStorageEngine" :
+                case "getAllStorageInfo" :  
+                case "getStorageByID" :
+                case "getStorageRestriction" :
+                case "getStorageProduct" :    
                     return new StorageController();
                     
                 case "userAdm"    :
-                case "addUserEngine" :
-                case "editUserEngine" :    
-                case "deleteUserEngine" :    
-                case "searchUserEngine" :    
+                case "editUserEngine" :           
                 case "addRestriction" :    
-                    
-                // AJAX CALL
-                case "getUserInfo" :    
+                case "getUserInfo" :
+                case "addUserEngine" :   
+                case "getUserByID" :
+                case "deleteUserEngine" :    
+                case "getUserRestriction" :   
                     return new UserController();    
                     
                 case "transfer" :
-                case "testingAjax" :
-                case "getAjaxResult" :    
+                case "getTransferRestriction" :
                     return new transferController();
                     
                     

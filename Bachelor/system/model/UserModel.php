@@ -38,8 +38,8 @@ class UserModel {
         return $this->selStmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getAllUserInfoFromID($givenUserUD) {
-        $this->selUserID->execute(array("givenUserID" => $givenUserUD));
+    public function getAllUserInfoFromID($givenUserID) {
+        $this->selUserID->execute(array("givenUserID" => $givenUserID));
         return $this->selUserID->fetchAll(PDO::FETCH_ASSOC);
     }
 
