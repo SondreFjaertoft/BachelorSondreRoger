@@ -73,7 +73,7 @@
         <input name="transferProductID[]" form="transferProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
         <td><input name="transferQuantity[]" form="transferProducts" type="int" value=""/></td> 
-        <th>Tilgjengelig</th>
+        <th>Tilgjengelig:</th>
         <td>{{quantity}} stk</td>    
     </tr>
 {{/each}}
