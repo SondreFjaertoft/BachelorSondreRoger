@@ -1,7 +1,6 @@
 <?php
 
 
-  require_once("dummy.php");
   require_once("UserModel.php");
   require_once("StorageModel.php");
   require_once("RestrictionModel.php");
@@ -13,7 +12,6 @@
 $dbConn = new PDO('mysql:host=localhost;dbname=tafjord;charset=utf8mb4', 'root', 'Tafjord123');
 
 // Create data models
-$dummy = new Dummy($dbConn);
 $userModel = new UserModel($dbConn);
 $storageModel = new StorageModel($dbConn);
 $restrictionModel = new RestritionModel($dbConn);

@@ -1,11 +1,10 @@
 <?php
 
 // include all controllers we have
-require_once("OverviewController.php");
 require_once("LoginController.php");
 require_once("HomeController.php");
 require_once("UserController.php");
 require_once("StorageController.php");
-require_once("productController.php");
-require_once("transferController.php");
-
+require_once("ProductController.php");
+require_once("TransferController.php");
+require_once("SaleController.php");
