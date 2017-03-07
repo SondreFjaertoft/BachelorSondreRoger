@@ -280,7 +280,7 @@
 
 <!-- Display StorageProduct-->
 <script id="storageProductTemplate" type="text/x-handlebars-template">
-    {{#each storageProduct}}         
+    {{#each storageProduct}}          
     {{productName}} , Antall: {{quantity}}<br>   
     {{/each}}    
 </script>

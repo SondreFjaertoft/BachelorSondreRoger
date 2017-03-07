@@ -63,7 +63,8 @@ class InventoryModel {
         $this->addStmt->execute(array("givenStorageID" => $givenStorageID, "givenProductID" => $givenProductID, "givenQuantity" => $givenQuantity));
         return $this->addStmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    }   
+    
+}   
     
 
     

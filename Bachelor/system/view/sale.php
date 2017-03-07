@@ -8,48 +8,69 @@
 
 
     <div class="col-sm-3 col-sm-offset-1 col-md-6 col-md-offset-2 form-group">
-        
-        
+
+
         <div class="col-sm-3 col-md-4">
             <label>Uttak fra:</label>
             <select name="fromStorageID" form="withdrawProducts" id="withdrawrRestrictionContainer" class="form-control">
-                
+
                 <!-- Her kommer Handlebars Template-->
 
             </select>
         </div>
-        
-        
-        <br><br><br><br>
 
+
+        <br><br><br><br>
+        
         <div id="withdrawProductContainer">
             
-            
+
             <!-- Viser Product som er valgt i FRA lager -->
 
 
         </div>        
-        
+
         <br><br><br>
+
+        <div>
+            <table class="table table-bordered table-striped table-responsive" id="commentContainer">
+
+                <tr>
+                    <th>Kundenr:   </th> 
+                    <td><input name="customerNumber" form="withdrawProducts" type="int" value=""/></td> 
+                </tr>  
+                <tr>
+                    <th>kommentar:  </th>
+                    <td><input name="withdrawComment" form="withdrawProducts" type="text" value=""/></td>
+                </tr>
+
+            </table>
+        </div>
+
+        <br>
         
         <div>
             <table class="table table-bordered table-striped table-responsive" id="withdrawQuantityContainer">
 
-            <!-- Lar deg velge antall enheter -->
-            
+                <!-- Lar deg velge antall enheter -->
+
             </table>
-            
-            
+
+
             <form id="withdrawProducts" action="?page=withdrawProduct" method="post"></form>
+            <input form="withdrawProducts" type="hidden" id="date" name="date">
+            
             <button form="withdrawProducts" type="submit" class="btn btn-default" id="withdrawButton">Overfør</button>
             <p id="errorMessage"></p>
         </div>    
 
-        
-        
-        
+
+
+
     </div>  
 </div>    
+
+
 
 <script id="withdrawQuantityTemplate" type="text/x-handlebars-template">
     
@@ -74,31 +95,34 @@
 <tr>
     <option data-id="{{storageID}}" value="{{storageID}}" class="withdrawStorage">{{storageName}}</option>
 </tr>   
-{{/each}} 
+{{/each}}
+        
 </script>  
 
 
 <script id="withdrawProductTemplate" type="text/x-handlebars-template">
-<br>
-{{#each storageProduct}}    
- <button data-id="{{productID}}" class="btn btn-default product">{{productName}}</button>
-{{/each}} 
+    <br>
+    {{#each storageProduct}}    
+    <button data-id="{{productID}}" class="btn btn-default product">{{productName}}</button>
+    {{/each}} 
 </script>
 
 <!-- Get storage information with user restriction -->
-<script> 
-$('#withdrawButton').hide(); // hides transferbutton                    
-$(function () {
-    $.ajax({
-        type: 'GET',
-        url: '?page=getTransferRestriction',
-        dataType: 'json',
-        success: function (data) {
-            withdrawRestrictionTemplate(data);
-            } 
+<script>
+    $('#withdrawButton').hide(); // hides transferbutton  
+    $('#commentContainer').hide();
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getTransferRestriction',
+            dataType: 'json',
+            success: function (data) {
+                withdrawRestrictionTemplate(data);
+            }
         });
     });
 </script>
+
 
 <!-- Display storages in drop down meny Template -->
 <script>
@@ -120,26 +144,27 @@ $(function () {
 
         $('#withdrawrRestrictionContainer').on('change', function () {
             var givenStorageID = $(this).find("option:selected").data('id');
-            
-            if(givenStorageID > 0){
+
+            if (givenStorageID > 0) {
                 $.ajax({
                     type: 'POST',
                     url: '?page=getStorageProduct',
                     data: {givenStorageID: givenStorageID},
                     dataType: 'json',
                     success: function (data) {
-                    withdrawProductTemplate(data);
-                    $('.selectQuantity').remove();
-                    $('#transferButton').hide();
-                
+                        withdrawProductTemplate(data);
+                        $('.selectQuantity').remove();
+                        $('#transferButton').hide();
+                        $('#commentContainer').hide();
+                        getDate();
                     }
                 });
-            } else  {
+            } else {
                 $('.product').remove();
                 $('.selectQuantity').remove();
             }
-            
-        return false;
+
+            return false;
 
         });
     });
@@ -160,31 +185,32 @@ $(function () {
 <!-- Get productID from selected ID -->
 <script>
     $(function POSTselectedProduct() {
-        
+
         $('#withdrawProductContainer').delegate('.product', 'click', function () {
-            if($(this).data('clicked')) { 
+            if ($(this).data('clicked')) {
                 return false;
-            }    
-             
+            }
+
             $(this).data('clicked', true);
-            
+
             var givenProductID = $(this).attr('data-id');
-            
-            
+
+
             $.ajax({
                 type: 'POST',
                 url: '?page=getProductByID',
                 data: {givenProductID: givenProductID},
                 dataType: 'json',
                 success: function (data) {
-                    
+
                     withdrawQuantityTemplate(data);
-                     $('#withdrawButton').show();        
+                    $('#commentContainer').show();
+                    $('#withdrawButton').show();
                 }
             });
             return false;
-            
-            
+
+
         });
     });
 </script> 
@@ -208,26 +234,56 @@ $(function () {
         $('#withdrawProducts').submit(function () {
             var url = $(this).attr('action');
             var data = $(this).serialize();
- 
-                $.ajax({
+
+            $.ajax({
                 type: 'POST',
                 url: url,
                 data: data,
                 dataType: 'json',
-                error: function() {         
+                error: function () {
                     var $displayUsers = $('#errorMessage');
                     $displayUsers.empty().append("Kunne ikke overføre");
                 },
                 success: function (data) {
-                   $('.product').remove();
-                   $('.selectQuantity').remove();
-                   $('#errorMessage').remove();
-                   updateTransfer();
+                    $('.product').remove();
+                    $('.selectQuantity').remove();
+                    $('#errorMessage').remove();
+                    updateSale();
                 }
             });
             return false;
         });
-     });    
+    });
+</script>
+
+<script> 
+function updateSale() {                            
+$('#withdrawButton').hide();// hides transferbutton 
+$('#commentContainer').hide();
+$(function () {
+    $.ajax({
+        type: 'GET',
+        url: '?page=getTransferRestriction',
+        dataType: 'json',
+        success: function (data) {
+            withdrawRestrictionTemplate(data);
+            }  
+        });
+    });
+}
+</script>
+
+<script>
+Date.prototype.yyyymmdd = function() {
+   var yyyy = this.getFullYear();
+   var mm = this.getMonth() < 9 ? "0" + (this.getMonth() + 1) : (this.getMonth() + 1); // getMonth() is zero-based
+   var dd  = this.getDate() < 10 ? "0" + this.getDate() : this.getDate();
+   return "".concat(yyyy).concat(mm).concat(dd);
+  };
+
+var d = new Date();
+document.getElementById("date").value  = d.yyyymmdd();
+
 </script>
 
 
