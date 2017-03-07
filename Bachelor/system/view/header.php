@@ -47,9 +47,9 @@
                     <br><br>
                     <ul class="nav nav-sidebar list-group">
                         <li><a class="list-group-item active" href="?page=home">Home</a></li><br>
+                        <li><a class="list-group-item active" href="?page=sale">Registrer Uttak</a></li><br>
                         <li><a class="list-group-item active">Dine Salg</a></li><br>
                         <li><a class="list-group-item active">Dine Returer</a></li><br>
-                        <li><a class="list-group-item active">Registrer Utlevering</a></li><br>
                         <li><a class="list-group-item active">Registrer Retur</a></li><br>
                         <li><a class="list-group-item active" href="?page=transfer">Overføring</a></li><br>
                         
