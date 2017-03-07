@@ -194,17 +194,17 @@
 {{#each product}}    
     <input form="editProduct" type="hidden" name="editProductID" value="{{productID}}"><br>
     Produktnavn: <br>
-    <input form="editProduct" type="text" name="editProductName" value="{{productName}}"><br>
+    <input form="editProduct" type="text" name="editProductName" value="{{productName}}" autocomplete="off"><br>
     Kjøpspris: <br>
-    <input form="editProduct" type="int" name="editBuyPrice" value="{{buyPrice}}"><br>
+    <input form="editProduct" type="int" name="editBuyPrice" value="{{buyPrice}}" autocomplete="off"><br>
     Salgspris: <br>
-    <input form="editProduct" type="int" name="editSalePrice" value="{{salePrice}}"><br>
+    <input form="editProduct" type="int" name="editSalePrice" value="{{salePrice}}" autocomplete="off"><br>
     Kategori: <br>
-    <input form="editProduct" type="int" name="editCategoryID" value="{{categoryID}}"><br>
+    <input form="editProduct" type="int" name="editCategoryID" value="{{categoryID}}" autocomplete="off"><br>
     Media: <br>
-    <input form="editProduct" type="int" name="editMediaID" value="{{mediaID}}"><br>
+    <input form="editProduct" type="int" name="editMediaID" value="{{mediaID}}" autocomplete="off"><br>
     Produktnummer: <br>
-    <input form="editProduct" type="text" name="editProductNumber" value="{{productNumber}}"><br>
+    <input form="editProduct" type="text" name="editProductNumber" value="{{productNumber}}" autocomplete="off"><br>
 {{/each}} 
 </script>  
 

@@ -252,7 +252,7 @@
     {{#each storage}}     
     <input form="editStorage" type="hidden" name="editStorageID" value="{{storageID}}"><br>
     Lagernavn: <br> 
-    <input form="editStorage" type="text" name="editStorageName" value="{{storageName}}"><br> 
+    <input form="editStorage" type="text" name="editStorageName" value="{{storageName}}" autocomplete="off"><br> 
     {{/each}}            
 </script>  
 

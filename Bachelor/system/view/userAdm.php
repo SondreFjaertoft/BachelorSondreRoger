@@ -42,15 +42,15 @@
                             <div style="text-align: center">
                                 <form action="?page=addUserEngine" method="post" id="createUser">
                                     <p style="font-weight: bold ">Name:</p>
-                                    <input type="text" name="givenName" value=""><br>
+                                    <input type="text" name="givenName" value="" autocomplete="off"><br>
                                     <p style="font-weight: bold ">Brukernavn:</p>
-                                    <input type="text" name="givenUsername" value=""><br>
+                                    <input type="text" name="givenUsername" value="" autocomplete="off"><br>
                                     <p style="font-weight: bold ">Passord:</p>
-                                    <input type="text" name="givenPassword" value=""><br>
+                                    <input type="text" name="givenPassword" value="" autocomplete="off"><br>
                                     <p style="font-weight: bold ">UserLevel:</p>
-                                    <input type="text" name="givenUserLevel" value=""><br>
+                                    <input type="text" name="givenUserLevel" value="" autocomplete="off"><br>
                                     <p style="font-weight: bold ">Email:</p>
-                                    <input type="text" name="givenEmail" value=""><br>
+                                    <input type="text" name="givenEmail" value="" autocomplete="off"><br>
                                     <br>
                                 </form> 
                             </div>
