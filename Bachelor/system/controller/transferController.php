@@ -38,14 +38,48 @@ class transferController extends Controller {
     
     private function transferProduct(){
         $fromStorageID = $_REQUEST["fromStorageID"];
-        $transferProductID = $_REQUEST["transferProductID"];
-        $transferQuantity = $_REQUEST["transferQuantity"];
+        $transferProductIDArray = $_REQUEST["transferProductID"];
+        $transferQuantityArray = $_REQUEST["transferQuantity"];
         $toStorageID = $_REQUEST["toStorageID"];
         
         if($fromStorageID == 0 || $toStorageID == 0){
            return false;
-        } else $data = json_encode("success");
-        echo $data;
+        } else { 
+        
+            
+            
+        $inventoryInfo = $GLOBALS["inventoryModel"];
+        
+         for($i = 0; $i < sizeof($transferProductIDArray); $i++ ){
+             $count = $inventoryInfo->doesProductExistInStorage($toStorageID, $transferProductIDArray[$i]);
+           
+        foreach($count as $counts)  :  
+        
+            if($counts["COUNT(*)"] < 1){
+                 
+                
+                    $inventoryInfo->addInventory($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
+                    $inventoryInfo->transferFromStorage($fromStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
+                
+          
+                
+            } else {
+               
+                    $inventoryInfo->transferFromStorage($fromStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
+                    $inventoryInfo->transferToStorage($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]); 
+                
+            }   
+        
+        endforeach;
+
+        }
+        
+    }   
+        $data = json_encode("success");
+    echo $data;
+       
     }
+    
+    
 
 }

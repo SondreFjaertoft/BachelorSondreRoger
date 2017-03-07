@@ -229,7 +229,7 @@ $(function () {
                 dataType: 'json',
                 error: function() {         
                     var $displayUsers = $('#errorMessage');
-                    $displayUsers.append("Du må velge et TIL lager");
+                    $displayUsers.empty().append("Du må velge et TIL lager");
                 },
                 success: function (data) {
                    $('.product').remove();
