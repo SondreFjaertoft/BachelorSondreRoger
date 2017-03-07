@@ -46,20 +46,38 @@ class transferController extends Controller {
            return false;
         } else { 
         
+            
+            
         $inventoryInfo = $GLOBALS["inventoryModel"];
         
-        foreach ($transferProductIDArray as $transferProductID) :
-            
-            foreach ($transferQuantityArray as $transferQuantity) :
+         for($i = 0; $i < sizeof($transferProductIDArray); $i++ ){
+             $count = $inventoryInfo->doesProductExistInStorage($toStorageID, $transferProductIDArray[$i]);
+           
+        foreach($count as $counts)  :  
+        
+            if($counts["COUNT(*)"] < 1){
+                 
                 
-                $inventoryInfo->transferFromStorage($fromStorageID, $transferProductID, $transferQuantity);
-                $inventoryInfo->transferToStorage($toStorageID, $transferProductID, $transferQuantity); 
-            
-            endforeach;
+                    $inventoryInfo->addInventory($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
+                    $inventoryInfo->transferFromStorage($fromStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
+                
+          
+                
+            } else {
+               
+                    $inventoryInfo->transferFromStorage($fromStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
+                    $inventoryInfo->transferToStorage($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]); 
+                
+            }   
+        
         endforeach;
-        $data = json_encode("success");
-        echo $data;
+
         }
+        
+    }   
+        $data = json_encode("success");
+    echo $data;
+       
     }
     
     

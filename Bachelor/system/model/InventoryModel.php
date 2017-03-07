@@ -7,6 +7,8 @@ class InventoryModel {
 
     
     const TABLE = "inventory";
+    const FIND_QUERY = "SELECT COUNT(*) FROM " . InventoryModel::TABLE . " WHERE storageID = :givenStorageID AND productID = :givenProductID";
+    const ADD_QUERY = "INSERT INTO " . InventoryModel::TABLE . " (storageID, productID, quantity) VALUES (:givenStorageID, :givenProductID, :givenQuantity)";
     const TO_STORAGE = "UPDATE " . InventoryModel::TABLE . " SET quantity = quantity + :givenQuantity WHERE productID = :givenProductID AND storageID = :givenStorageID";
     const FROM_STORAGE = "UPDATE " . InventoryModel::TABLE . " SET quantity = quantity - :givenQuantity WHERE productID = :givenProductID AND storageID = :givenStorageID";
     const SELECT_QUERY_PRODUCTID = "SELECT storage.storageName, inventory.productID, inventory.quantity FROM " . InventoryModel::TABLE . " INNER JOIN storage ON storage.storageID = inventory.storageID WHERE productID = :givenProductID";
@@ -22,6 +24,8 @@ class InventoryModel {
         $this->selProductID = $this->dbConn->prepare(InventoryModel::SELECT_QUERY_PRODUCTID);
         $this->fromStorage = $this->dbConn->prepare(InventoryModel::FROM_STORAGE);
         $this->toStorage = $this->dbConn->prepare(InventoryModel::TO_STORAGE);
+        $this->addStmt = $this->dbConn->prepare(InventoryModel::ADD_QUERY);
+        $this->findStm = $this->dbConn->prepare(InventoryModel::FIND_QUERY);
     }
 
 
@@ -40,6 +44,11 @@ class InventoryModel {
         return $this->selProductID->fetchAll(PDO::FETCH_ASSOC);        
     }
     
+    public function doesProductExistInStorage($givenStorageID, $givenProductID){
+        $this->findStm->execute(array("givenStorageID" => $givenStorageID, "givenProductID" => $givenProductID));
+        return $this->findStm->fetchAll(PDO::FETCH_ASSOC); 
+    }
+    
     public function transferFromStorage($givenStorageID, $givenProductID, $givenQuantity){
         $this->fromStorage->execute(array("givenStorageID" => $givenStorageID, "givenProductID" => $givenProductID, "givenQuantity" => $givenQuantity));
         return $this->fromStorage->fetchAll(PDO::FETCH_ASSOC); 
@@ -49,7 +58,11 @@ class InventoryModel {
         $this->toStorage->execute(array("givenStorageID" => $givenStorageID, "givenProductID" => $givenProductID, "givenQuantity" => $givenQuantity));
         return $this->toStorage->fetchAll(PDO::FETCH_ASSOC); 
     }
-        
+    
+    public function addInventory($givenStorageID, $givenProductID, $givenQuantity){
+        $this->addStmt->execute(array("givenStorageID" => $givenStorageID, "givenProductID" => $givenProductID, "givenQuantity" => $givenQuantity));
+        return $this->addStmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     }   
     
 
