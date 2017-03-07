@@ -110,4 +110,4 @@ class ProductController extends Controller {
         echo $data; 
     }
 
-}
+} 

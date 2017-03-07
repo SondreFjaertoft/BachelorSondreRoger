@@ -71,4 +71,4 @@ class transferController extends Controller {
         echo $data;
     }
 
-}
+} 
