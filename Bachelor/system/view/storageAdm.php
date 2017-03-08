@@ -456,11 +456,12 @@
     $(function POSTstorageInformationModal() {
 
         $('#displayStorageContainer').delegate('.information', 'click', function () {
-
+            
             var givenStorageID = $(this).attr('data-id');
             POSTstorageRestriction(givenStorageID);
             POSTstorageProduct(givenStorageID);
             chartTest(givenStorageID);
+            
             $.ajax({
                 type: 'POST',
                 url: '?page=getStorageByID',
@@ -483,6 +484,7 @@
 <!-- Get storageInventory from selected storage-->
 <script>
     function chartTest(data) {
+         
         var givenStorageID = data;
         $(function () {
             $.ajax({
@@ -491,6 +493,7 @@
                 data: {givenStorageID: givenStorageID},
                 dataType: 'json',
                 success: function (data) {
+                   
                     var ctx = document.getElementById('myChart').getContext('2d');
                     var product = [];
                     var antall = [];
@@ -499,7 +502,8 @@
                         product.push(item.productName);
                         antall.push(item.quantity);
                         });
-                
+                            
+
                              var myChart = new Chart(ctx, {
                             type: 'bar',
                             data: {
