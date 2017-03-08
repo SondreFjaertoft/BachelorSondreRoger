@@ -223,7 +223,7 @@
 
 <script id="storageRestrictionTemplate" type="text/x-handlebars-template">
 {{#each storageInfo}}
-    <tr>
+    <tr> 
         <td>{{storageName}}</td> 
 
         <td><input form="editRestriction" class="selectStorageRestriction" id="{{storageID}}" value="{{storageID}}"  name="storageRestrictions[]" type="checkbox"></td>
@@ -319,7 +319,7 @@
     display: inline;">
     <span class="glyphicon glyphicon-edit" style="color: green"></span>
     </button>
- 
+  
 
     <!-- Knapp som aktiverer Model for å vise brukerinformasjon  --> 
 
