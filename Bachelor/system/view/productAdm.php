@@ -62,17 +62,17 @@
                     <div style="text-align: center">
                         <form action="?page=addProductEngine" method="post" id="createProduct">
                             <p style="font-weight: bold ">Produktnavn:</p>
-                            <input type="text" name="givenProductName" value=""><br>
+                            <input type="text" required="required" name="givenProductName" value=""><br>
                             <p style="font-weight: bold ">Kjøpspris:</p>
-                            <input type="int" name="givenBuyPrice" value=""><br>
+                            <input type="int" required="required" name="givenBuyPrice" value=""><br>
                             <p style="font-weight: bold ">Salgspris:</p>
-                            <input type="int" name="givenSalePrice" value=""><br>
+                            <input type="int" required="required" name="givenSalePrice" value=""><br>
                             <p style="font-weight: bold ">Kategori:</p>
-                            <input type="int" name="givenCategoryID" value=""><br>
+                            <input type="int" required="required" name="givenCategoryID" value=""><br>
                             <p style="font-weight: bold ">Media:</p>
-                            <input type="int" name="givenMediaID" value=""><br>
+                            <input type="int" required="required" name="givenMediaID" value=""><br>
                             <p style="font-weight: bold ">Produktnummer:</p>
-                            <input type="text" name="givenProductNumber" value=""><br>
+                            <input type="text" required="required" name="givenProductNumber" value=""><br>
                             <p style="font-weight: bold ">MacAdresse:</p>
                             <input type="checkbox" id="TRUE" name="givenMacAdresse" value="TRUE"><br>
                             <br>
@@ -194,17 +194,17 @@
 {{#each product}}    
     <input form="editProduct" type="hidden" name="editProductID" value="{{productID}}"><br>
     Produktnavn: <br>
-    <input form="editProduct" type="text" name="editProductName" value="{{productName}}" autocomplete="off"><br>
+    <input form="editProduct" type="text" required="required" name="editProductName" value="{{productName}}" autocomplete="off"><br>
     Kjøpspris: <br>
-    <input form="editProduct" type="int" name="editBuyPrice" value="{{buyPrice}}" autocomplete="off"><br>
+    <input form="editProduct" type="int" required="required" name="editBuyPrice" value="{{buyPrice}}" autocomplete="off"><br>
     Salgspris: <br>
-    <input form="editProduct" type="int" name="editSalePrice" value="{{salePrice}}" autocomplete="off"><br>
+    <input form="editProduct" type="int" required="required" name="editSalePrice" value="{{salePrice}}" autocomplete="off"><br>
     Kategori: <br>
-    <input form="editProduct" type="int" name="editCategoryID" value="{{categoryID}}" autocomplete="off"><br>
+    <input form="editProduct" type="int" required="required" name="editCategoryID" value="{{categoryID}}" autocomplete="off"><br>
     Media: <br>
-    <input form="editProduct" type="int" name="editMediaID" value="{{mediaID}}" autocomplete="off"><br>
+    <input form="editProduct" type="int" required="required" name="editMediaID" value="{{mediaID}}" autocomplete="off"><br>
     Produktnummer: <br>
-    <input form="editProduct" type="text" name="editProductNumber" value="{{productNumber}}" autocomplete="off"><br>
+    <input form="editProduct" type="text" required="required" name="editProductNumber" value="{{productNumber}}" autocomplete="off"><br>
 {{/each}} 
 </script>  
 

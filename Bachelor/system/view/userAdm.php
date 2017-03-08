@@ -42,15 +42,15 @@
                             <div style="text-align: center">
                                 <form action="?page=addUserEngine" method="post" id="createUser">
                                     <p style="font-weight: bold ">Name:</p>
-                                    <input type="text" name="givenName" value="" autocomplete="off"><br>
+                                    <input type="text" name="givenName" required="required" value="" autocomplete="off"><br>
                                     <p style="font-weight: bold ">Brukernavn:</p>
-                                    <input type="text" name="givenUsername" value="" autocomplete="off"><br>
+                                    <input type="text" name="givenUsername" required="required" value="" autocomplete="off"><br>
                                     <p style="font-weight: bold ">Passord:</p>
-                                    <input type="text" name="givenPassword" value="" autocomplete="off"><br>
+                                    <input type="text" name="givenPassword" required="required" value="" autocomplete="off"><br>
                                     <p style="font-weight: bold ">UserLevel:</p>
-                                    <input type="text" name="givenUserLevel" value="" autocomplete="off"><br>
+                                    <input type="text" name="givenUserLevel" required="required" value="" autocomplete="off"><br>
                                     <p style="font-weight: bold ">Email:</p>
-                                    <input type="text" name="givenEmail" value="" autocomplete="off"><br>
+                                    <input type="text" name="givenEmail" required="required" value="" autocomplete="off"><br>
                                     <br>
                                 </form> 
                             </div>
@@ -237,15 +237,15 @@
     {{#each user}}     
     <input form="editUser" type="hidden" name="editUserID" value="{{userID}}"><br>
     Navn: <br>
-    <input form="editUser" type="text" name="editName" value="{{name}}"><br>
+    <input form="editUser" type="text" required="required" name="editName" value="{{name}}"><br>
     Brukernavn: <br>
-    <input form="editUser" type="text" name="editUsername" value="{{username}}"><br>
+    <input form="editUser" type="text" required="required" name="editUsername" value="{{username}}"><br>
     Passord: <br>
-    <input form="editUser" type="text" name="editPassword" value="{{password}}"><br>
+    <input form="editUser" type="text" required="required" name="editPassword" value="{{password}}"><br>
     Brukernivå: <br>
-    <input form="editUser" type="text" name="editUserLevel" value="{{userLevel}}"><br>
+    <input form="editUser" type="text" required="required" name="editUserLevel" value="{{userLevel}}"><br>
     Epost: <br>
-    <input form="editUser" type="text" name="editEmail" value="{{email}}"><br>
+    <input form="editUser" type="text" required="required" name="editEmail" value="{{email}}"><br>
     <br>    
     {{/each}}
 </script>   

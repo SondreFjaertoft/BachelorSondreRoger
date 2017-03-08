@@ -62,7 +62,7 @@
                 <div style="text-align: center">
                     <form action="?page=addStorageEngine" method="post" id="createStorage">
                         Navn på lager:<br>
-                        <input type="text" name="givenStorageName" value=""><br>
+                        <input type="text" required="required" name="givenStorageName" value=""><br>
 
                         <br>
 
@@ -252,7 +252,7 @@
     {{#each storage}}     
     <input form="editStorage" type="hidden" name="editStorageID" value="{{storageID}}"><br>
     Lagernavn: <br> 
-    <input form="editStorage" type="text" name="editStorageName" value="{{storageName}}" autocomplete="off"><br> 
+    <input form="editStorage" required="required" type="text" name="editStorageName" value="{{storageName}}" autocomplete="off"><br> 
     {{/each}}            
 </script>  
 
