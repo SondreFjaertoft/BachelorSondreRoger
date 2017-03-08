@@ -484,14 +484,33 @@
 <script>
     function chartTest(data) {
         var givenStorageID = data;
+       
         $(function () {
+            
+           
             $.ajax({
                 type: 'POST',
                 url: '?page=chartProduct',
                 data: {givenStorageID: givenStorageID},
                 dataType: 'json',
                 success: function (data) {
-                    var ctx = document.getElementById('myChart').getContext('2d');
+                    
+                    drawChart(data);
+                    
+                }
+            });
+        });
+    }
+    var myChart;
+    
+    function drawChart(data)
+    {
+        if(myChart)
+        {
+            myChart.destroy();
+        }
+          var ctx = document.getElementById('myChart').getContext('2d');
+
                     var product = [];
                     var antall = [];
 
@@ -499,8 +518,10 @@
                         product.push(item.productName);
                         antall.push(item.quantity);
                         });
+                        
+                        
                 
-                             var myChart = new Chart(ctx, {
+                            myChart = new Chart(ctx, {
                             type: 'bar',
                             data: {
                                 labels: product,
@@ -538,11 +559,6 @@
                             }
 
                         });
-                    
-                    
-                }
-            });
-        });
     }
 </script>
 
