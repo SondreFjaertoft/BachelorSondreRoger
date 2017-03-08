@@ -37,11 +37,11 @@
 
                 <tr>
                     <th>Kundenr:   </th> 
-                    <td><input name="customerNumber" form="withdrawProducts" type="int" value=""/></td> 
+                    <td><input name="customerNumber" required="required" form="withdrawProducts" type="int" value=""/></td> 
                 </tr>  
                 <tr>
                     <th>kommentar:  </th>
-                    <td><input name="withdrawComment" form="withdrawProducts" type="text" value=""/></td>
+                    <td><input name="withdrawComment" required="required" form="withdrawProducts" type="text" value=""/></td>
                 </tr>
 
             </table>
@@ -55,7 +55,6 @@
                 <!-- Lar deg velge antall enheter -->
 
             </table>
-
 
             <form id="withdrawProducts" action="?page=withdrawProduct" method="post"></form>
             <input form="withdrawProducts" type="hidden" id="date" name="date">
@@ -73,14 +72,13 @@
 
 
 <script id="withdrawQuantityTemplate" type="text/x-handlebars-template">
-    
-{{#each product}}   
+{{#each prodInfo}} 
     <tr class="selectQuantity">
         <th>Produkt:   </th>
         <td>{{productName}}</td>
         <input name="withdrawProductID[]" form="withdrawProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
-        <td><input name="withdrawQuantity[]" form="withdrawProducts" type="int" value="" autocomplete="off"/></td> 
+        <td><input name="withdrawQuantity[]" form="withdrawProducts" required="required" type="number" min="1" max="{{quantity}}" value="" autocomplete="off"/></td> 
         <th>Tilgjengelig:</th>
         <td>{{quantity}} stk</td>    
     </tr>
@@ -101,8 +99,8 @@
 
 
 <script id="withdrawProductTemplate" type="text/x-handlebars-template">
-    <br>
-    {{#each storageProduct}}    
+    <br>  
+    {{#each storageProduct}} 
     <button data-id="{{productID}}" class="btn btn-default product">{{productName}}</button>
     {{/each}} 
 </script>
@@ -140,10 +138,11 @@
 
 <!-- Get the selected storage, and POST this to retrive inventory-->
 <script>
+    var givenStorageID;
     $(function POSTfromStorageModal() {
-
+        
         $('#withdrawrRestrictionContainer').on('change', function () {
-            var givenStorageID = $(this).find("option:selected").data('id');
+            givenStorageID = $(this).find("option:selected").data('id');
 
             if (givenStorageID > 0) {
                 $.ajax({
@@ -156,7 +155,7 @@
                         $('.selectQuantity').remove();
                         $('#transferButton').hide();
                         $('#commentContainer').hide();
-                        getDate();
+                
                     }
                 });
             } else {
@@ -184,22 +183,23 @@
 
 <!-- Get productID from selected ID -->
 <script>
+                            
     $(function POSTselectedProduct() {
 
         $('#withdrawProductContainer').delegate('.product', 'click', function () {
             if ($(this).data('clicked')) {
                 return false;
             }
-
+            
             $(this).data('clicked', true);
-
+            
             var givenProductID = $(this).attr('data-id');
 
 
             $.ajax({
                 type: 'POST',
-                url: '?page=getProductByID',
-                data: {givenProductID: givenProductID},
+                url: '?page=getProdQuantity',
+                data: {givenProductID: givenProductID, givenStorageID: givenStorageID},
                 dataType: 'json',
                 success: function (data) {
 
@@ -224,6 +224,7 @@
 
         var transferContainer = document.getElementById("withdrawQuantityContainer");
         transferContainer.innerHTML += transferProductGeneratedHTML;
+        
     }
 </script>
 

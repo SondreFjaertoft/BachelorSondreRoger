@@ -81,7 +81,8 @@ class Router {
                     return new TransferController();
                     
                 case "sale" :
-                case "withdrawProduct" :    
+                case "withdrawProduct" :  
+                case "getProdQuantity" :    
                     return new SaleController();
                     
                     

@@ -14,6 +14,7 @@ class InventoryModel {
     const SELECT_QUERY_PRODUCTID = "SELECT storage.storageName, inventory.productID, inventory.quantity FROM " . InventoryModel::TABLE . " INNER JOIN storage ON storage.storageID = inventory.storageID WHERE productID = :givenProductID";
     const SELECT_QUERY = "SELECT storageID, products.productName, products.productID, quantity FROM " . InventoryModel::TABLE . " INNER JOIN products ON products.productID = inventory.productID";
     const SELECT_QUERY_STORAGEID = "SELECT storageID, products.productName, products.productID, quantity FROM " . InventoryModel::TABLE . " INNER JOIN products ON products.productID = inventory.productID WHERE storageID = :givenStorageID";
+    const SELECT_FROM_stoID_proID = "SELECT products.productID, productName, quantity FROM products INNER JOIN " . InventoryModel::TABLE . " on products.productID LIKE inventory.productID WHERE storageID = :givenStorageID AND products.productID = :givenProductID";
     
     private $selStmt;
 
@@ -26,6 +27,7 @@ class InventoryModel {
         $this->toStorage = $this->dbConn->prepare(InventoryModel::TO_STORAGE);
         $this->addStmt = $this->dbConn->prepare(InventoryModel::ADD_QUERY);
         $this->findStm = $this->dbConn->prepare(InventoryModel::FIND_QUERY);
+        $this->stoID_proID = $this->dbConn->prepare(InventoryModel::SELECT_FROM_stoID_proID);
     }
 
 
@@ -64,6 +66,10 @@ class InventoryModel {
         return $this->addStmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    public function getProdFromStorageIDAndProductID($givenStorageID, $givenProductID){
+        $this->stoID_proID->execute(array("givenStorageID" => $givenStorageID, "givenProductID" => $givenProductID));
+        return $this->stoID_proID->fetchAll(PDO::FETCH_ASSOC);
+    }
 }   
     
 

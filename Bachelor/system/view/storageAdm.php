@@ -203,8 +203,8 @@
 
                         });
                     </script>
-
                 </div>
+                    
             </div>
             <div class="modal-footer">
 
@@ -500,6 +500,7 @@
                 success: function (data) {
                     $('#showStorageInformationModal').modal('show');
                     StorageInformationTemplate(data);
+                    chartTemplate(data);
 
                 }
             });
@@ -562,7 +563,8 @@
                 data: {givenStorageID: givenStorageID},
                 dataType: 'json',
                 success: function (data) {
-                    storageProductTemplate(data);
+                    storageProductTemplate(data); 
+
                 }
             });
         });

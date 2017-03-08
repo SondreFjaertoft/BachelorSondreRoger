@@ -11,7 +11,8 @@ class SaleController extends Controller {
             $this->withdrawProduct();
         } else if ($page == "saleFromStorageID"){
             $this->saleFromStorageID();
-        }
+        } else if ($page == "getProdQuantity")
+            $this->getProdQuantity ();
     }
 
     private function salePage() {
@@ -55,6 +56,19 @@ class SaleController extends Controller {
              } 
              echo json_encode("success");
         }
+    }
+    
+    private function getProdQuantity(){
+        $givenStorageID = $_REQUEST["givenStorageID"];
+        $givenProductID = $_REQUEST["givenProductID"];
+        
+        $inventoryInfo = $GLOBALS["inventoryModel"];
+        
+        $inventoryModel = $inventoryInfo->getProdFromStorageIDAndProductID($givenStorageID, $givenProductID);
+
+        $data = json_encode(array("prodInfo" => $inventoryModel));
+        echo $data;
+        
     }
 }
     

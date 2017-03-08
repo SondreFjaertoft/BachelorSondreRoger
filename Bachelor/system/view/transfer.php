@@ -66,13 +66,13 @@
 
 <script id="transferQuantityTemplate" type="text/x-handlebars-template">
     
-{{#each product}}   
+{{#each prodInfo}}   
     <tr class="selectQuantity">
         <th>Produkt:   </th>
         <td>{{productName}}</td>
         <input name="transferProductID[]" form="transferProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
-        <td><input name="transferQuantity[]" form="transferProducts" type="int" value="" autocomplete="off"/></td> 
+        <td><input name="transferQuantity[]" form="transferProducts" required="required" type="number" min="1" max="{{quantity}}" value="" autocomplete="off"/></td> 
         <th>Tilgjengelig:</th>
         <td>{{quantity}} stk</td>    
     </tr>
@@ -89,7 +89,7 @@
 
 <script id="transferRestrictionTemplate" type="text/x-handlebars-template">
 <option data-id="0" value="0" class="transferStorage">Velg et lager</option>
-{{#each transferRestriction}}    
+{{#each transferRestriction}}     
 <tr>
     <option data-id="{{storageID}}" value="{{storageID}}" class="transferStorage">{{storageName}}</option>
 </tr>   
@@ -129,10 +129,11 @@ $(function () {
 
 <!-- Get the selected storage, and POST this to retrive inventory-->
 <script>
+    var givenStorageID;
     $(function POSTfromTransferModal() {
 
         $('#fromTransferRestrictionContainer').on('change', function () {
-            var givenStorageID = $(this).find("option:selected").data('id');
+            givenStorageID = $(this).find("option:selected").data('id');
             
             if(givenStorageID > 0){
                 $.ajax({
@@ -186,8 +187,8 @@ $(function () {
             
             $.ajax({
                 type: 'POST',
-                url: '?page=getProductByID',
-                data: {givenProductID: givenProductID},
+                url: '?page=getProdQuantity',
+                data: {givenProductID: givenProductID, givenStorageID: givenStorageID},
                 dataType: 'json',
                 success: function (data) {
                     
