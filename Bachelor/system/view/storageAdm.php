@@ -163,45 +163,7 @@
 
                     <canvas id="myChart"></canvas>
                     <script>
-                        var ctx = document.getElementById('myChart').getContext('2d');
-                        var myChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: ["FMG", "Dekoder", "Roger", "Sondre", "Ole", "Tafjord", "DØØMEEE"],
-                                datasets: [
-                                    {
-                                        label: "Antall produkter i lageret",
-                                        backgroundColor: [
-                                            'rgba(0, 46, 96, 0.7)',
-                                            'rgba(255, 211, 0, 0.7)',
-                                            'rgba(0, 46, 96, 0.7)',
-                                            'rgba(255, 211, 0, 0.7)',
-                                            'rgba(0, 46, 96, 0.7)',
-                                            'rgba(255, 211, 0, 0.7)',
-                                            'rgba(0, 46, 96, 0.7)'
 
-                                        ],
-                                        borderColor: [
-                                            'rgba(0, 46, 96, 1)',
-                                            'rgba(255, 211, 0, 1)',
-                                            'rgba(0, 46, 96, 1)',
-                                            'rgba(255, 211, 0, 1)',
-                                            'rgba(0, 46, 96, 1)',
-                                            'rgba(255, 211, 0, 1)',
-                                            'rgba(0, 46, 96, 1)'
-                                        ],
-                                        borderWidth: 1,
-                                        data: [65, 59, 80, 81, 56, 55, 0]
-                                    }
-                                ]
-                            },
-                            options: {
-                                legend: {
-                                    display: false
-                                }
-                            }
-
-                        });
                     </script>
                 </div>
                     
@@ -525,12 +487,59 @@
         $(function () {
             $.ajax({
                 type: 'POST',
-                url: '?page=chartTest',
+                url: '?page=chartProduct',
                 data: {givenStorageID: givenStorageID},
                 dataType: 'json',
                 success: function (data) {
-                    alert(data);
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var product = [];
+                    var antall = [];
 
+                        $.each(data, function(i, item){
+                        product.push(item.productName);
+                        antall.push(item.quantity);
+                        });
+                
+                             var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: product,
+                                datasets: [
+                                    {
+                                        label: product,
+                                        backgroundColor: [
+                                            'rgba(0, 46, 96, 0.7)',
+                                            'rgba(255, 211, 0, 0.7)',
+                                            'rgba(0, 46, 96, 0.7)',
+                                            'rgba(255, 211, 0, 0.7)',
+                                            'rgba(0, 46, 96, 0.7)',
+                                            'rgba(255, 211, 0, 0.7)',
+                                            'rgba(0, 46, 96, 0.7)'
+
+                                        ],
+                                        borderColor: [
+                                            'rgba(0, 46, 96, 1)',
+                                            'rgba(255, 211, 0, 1)',
+                                            'rgba(0, 46, 96, 1)',
+                                            'rgba(255, 211, 0, 1)',
+                                            'rgba(0, 46, 96, 1)',
+                                            'rgba(255, 211, 0, 1)',
+                                            'rgba(0, 46, 96, 1)'
+                                        ],
+                                        borderWidth: 1,
+                                        data: antall
+                                    }
+                                ]
+                            },
+                            options: {
+                                legend: {
+                                    display: false
+                                }
+                            }
+
+                        });
+                    
+                    
                 }
             });
         });

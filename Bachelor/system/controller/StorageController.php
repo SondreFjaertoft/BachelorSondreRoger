@@ -21,8 +21,8 @@ class StorageController extends Controller {
             $this->getStorageRestriction();
         } else if ($page == "getStorageProduct") {
             $this->getStorageProduct();
-        } else if ($page == "chartTest"){
-            $this->chartTest();
+        } else if ($page == "chartProduct"){
+            $this->chartProduct();
         }
     }
 
@@ -104,7 +104,7 @@ class StorageController extends Controller {
         echo $data;
     }
 
-        private function chartTest() {
+        private function chartProduct() {
         $givenStorageID = $_REQUEST['givenStorageID'];
 
         $inventoryInfo = $GLOBALS["inventoryModel"];
