@@ -11,12 +11,21 @@ class SaleController extends Controller {
             $this->withdrawProduct();
         } else if ($page == "saleFromStorageID"){
             $this->saleFromStorageID();
-        } else if ($page == "getProdQuantity")
-            $this->getProdQuantity ();
+        } else if ($page == "getProdQuantity"){
+            $this->getProdQuantity (); 
+        } else if ($page == "mySales") {
+            $this->getMySalesPage();
+        } else if ($page == "getMySales"){
+            $this->getAllMySales();
+        }
     }
 
     private function salePage() {
         return $this->render("sale");
+    }
+    
+    private function getMySalesPage() {
+        return $this->render("mySales");
     }
     
     private function saleFromStorageID(){
@@ -67,8 +76,19 @@ class SaleController extends Controller {
         $inventoryModel = $inventoryInfo->getProdFromStorageIDAndProductID($givenStorageID, $givenProductID);
 
         $data = json_encode(array("prodInfo" => $inventoryModel));
-        echo $data;
+        echo $data;   
+    }
+    
+    private function getAllMySales(){
+        $givenUserID = $_SESSION["userID"];
         
+        $saleModel = $GLOBALS["saleModel"];
+        
+        $mySales = $saleModel->getMySales($givenUserID);
+        
+        $data = json_encode(array("mySales" => $mySales));
+        echo $data;
+
     }
 }
     

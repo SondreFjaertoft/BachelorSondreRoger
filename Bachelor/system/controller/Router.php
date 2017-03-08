@@ -83,7 +83,9 @@ class Router {
                     
                 case "sale" :
                 case "withdrawProduct" :  
-                case "getProdQuantity" :    
+                case "getProdQuantity" :   
+                case "mySales" :   
+                case "getMySales"   : 
                     return new SaleController();
                     
                     

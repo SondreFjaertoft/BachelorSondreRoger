@@ -7,6 +7,7 @@ class SaleModel {
     const TABLE = "sales";
     
     const SELECT_QUERY = "SELECT * FROM " . SaleModel::TABLE;
+    const SELECT_MY_SALES = "SELECT * FROM " . SaleModel::TABLE . " WHERE userID = :givenUserID";
     const SELECT_STORAGE = "SELECT * FROM " . SaleModel::TABLE . " WHERE storageID = :givenStorageID";
     const UPDATE_QUERY = "UPDATE " . SaleModel::TABLE . " SET productName = :editProductName, buyPrice = :editBuyPrice, salePrice = :editSalePrice, categoryID = :editCategoryID, mediaID = :editMediaID, productNumber = :editProductNumber WHERE productID = :editProductID" ;
     const INSERT_QUERY = "INSERT INTO " . SaleModel::TABLE . " (productID, date, customerNr, comment, userID, storageID, quantity) VALUES (:givenProductID, :givenDate, :givenCustomerNumber, :givenComment, :givenUserID, :givenStorageID, :givenQuantity)";
@@ -17,6 +18,7 @@ class SaleModel {
       $this->addStmt = $this->dbConn->prepare(SaleModel::INSERT_QUERY);
       $this->selStmt = $this->dbConn->prepare(SaleModel::SELECT_QUERY);
       $this->selStorage = $this->dbConn->prepare(SaleModel::SELECT_STORAGE);
+      $this->mySales = $this->dbConn->prepare(SaleModel::SELECT_MY_SALES);
     }
     
 
@@ -36,4 +38,10 @@ class SaleModel {
     public function newSale($givenStorageID, $givenCustomerNumber, $givenProductID, $givenQuantity, $givenUserID, $givenComment, $givenDate) {
         return $this->addStmt->execute(array("givenStorageID" =>  $givenStorageID, "givenCustomerNumber" => $givenCustomerNumber, "givenProductID" => $givenProductID, "givenQuantity" => $givenQuantity, "givenUserID" => $givenUserID, "givenComment" => $givenComment, "givenDate" => $givenDate));
     }
+    
+    public function getMySales($givenUserID){
+         $this->mySales->execute(array("givenUserID" =>  $givenUserID));
+        return $this->mySales->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
 }
