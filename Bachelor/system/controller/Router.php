@@ -62,7 +62,8 @@ class Router {
                 case "getAllStorageInfo" :  
                 case "getStorageByID" :
                 case "getStorageRestriction" :
-                case "getStorageProduct" :    
+                case "getStorageProduct" :  
+                case "chartTest" :    
                     return new StorageController();
                     
                 case "userAdm"    :

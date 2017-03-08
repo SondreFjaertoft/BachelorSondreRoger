@@ -481,6 +481,12 @@
 
 
 
+
+
+
+
+
+
 <!-- SHOW STORAGE INFORMATION -->
 
 <!-- get information from selected storage-->
@@ -492,6 +498,7 @@
             var givenStorageID = $(this).attr('data-id');
             POSTstorageRestriction(givenStorageID);
             POSTstorageProduct(givenStorageID);
+            chartTest(givenStorageID);
             $.ajax({
                 type: 'POST',
                 url: '?page=getStorageByID',
@@ -500,7 +507,7 @@
                 success: function (data) {
                     $('#showStorageInformationModal').modal('show');
                     StorageInformationTemplate(data);
-                    chartTemplate(data);
+                 
 
                 }
             });
@@ -509,6 +516,35 @@
         });
     });
 </script>
+
+
+<!-- Get storageInventory from selected storage-->
+<script>
+    function chartTest(data) {
+        var givenStorageID = data;
+        $(function () {
+            $.ajax({
+                type: 'POST',
+                url: '?page=chartTest',
+                data: {givenStorageID: givenStorageID},
+                dataType: 'json',
+                success: function (data) {
+                    alert(data);
+
+                }
+            });
+        });
+    }
+</script>
+
+
+
+
+
+
+
+
+
 
 <!-- Display storageInformation Template-->
 <script>
