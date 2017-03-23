@@ -45,13 +45,18 @@
             <div class="row">
                 <div id="sidebar" class="col-sm-3 col-md-2 sidebar">
                     <br><br>
-                    <ul class="nav nav-sidebar">
-                        <li><a class="" href="?page=home">Home</a></li><br>
-                        <li><a class="" href="?page=sale">Registrer Uttak</a></li><br>
-                        <li><a class="" href="?page=mySales">Dine Salg</a></li><br>
-                        <li><a class="">Dine Returer</a></li><br>
-                        <li><a class="">Registrer Retur</a></li><br>
-                        <li><a class="" href="?page=transfer">Overføring</a></li><br>
+
+                    
+
+                    <ul class="nav nav-sidebar list-group">
+                        <li><a class="list-group-item active" href="?page=home">Home</a></li><br>
+                        <li><a class="list-group-item active" href="?page=sale">Registrer Uttak</a></li><br>
+                        <li><a class="list-group-item active" href="?page=return">Registrer Retur</a></li><br>
+                        <li><a class="list-group-item active" href="?page=transfer">Overføring</a></li><br>
+                        <li><a class="list-group-item active" href="?page=mySales">Dine Salg</a></li><br>
+                        <li><a class="list-group-item active" href="?page=myReturns">Dine Returer</a></li><br>
+                        
+
                         
                         <?php if ($_SESSION["userLevel"] == "Administrator") {?>
                         <li><a class="list-group-item active" href="?page=userAdm">Bruker Administrering</a></li><br>

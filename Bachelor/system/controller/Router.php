@@ -88,7 +88,10 @@ class Router {
                 case "getMySales"   : 
                     return new SaleController();
                     
-                    
+                case "return" :
+                case "myReturns" :
+                case "getMyReturns" :    
+                    return new ReturnController();
                     
                     }
                 }
