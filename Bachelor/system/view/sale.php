@@ -81,6 +81,19 @@
         <td><input name="withdrawQuantity[]" form="withdrawProducts" required="required" type="number" min="1" max="{{quantity}}" value="" autocomplete="off"/></td> 
         <th>Tilgjengelig:</th>
         <td>{{quantity}} stk</td>    
+         
+        <td>
+            <button class="remove" data-toggle="tooltip" 
+                style="appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                outline: none;
+                border: 0;
+                background: transparent;
+                display: inline;">
+                <span class="glyphicon glyphicon-remove" style="color: red"></span>
+            </button>
+        </td> 
     </tr>
 {{/each}}
      
@@ -287,4 +300,15 @@ document.getElementById("date").value  = d.yyyymmdd();
 
 </script>
 
+<script>
+    $(function POSTdeleteStorageModal() {
+
+        $('#withdrawQuantityContainer').delegate('.remove', 'click', function () {
+           var $tr = (this).closest('tr');
+           
+           $tr.remove();
+           
+        });
+    });
+</script>  
 

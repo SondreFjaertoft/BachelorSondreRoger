@@ -46,7 +46,7 @@
         
         <div>
             <table class="table table-bordered table-striped table-responsive" id="returnQuantityContainer">
-
+            
                 <!-- Lar deg velge antall enheter -->
 
             </table>
@@ -72,6 +72,20 @@
         <input name="returnProductID[]" form="returnProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
         <td><input name="returnQuantity[]" form="returnProducts" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
+        
+        <td>
+            <button class="remove" data-toggle="tooltip" 
+                style="appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                outline: none;
+                border: 0;
+                background: transparent;
+                display: inline;">
+                <span class="glyphicon glyphicon-remove" style="color: red"></span>
+            </button>
+        </td>    
+        
     </tr>
 {{/each}}
      
@@ -273,3 +287,16 @@ var d = new Date();
 document.getElementById("date").value  = d.yyyymmdd();
 
 </script>
+
+<!-- remove product modal -->
+<script>
+    $(function POSTdeleteStorageModal() {
+
+        $('#returnQuantityContainer').delegate('.remove', 'click', function () {
+           var $tr = (this).closest('tr');
+           
+           $tr.remove();
+           
+        });
+    });
+</script>  
