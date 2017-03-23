@@ -11,6 +11,8 @@ class ReturnController extends Controller {
             $this->myReturnsPage();
         } else if ($page == "getMyReturns"){
             $this->getAllMyReturns();
+        } else if ($page == "returnProduct"){
+            $this->returnProduct();
         }
     }
     
@@ -22,6 +24,34 @@ class ReturnController extends Controller {
         return $this->render("myReturns");
     }
     
+    private function returnProduct(){
+        $toStorageID = $_REQUEST["toStorageID"];
+        $returnProductIDArray = $_REQUEST["returnProductID"];
+        $returnQuantityArray = $_REQUEST["returnQuantity"];
+        $customerNumber = $_REQUEST["customerNumber"];
+        $userID = $_SESSION["userID"];
+        $comment = $_REQUEST["returnComment"];
+        $date = $_REQUEST["date"];
+        
+
+        if ($toStorageID == 0) {
+            return false;
+        } else {
+        
+             for ($i = 0; $i < sizeof($returnProductIDArray); $i++) {
+               
+            
+                $returnModel = $GLOBALS["returnModel"];
+                $inventoryInfo = $GLOBALS["inventoryModel"];
+            
+                $returnModel->newReturn($toStorageID, $customerNumber, $returnProductIDArray[$i], $returnQuantityArray[$i], $userID, $comment, $date);
+                $inventoryInfo->transferToStorage($toStorageID, $returnProductIDArray[$i], $returnQuantityArray[$i]);
+                
+                
+             } 
+             echo json_encode("success");
+        }
+    }
     
     private function getAllMyReturns(){
         $givenUserID = $_SESSION["userID"];
