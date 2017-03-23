@@ -304,9 +304,11 @@ document.getElementById("date").value  = d.yyyymmdd();
     $(function POSTdeleteStorageModal() {
 
         $('#withdrawQuantityContainer').delegate('.remove', 'click', function () {
-           var $tr = (this).closest('tr');
+           var $tr = $(this).closest('tr');
            
-           $tr.remove();
+           $tr.fadeOut(150, function() {
+            $(this).remove();
+           });
            
         });
     });
