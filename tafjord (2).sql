@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 08. Mar, 2017 01:48 a.m.
+-- Generation Time: 23. Mar, 2017 14:33 p.m.
 -- Server-versjon: 5.5.54
 -- PHP Version: 5.6.28
 
@@ -72,12 +72,13 @@ INSERT INTO `inventory` (`inventoryID`, `storageID`, `productID`, `quantity`) VA
 (1, 1, 1, 10),
 (2, 1, 2, 0),
 (3, 2, 1, 1),
-(4, 1, 11, 3),
+(4, 1, 11, 2),
 (5, 1, 12, 0),
-(6, 1, 13, 1),
+(6, 1, 13, 0),
 (7, 1, 14, 0),
-(61, 2, 2, 2),
-(71, 6, 12, 2);
+(61, 2, 2, 0),
+(71, 6, 12, 2),
+(72, 6, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -186,6 +187,28 @@ INSERT INTO `restrictions` (`resID`, `userID`, `storageID`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tabellstruktur for tabell `returns`
+--
+
+CREATE TABLE `returns` (
+  `returnID` int(11) UNSIGNED NOT NULL,
+  `productID` int(11) UNSIGNED NOT NULL,
+  `date` date NOT NULL,
+  `customerNr` int(11) NOT NULL,
+  `comment` text,
+  `userID` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+--
+-- Dataark for tabell `returns`
+--
+
+INSERT INTO `returns` (`returnID`, `productID`, `date`, `customerNr`, `comment`, `userID`) VALUES
+(1, 1, '2017-03-08', 13243, 'testubg', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Tabellstruktur for tabell `sales`
 --
 
@@ -221,7 +244,9 @@ INSERT INTO `sales` (`salesID`, `productID`, `date`, `customerNr`, `comment`, `u
 (14, 2, '2017-03-08', 1, 'jkhkjhkjhkjhkjhkj', 1, 2, 1),
 (15, 1, '2017-03-08', 1, 'asd', 1, 2, 2),
 (16, 2, '2017-03-08', 0, 'test', 1, 2, 1),
-(17, 1, '2017-03-08', 0, 'test', 1, 2, 5);
+(17, 1, '2017-03-08', 0, 'test', 1, 2, 5),
+(18, 13, '2017-03-08', 21321, 'adfadsf', 1, 1, 1),
+(19, 11, '2017-03-23', 0, 'testih', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -242,21 +267,6 @@ INSERT INTO `storage` (`storageID`, `storageName`) VALUES
 (2, 'Hovedlager'),
 (1, 'Kundesenter'),
 (6, 'Testlager');
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur for tabell `trade`
---
-
-CREATE TABLE `trade` (
-  `tradeID` int(11) UNSIGNED NOT NULL,
-  `productID` int(11) UNSIGNED NOT NULL,
-  `date` date NOT NULL,
-  `customerNr` int(11) NOT NULL,
-  `comment` text,
-  `userID` int(11) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -352,6 +362,14 @@ ALTER TABLE `restrictions`
   ADD KEY `storageID` (`storageID`);
 
 --
+-- Indexes for table `returns`
+--
+ALTER TABLE `returns`
+  ADD PRIMARY KEY (`returnID`),
+  ADD KEY `productID` (`productID`),
+  ADD KEY `userID` (`userID`);
+
+--
 -- Indexes for table `sales`
 --
 ALTER TABLE `sales`
@@ -366,14 +384,6 @@ ALTER TABLE `sales`
 ALTER TABLE `storage`
   ADD PRIMARY KEY (`storageID`),
   ADD UNIQUE KEY `storageName` (`storageName`);
-
---
--- Indexes for table `trade`
---
-ALTER TABLE `trade`
-  ADD PRIMARY KEY (`tradeID`),
-  ADD KEY `productID` (`productID`),
-  ADD KEY `userID` (`userID`);
 
 --
 -- Indexes for table `users`
@@ -400,7 +410,7 @@ ALTER TABLE `checkout`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 --
 -- AUTO_INCREMENT for table `logg`
 --
@@ -420,27 +430,27 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `restrictions`
 --
 ALTER TABLE `restrictions`
   MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
+-- AUTO_INCREMENT for table `returns`
+--
+ALTER TABLE `returns`
+  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `storage`
 --
 ALTER TABLE `storage`
   MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `trade`
---
-ALTER TABLE `trade`
-  MODIFY `tradeID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -493,19 +503,19 @@ ALTER TABLE `restrictions`
   ADD CONSTRAINT `restrictions_ibfk_2` FOREIGN KEY (`storageID`) REFERENCES `storage` (`storageID`);
 
 --
+-- Begrensninger for tabell `returns`
+--
+ALTER TABLE `returns`
+  ADD CONSTRAINT `returns_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`),
+  ADD CONSTRAINT `returns_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`);
+
+--
 -- Begrensninger for tabell `sales`
 --
 ALTER TABLE `sales`
   ADD CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`),
   ADD CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
   ADD CONSTRAINT `sales_ibfk_3` FOREIGN KEY (`storageID`) REFERENCES `storage` (`storageID`);
-
---
--- Begrensninger for tabell `trade`
---
-ALTER TABLE `trade`
-  ADD CONSTRAINT `trade_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`),
-  ADD CONSTRAINT `trade_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
