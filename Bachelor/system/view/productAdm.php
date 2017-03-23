@@ -30,15 +30,19 @@
          
         <!-- DISPLAY PRODUCT CONTAINER -->
         <br>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center"><b>PRODUKTOVERSIKT</b></h3>
+            </div>
         <table class="table table-bordered table-striped table-responsive"> 
-            <h4> Lageroversikt </h4> 
+             
             <tbody id="displayProductContainer">
 
                 <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
 
             </tbody>
         </table>   
-           
+        </div>
     </div>
 </div>
 
@@ -60,24 +64,40 @@
                 </div>
                 <div class="modal-body">
                     <div style="text-align: center">
+                        <table class="table table-bordered table-striped table-responsive">
                         <form action="?page=addProductEngine" method="post" id="createProduct">
-                            <p style="font-weight: bold ">Produktnavn:</p>
-                            <input type="text" required="required" name="givenProductName" value=""><br>
-                            <p style="font-weight: bold ">Kjøpspris:</p>
-                            <input type="int" required="required" name="givenBuyPrice" value=""><br>
-                            <p style="font-weight: bold ">Salgspris:</p>
-                            <input type="int" required="required" name="givenSalePrice" value=""><br>
-                            <p style="font-weight: bold ">Kategori:</p>
-                            <input type="int" required="required" name="givenCategoryID" value=""><br>
-                            <p style="font-weight: bold ">Media:</p>
-                            <input type="int" required="required" name="givenMediaID" value=""><br>
-                            <p style="font-weight: bold ">Produktnummer:</p>
-                            <input type="text" required="required" name="givenProductNumber" value=""><br>
-                            <p style="font-weight: bold ">MacAdresse:</p>
-                            <input type="checkbox" id="TRUE" name="givenMacAdresse" value="TRUE"><br>
-                            <br>
+                            <tr>
+                                <th>Produktnavn:</th>
+                                <td><input type="text" required="required" name="givenProductName" value="" autocomplete="off"></td>
+                            </tr>
+                            <tr>
+                                <th>Kjøpspris:</th>
+                                <td><input type="int" required="required" name="givenBuyPrice" value="" autocomplete="off"></td>
+                            </tr>
+                            <tr>
+                                <th>Salgspris:</th>
+                                <td><input type="int" required="required" name="givenSalePrice" value="" autocomplete="off"></td>
+                            </tr>
+                            <tr>
+                                <th>Kategori:</th>
+                                <td><input type="int" required="required" name="givenCategoryID" value="" autocomplete="off"></td>
+                            </tr>
+                            <tr>
+                                <th>Media:</th>
+                                <td><input type="int" required="required" name="givenMediaID" value="" autocomplete="off"></td>
+                            </tr>
+                            <tr>
+                                <th>Produktnummer:</th>
+                                <td><input type="text" required="required" name="givenProductNumber" value="" autocomplete="off"></td>
+                            </tr>
+                            <tr>
+                                <th>MacAdresse:</th>
+                                <td><input type="checkbox" id="TRUE" name="givenMacAdresse" value="TRUE"></td>
+                            </tr>
                             
-                        </form> 
+                            
+                        </form>
+                        </table>
                     </div>
                 </div>
                 <div class="modal-footer">

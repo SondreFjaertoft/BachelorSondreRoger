@@ -40,19 +40,31 @@
                         </div>
                         <div class="modal-body">
                             <div style="text-align: center">
+                                <table class="table table-bordered table-striped table-responsive">
                                 <form action="?page=addUserEngine" method="post" id="createUser">
-                                    <p style="font-weight: bold ">Name:</p>
-                                    <input type="text" name="givenName" required="required" value="" autocomplete="off"><br>
-                                    <p style="font-weight: bold ">Brukernavn:</p>
-                                    <input type="text" name="givenUsername" required="required" value="" autocomplete="off"><br>
-                                    <p style="font-weight: bold ">Passord:</p>
-                                    <input type="text" name="givenPassword" required="required" value="" autocomplete="off"><br>
-                                    <p style="font-weight: bold ">UserLevel:</p>
-                                    <input type="text" name="givenUserLevel" required="required" value="" autocomplete="off"><br>
-                                    <p style="font-weight: bold ">Email:</p>
-                                    <input type="text" name="givenEmail" required="required" value="" autocomplete="off"><br>
-                                    <br>
-                                </form> 
+                                    <tr>
+                                        <th>Name:</th>
+                                        <td><input type="text" name="givenName" required="required" value="" autocomplete="off"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Brukernavn:</th>
+                                        <td><input type="text" name="givenUsername" required="required" value="" autocomplete="off"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Passord:</th>
+                                        <td><input type="text" name="givenPassword" required="required" value="" autocomplete="off"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>UserLevel:</th>
+                                        <td><input type="text" name="givenUserLevel" required="required" value="" autocomplete="off"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email:</th>
+                                        <td><input type="text" name="givenEmail" required="required" value="" autocomplete="off"></td>
+                                    </tr>
+                                   
+                                </form>
+                                    </table>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -75,14 +87,19 @@
 
     <!-- DISPLAY USER CONTAINER    --->       
     <br>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title text-center"><b>Brukeroversikt</b></h3>
+        </div>
         <table class="table table-bordered table-striped table-responsive">
-            <h4> Brukeroversikt </h4>
+            
             <tbody id="displayUserContainer">
 
             <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
 
             </tbody>    
         </table>
+    </div>
     </div>
 </div>
 

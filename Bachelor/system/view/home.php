@@ -60,7 +60,11 @@
         </script>
     </div>
     <div class="col-sm-3 col-md-4">
-        <h3> MEST SOLGTE PRODUKTER </h3> 
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center"><b>MEST SOLGTE PRODUKTER</b></h3>
+            </div>
+         
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -76,9 +80,13 @@
 
             </tbody>
         </table>
+        </div>
     </div>
     <div class="col-sm-3 col-md-4">
-        <h3> SISTE SALG </h3> 
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center"><b>SISTE SALG</b></h3>
+            </div>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -93,6 +101,7 @@
 
             </tbody>
         </table>
+        </div>
 
 
     </div>

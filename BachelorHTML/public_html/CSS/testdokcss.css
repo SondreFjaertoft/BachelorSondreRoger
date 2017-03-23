@@ -1,77 +1,69 @@
-/* FOR Å TESTE TING SÅNN AT ME IKKJE ØDELEGGE DET SOM FUNKA
-
-SKAL SLETTES FØR ME E FERDIG */
-
-body
-{
-    margin: 0;
-    
+.navbar-default {
+  background-color: #6fd5f2;
+  border-color: #528ae5;
 }
-#wrapper
-{
-    margin: auto;
+.navbar-default .navbar-brand {
+  color: #000000;
 }
-
-#sidenav nav ul
-{
-    margin: 0;
-    padding: 0;
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #ecf0f1;
 }
-#sidenav nav ul li a
-{
-    
-    font-size: 1.3em;
-    color: #aaa;
-    display: block;
-    line-height: 2em;
-    padding: 0.5em 0.5em;
-    text-decoration: none;
+.navbar-default .navbar-text {
+  color: #000000;
 }
-#sidenav
-{
-    position: absolute;
-    text-align: center;
-    width: 14.2499em;
-    height: 100%;
-    background-color: #333;
+.navbar-default .navbar-nav > li > a {
+  color: #000000;
 }
-
-#bildeli
-{
-    margin-bottom: -0.243em;
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #ecf0f1;
 }
-.sideLi a:hover
-{
-    background-color: #003366;
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #ecf0f1;
+  background-color: #528ae5;
 }
-#header
-{
-    position: relative;
-    
-    background-color: #333;
-    margin-left: 14.2562em;
-    height: 4.12em;
-    overflow: auto;
-
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #ecf0f1;
+  background-color: #528ae5;
 }
-#header div ul li
-{
-    display: inline-block;
-    overflow: auto;
+.navbar-default .navbar-toggle {
+  border-color: #528ae5;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #528ae5;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #000000;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #000000;
+}
+.navbar-default .navbar-link {
+  color: #000000;
+}
+.navbar-default .navbar-link:hover {
+  color: #ecf0f1;
 }
 
-#datetime
-{
-    color: #aaa;
-}
-#header #formwrapper
-{
-    padding-top: 1.3%;
-}
-form 
-{
-    position: relative;
-    width: 50%;
-    margin: 0 auto;
-    
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #000000;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #ecf0f1;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ecf0f1;
+    background-color: #528ae5;
+  }
 }

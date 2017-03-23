@@ -7,15 +7,19 @@
 
         
     
-        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center"><b>Mine Salg</b></h3> 
+            </div>
          <table class="table table-bordered table-striped table-responsive"> 
-            <h4> Mine Salg </h4> 
+            
             <tbody id="mySalesContainer">
 
                 <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
 
             </tbody>
         </table> 
+        </div>
         
 <script id="mySalesTemplate" type="text/x-handlebars-template">        
 <tr>

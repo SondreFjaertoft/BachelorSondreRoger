@@ -1,67 +1,50 @@
 
-
-<!-- FOR Å TESTE TING SÅNN AT ME IKKJE ØDELEGGE DET SOM FUNKA -->
-
-<!-- SKAL SLETTES FØR ME E FERDIG -->
-
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Tafjord</title>
-        <link rel="stylesheet" type="text/css" href="../CSS/testdokcss.css">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div id="wrapper">
-            <div id="sidenav">
-                <nav >
-                    <ul>
-                        <li id="bildeli">
-                            <img src="../image/TafjordLogo.png" alt="Tafjord logo">
-                        </li>
-                        <li class="sideLi">
-                            <a>Home</a>
-                        </li>
-                        <li class="sideLi">
-                            <a>Salg</a>
-                        </li>
-                        <li class="sideLi">
-                            <a>Salg</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div id="header">
-                <div>
-                    <ul>
-                        <li>
-                            <div id="formwrapper">
-                                <form>
-                                    <input type="text" id="searchfield" placeholder="Søk..">
-                                </form>
-                            </div>
-                        </li>
-                        <li>
-                            <div id="datetime">
-                                <p id="date">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   
 
-                                </p>
-                                <script>
-                                    n = new Date();
-                                    y = n.getFullYear();
-                                    m = n.getMonth() + 1;
-                                    d = n.getDate();
-                                    document.getElementById("date").innerHTML = d + "/" + m + "/" + y;
-                                </script>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <title>Taford | Dashboard</title>
 
+    <!-- Bootstrap core CSS -->
+    <link href="../Bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+    
+    <link href="../CSS/testdokcss.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      
+        <div class="navbar-header">
+
+            <a class="navbar-brand pull-left" href="#"><img src="../image/TafjordLogo.png" alt="test"></a>
         </div>
+        <div id="navbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+     
+    </nav>
 
-    </body>
+    <div class="container">
+
+      
+
+    </div><!-- /.container -->
+
+
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+    <script src="../../dist/js/bootstrap.min.js"></script>
+   </body>
 </html>
+

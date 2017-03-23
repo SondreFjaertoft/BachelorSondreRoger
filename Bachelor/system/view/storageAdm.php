@@ -28,8 +28,12 @@
 
         <!-- DISPLAY STORAGE CONTAINER -->
         <br>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center"><b>Lageroversikt</b></h3>
+            </div>
         <table class="table table-bordered table-striped table-responsive"> 
-            <h4> Lageroversikt </h4> 
+             
             <tbody id="displayStorageContainer">
 
                 <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
@@ -37,6 +41,8 @@
             </tbody>
 
         </table>
+            
+        </div>
 
     </div>
 </div>
@@ -60,13 +66,14 @@
             </div>
             <div class="modal-body">
                 <div style="text-align: center">
+                    <table class="table table-bordered table-striped table-responsive">
                     <form action="?page=addStorageEngine" method="post" id="createStorage">
-                        Navn på lager:<br>
-                        <input type="text" required="required" name="givenStorageName" value=""><br>
-
-                        <br>
-
+                        <tr>
+                            <th>Lagernavn:</th>
+                            <td><input type="text" required="required" name="givenStorageName" value=""></td>
+                        </tr>
                     </form> 
+                    </table>
                 </div>
             </div>
             <div class="modal-footer">
