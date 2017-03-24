@@ -74,7 +74,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-
+                            <p id="errorMessage"></p>
                             <input class="btn btn-default" form="createUser" type="submit" value="Opprett bruker">
 
 
@@ -325,6 +325,12 @@
     <th>Sist inlogget: </th>
     <td>{{lastLogin}}</td>
     </tr> 
+    <tr>
+    <td><img src="image/{{image}}" alt="Home"></td>
+    </tr>
+
+  
+    
     {{/each}}     
 </script>    
 
@@ -429,9 +435,14 @@
                 url: url,
                 data: data,
                 dataType: 'json',
+                error: function() {         
+                    var $displayError = $('#errorMessage');
+                    $displayError.empty().append("Brukernavn trolig i bruk");
+                },
                 success: function () {
                     $("#createUser")[0].reset();
                     $('#createUserModal').modal('hide');
+                    $('#errorMessage').remove();
                     UpdateUsersTable();
                 }
             });
