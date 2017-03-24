@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 23. Mar, 2017 14:33 p.m.
+-- Generation Time: 24. Mar, 2017 13:05 p.m.
 -- Server-versjon: 5.5.54
 -- PHP Version: 5.6.28
 
@@ -69,16 +69,16 @@ CREATE TABLE `inventory` (
 --
 
 INSERT INTO `inventory` (`inventoryID`, `storageID`, `productID`, `quantity`) VALUES
-(1, 1, 1, 10),
-(2, 1, 2, 0),
-(3, 2, 1, 1),
-(4, 1, 11, 2),
+(1, 1, 1, 12),
+(2, 1, 2, 6),
+(3, 2, 1, 0),
+(4, 1, 11, 5),
 (5, 1, 12, 0),
-(6, 1, 13, 0),
-(7, 1, 14, 0),
-(61, 2, 2, 0),
-(71, 6, 12, 2),
-(72, 6, 2, 2);
+(6, 1, 13, 8),
+(7, 1, 14, 9),
+(61, 2, 2, 2),
+(71, 6, 12, 27),
+(72, 6, 2, 25);
 
 -- --------------------------------------------------------
 
@@ -178,11 +178,11 @@ CREATE TABLE `restrictions` (
 
 INSERT INTO `restrictions` (`resID`, `userID`, `storageID`) VALUES
 (7, 1, 2),
-(8, 1, 1),
-(9, 1, 6),
-(10, 2, 2),
-(11, 2, 1),
-(12, 2, 6);
+(36, 1, 1),
+(37, 1, 6),
+(38, 10, 2),
+(39, 10, 1),
+(40, 10, 6);
 
 -- --------------------------------------------------------
 
@@ -196,15 +196,28 @@ CREATE TABLE `returns` (
   `date` date NOT NULL,
   `customerNr` int(11) NOT NULL,
   `comment` text,
-  `userID` int(11) UNSIGNED NOT NULL
+  `userID` int(11) UNSIGNED NOT NULL,
+  `storageID` int(11) UNSIGNED NOT NULL,
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Dataark for tabell `returns`
 --
 
-INSERT INTO `returns` (`returnID`, `productID`, `date`, `customerNr`, `comment`, `userID`) VALUES
-(1, 1, '2017-03-08', 13243, 'testubg', 1);
+INSERT INTO `returns` (`returnID`, `productID`, `date`, `customerNr`, `comment`, `userID`, `storageID`, `quantity`) VALUES
+(2, 2, '2017-03-23', 123456, 'sadsadsad', 1, 1, 5),
+(3, 2, '2017-03-23', 123, 'asdsad', 1, 2, 5),
+(4, 11, '2017-03-23', 3234234, 'test', 1, 6, 15),
+(5, 12, '2017-03-23', 3234234, 'test', 1, 6, 15),
+(6, 13, '2017-03-23', 213213, 'asdsadsa', 1, 1, 10),
+(7, 14, '2017-03-23', 213213, 'asdsadsa', 1, 1, 10),
+(8, 1, '2017-03-23', 2, 'asd', 1, 1, 2),
+(9, 11, '2017-03-24', 7474657, 'asdsad', 1, 1, 2),
+(10, 2, '2017-03-24', 1234567, 'hmm', 1, 1, 3),
+(11, 2, '2017-03-24', 1234567, 'testing', 7, 2, 5),
+(12, 2, '2017-03-24', 21321321, 'asdasdsa', 7, 6, 12),
+(13, 2, '2017-03-24', 123213, 'asdsadsadsadsa', 7, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -228,25 +241,10 @@ CREATE TABLE `sales` (
 --
 
 INSERT INTO `sales` (`salesID`, `productID`, `date`, `customerNr`, `comment`, `userID`, `storageID`, `quantity`) VALUES
-(1, 2, '2017-03-23', 1, 'test', 1, 2, 2),
-(2, 11, '2017-03-23', 2, 'dad', 1, 1, 3),
-(3, 1, '2017-03-23', 2, 'test3', 1, 2, 7),
-(4, 1, '2017-03-23', 2, 'testing igjen ', 1, 2, 2),
-(5, 12, '2017-03-07', 2303496, 'testprod2', 1, 1, 3),
-(6, 14, '2017-03-07', 46543, 'virker dette?', 1, 1, 4),
-(7, 11, '2017-03-07', 1234561, 'alle skal gå i null', 1, 1, 1),
-(8, 12, '2017-03-07', 1234561, 'alle skal gå i null', 1, 1, 2),
-(9, 13, '2017-03-07', 1234561, 'alle skal gå i null', 1, 1, 3),
-(10, 11, '2017-03-07', 123456, 'siste test no!', 1, 1, 1),
-(11, 12, '2017-03-07', 123456, 'siste test no!', 1, 1, 2),
-(12, 13, '2017-03-07', 123456, 'siste test no!', 1, 1, 3),
-(13, 14, '2017-03-07', 123456, 'siste test no!', 1, 1, 4),
-(14, 2, '2017-03-08', 1, 'jkhkjhkjhkjhkjhkj', 1, 2, 1),
-(15, 1, '2017-03-08', 1, 'asd', 1, 2, 2),
-(16, 2, '2017-03-08', 0, 'test', 1, 2, 1),
-(17, 1, '2017-03-08', 0, 'test', 1, 2, 5),
-(18, 13, '2017-03-08', 21321, 'adfadsf', 1, 1, 1),
-(19, 11, '2017-03-23', 0, 'testih', 1, 1, 1);
+(25, 2, '2017-03-24', 123, 'add', 1, 1, 12),
+(26, 2, '2017-03-24', 123, 'asd', 6, 1, 2),
+(27, 2, '2017-03-24', 233, 'asdasd', 1, 1, 1),
+(28, 2, '2017-03-24', 1234567, 'Testing', 7, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -291,7 +289,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`userID`, `name`, `username`, `password`, `userLevel`, `image`, `lastLogin`, `email`) VALUES
 (1, 'Roger Kolseth', 'rogkol', 'Test123', 'Administrator', 'tafjord.jpg', NULL, 'roger.kolseth@tafjord.no'),
-(2, 'Testbruker', 'Test1', 'test123', 'User', 'tafjord.jpg', NULL, 'test@test.no');
+(10, 'Test', 'Test', 'Test', 'User', 'tafjord.jpg', NULL, 'Test');
 
 --
 -- Indexes for dumped tables
@@ -325,8 +323,8 @@ ALTER TABLE `inventory`
 --
 ALTER TABLE `logg`
   ADD PRIMARY KEY (`loggID`),
-  ADD KEY `userID` (`userID`),
-  ADD KEY `inventoryID` (`inventoryID`);
+  ADD KEY `inventoryID` (`inventoryID`),
+  ADD KEY `logg_ibfk_1` (`userID`);
 
 --
 -- Indexes for table `macadresse`
@@ -367,7 +365,8 @@ ALTER TABLE `restrictions`
 ALTER TABLE `returns`
   ADD PRIMARY KEY (`returnID`),
   ADD KEY `productID` (`productID`),
-  ADD KEY `userID` (`userID`);
+  ADD KEY `returns_ibfk_3` (`storageID`),
+  ADD KEY `returns_ibfk_2` (`userID`);
 
 --
 -- Indexes for table `sales`
@@ -375,8 +374,8 @@ ALTER TABLE `returns`
 ALTER TABLE `sales`
   ADD PRIMARY KEY (`salesID`),
   ADD KEY `productID` (`productID`),
-  ADD KEY `userID` (`userID`),
-  ADD KEY `sales_ibfk_3` (`storageID`);
+  ADD KEY `sales_ibfk_3` (`storageID`),
+  ADD KEY `sales_ibfk_2` (`userID`);
 
 --
 -- Indexes for table `storage`
@@ -435,27 +434,27 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `restrictions`
 --
 ALTER TABLE `restrictions`
-  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `returns`
 --
 ALTER TABLE `returns`
-  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `storage`
 --
 ALTER TABLE `storage`
-  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `userID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Begrensninger for dumpede tabeller
 --
@@ -506,15 +505,16 @@ ALTER TABLE `restrictions`
 -- Begrensninger for tabell `returns`
 --
 ALTER TABLE `returns`
+  ADD CONSTRAINT `returns_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
   ADD CONSTRAINT `returns_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`),
-  ADD CONSTRAINT `returns_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`);
+  ADD CONSTRAINT `returns_ibfk_3` FOREIGN KEY (`storageID`) REFERENCES `storage` (`storageID`);
 
 --
 -- Begrensninger for tabell `sales`
 --
 ALTER TABLE `sales`
-  ADD CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`),
   ADD CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
+  ADD CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`),
   ADD CONSTRAINT `sales_ibfk_3` FOREIGN KEY (`storageID`) REFERENCES `storage` (`storageID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
