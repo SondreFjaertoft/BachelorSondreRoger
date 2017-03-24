@@ -51,9 +51,7 @@ class transferController extends Controller {
             for ($i = 0; $i < sizeof($transferProductIDArray); $i++) {
                 $count = $inventoryInfo->doesProductExistInStorage($toStorageID, $transferProductIDArray[$i]);
 
-                foreach ($count as $counts) :
-
-                    if ($counts["COUNT(*)"] < 1) {
+                    if ($count[0]["COUNT(*)"] < 1) {
 
 
                         $inventoryInfo->addInventory($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
@@ -64,7 +62,7 @@ class transferController extends Controller {
                         $inventoryInfo->transferToStorage($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                     }
 
-                endforeach;
+               
             }
         }
         $data = json_encode("success");

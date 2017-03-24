@@ -10,6 +10,7 @@ class RestritionModel{
     const TABLE = "restrictions";
     const SELECT_FROM_STORAGEID = "SELECT users.name, restrictions.storageID, restrictions.userID FROM users INNER JOIN " . RestritionModel::TABLE . " ON users.userID = restrictions.userID WHERE storageID = :givenStorageID";
     const SELECT_FROM_USERID = "SELECT storage.storageName, restrictions.storageID, restrictions.userID FROM storage INNER JOIN " . RestritionModel::TABLE . " ON storage.storageID = restrictions.storageID WHERE userID = :givenUserID";
+    const FIND_QUERY = "SELECT COUNT(*) FROM " . RestritionModel::TABLE . " WHERE storageID = :givenStorageID AND userID = :givenUserID";
 
     const SELECT_STORAGE_QUERY = "SELECT storage.storageName, restrictions.storageID, restrictions.userID FROM storage INNER JOIN " . RestritionModel::TABLE . " ON storage.storageID = restrictions.storageID";
     const SELECT_USER_QUERY = "SELECT users.name, restrictions.storageID, restrictions.userID FROM users INNER JOIN " . RestritionModel::TABLE . " ON users.userID = restrictions.userID";
@@ -31,6 +32,7 @@ class RestritionModel{
     $this->SelFromStorageID = $this->dbConn->prepare(RestritionModel::SELECT_FROM_STORAGEID);
     $this->delStmt = $this->dbConn->prepare(RestritionModel::DELETE_QUERY);
     $this->delSingleStmt = $this->dbConn->prepare(RestritionModel::DELETE_SINGLE_QUERY);
+    $this->findStm = $this->dbConn->prepare(RestritionModel::FIND_QUERY);
 
     }
     
@@ -66,9 +68,12 @@ class RestritionModel{
     
     public function deleteSingleRestriction($givenUserID, $givenStorageID){
         return $this->delSingleStmt->execute(array("givenUserID" => $givenUserID, "givenStorageID" => $givenStorageID));  
-
     }
     
+    public function doesRestrictionExist($givenUserID, $givenStorageID){
+        $this->findStm->execute(array("givenUserID" => $givenUserID, "givenStorageID" => $givenStorageID));
+        return $this->findStm->fetchAll(PDO::FETCH_ASSOC); 
+    }
     
     
     

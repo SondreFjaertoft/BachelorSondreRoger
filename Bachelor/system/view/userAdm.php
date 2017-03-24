@@ -264,7 +264,7 @@
     Brukernavn: <br>
     <input form="editUser" type="text" required="required" name="editUsername" value="{{username}}"><br>
     Passord: <br>
-    <input form="editUser" type="text" required="required" name="editPassword" value="{{password}}"><br>
+    <input form="editUser" type="password" required="required" name="editPassword" value="{{password}}"><br>
     Brukernivå: <br>
     
     <select form="editUser" type="text" required="required" name="editUserLevel" class="form-control" autocomplete="off">

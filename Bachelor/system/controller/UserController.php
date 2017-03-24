@@ -58,7 +58,10 @@ class UserController extends Controller {
             foreach ($givenUserArray as $givenUserID) :
                 
                 foreach ($givenStorageArray as $givenStorageID) :
-                $data = $addRestriction->addRestriction($givenUserID, $givenStorageID);
+                $count = $addRestriction->doesRestrictionExist($givenUserID, $givenStorageID);
+                    if ($count[0]["COUNT(*)"] < 1) {
+                        $data = $addRestriction->addRestriction($givenUserID, $givenStorageID);
+                    }
                 endforeach;
             endforeach;  
         echo json_encode("success");
