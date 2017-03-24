@@ -21,6 +21,8 @@ class UserController extends Controller {
             $this->deleteUserEngine();
         } else if ($page == "editUserEngine") {
             $this->userEditEngine();
+        } else if ($page == "deleteSingleRes"){
+            $this->deleteSingleRes();
         }
             
     }
@@ -122,6 +124,17 @@ class UserController extends Controller {
         $removeUser = $GLOBALS["userModel"];
         $removeUser->removeUser($removeUserID);
         
+        
+        echo json_encode("success");
+    }
+    
+    private function deleteSingleRes(){
+        $givenUserID = $_REQUEST["givenUserID"];
+        $givenStorageID = $_REQUEST["givenStorageID"];
+        
+        
+        $deletedRes = $GLOBALS["restrictionModel"];
+        $deletedRes->deleteSingleRestriction($givenUserID, $givenStorageID);
         
         echo json_encode("success");
     }

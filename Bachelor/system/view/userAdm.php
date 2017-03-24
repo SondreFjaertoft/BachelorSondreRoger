@@ -55,8 +55,14 @@
                                         <td><input type="text" name="givenPassword" required="required" value="" autocomplete="off"></td>
                                     </tr>
                                     <tr>
-                                        <th>UserLevel:</th>
-                                        <td><input type="text" name="givenUserLevel" required="required" value="" autocomplete="off"></td>
+                                        <th>UserLevel:</th>                                       
+                                            <td>
+                                                <select name="givenUserLevel" required="required" class="form-control" autocomplete="off">
+                                                    <option></option>
+                                                    <option value="User">User</option>
+                                                    <option value="Administrator">Administrator</option>
+                                                </select>  
+                                            </td>
                                     </tr>
                                     <tr>
                                         <th>Email:</th>
@@ -260,7 +266,13 @@
     Passord: <br>
     <input form="editUser" type="text" required="required" name="editPassword" value="{{password}}"><br>
     Brukernivå: <br>
-    <input form="editUser" type="text" required="required" name="editUserLevel" value="{{userLevel}}"><br>
+    
+    <select form="editUser" type="text" required="required" name="editUserLevel" class="form-control" autocomplete="off">
+        <option></option>
+        <option value="User">User</option>
+        <option value="Administrator">Administrator</option>
+    </select> 
+    
     Epost: <br>
     <input form="editUser" type="text" required="required" name="editEmail" value="{{email}}"><br>
     <br>    
@@ -271,7 +283,18 @@
 <!-- show user restriction template-->
 <script id="userRestrictionTemplate" type="text/x-handlebars-template">
 {{#each restriction}}
-{{storageName}} <br>
+{{storageName}}
+<button data-id="{{storageID}}" class="deleteRestriction" data-toggle="tooltip" 
+    style="appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: 0;
+    background: transparent;
+    display: inline;">
+    <span class="glyphicon glyphicon-remove" style="color: red"></span>
+    </button> 
+<br>    
 {{/each}}      
 </script>
 
@@ -498,6 +521,7 @@
 <!--    SHOW USER INFORMATION      -->
 
 <script>
+   
     $(function POSTuserInformationModal() {
 
         $('#displayUserContainer').delegate('.information', 'click', function () {
@@ -522,8 +546,9 @@
 </script>
 
 <script>
+    var givenUserID
     function POSTuserRestriction(data) {
-        var givenUserID = data;
+        givenUserID = data;
         $(function () {
             $.ajax({
                 type: 'POST',
@@ -537,6 +562,29 @@
         });
     }
 </script>
+
+<script>
+    $(function deleteUserRestriction() {
+        $('#userRestrictionContainer').delegate('.deleteRestriction', 'click', function () {
+
+            var givenStorageID = $(this).attr('data-id');
+            
+            $.ajax({
+                type: 'POST',
+                url: '?page=deleteSingleRes',
+                data: {givenUserID: givenUserID, givenStorageID: givenStorageID},
+                dataType: 'json',
+                success: function () {
+                    POSTuserRestriction(givenUserID)
+
+                }
+            });
+            return false;
+
+        });
+    });               
+</script>                    
+
 
 <script>
     function userRestrictionTemplate(data) {

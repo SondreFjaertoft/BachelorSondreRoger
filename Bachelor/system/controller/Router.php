@@ -91,7 +91,8 @@ class Router {
                 case "editUserEngine" :           
                 case "addRestriction" :    
                 case "addUserEngine" : 
-                case "deleteUserEngine" :     
+                case "deleteUserEngine" : 
+                case "deleteSingleRes" :
                     return new UserController();    
    
                     }
