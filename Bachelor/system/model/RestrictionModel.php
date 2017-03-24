@@ -14,6 +14,8 @@ class RestritionModel{
     const SELECT_STORAGE_QUERY = "SELECT storage.storageName, restrictions.storageID, restrictions.userID FROM storage INNER JOIN " . RestritionModel::TABLE . " ON storage.storageID = restrictions.storageID";
     const SELECT_USER_QUERY = "SELECT users.name, restrictions.storageID, restrictions.userID FROM users INNER JOIN " . RestritionModel::TABLE . " ON users.userID = restrictions.userID";
     const INSERT_QUERY = "INSERT INTO " . RestritionModel::TABLE . " (userID, storageID) VALUES (:givenUserID, :givenStorageID)";
+    const DELETE_QUERY = "DELETE FROM " . RestritionModel::TABLE . " WHERE userID = :removeUserID";
+
     
     /** @var PDOStatement Statement for selecting all entries */
 
@@ -27,6 +29,7 @@ class RestritionModel{
     $this->selUserStmt = $this->dbConn->prepare(RestritionModel::SELECT_USER_QUERY);
     $this->SelFromUserID = $this->dbConn->prepare(RestritionModel::SELECT_FROM_USERID);
     $this->SelFromStorageID = $this->dbConn->prepare(RestritionModel::SELECT_FROM_STORAGEID);
+    $this->delStmt = $this->dbConn->prepare(RestritionModel::DELETE_QUERY);
     }
     
     /**
@@ -53,6 +56,10 @@ class RestritionModel{
     public function getAllRestrictionInfoFromStorageID($givenStorageID){
         $this->SelFromStorageID->execute(array("givenStorageID" => $givenStorageID));
         return $this->SelFromStorageID->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function deleteUserRestriction($removeUserID){
+        return $this->delStmt->execute(array("removeUserID" => $removeUserID));  
     }
     
     

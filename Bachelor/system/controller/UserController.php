@@ -52,7 +52,6 @@ class UserController extends Controller {
             $givenStorageArray = $_REQUEST['storageRestrictions'];
             
             $addRestriction = $GLOBALS["restrictionModel"];
-   
             
             foreach ($givenUserArray as $givenUserID) :
                 
@@ -94,10 +93,13 @@ class UserController extends Controller {
 
         $userCreationInfo = $GLOBALS["userModel"];
         $added = $userCreationInfo->addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail);
-        
+        if($added){
         $data = json_encode("success");
         
         echo $data;
+        } else {
+        return false;    
+        }
     }
     
     private function getUserByID(){
@@ -112,10 +114,14 @@ class UserController extends Controller {
     }
     
     private function deleteUserEngine() {
-        $removeUserID = $_REQUEST["deleteUserID"];
-
+        $removeUserID = $_REQUEST["deleteUserID"]; 
+        
+        $removeUserRestriction = $GLOBALS["restrictionModel"];
+        $removeUserRestriction->deleteUserRestriction($removeUserID);
+        
         $removeUser = $GLOBALS["userModel"];
-        $removeUser->removeUser($removeUserID); 
+        $removeUser->removeUser($removeUserID);
+        
         
         echo json_encode("success");
     }

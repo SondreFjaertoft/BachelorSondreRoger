@@ -36,46 +36,6 @@ class Router {
                 case "loginEngine":
                     return new LoginController();
                     
-                
-                case "dummy" :
-                    return new OverviewController();
-                    
-                
-                        
-            }
-            
-            if ($_SESSION["userLevel"] == "Administrator") {   
-                    switch ($page) {
-                case "productAdm" :
-                case "addProductEngine" :
-                case "editProductEngine" :
-                case "deleteProductEngine" :  
-                case "getAllProductInfo" :
-                case "getProductByID" :
-                case "getProductLocation" :    
-                    return new ProductController();
-                    
-                case "storageAdm":
-                case "addStorageEngine":
-                case "editStorageEngine" :
-                case "deleteStorageEngine" :
-                case "getAllStorageInfo" :  
-                case "getStorageByID" :
-                case "getStorageRestriction" :
-                case "getStorageProduct" :  
-                case "chartProduct" :    
-                    return new StorageController();
-                    
-                case "userAdm"    :
-                case "editUserEngine" :           
-                case "addRestriction" :    
-                case "getUserInfo" :
-                case "addUserEngine" :   
-                case "getUserByID" :
-                case "deleteUserEngine" :    
-                case "getUserRestriction" :   
-                    return new UserController();    
-                    
                 case "transfer" :
                 case "getTransferRestriction" :
                 case "transferProduct" :    
@@ -94,6 +54,46 @@ class Router {
                 case "returnProduct" :    
                     return new ReturnController();
                     
+                case "getAllProductInfo" :
+                case "getProductByID" :
+                case "getProductLocation" :    
+                    return new ProductController();    
+                    
+                case "getAllStorageInfo" :  
+                case "getStorageByID" :
+                case "getStorageRestriction" :
+                case "getStorageProduct" :  
+                case "chartProduct" :    
+                    return new StorageController(); 
+                  
+                case "getUserInfo" :    
+                case "getUserByID" :   
+                case "getUserRestriction" :   
+                    return new UserController();     
+                        
+            }
+            
+            if ($_SESSION["userLevel"] == "Administrator") {   
+                    switch ($page) {
+                case "productAdm" :
+                case "addProductEngine" :
+                case "editProductEngine" :
+                case "deleteProductEngine" :  
+                    return new ProductController();
+                    
+                case "storageAdm":
+                case "addStorageEngine":
+                case "editStorageEngine" :
+                case "deleteStorageEngine" :
+                    return new StorageController();
+                    
+                case "userAdm"    :
+                case "editUserEngine" :           
+                case "addRestriction" :    
+                case "addUserEngine" : 
+                case "deleteUserEngine" :     
+                    return new UserController();    
+   
                     }
                 }
             

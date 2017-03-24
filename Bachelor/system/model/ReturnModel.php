@@ -6,7 +6,7 @@ class ReturnModel {
     
     const TABLE = "returns";
     
-    const SELECT_QUERY = "SELECT * FROM " . ReturnModel::TABLE;
+    const SELECT_QUERY = "SELECT * FROM " . ReturnModel::TABLE . " WHERE userID = :givenUserID";
     const INSERT_QUERY = "INSERT INTO " . ReturnModel::TABLE . " (productID, date, customerNr, comment, userID, storageID, quantity) VALUES (:givenProductID, :givenDate, :givenCustomerNumber, :givenComment, :givenUserID, :givenStorageID, :givenQuantity)";
    
     
@@ -16,9 +16,10 @@ class ReturnModel {
       $this->addStmt = $this->dbConn->prepare(ReturnModel::INSERT_QUERY);
     }
     
-    public function getAllReturnInfo(){
-       $this->selStmt->execute();
-       return $this->selStmt->fetchAll(PDO::FETCH_ASSOC); 
+    public function getAllReturnInfo($givenUserID){
+        $this->selStmt->execute(array("givenUserID" =>  $givenUserID));
+        return $this->selStmt->fetchAll(PDO::FETCH_ASSOC); 
+
        
     }
     

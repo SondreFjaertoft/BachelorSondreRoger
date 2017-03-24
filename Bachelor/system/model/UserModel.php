@@ -11,7 +11,10 @@ class UserModel {
     const SEARCH_QUERY = "SELECT * FROM " . UserModel::TABLE . " WHERE name LIKE :givenSearchWord OR username LIKE :givenSearchWord";
     const INSERT_QUERY = "INSERT INTO " . UserModel::TABLE . " (name, username, password, userLevel, email) VALUES (:givenName, :givenUsername, :givenPassword, :givenUserLevel, :givenEmail)";
     const DELETE_QUERY = "DELETE FROM " . UserModel::TABLE . " WHERE userID = :removeUserID";
+    const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
+    const ACTIVATE_CONS = "SET FOREIGN_KEY_CHECKS=1;";
 
+    
     private $selStmt;
     private $addStmt;
     private $delStmt;
@@ -26,6 +29,8 @@ class UserModel {
         $this->delStmt = $this->dbConn->prepare(UserModel::DELETE_QUERY);
         $this->editStmt = $this->dbConn->prepare(UserModel::UPDATE_QUERY);
         $this->selUserID = $this->dbConn->prepare(UserModel::SELECT_QUERY_USERID);
+        $this->disabCons = $this->dbConn->prepare(UserModel::DISABLE_CONS);
+        $this->actCons = $this->dbConn->prepare(UserModel::ACTIVATE_CONS);
     }
 
     public function getSearchResult($givenSearchWord) {
@@ -56,7 +61,9 @@ class UserModel {
 
     // kommer tilbake til, ved sletting av bruker
     public function removeUser($removeUserID) {
-        return $this->delStmt->execute(array("removeUserID" => $removeUserID));
+       $this->disabCons->execute();
+       $this->delStmt->execute(array("removeUserID" => $removeUserID));
+       $this->actCons->execute();
     }
 
 }
