@@ -8,7 +8,7 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Tafjord</title>
         
-        <script src="jquery-3.1.1.min.js"></script>
+        <script src="/system/jquery-3.1.1.min.js"></script>
         <!-- Bootstrap -->
         <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="style/home.css" rel="stylesheet">
@@ -54,8 +54,7 @@
 
                     
 
-        
-                        <li><a href="?page=home"><i class="fa fa-dashboard fa-fw"></i> Home</a></li>
+
                         <li><a href="?page=home">Home</a></li>
                         <li><a href="?page=sale">Registrer Uttak</a></li>
                         <li><a href="?page=return">Registrer Retur</a></li>
@@ -65,18 +64,20 @@
                         
                         <?php if ($_SESSION["userLevel"] == "Administrator") {?>
                         <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Administrering<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+                        <a id="show-hide-toogle" href="#">Administrering</a>
+                        
+                            <ul id="dropdown" class="nav nav-second-level">
                                 <li>
                                     <a href="?page=userAdm">Bruker Administrering</a>
                                 </li>
                                 <li>
-                                    <a href="?page=storageAdm">Lager Administrering</a>
+                                    <a  href="?page=storageAdm">Lager Administrering</a>
                                 </li>
                                 <li>
                                     <a href="?page=productAdm">Produkt Administrering</a>
                                 </li>
                             </ul>
+                  
                         </li>
                         <?php }?>
           
@@ -95,4 +96,13 @@
         <script src="Bootstrap/js/bootstrap.min.js"></script>
         <script src="Charts/Chart.js"></script>
         
-    
+<script>
+$('#dropdown').hide();
+
+$(document).ready(function(){
+    $("#show-hide-toogle").click(function(){
+        $("#dropdown").toggle();
+    });
+});
+ 
+</script>
