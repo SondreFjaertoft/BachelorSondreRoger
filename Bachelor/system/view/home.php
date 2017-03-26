@@ -106,12 +106,7 @@
 
     </div>
 
-
-
-
-
-
-
     <!-- HER KOMMER INNHOLDET>   -->                
 
 </div>
+
