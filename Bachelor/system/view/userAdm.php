@@ -39,7 +39,7 @@
                             <h4 class="modal-title">Opprett bruker</h4>
                         </div>
                         <div class="modal-body">
-                            <div style="text-align: center">
+                            <div class="text-center">
                                 <table class="table table-bordered table-striped table-responsive">
                                 <form action="?page=addUserEngine" method="post" id="createUser">
                                     <tr>
@@ -55,19 +55,21 @@
                                         <td><input type="text" name="givenPassword" required="required" value="" autocomplete="off"></td>
                                     </tr>
                                     <tr>
+                                        <th>Email:</th>
+                                        <td><input type="text" name="givenEmail" required="required" value="" autocomplete="off"></td>
+                                    </tr>
+                                    <tr>
                                         <th>UserLevel:</th>                                       
-                                            <td>
+                                        <td><div class="col-md-4 col-md-offset-4">
                                                 <select name="givenUserLevel" required="required" class="form-control" autocomplete="off">
                                                     <option></option>
                                                     <option value="User">User</option>
                                                     <option value="Administrator">Administrator</option>
                                                 </select>  
+                                            </div>
                                             </td>
                                     </tr>
-                                    <tr>
-                                        <th>Email:</th>
-                                        <td><input type="text" name="givenEmail" required="required" value="" autocomplete="off"></td>
-                                    </tr>
+                                    
                                    
                                 </form>
                                     </table>
@@ -223,10 +225,11 @@
                     <h4 class="modal-title">Bruker informasjon</h4>
                 </div>
                 <form action="?page=editUserEngine" method="post" id="editUser"></form>
-                <div class="modal-body" id="editUserContainer">
+                <div class="modal-body text-center">
+                    <table class="table table-striped table-bordered" id="editUserContainer">
 
                     <!-- Innhold fra Handlebars Template--> 
-
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <input class="btn btn-default" type="submit" value="Lagre" form="editUser">
@@ -257,25 +260,38 @@
 <!-- edit user template-->
 <script id="editUserTemplate" type="text/x-handlebars-template">
 
-    {{#each user}}     
-    <input form="editUser" type="hidden" name="editUserID" value="{{userID}}"><br>
-    Navn: <br>
-    <input form="editUser" type="text" required="required" name="editName" value="{{name}}"><br>
-    Brukernavn: <br>
-    <input form="editUser" type="text" required="required" name="editUsername" value="{{username}}"><br>
-    Passord: <br>
-    <input form="editUser" type="password" required="required" name="editPassword" value="{{password}}"><br>
-    Brukernivå: <br>
+    {{#each user}}
+    <input form="editUser" type="hidden" name="editUserID" value="{{userID}}">
+    <tr>
+    <th>Navn: </th>
+    <td><input form="editUser" type="text" required="required" name="editName" value="{{name}}"></td>
+    </tr>
+    <tr>
+    <th>Brukernavn: </th>
+    <td><input form="editUser" type="text" required="required" name="editUsername" value="{{username}}"></td>
+    </tr>
+    <tr>
+    <th>Passord: </th>
+    <td><input form="editUser" type="password" required="required" name="editPassword" value="{{password}}"></td>
+    </tr>
+    <tr>
+    <th>Epost:</th>
+    <td><input form="editUser" type="text" required="required" name="editEmail" value="{{email}}"></td>
+    </tr>
+    <tr>
+    <th>Brukernivå: </th>
     
+    <td><div class="col-md-4 col-md-offset-4">
     <select form="editUser" type="text" required="required" name="editUserLevel" class="form-control" autocomplete="off">
         <option></option>
         <option value="User">User</option>
         <option value="Administrator">Administrator</option>
-    </select> 
+    </select>
+    </div>
+    </td>
+    </tr>
     
-    Epost: <br>
-    <input form="editUser" type="text" required="required" name="editEmail" value="{{email}}"><br>
-    <br>    
+        
     {{/each}}
 </script>   
 
@@ -284,7 +300,7 @@
 <script id="userRestrictionTemplate" type="text/x-handlebars-template">
 {{#each restriction}}
 {{storageName}}
-<button data-id="{{storageID}}" class="deleteRestriction" data-toggle="tooltip" 
+<button data-id="{{storageID}}" class="deleteRestriction" data-toggle="tooltip" title="Fjern lagertilgang"
     style="appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -355,7 +371,7 @@
      
     <!-- Knapp som aktiverer Model for brukerredigering  --> 
 
-    <button data-id="{{userID}}" class="edit" data-toggle="tooltip"
+    <button data-id="{{userID}}" class="edit" data-toggle="tooltip" title="Rediger bruker"
     style="appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -369,7 +385,7 @@
 
     <!-- Knapp som aktiverer Model for å vise brukerinformasjon  --> 
 
-    <button data-id="{{userID}}" class="information" data-toggle="tooltip" 
+    <button data-id="{{userID}}" class="information" data-toggle="tooltip" title="Vis informasjon" 
     style="appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -385,7 +401,7 @@
 
      
    
-    <button data-id="{{userID}}" class="delete" data-toggle="tooltip" 
+    <button data-id="{{userID}}" class="delete" data-toggle="tooltip" title="Slett bruker"
     style="appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;

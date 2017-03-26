@@ -63,7 +63,7 @@
                     <h4 class="modal-title">Opprett Produkt</h4>
                 </div>
                 <div class="modal-body">
-                    <div style="text-align: center">
+                    <div>
                         <table class="table table-bordered table-striped table-responsive">
                         <form action="?page=addProductEngine" method="post" id="createProduct">
                             <tr>
@@ -123,11 +123,14 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Produkt informasjon</h4>
             </div>
+            
             <form action="?page=editProductEngine" method="post" id="editProduct"></form>
-            <div class="modal-body" id="editProductContainer">
-
+            <div class="modal-body" >
+                <table class="table table-striped table-bordered">
+                    <tbody id="editProductContainer">
                 <!-- Innhold fra Handlebars Template-->
-
+                    </tbody>
+                </table>
             </div>
             <div class="modal-footer">
                 <input class="btn btn-default" type="submit" value="Lagre" form="editProduct">
@@ -212,19 +215,31 @@
 
 <script id="editProductTemplate" type="text/x-handlebars-template">
 {{#each product}}    
-    <input form="editProduct" type="hidden" name="editProductID" value="{{productID}}"><br>
-    Produktnavn: <br>
-    <input form="editProduct" type="text" required="required" name="editProductName" value="{{productName}}" autocomplete="off"><br>
-    Kjøpspris: <br>
-    <input form="editProduct" type="int" required="required" name="editBuyPrice" value="{{buyPrice}}" autocomplete="off"><br>
-    Salgspris: <br>
-    <input form="editProduct" type="int" required="required" name="editSalePrice" value="{{salePrice}}" autocomplete="off"><br>
-    Kategori: <br>
-    <input form="editProduct" type="int" required="required" name="editCategoryID" value="{{categoryID}}" autocomplete="off"><br>
-    Media: <br>
-    <input form="editProduct" type="int" required="required" name="editMediaID" value="{{mediaID}}" autocomplete="off"><br>
-    Produktnummer: <br>
-    <input form="editProduct" type="text" required="required" name="editProductNumber" value="{{productNumber}}" autocomplete="off"><br>
+    <input form="editProduct" type="hidden" name="editProductID" value="{{productID}}">
+    <tr>
+    <th>Produktnavn:</th>
+    <td><input form="editProduct" type="text" required="required" name="editProductName" value="{{productName}}" autocomplete="off"></td>
+    </tr>
+    <tr>
+    <th>Kjøpspris: </th>
+    <td><input form="editProduct" type="int" required="required" name="editBuyPrice" value="{{buyPrice}}" autocomplete="off"></td>
+    </tr>
+    <tr>
+    <th>Salgspris:</th>
+    <td><input form="editProduct" type="int" required="required" name="editSalePrice" value="{{salePrice}}" autocomplete="off"></td>
+    </tr>
+    <tr>
+    <th>Kategori:</th>
+    <td><input form="editProduct" type="int" required="required" name="editCategoryID" value="{{categoryID}}" autocomplete="off"></td>
+    </tr>
+    <tr>
+    <th>Media: </th>
+    <td><input form="editProduct" type="int" required="required" name="editMediaID" value="{{mediaID}}" autocomplete="off"></td>
+    </tr>
+    <tr>
+    <th>Produktnummer:</th>
+    <td><input form="editProduct" type="text" required="required" name="editProductNumber" value="{{productNumber}}" autocomplete="off"></td>
+     </tr>   
 {{/each}} 
 </script>  
 
@@ -288,7 +303,7 @@
 
     <!-- Knapp som aktiverer Model for produktredigering  --> 
 
-    <button data-id="{{productID}}" class="edit" data-toggle="tooltip"
+    <button data-id="{{productID}}" class="edit" data-toggle="tooltip" title="Rediger produkt"
     style="appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -302,7 +317,7 @@
 
     <!-- Knapp som aktiverer Model for å vise productinformasjon  --> 
 
-    <button data-id="{{productID}}" class="information" data-toggle="tooltip" 
+    <button data-id="{{productID}}" class="information" data-toggle="tooltip" title="Vis informasjon"
     style="appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -318,7 +333,7 @@
 
 
 
-    <button data-id="{{productID}}" class="delete" data-toggle="tooltip" 
+    <button data-id="{{productID}}" class="delete" data-toggle="tooltip" title="Slett produkt" 
     style="appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;

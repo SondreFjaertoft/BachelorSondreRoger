@@ -5,16 +5,19 @@
     <br><br><br><br>
 
     <div class="col-sm-3 col-sm-offset-1 col-md-6 col-md-offset-2 form-group"> 
-        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center"><b>Mine Returer</b></h3>
+            </div>
          <table class="table table-bordered table-striped table-responsive"> 
-            <h4> Mine Returer </h4> 
+            
             <tbody id="myReturnsContainer">
 
                 <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
 
             </tbody>
         </table> 
-        
+            </div>
 <script id="myReturnsTemplate" type="text/x-handlebars-template">        
 <tr>
     <th>Produkt</th>
