@@ -13,7 +13,9 @@
         <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="style/home.css" rel="stylesheet">
         <script src="js/handlebars-v4.0.5.js"></script>
-        
+           <!-- MetisMenu CSS -->
+   
+         <script src="Bootstrap/js/bootstrap.min.js"></script>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -22,8 +24,9 @@
         <![endif]-->
     </head>
     <body>
-        
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <div id="wrapper">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+
             <div class="container-fluid">
                 <div class="navbar-header">
                     
@@ -42,40 +45,49 @@
                 <form class="navbar-form navbar-right">
                     <input type="text" class="form-control" placeholder="Søk..">
                 </form>
+                
             </div>
-        </nav>
-        <div class="container-fluid">
-            <div class="row">
-                <div id="sidebar" class="col-sm-3 col-md-2 sidebar">
-                    <br><br>
+        
+        <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
 
                     
 
-                    <ul class="nav nav-sidebar list-group">
-                        <li><a class="list-group-item active" href="?page=home">Home</a></li><br>
-                        <li><a class="list-group-item active" href="?page=sale">Registrer Uttak</a></li><br>
-                        <li><a class="list-group-item active" href="?page=return">Registrer Retur</a></li><br>
-                        <li><a class="list-group-item active" href="?page=transfer">Overføring</a></li><br>
-                        <li><a class="list-group-item active" href="?page=mySales">Dine Salg</a></li><br>
-                        <li><a class="list-group-item active" href="?page=myReturns">Dine Returer</a></li><br>
+        
+                        <li><a href="?page=home"><i class="fa fa-dashboard fa-fw"></i> Home</a></li>
+                        <li><a href="?page=home">Home</a></li>
+                        <li><a href="?page=sale">Registrer Uttak</a></li>
+                        <li><a href="?page=return">Registrer Retur</a></li>
+                        <li><a href="?page=transfer">Overføring</a></li>
+                        <li><a href="?page=mySales">Dine Salg</a></li>
+                        <li><a href="?page=myReturns">Dine Returer</a></li>
                         
-
                         <?php if ($_SESSION["userLevel"] == "Administrator") {?>
-                        <li><a class="list-group-item active" href="?page=userAdm">Bruker Administrering</a></li><br>
-                        <li><a class="list-group-item active" href="?page=storageAdm">Lager Administrering</a></li><br>
-                        <li><a class="list-group-item active" href="?page=productAdm">Produkt Administrering</a></li>
-
-
+                        <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Administrering<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="?page=userAdm">Bruker Administrering</a>
+                                </li>
+                                <li>
+                                    <a href="?page=storageAdm">Lager Administrering</a>
+                                </li>
+                                <li>
+                                    <a href="?page=productAdm">Produkt Administrering</a>
+                                </li>
+                            </ul>
+                        </li>
                         <?php }?>
-                    </ul>
+          
+     
 
                 </div>
 
 
             </div>
-
-        </div>
-
+            </nav>
+      
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
