@@ -337,6 +337,7 @@
 <!-- GET storageInformation -->
 
 <script>
+    $('#dropdown').show();
     $(function () {
         $.ajax({
             type: 'GET',

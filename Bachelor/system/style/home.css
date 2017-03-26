@@ -4,51 +4,36 @@ html, body
     height: 100%;
 }
 
-
-
-
 .sidebar .sidebar-nav.navbar-collapse {
   padding-left: 0;
   padding-right: 0;
-  overflow-x: visible;
+  border-right: 2px solid #002E5F;
 }
 
 
 
  
 .container-fluid{
-    background-color: #99d6ff;
+    background-color: #002E5F;
 }
 
-.sidebar ul li {
-  border-bottom: 1px solid #e7e7e7;
-  
-  
+.nav-second-level{
+    padding-left: 26px;
 }
-.sidebar ul li a.active {
-  background-color: #eeeeee;
-}
-.sidebar .arrow {
-  float: right;
-}
-.sidebar .fa.arrow:before {
-  content: "\f104";
-}
-.sidebar .active > a > .fa.arrow:before {
-  content: "\f107";
-}
-
-.sidebar .nav-second-level li,
-.sidebar .nav-third-level li {
+.sidebar .nav-second-level li {
   border-bottom: none !important;
 }
 
-.sidebar .nav-second-level li a {
-  padding-left: 37px;
+.sidebar ul li {
+  border-bottom: 0.5px solid rgba(0,46,95,.1);
+ 
 }
-.sidebar .nav-third-level li a {
-  padding-left: 52px;
+.sidebar ul li a.active {
+  background-color: #eeeeee;
+  
 }
+
+
 @media (min-width: 768px) {
   .sidebar {
     z-index: 1;

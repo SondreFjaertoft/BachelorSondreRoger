@@ -30,8 +30,8 @@
             <div class="container-fluid">
                 <div class="navbar-header">
                     
-                    <a class="navbar-left" href="?page=home" style="margin-left: 50px; margin-top: 5px;">
-                        <img src="image/tafjordLogo.png" alt="Home">
+                    <a class="navbar-left" href="?page=home" style="margin-left: 25px; margin-top: 10px;">
+                        <img src="image/tafjordLogo2.png" alt="Home">
                     </a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
@@ -61,12 +61,11 @@
                         <li><a href="?page=transfer">Overføring</a></li>
                         <li><a href="?page=mySales">Dine Salg</a></li>
                         <li><a href="?page=myReturns">Dine Returer</a></li>
-                        
+                           
                         <?php if ($_SESSION["userLevel"] == "Administrator") {?>
-                        <li>
-                        <a id="show-hide-toogle" href="#">Administrering</a>
+                        <li><a id="show-hide-toogle" class="nav nav-second-level" href="#">Administrering</a>
                         
-                            <ul id="dropdown" class="nav nav-second-level">
+                            <ul id="dropdown" class="nav nav-second-level" hidden>
                                 <li>
                                     <a href="?page=userAdm">Bruker Administrering</a>
                                 </li>
@@ -80,7 +79,7 @@
                   
                         </li>
                         <?php }?>
-          
+                    </ul>    
      
 
                 </div>
@@ -97,7 +96,7 @@
         <script src="Charts/Chart.js"></script>
         
 <script>
-$('#dropdown').hide();
+
 
 $(document).ready(function(){
     $("#show-hide-toogle").click(function(){

@@ -349,6 +349,7 @@
 
 <!-- GET productInformation -->
 <script>
+    $('#dropdown').show();
     $(function () {
         $.ajax({
             type: 'GET',

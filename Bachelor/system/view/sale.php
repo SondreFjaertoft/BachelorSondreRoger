@@ -33,7 +33,7 @@
         <br><br><br>
 
         <div>
-            <table class="table table-bordered table-striped table-responsive" id="commentContainer">
+            <table class="table table-bordered table-striped table-responsive" id="commentContainer" hidden>
 
                 <tr>
                     <th>Kundenr:   </th> 
@@ -59,7 +59,7 @@
             <form id="withdrawProducts" action="?page=withdrawProduct" method="post"></form>
             <input form="withdrawProducts" type="hidden" id="date" name="date">
             
-            <button form="withdrawProducts" type="submit" class="btn btn-default" id="withdrawButton">Overfør</button>
+            <button form="withdrawProducts" type="submit" class="btn btn-default" id="withdrawButton" hidden>Overfør</button>
             <p id="errorMessage"></p>
         </div>    
 
@@ -120,8 +120,8 @@
 
 <!-- Get storage information with user restriction -->
 <script>
-    $('#withdrawButton').hide(); // hides transferbutton  
-    $('#commentContainer').hide();
+ 
+$('#withdrawButton').hide();
     $(function () {
         $.ajax({
             type: 'GET',

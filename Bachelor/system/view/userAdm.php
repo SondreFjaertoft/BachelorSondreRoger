@@ -500,6 +500,7 @@
 <!-- GET USER INFOROMATION -->
 
 <script>
+    $('#dropdown').show();
     $(function () {
         $.ajax({
             type: 'GET',
