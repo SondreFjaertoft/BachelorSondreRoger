@@ -4,7 +4,9 @@ html,body
     min-height: 100%;
 }
 
-
+.sidebar .glyphicon{
+    margin-right: 3%;
+}
 
 
 .container{
@@ -12,7 +14,6 @@ html,body
   width: 90%;
   padding: 1%;
   border-radius: 7px;
-
 }
 
 .main {

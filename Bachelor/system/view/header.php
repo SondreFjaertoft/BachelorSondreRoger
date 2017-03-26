@@ -55,25 +55,25 @@
                     
 
 
-                        <li><a href="?page=home">Home</a></li>
-                        <li><a href="?page=sale">Registrer Uttak</a></li>
-                        <li><a href="?page=return">Registrer Retur</a></li>
-                        <li><a href="?page=transfer">Overføring</a></li>
-                        <li><a href="?page=mySales">Dine Salg</a></li>
-                        <li><a href="?page=myReturns">Dine Returer</a></li>
+                        <li><a href="?page=home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li><a href="?page=sale"><span class="glyphicon glyphicon-export"></span> Registrer Uttak</a></li>
+                        <li><a href="?page=return"><span class="glyphicon glyphicon-import"></span> Registrer Retur</a></li>
+                        <li><a href="?page=transfer"><span class="glyphicon glyphicon-random"></span> Overføring</a></li>
+                        <li><a href="?page=mySales"><span class="glyphicon glyphicon-stats"></span> Dine Salg</a></li>
+                        <li><a href="?page=myReturns"><span class="glyphicon glyphicon-stats"></span> Dine Returer</a></li>
                            
                         <?php if ($_SESSION["userLevel"] == "Administrator") {?>
-                        <li><a id="show-hide-toogle" class="nav nav-second-level" href="#">Administrering</a>
+                        <li><a id="show-hide-toogle" href="#"><span class="glyphicon glyphicon-wrench"></span> Administrering</a>
                         
                             <ul id="dropdown" class="nav nav-second-level" hidden>
                                 <li>
-                                    <a href="?page=userAdm">Bruker Administrering</a>
+                                    <a href="?page=userAdm"><span class="glyphicon glyphicon-user"></span> Bruker Administrering</a>
                                 </li>
                                 <li>
-                                    <a  href="?page=storageAdm">Lager Administrering</a>
+                                    <a  href="?page=storageAdm"><span class="glyphicon glyphicon-th-list"></span> Lager Administrering</a>
                                 </li>
                                 <li>
-                                    <a href="?page=productAdm">Produkt Administrering</a>
+                                    <a href="?page=productAdm"><span class="glyphicon glyphicon-th-list"></span> Produkt Administrering</a>
                                 </li>
                             </ul>
                   
