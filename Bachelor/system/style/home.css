@@ -1,18 +1,29 @@
-html, body
+html,body
 {
-    background: #f4f4f4;
-    height: 100%;
+    background-color: #f4f4f4;
+    min-height: 100%;
 }
 
+
+
+
+.container{
+  background-color: white;
+  width: 90%;
+  padding: 1%;
+  border-radius: 7px;
+
+}
+
+.main {
+    margin-top: 2%;
+}
 
 .sidebar .sidebar-nav.navbar-collapse {
   padding-left: 0;
   padding-right: 0;
   border-right: 2px solid #002E5F;
 }
-
-
-
  
 .container-fluid{
     background-color: #002E5F;
@@ -44,17 +55,15 @@ html, body
   }
   }
 
-.main 
-{
-    padding: 20px;
+  
 
-}
 
 #wrapper {
   width: 100%;
   background-color: white;
-
 }
+
+
 
 
 
