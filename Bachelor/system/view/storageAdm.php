@@ -106,10 +106,13 @@
                 <h4 class="modal-title">Bruker informasjon</h4>
             </div>
             <form action="?page=editStorageEngine" method="post" id="editStorage"></form>
-            <div class="modal-body" id="editStorageContainer">
+            <div class="modal-body">
+                <table class="table table-striped table-bordered" id="editStorageContainer">
+                    
 
                 <!-- Innhold fra Handlebars Template -->
-
+                    
+                </table>
             </div>
             <div class="modal-footer">
                 <input class="btn btn-default" type="submit" value="Lagre" form="editStorage">
@@ -141,10 +144,14 @@
 
                         </tbody>
                     </table>
-                    <table class="table table-striped table-bordered">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title text-center"><b>Brukere med tilgang</b></h2>
+                        </div>
+                    <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th class="col-md-5">Personer med tilgang: </th>
+                                
                                 <td id="storageRestrictionContainer">
 
                                     <!-- Her kommer handlebars Template -->
@@ -152,11 +159,16 @@
                                 </td>
                             </tr>                      
                         </tbody>    
-                    </table> 
+                    </table>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title text-center"><b>Innhold i lageret</b></h2>
+                        </div>
                     <table class="table table-striped table-bordered">
                         <tbody>
                             <tr>
-                                <th class="col-md-5">Utstyr i lageret: </th>
+                                
                                 <td id="storageProductContainer">
 
                                     <!-- Her kommer handlebars Template -->
@@ -165,6 +177,7 @@
                             </tr>                      
                         </tbody>
                     </table>
+                    </div>
                 </div>
                 <div class="col-sm-9 col-md-7">
 
@@ -218,10 +231,12 @@
 
 <!-- Display editStorage-->                    
 <script id="editStorageTemplate" type="text/x-handlebars-template">
-    {{#each storage}}     
-    <input form="editStorage" type="hidden" name="editStorageID" value="{{storageID}}"><br>
-    Lagernavn: <br> 
-    <input form="editStorage" required="required" type="text" name="editStorageName" value="{{storageName}}" autocomplete="off"><br> 
+    {{#each storage}}    
+    <input form="editStorage" type="hidden" name="editStorageID" value="{{storageID}}">
+    <tr>
+    <th>Lagernavn: </th> 
+    <td><input form="editStorage" required="required" type="text" name="editStorageName" value="{{storageName}}" autocomplete="off"></td> 
+    </tr>
     {{/each}}            
 </script>  
 
@@ -276,7 +291,7 @@
 
     <!-- Knapp som aktiverer Model for lagerredigering  --> 
 
-    <button data-id="{{storageID}}" class="edit" data-toggle="tooltip"
+    <button data-id="{{storageID}}" class="edit" data-toggle="tooltip" title="Rediger lager"
     style="appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -290,7 +305,7 @@
 
     <!-- Knapp som aktiverer Model for å vise lagerinformasjon  --> 
 
-    <button data-id="{{storageID}}" class="information" data-toggle="tooltip" 
+    <button data-id="{{storageID}}" class="information" data-toggle="tooltip" title="Vis informasjon"
     style="appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -306,7 +321,7 @@
 
 
 
-    <button data-id="{{storageID}}" class="delete" data-toggle="tooltip" 
+    <button data-id="{{storageID}}" class="delete" data-toggle="tooltip" title="Slett lager"
     style="appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
