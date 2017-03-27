@@ -68,14 +68,16 @@
 </div> 
 
 <script id="displayMediaTemplate" type="text/x-handlebars-template">
-{{#each mediaInfo}} 
-<div class="panel panel-default col-sm-3">
+{{#each mediaInfo}}
+<div class="col-md-3">
+<div class="panel panel-default">
 <div class="panel-heading"><b>Filnavn: {{mediaName}}</b>
 </div>
 
 <img width="100" height="100" src="image/{{mediaName}}" alt="Home">
 
 <div class="panel-footer"> Knapp 1 | Knapp 2 | Knapp 3</div>
+</div>
 </div>
 {{/each}}
     
