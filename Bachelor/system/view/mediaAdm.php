@@ -68,17 +68,7 @@
 
 <script id="displayMediaTemplate" type="text/x-handlebars-template">
 {{#each mediaInfo}}
-
-<div class="col-md-3">
-<div class="panel panel-default text-center">
-<div class="panel-heading"><b>Filnavn: {{mediaName}}</b>
-</div>
-
 <div class="col-md-2">
-
-
-<div class="col-md-2">
-
 
 <div class="img-border">
 <div class="caption">
@@ -118,6 +108,7 @@
 
 
 <script>
+$('#dropdown').show();            
     $(function () {
         $.ajax({
             type: 'GET',
