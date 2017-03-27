@@ -96,7 +96,8 @@ class Router {
                     return new UserController();    
                     
                 case "mediaAdm" :
-                case "uploadImage" :    
+                case "uploadImage" :  
+                case "getAllMediaInfo" :    
                     return new mediaController();
                     }
                 }

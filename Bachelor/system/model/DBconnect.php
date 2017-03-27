@@ -8,6 +8,7 @@
   require_once("ProductModel.php");
   require_once("SaleModel.php");
   require_once("returnModel.php");
+  require_once("MediaModel.php");
 
 //connection to the database
 $dbConn = new PDO('mysql:host=localhost;dbname=tafjord;charset=utf8mb4', 'root', 'Tafjord123');
@@ -20,6 +21,7 @@ $inventoryModel = new InventoryModel($dbConn);
 $productModel = new ProductModel($dbConn);
 $saleModel = new SaleModel($dbConn);
 $returnModel = new ReturnModel($dbConn);
+$mediaModel = new MediaModel($dbConn);
 
 
 // TODO - create new models here. First create them as a new class

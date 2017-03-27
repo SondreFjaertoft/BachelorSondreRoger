@@ -9,17 +9,20 @@ class mediaController extends Controller {
             $this->mediaPage();
         } else if($page == "uploadImage"){
             $this->uploadImage();
+        } else if ($page == "getAllMediaInfo"){
+            $this->getAllMediaInfo();
         }
     }
 
     private function mediaPage() {
-        rename("image/test.png","image/pictures.png");
+    //    rename("image/test.png","image/pictures.png");
         return $this->render("mediaAdm");
         
     }
 
     private function uploadImage() {
-
+        $givenCaterogy = $_REQUEST["givenCaterogy"];
+        $imageName = "";
         $target_dir = "image/";
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
         $uploadOk = 1;
@@ -57,17 +60,32 @@ class mediaController extends Controller {
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                 echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
+                $imageName = basename($_FILES["fileToUpload"]["name"]);
+                $this->addMedia($imageName, $givenCaterogy);
             } else {
                 echo "Sorry, there was an error uploading your file.";
             }           
         }
         
-        
-        
-
         return $this->render("mediaAdm");
     }
     
+    private function addMedia($fileName, $givenCaterogy){
+        $mediaModel = $GLOBALS["mediaModel"];
+        $added = $mediaModel->addMedia($fileName, $givenCaterogy);
+        
+        if($added){
+            echo "workiiiing!";
+        }
+    }
     
+    private function getAllMediaInfo(){
+        $mediaModel = $GLOBALS["mediaModel"];
+        $mediaInfo = $mediaModel->getAllMediaInfo();
+        
+        $data = json_encode(array("mediaInfo" => $mediaInfo));
+
+        echo $data;
+    }
 
 }
