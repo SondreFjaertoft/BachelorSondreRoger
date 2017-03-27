@@ -46,7 +46,17 @@ background:#002E5F;
 }
 
 
+@media (min-width: 768px) {   
+.container-fluid{
+    background-color: #002E5F;
+    position: fixed;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
     
+}
+}
+
 .container-fluid{
     background-color: #002E5F;
 }
@@ -71,13 +81,13 @@ background:#002E5F;
 @media (min-width: 768px) {
   .sidebar {
     z-index: 1;
-    position: absolute;
+    position: fixed;
     width: 250px;
-    margin-top: 0px;
+    margin-top: 50px;
     border-right: 2px solid #002E5F;
-    height: -webkit-calc(100vh - 51px);
-    height:    -moz-calc(100vh - 51px);
-    height:         calc(100vh - 51px);
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 }
 
