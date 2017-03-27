@@ -300,14 +300,7 @@
 <script id="userRestrictionTemplate" type="text/x-handlebars-template">
 {{#each restriction}}
 {{storageName}}
-<button data-id="{{storageID}}" class="deleteRestriction" data-toggle="tooltip" title="Fjern lagertilgang"
-    style="appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    outline: none;
-    border: 0;
-    background: transparent;
-    display: inline;">
+<button id="redigerknapp" data-id="{{storageID}}" class="deleteRestriction" data-toggle="tooltip" title="Fjern lagertilgang">
     <span class="glyphicon glyphicon-remove" style="color: red"></span>
     </button> 
 <br>    

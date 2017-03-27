@@ -303,28 +303,14 @@
 
     <!-- Knapp som aktiverer Model for produktredigering  --> 
 
-    <button data-id="{{productID}}" class="edit" data-toggle="tooltip" title="Rediger produkt"
-    style="appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    outline: none;
-    border: 0;
-    background: transparent;
-    display: inline;">
+    <button id="redigerknapp" data-id="{{productID}}" class="edit" data-toggle="tooltip" title="Rediger produkt">
     <span class="glyphicon glyphicon-edit" style="color: green"></span>
     </button>
 
 
     <!-- Knapp som aktiverer Model for å vise productinformasjon  --> 
 
-    <button data-id="{{productID}}" class="information" data-toggle="tooltip" title="Vis informasjon"
-    style="appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    outline: none;
-    border: 0;
-    background: transparent;
-    display: inline;">
+    <button id="redigerknapp" data-id="{{productID}}" class="information" data-toggle="tooltip" title="Vis informasjon">
     <span class="glyphicon glyphicon-menu-hamburger" style="color: #003366" ></span>
     </button>
 
@@ -333,14 +319,7 @@
 
 
 
-    <button data-id="{{productID}}" class="delete" data-toggle="tooltip" title="Slett produkt" 
-    style="appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    outline: none;
-    border: 0;
-    background: transparent;
-    display: inline;">
+    <button id="redigerknapp" data-id="{{productID}}" class="delete" data-toggle="tooltip" title="Slett produkt" >
     <span class="glyphicon glyphicon-remove" style="color: red"></span>
     </button>
 

@@ -291,28 +291,14 @@
 
     <!-- Knapp som aktiverer Model for lagerredigering  --> 
 
-    <button data-id="{{storageID}}" class="edit" data-toggle="tooltip" title="Rediger lager"
-    style="appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    outline: none;
-    border: 0;
-    background: transparent;
-    display: inline;">
+    <button id="redigerknapp" data-id="{{storageID}}" class="edit" data-toggle="tooltip" title="Rediger lager">
     <span class="glyphicon glyphicon-edit" style="color: green"></span>
     </button>
 
 
     <!-- Knapp som aktiverer Model for å vise lagerinformasjon  --> 
 
-    <button data-id="{{storageID}}" class="information" data-toggle="tooltip" title="Vis informasjon"
-    style="appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    outline: none;
-    border: 0;
-    background: transparent;
-    display: inline;">
+    <button id="redigerknapp" data-id="{{storageID}}" class="information" data-toggle="tooltip" title="Vis informasjon">
     <span class="glyphicon glyphicon-menu-hamburger" style="color: #003366" ></span>
     </button>
 
@@ -321,14 +307,7 @@
 
 
 
-    <button data-id="{{storageID}}" class="delete" data-toggle="tooltip" title="Slett lager"
-    style="appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    outline: none;
-    border: 0;
-    background: transparent;
-    display: inline;">
+    <button id="redigerknapp" data-id="{{storageID}}" class="delete" data-toggle="tooltip" title="Slett lager">
     <span class="glyphicon glyphicon-remove" style="color: red"></span>
     </button>
 
