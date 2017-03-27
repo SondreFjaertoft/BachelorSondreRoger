@@ -15,7 +15,7 @@ html,body
 
 .container{
   background-color: #FFFFFF;
-  width: 90%;
+  width: 100%;
   padding: 1%;
   border-radius: 7px;
 }
@@ -30,6 +30,22 @@ html,body
   
 }
 
+.navbar-default .navbar-nav>.open>a, 
+.navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+color: #FFFFFF;
+background:#002E5F; 
+}
+
+.navbar-default .navbar-nav>li>a{
+    color: #B8B8B8 ;
+}
+
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover{
+    color: #FFFFFF ;
+}
+
+
+    
 .container-fluid{
     background-color: #002E5F;
 }
@@ -61,10 +77,8 @@ html,body
     height: -webkit-calc(100vh - 51px);
     height:    -moz-calc(100vh - 51px);
     height:         calc(100vh - 51px);
- 
-
   }
-  }
+}
 
   
 
