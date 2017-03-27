@@ -343,7 +343,7 @@
             <div class="modal-body">
                 <div style="text-align: center">
 
-                    <form action="?page=uploadImage" id="uploadImage" method="post" enctype="multipart/form-data">
+                    <form action="?page=uploadImageShortcut" id="uploadImage" method="post" enctype="multipart/form-data">
                         <p>Velg bilde for å laste opp:</p>
                         <input type="file" name="fileToUpload" required="required" id="fileToUpload"><br>
                         velg en katerogi:

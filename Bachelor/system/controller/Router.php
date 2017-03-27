@@ -97,7 +97,8 @@ class Router {
                     
                 case "mediaAdm" :
                 case "uploadImage" :  
-                case "getAllMediaInfo" :    
+                case "getAllMediaInfo" :
+                case "uploadImageShortcut" :   
                     return new mediaController();
                     }
                 }
