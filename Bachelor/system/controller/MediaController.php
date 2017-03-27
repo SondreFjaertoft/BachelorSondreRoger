@@ -13,7 +13,9 @@ class mediaController extends Controller {
     }
 
     private function mediaPage() {
+        rename("image/test.png","image/pictures.png");
         return $this->render("mediaAdm");
+        
     }
 
     private function uploadImage() {
@@ -57,9 +59,12 @@ class mediaController extends Controller {
                 echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
             } else {
                 echo "Sorry, there was an error uploading your file.";
-            }
+            }           
         }
         
+        
+        
+
         return $this->render("mediaAdm");
     }
     
