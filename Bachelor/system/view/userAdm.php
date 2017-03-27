@@ -44,19 +44,19 @@
                                 <form action="?page=addUserEngine" method="post" id="createUser">
                                     <tr>
                                         <th style="border: none">Name:</th>
-                                        <td style="border: none"><input type="text" name="givenName" required="required" value="" autocomplete="off"></td>
+                                        <td style="border: none"><input class="form-control" type="text" name="givenName" required="required" value="" autocomplete="off"></td>
                                     </tr>
                                     <tr>
                                         <th>Brukernavn:</th>
-                                        <td><input type="text" name="givenUsername" required="required" value="" autocomplete="off"></td>
+                                        <td><input class="form-control" type="text" name="givenUsername" required="required" value="" autocomplete="off"></td>
                                     </tr>
                                     <tr>
                                         <th>Passord:</th>
-                                        <td><input type="text" name="givenPassword" required="required" value="" autocomplete="off"></td>
+                                        <td><input class="form-control" type="text" name="givenPassword" required="required" value="" autocomplete="off"></td>
                                     </tr>
                                     <tr>
                                         <th>Email:</th>
-                                        <td><input type="text" name="givenEmail" required="required" value="" autocomplete="off"></td>
+                                        <td><input class="form-control" type="text" name="givenEmail" required="required" value="" autocomplete="off"></td>
                                     </tr>
                                     <tr>
                                         <th>UserLevel:</th>                                       
