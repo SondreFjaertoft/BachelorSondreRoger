@@ -371,28 +371,14 @@
      
     <!-- Knapp som aktiverer Model for brukerredigering  --> 
 
-    <button data-id="{{userID}}" class="edit" data-toggle="tooltip" title="Rediger bruker"
-    style="appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    outline: none;
-    border: 0;
-    background: transparent;
-    display: inline;">
+    <button id="redigerknapp" data-id="{{userID}}" class="edit" data-toggle="tooltip" title="Rediger bruker">
     <span class="glyphicon glyphicon-edit" style="color: green"></span>
     </button>
   
 
     <!-- Knapp som aktiverer Model for å vise brukerinformasjon  --> 
 
-    <button data-id="{{userID}}" class="information" data-toggle="tooltip" title="Vis informasjon" 
-    style="appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    outline: none;
-    border: 0;
-    background: transparent;
-    display: inline;">
+    <button id="redigerknapp" data-id="{{userID}}" class="information" data-toggle="tooltip" title="Vis informasjon" >
     <span class="glyphicon glyphicon-menu-hamburger" style="color: #003366" ></span>
     </button>
 
@@ -401,14 +387,7 @@
 
      
    
-    <button data-id="{{userID}}" class="delete" data-toggle="tooltip" title="Slett bruker"
-    style="appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    outline: none;
-    border: 0;
-    background: transparent;
-    display: inline;">
+    <button id="redigerknapp" data-id="{{userID}}" class="delete" data-toggle="tooltip" title="Slett bruker">
     <span class="glyphicon glyphicon-remove" style="color: red"></span>
     </button> 
 
@@ -574,7 +553,7 @@
 </script>
 
 <script>
-    var givenUserID
+    var givenUserID;
     function POSTuserRestriction(data) {
         givenUserID = data;
         $(function () {
@@ -603,7 +582,7 @@
                 data: {givenUserID: givenUserID, givenStorageID: givenStorageID},
                 dataType: 'json',
                 success: function () {
-                    POSTuserRestriction(givenUserID)
+                    POSTuserRestriction(givenUserID);
 
                 }
             });

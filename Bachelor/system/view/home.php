@@ -4,10 +4,8 @@
 
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-   <div class="container">
-
-       
-       <?php if ($_SESSION["userLevel"] == "Administrator") {?>
+    <div id="snarveidiv">
+    <?php if ($_SESSION["userLevel"] == "Administrator") {?>
        <div class="row">
         <div class="col-md-12">
             <div class="panel panel-primary">
@@ -65,6 +63,12 @@
         </div>
     </div>
     <?php }?>
+        
+    </div>
+   <div class="container">
+
+       
+       
 
 
 

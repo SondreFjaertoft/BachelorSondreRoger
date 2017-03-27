@@ -12,6 +12,23 @@ html,body
     float: right;
 }
 
+#snarveidiv
+{
+    width: 90%; 
+    margin-right: 10px; 
+    margin-top: -1.5%;
+}
+#redigerknapp
+{
+    
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: 0;
+    background: transparent;
+    display: inline;
+}
+
 @media (min-width: 768px) {
 .container{
   background-color: #FFFFFF;
