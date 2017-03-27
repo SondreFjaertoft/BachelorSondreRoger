@@ -9,15 +9,22 @@ class mediaController extends Controller {
             $this->mediaPage();
         } else if($page == "uploadImage"){
             $this->uploadImage();
+            $this->mediaPage();
         } else if ($page == "getAllMediaInfo"){
             $this->getAllMediaInfo();
+        } else if ($page == "uploadImageShortcut"){
+            $this->uploadImage();
+            $this->homePage();
         }
     }
 
     private function mediaPage() {
     //    rename("image/test.png","image/pictures.png");
         return $this->render("mediaAdm");
-        
+    }
+    
+    private function homePage(){
+        return $this->render("home");
     }
 
     private function uploadImage() {
@@ -67,7 +74,7 @@ class mediaController extends Controller {
             }           
         }
         
-        return $this->render("mediaAdm");
+        
     }
     
     private function addMedia($fileName, $givenCaterogy){
