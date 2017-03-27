@@ -60,7 +60,7 @@
                                     </tr>
                                     <tr>
                                         <th>UserLevel:</th>                                       
-                                        <td><div class="col-md-6 col-md-offset-3">
+                                        <td><div>
                                                 <select name="givenUserLevel" required="required" class="form-control" autocomplete="off">
                                                     <option></option>
                                                     <option value="User">User</option>
