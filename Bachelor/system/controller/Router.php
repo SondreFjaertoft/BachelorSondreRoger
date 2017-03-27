@@ -94,7 +94,10 @@ class Router {
                 case "deleteUserEngine" : 
                 case "deleteSingleRes" :
                     return new UserController();    
-   
+                    
+                case "mediaAdm" :
+                case "uploadImage" :    
+                    return new mediaController();
                     }
                 }
             

@@ -75,6 +75,9 @@
                                 <li>
                                     <a href="?page=productAdm"><span class="glyphicon glyphicon-th-list"></span> Produkt Administrering</a>
                                 </li>
+                                <li>
+                                    <a href="?page=mediaAdm"><span class="glyphicon glyphicon-th-list"></span> Media Administrering</a>
+                                </li>
                             </ul>
                   
                         </li>

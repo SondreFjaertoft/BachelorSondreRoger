@@ -51,9 +51,6 @@ background:#002E5F;
     background-color: #002E5F;
     position: fixed;
     width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    
 }
 }
 
@@ -64,9 +61,7 @@ background:#002E5F;
 .nav-second-level{
     padding-left: 26px;
 }
-.sidebar .nav-second-level li {
-  border-bottom: none !important;
-}
+
 
 .sidebar ul li {
   border-bottom: 0.5px solid rgba(0,46,95,.1);
