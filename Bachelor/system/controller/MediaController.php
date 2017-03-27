@@ -88,7 +88,14 @@ class mediaController extends Controller {
     
     private function getAllMediaInfo(){
         $mediaModel = $GLOBALS["mediaModel"];
-        $mediaInfo = $mediaModel->getAllMediaInfo();
+        
+        if (isset($_POST['givenMediaSearchWord'])) {
+            $givenStorageSearchWord = "%{$_REQUEST["givenMediaSearchWord"]}%";
+            $mediaInfo = $mediaModel->getAllMediaInfo($givenStorageSearchWord);
+        } else {
+            $givenStorageSearchWord = "%%";
+            $mediaInfo = $mediaModel->getAllMediaInfo($givenStorageSearchWord);
+        }
         
         $data = json_encode(array("mediaInfo" => $mediaInfo));
 

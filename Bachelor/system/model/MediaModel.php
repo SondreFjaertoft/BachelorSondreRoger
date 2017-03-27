@@ -6,19 +6,19 @@ class MediaModel {
     
     const TABLE = "media";
     
-    const SELECT_QUERY = "SELECT * FROM " . MediaModel::TABLE;
+    const SEARCH_QUERY = "SELECT * FROM " . MediaModel::TABLE . " WHERE mediaName LIKE :givenSearchWord";
     const INSERT_QUERY = "INSERT INTO " . MediaModel::TABLE . " (mediaName, category) VALUES (:givenFileName, :givenCaterogy)";
    
     
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;
-      $this->selStmt = $this->dbConn->prepare(MediaModel::SELECT_QUERY);
+      $this->searchStmt = $this->dbConn->prepare(MediaModel::SEARCH_QUERY);
       $this->addStmt = $this->dbConn->prepare(MediaModel::INSERT_QUERY);
     }
     
-    public function getAllMediaInfo(){
-        $this->selStmt->execute();
-        return $this->selStmt->fetchAll(PDO::FETCH_ASSOC);
+    public function getAllMediaInfo($givenSearchWord){
+        $this->searchStmt->execute(array("givenSearchWord" => $givenSearchWord));
+        return $this->searchStmt->fetchAll(PDO::FETCH_ASSOC);
 
        
     }
