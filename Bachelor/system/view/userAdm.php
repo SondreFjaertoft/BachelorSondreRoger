@@ -40,11 +40,11 @@
                         </div>
                         <div class="modal-body">
                             <div class="text-center">
-                                <table class="table table-bordered table-striped table-responsive">
+                                <table class="table">
                                 <form action="?page=addUserEngine" method="post" id="createUser">
                                     <tr>
-                                        <th>Name:</th>
-                                        <td><input type="text" name="givenName" required="required" value="" autocomplete="off"></td>
+                                        <th style="border: none">Name:</th>
+                                        <td style="border: none"><input type="text" name="givenName" required="required" value="" autocomplete="off"></td>
                                     </tr>
                                     <tr>
                                         <th>Brukernavn:</th>
