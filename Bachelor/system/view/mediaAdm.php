@@ -88,7 +88,9 @@
 <div class="caption">
 {{mediaName}}
 </div>
-<img class="img-thumbnail"  src="image/{{mediaName}}" alt="Home">
+<a href="#">
+<img class="img-thumbnail"  onclick=alert("masseinfo"); id="{{mediaID}}" src="image/{{mediaName}}" alt="Home">
+</a>
 <div class="caption">
 
     <button data-id="{{mediaID}}" id="redigerknapp" class="edit" data-toggle="tooltip" title="Rediger bilde">
