@@ -11,25 +11,26 @@
                 <button class="btn btn-default" type="button" data-toggle="modal" data-target="#uploadImageModal">Last opp bilde</button>
             </div>
 
-
+        
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title text-center"><b>Media Oversikt</b></h3>
                 </div>
-                <table class="table table-bordered table-striped table-responsive"> 
+              
 
-                    <tbody id="displayMediaContainer">
+                    <div id="displayMediaContainer">
 
                         <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
 
-                    </tbody>
+                    </div>
 
-                </table>
+    
 
             </div>
 
         </div>
-    </div>
+  
+    </div>     
 </div>
 
 
@@ -71,8 +72,10 @@
 
 <script id="displayMediaTemplate" type="text/x-handlebars-template">
 {{#each mediaInfo}} 
+<div class="col-md-1 col-md-offset-1">
 <p>filnavn: {{mediaName}}</p>
 <img width="100" height="100" src="image/{{mediaName}}" alt="Home">
+</div>
 {{/each}}
     
 </script>    
