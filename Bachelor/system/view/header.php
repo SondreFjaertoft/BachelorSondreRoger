@@ -31,7 +31,7 @@
                 <div class="navbar-header">
                     
                     <a class="navbar-left" href="?page=home" style="margin-left: 25px; margin-top: 10px;">
-                        <img src="image/tafjordLogo2.png" alt="Home">
+                        <img src="image/tafjordLogo.png" alt="Home">
                     </a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
