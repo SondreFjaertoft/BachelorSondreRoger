@@ -16,16 +16,13 @@
                 <div class="panel-heading">
                     <h3 class="panel-title text-center"><b>Media Oversikt</b></h3>
                 </div>
-              
-
+                <div class="panel-body"
                     <div id="displayMediaContainer">
 
                         <!-- HER KOMMER INNHOLDET FRA HANDLEBARS  -->
 
                     </div>
-
-    
-
+                </div>
             </div>
 
         </div>
@@ -72,9 +69,13 @@
 
 <script id="displayMediaTemplate" type="text/x-handlebars-template">
 {{#each mediaInfo}} 
-<div class="col-md-1 col-md-offset-1">
-<p>filnavn: {{mediaName}}</p>
+<div class="panel panel-default col-sm-3">
+<div class="panel-heading"><b>Filnavn: {{mediaName}}</b>
+</div>
+
 <img width="100" height="100" src="image/{{mediaName}}" alt="Home">
+
+<div class="panel-footer"> Knapp 1 | Knapp 2 | Knapp 3</div>
 </div>
 {{/each}}
     
