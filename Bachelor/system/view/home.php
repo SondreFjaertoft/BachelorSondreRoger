@@ -6,7 +6,6 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
    <div class="container">
 
-
     <div class="col-sm-3 col-md-4" style="border: solid black 1px">
         <h3 class="col-md-6"> LAGERSTATUS</h3>   
         <p style="margin-top: 22px">-- (Dropdown her med velg lager?)</p>
