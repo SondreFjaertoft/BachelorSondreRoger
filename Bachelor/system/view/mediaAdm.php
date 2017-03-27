@@ -70,7 +70,7 @@
 <script id="displayMediaTemplate" type="text/x-handlebars-template">
 {{#each mediaInfo}}
 <div class="col-md-3">
-<div class="panel panel-default">
+<div class="panel panel-default text-center">
 <div class="panel-heading"><b>Filnavn: {{mediaName}}</b>
 </div>
 
