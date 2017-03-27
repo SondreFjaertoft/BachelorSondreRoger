@@ -1,10 +1,10 @@
 
 <?php require("view/header.php");?>
 
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
 
     <div class="container">
-    <div class="col-sm-3 col-sm-offset-1 col-md-6 col-md-offset-2 form-group">
+    <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
 
         
         <!-- SØK ETTER PRODUKT-->

@@ -12,14 +12,15 @@ html,body
     float: right;
 }
 
-
+@media (min-width: 768px) {
 .container{
   background-color: #FFFFFF;
-  width: 100%;
-  padding: 1%;
+  width: 90%;
+  padding: 3%;
   border-radius: 7px;
+  margin-right: 10%;
 }
-
+}
 .main {
     margin-top: 2%;
 }
