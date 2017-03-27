@@ -5,6 +5,7 @@
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
    <div class="container">
+
        
        <?php if ($_SESSION["userLevel"] == "Administrator") {?>
        <div class="row">
@@ -64,6 +65,8 @@
         </div>
     </div>
     <?php }?>
+
+
 
     <div class="col-sm-3 col-md-4" style="border: solid black 1px">
         <h3 class="col-md-6"> LAGERSTATUS</h3>   

@@ -68,14 +68,17 @@
 
 <script id="displayMediaTemplate" type="text/x-handlebars-template">
 {{#each mediaInfo}}
-<<<<<<< HEAD
+
 <div class="col-md-3">
 <div class="panel panel-default text-center">
 <div class="panel-heading"><b>Filnavn: {{mediaName}}</b>
 </div>
-=======
+
 <div class="col-md-2">
->>>>>>> 858b3dbdcb4c76d321bae0fbf1aa0fd72b349873
+
+
+<div class="col-md-2">
+
 
 <div class="img-border">
 <div class="caption">
