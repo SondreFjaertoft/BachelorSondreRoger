@@ -1,6 +1,6 @@
 html,body
 {
-    background-color: #f4f4f4;
+    background-color: #F4F4F4;
     min-height: 100%;
 }
 
@@ -8,9 +8,13 @@ html,body
     margin-right: 3%;
 }
 
+ .sidebar .caret {
+    float: right;
+}
+
 
 .container{
-  background-color: white;
+  background-color: #FFFFFF;
   width: 90%;
   padding: 1%;
   border-radius: 7px;
@@ -23,9 +27,9 @@ html,body
 .sidebar .sidebar-nav.navbar-collapse {
   padding-left: 0;
   padding-right: 0;
-  border-right: 2px solid #002E5F;
+  
 }
- 
+
 .container-fluid{
     background-color: #002E5F;
 }
@@ -53,16 +57,18 @@ html,body
     position: absolute;
     width: 250px;
     margin-top: 0px;
+    border-right: 2px solid #002E5F;
+    height: -webkit-calc(100vh - 51px);
+    height:    -moz-calc(100vh - 51px);
+    height:         calc(100vh - 51px);
+ 
+
   }
   }
 
   
 
 
-#wrapper {
-  width: 100%;
-  background-color: white;
-}
 
 
 

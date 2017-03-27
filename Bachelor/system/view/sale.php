@@ -71,6 +71,7 @@
 </div> 
 
 
+
 <script id="withdrawQuantityTemplate" type="text/x-handlebars-template">
 {{#each prodInfo}} 
     <tr class="selectQuantity">

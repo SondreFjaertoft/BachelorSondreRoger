@@ -243,7 +243,7 @@
 
 
 </div>
-</div>
+
 
 <!-- HANDLEBARS TEMPLATES-->
 
