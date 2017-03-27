@@ -35,8 +35,6 @@ CREATE TABLE `categories` (
 -- Dataark for tabell `categories`
 --
 
-INSERT INTO `categories` (`categoryID`, `categoryName`) VALUES
-(1, 'Internett');
 
 -- --------------------------------------------------------
 
@@ -68,17 +66,7 @@ CREATE TABLE `inventory` (
 -- Dataark for tabell `inventory`
 --
 
-INSERT INTO `inventory` (`inventoryID`, `storageID`, `productID`, `quantity`) VALUES
-(1, 1, 1, 12),
-(2, 1, 2, 6),
-(3, 2, 1, 0),
-(4, 1, 11, 5),
-(5, 1, 12, 0),
-(6, 1, 13, 8),
-(7, 1, 14, 9),
-(61, 2, 2, 2),
-(71, 6, 12, 27),
-(72, 6, 2, 25);
+
 
 -- --------------------------------------------------------
 
@@ -123,8 +111,7 @@ CREATE TABLE `media` (
 -- Dataark for tabell `media`
 --
 
-INSERT INTO `media` (`mediaID`, `mediaName`, `fileType`) VALUES
-(1, 'FMGbilde', 'jpg');
+
 
 -- --------------------------------------------------------
 
@@ -148,17 +135,6 @@ CREATE TABLE `products` (
 -- Dataark for tabell `products`
 --
 
-INSERT INTO `products` (`productID`, `productName`, `buyPrice`, `salePrice`, `categoryID`, `mediaID`, `productNumber`, `date`, `macAdresse`) VALUES
-(1, 'FMG', '999.00', '1499.00', 1, 1, 'DIV-1499', '2017-03-06 00:00:00', 'FALSE'),
-(2, 'Dekoder', '599.00', '799.00', 1, 1, 'DIV-1330', '2017-03-08 00:00:00', 'FALSE'),
-(11, 'Testprodukt1', '111.00', '222.00', 1, 1, 'test1', '2017-03-07 00:00:00', 'FALSE'),
-(12, 'Testprodukt2', '111.00', '222.00', 1, 1, 'test2', '2017-02-21 00:00:00', 'FALSE'),
-(13, 'Testprodukt3', '111.00', '222.00', 1, 1, 'test3', '2017-02-21 00:00:00', 'FALSE'),
-(14, 'Testprodukt4', '111.00', '222.00', 1, 1, 'test4', '2017-02-21 00:00:00', 'FALSE'),
-(15, 'Testprodukt5', '111.00', '222.00', 1, 1, 'Test5', '2017-02-21 00:00:00', 'FALSE'),
-(16, 'Testprodukt6', '111.00', '222.00', 1, 1, 'Test6', '2017-02-21 00:00:00', 'FALSE'),
-(17, 'Testprodukt7', '111.00', '222.00', 1, 1, 'test7', '2017-02-21 00:00:00', 'FALSE'),
-(18, 'Testprodukt8', '111.00', '222.00', 1, 1, 'test8', '2017-02-21 00:00:00', 'FALSE');
 
 -- --------------------------------------------------------
 
@@ -176,13 +152,7 @@ CREATE TABLE `restrictions` (
 -- Dataark for tabell `restrictions`
 --
 
-INSERT INTO `restrictions` (`resID`, `userID`, `storageID`) VALUES
-(7, 1, 2),
-(36, 1, 1),
-(37, 1, 6),
-(38, 10, 2),
-(39, 10, 1),
-(40, 10, 6);
+
 
 -- --------------------------------------------------------
 
@@ -205,19 +175,6 @@ CREATE TABLE `returns` (
 -- Dataark for tabell `returns`
 --
 
-INSERT INTO `returns` (`returnID`, `productID`, `date`, `customerNr`, `comment`, `userID`, `storageID`, `quantity`) VALUES
-(2, 2, '2017-03-23', 123456, 'sadsadsad', 1, 1, 5),
-(3, 2, '2017-03-23', 123, 'asdsad', 1, 2, 5),
-(4, 11, '2017-03-23', 3234234, 'test', 1, 6, 15),
-(5, 12, '2017-03-23', 3234234, 'test', 1, 6, 15),
-(6, 13, '2017-03-23', 213213, 'asdsadsa', 1, 1, 10),
-(7, 14, '2017-03-23', 213213, 'asdsadsa', 1, 1, 10),
-(8, 1, '2017-03-23', 2, 'asd', 1, 1, 2),
-(9, 11, '2017-03-24', 7474657, 'asdsad', 1, 1, 2),
-(10, 2, '2017-03-24', 1234567, 'hmm', 1, 1, 3),
-(11, 2, '2017-03-24', 1234567, 'testing', 7, 2, 5),
-(12, 2, '2017-03-24', 21321321, 'asdasdsa', 7, 6, 12),
-(13, 2, '2017-03-24', 123213, 'asdsadsadsadsa', 7, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -240,11 +197,6 @@ CREATE TABLE `sales` (
 -- Dataark for tabell `sales`
 --
 
-INSERT INTO `sales` (`salesID`, `productID`, `date`, `customerNr`, `comment`, `userID`, `storageID`, `quantity`) VALUES
-(25, 2, '2017-03-24', 123, 'add', 1, 1, 12),
-(26, 2, '2017-03-24', 123, 'asd', 6, 1, 2),
-(27, 2, '2017-03-24', 233, 'asdasd', 1, 1, 1),
-(28, 2, '2017-03-24', 1234567, 'Testing', 7, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -261,10 +213,6 @@ CREATE TABLE `storage` (
 -- Dataark for tabell `storage`
 --
 
-INSERT INTO `storage` (`storageID`, `storageName`) VALUES
-(2, 'Hovedlager'),
-(1, 'Kundesenter'),
-(6, 'Testlager');
 
 -- --------------------------------------------------------
 
@@ -287,9 +235,6 @@ CREATE TABLE `users` (
 -- Dataark for tabell `users`
 --
 
-INSERT INTO `users` (`userID`, `name`, `username`, `password`, `userLevel`, `image`, `lastLogin`, `email`) VALUES
-(1, 'Roger Kolseth', 'rogkol', 'Test123', 'Administrator', 'tafjord.jpg', NULL, 'roger.kolseth@tafjord.no'),
-(10, 'Test', 'Test', 'Test', 'User', 'tafjord.jpg', NULL, 'Test');
 
 --
 -- Indexes for dumped tables
