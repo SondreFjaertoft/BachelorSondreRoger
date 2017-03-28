@@ -129,7 +129,7 @@
     <div class="col-sm-3 col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title text-center"><b>MEST SOLGTE PRODUKTER</b></h3>
+                <h3 class="panel-title text-center"><b>Lite ting og tang on the lager</b></h3>
             </div>
          
         <table class="table table-striped">
@@ -138,8 +138,23 @@
                     <th>Produkt</th>
                     <th>Lager</th>
                     <th>Antall</th>
-
                 </tr>
+                <tr class="bg-info">
+                    <td>FMG</td>
+                    <td>Hovedlager</td>
+                    <td>7</td>
+                </tr>
+                <tr class="bg-warning">
+                    <td>Roger</td>
+                    <td>Hovedlager</td>
+                    <td>5</td>
+                </tr>
+                <tr class="bg-danger">
+                    <td>Sondre</td>
+                    <td>KS-lager</td>
+                    <td>3</td>
+                </tr>
+                
             </thead>
             <tbody>
 
@@ -152,14 +167,29 @@
     <div class="col-sm-3 col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title text-center"><b>SISTE SALG</b></h3>
+                <h3 class="panel-title text-center"><b>Siste hendelser</b></h3>
             </div>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Produkt</th>
-                    <th>Lager</th>
-                    <th>Antall</th>
+                    <th>Aktivitet</th>
+                    <th>Bruker</th>
+                    <th>Info</th>
+                </tr>
+                <tr>
+                    <td>Salg</td>
+                    <td>Roger</td>
+                    <td>Fmg 4</td>
+                </tr>
+                <tr>
+                    <td>Retur</td>
+                    <td>Sondre</td>
+                    <td>Dekoder 2</td>
+                </tr>
+                <tr>
+                    <td>Sparken</td>
+                    <td>Ole</td>
+                    <td>Beeing a retard</td>
                 </tr>
             </thead>
             <tbody>
@@ -211,7 +241,7 @@
                                         <th>UserLevel:</th>                                       
                                         <td><div>
                                                 <select name="givenUserLevel" required="required" class="form-control" autocomplete="off">
-                                                    <option></option>
+                                                    <option>-Velg rettigheter-</option>
                                                     <option value="User">User</option>
                                                     <option value="Administrator">Administrator</option>
                                                 </select>  
@@ -226,10 +256,10 @@
                         </div>
                         <div class="modal-footer">
                             <p id="errorMessage"></p>
-                            <input class="btn btn-default" form="createUser" type="submit" value="Opprett bruker">
+                            <input class="btn btn-success" form="createUser" type="submit" value="Opprett bruker">
 
 
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
                         </div>
 
@@ -290,8 +320,8 @@
                 </div>
                 <div class="modal-footer">
 
-                    <input class="btn btn-default" form="createProduct" type="submit" value="Opprett Produkt">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                    <input class="btn btn-success" form="createProduct" type="submit" value="Opprett Produkt">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
                 </div>
 
@@ -325,10 +355,10 @@
             </div>
             <div class="modal-footer">
 
-                <input class="btn btn-default" form="createStorage" type="submit" value="Opprett Lager" href="?page=storageAdm">
+                <input class="btn btn-success" form="createStorage" type="submit" value="Opprett Lager" href="?page=storageAdm">
 
 
-                <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
             </div>
 
@@ -350,14 +380,25 @@
             <div class="modal-body">
                 
                     <form action="?page=uploadImageShortcut" id="uploadImage" method="post" enctype="multipart/form-data">
-                    
-                        <h3 class="panel-title">Velg bilde for å laste opp:</h3>
+                        <h4 class="text-center">Velg bilde for å laste opp</h4>
+                        <table class="table">
+                            <tr>
+                                <th class="col-sm-4 col-md-4" id="bordernone">Velg en fil:</th>
+                                <th class="col-sm-4 col-md-4" id="bordernone"></th>
+                                <th class="col-sm-4 col-md-4" id="bordernone">Velg en katerogi:</th>
+                            </tr>
+                        
                             
-                            
-                        <input type="file" name="fileToUpload" required="required" id="fileToUpload"><br>
-                        velg en katerogi:
-                        <input type="text" name="givenCaterogy" required="required"><br>
-                          
+                            <tr>                           
+                                <td id="bordernone">
+                                    <label class="btn btn-primary" for="fileToUpload">
+                                        Legg til bilde
+                                        <input type="file" name="fileToUpload" required="required" id="fileToUpload" style="display: none;" onchange="$('#upload-file-info').html($(this).val());"></td>
+                                    </label>
+                                <td id="bordernone"><span class="label label-default" id="upload-file-info"></span></td>
+                                <td id="bordernone"><input class="form-control" type="text" name="givenCaterogy" required="required"></td>
+                            </tr>
+                        </table>
                         
                         
 
@@ -365,8 +406,8 @@
                 
             </div>
             <div class="modal-footer">
-                <input form="uploadImage" type="submit" value="Upload Image" name="submit" href="?page=uploadImage">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?page=uploadImage">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
             </div>
 

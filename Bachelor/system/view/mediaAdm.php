@@ -61,18 +61,31 @@
                     <div style="text-align: center">
 
                         <form action="?page=uploadImage" id="uploadImage" method="post" enctype="multipart/form-data">
-                            <p>Velg bilde for å laste opp:</p>
-                            <input type="file" name="fileToUpload" required="required" id="fileToUpload"><br>
-                            velg en katerogi:
-                            <input type="text" name="givenCaterogy" required="required"><br>
-                            <input type="submit" value="Upload Image" name="submit">
-
+                            <h4 class="text-center">Velg bilde for å laste opp</h4>
+                        <table class="table">
+                            <tr>
+                                <th class="col-sm-4 col-md-4" id="bordernone">Velg en fil:</th>
+                                <th class="col-sm-4 col-md-4" id="bordernone"></th>
+                                <th class="col-sm-4 col-md-4" id="bordernone">Velg en katerogi:</th>
+                            </tr>
+                        
+                            
+                            <tr>                           
+                                <td id="bordernone">
+                                    <label class="btn btn-primary" for="fileToUpload">
+                                        Legg til bilde
+                                        <input type="file" name="fileToUpload" required="required" id="fileToUpload" style="display: none;" onchange="$('#upload-file-info').html($(this).val());"></td>
+                                    </label>
+                                <td id="bordernone"><span class="label label-default" id="upload-file-info"></span></td>
+                                <td id="bordernone"><input class="form-control" type="text" name="givenCaterogy" required="required"></td>
+                            </tr>
+                        </table>
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
-
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?page=uploadImage">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
                 </div>
 

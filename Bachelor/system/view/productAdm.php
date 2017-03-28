@@ -92,7 +92,7 @@
                             </tr>
                             <tr>
                                 <th>MacAdresse:</th>
-                                <td><input class="form-control" type="checkbox" id="TRUE" name="givenMacAdresse" value="TRUE"></td>
+                                <td><input type="checkbox" id="TRUE" name="givenMacAdresse" value="TRUE"></td>
                             </tr>
                             
                             
@@ -102,8 +102,8 @@
                 </div>
                 <div class="modal-footer">
 
-                    <input class="btn btn-default" form="createProduct" type="submit" value="Opprett Produkt">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                    <input class="btn btn-success" form="createProduct" type="submit" value="Opprett Produkt">
+                    <button class="btn btn-danger" type="button" data-dismiss="modal">Avslutt</button>
 
                 </div>
 
@@ -133,8 +133,8 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <input class="btn btn-default" type="submit" value="Lagre" form="editProduct">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                <input class="btn btn-success" type="submit" value="Lagre" form="editProduct">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
         </div>
     </div>
@@ -175,7 +175,7 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
         </div>
     </div>
@@ -201,8 +201,8 @@
 
             </div>
             <div class="modal-footer">
-                <input class="btn btn-default" type="submit" value="Slett" form="deleteProduct">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                <input class="btn btn-success" type="submit" value="Slett" form="deleteProduct">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
         </div>
     </div>

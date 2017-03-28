@@ -66,11 +66,11 @@
             </div>
             <div class="modal-body">
                 <div style="text-align: center">
-                    <table class="table table-bordered table-striped table-responsive">
+                    <table class="table">
                     <form action="?page=addStorageEngine" method="post" id="createStorage">
                         <tr>
-                            <th>Lagernavn:</th>
-                            <td><input type="text" required="required" name="givenStorageName" value=""></td>
+                            <th id="bordernone">Lagernavn:</th>
+                            <td id="bordernone"><input class="form-control" type="text" required="required" name="givenStorageName" value=""></td>
                         </tr>
                     </form> 
                     </table>
@@ -78,10 +78,10 @@
             </div>
             <div class="modal-footer">
 
-                <input class="btn btn-default" form="createStorage" type="submit" value="Opprett Lager" href="?page=storageAdm">
+                <input class="btn btn-success" form="createStorage" type="submit" value="Opprett Lager" href="?page=storageAdm">
 
 
-                <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
             </div>
 
@@ -115,8 +115,8 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <input class="btn btn-default" type="submit" value="Lagre" form="editStorage">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                <input class="btn btn-success" type="submit" value="Lagre" form="editStorage">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
         </div>
     </div>
@@ -190,7 +190,7 @@
             </div>
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
             </div>
         </div>
@@ -218,8 +218,8 @@
 
             </div>
             <div class="modal-footer">
-                <input form="deleteStorage" class="btn btn-default" type="submit" value="Slett">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                <input form="deleteStorage" class="btn btn-success" type="submit" value="Slett">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
         </div>
     </div>

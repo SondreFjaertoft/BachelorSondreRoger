@@ -75,10 +75,10 @@
                         </div>
                         <div class="modal-footer">
                             <p id="errorMessage"></p>
-                            <input class="btn btn-default" form="createUser" type="submit" value="Opprett bruker">
+                            <input class="btn btn-success" form="createUser" type="submit" value="Opprett bruker">
 
 
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
                         </div>
 
@@ -131,7 +131,7 @@
                 </div>
                 <div class="modal-footer">
 
-                    <button form="editRestriction" class="btn btn-default" type="submit">Velg lagertilgang</button> 
+                    <button form="editRestriction" class="btn btn-success" type="submit">Velg lagertilgang</button> 
 
                 </div>
 
@@ -162,8 +162,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <input form="deleteUser" class="btn btn-default" type="submit" value="Slett">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                    <input form="deleteUser" class="btn btn-success" type="submit" value="Slett">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
             </div>
         </div>
@@ -204,7 +204,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
             </div>
         </div>
@@ -230,8 +230,8 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <input class="btn btn-default" type="submit" value="Lagre" form="editUser">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Avslutt</button>
+                    <input class="btn btn-success" type="submit" value="Lagre" form="editUser">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
             </div>
         </div>
