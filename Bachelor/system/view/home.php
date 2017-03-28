@@ -462,7 +462,6 @@
                 success: function () {
                     $("#createProduct")[0].reset();
                     $('#createProductModal').modal('hide');
-                    UpdateProductTable();
                 }
             });
             return false;
@@ -489,7 +488,6 @@
                 success: function () {
                     $("#createStorage")[0].reset();
                     $('#createStorageModal').modal('hide');
-                    UpdateStorageTable();
                 }
             });
             return false;
