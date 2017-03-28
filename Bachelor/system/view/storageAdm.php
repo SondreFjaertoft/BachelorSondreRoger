@@ -107,7 +107,7 @@
             </div>
             <form action="?page=editStorageEngine" method="post" id="editStorage"></form>
             <div class="modal-body">
-                <table class="table table-striped table-bordered" id="editStorageContainer">
+                <table class="table" id="editStorageContainer">
                     
 
                 <!-- Innhold fra Handlebars Template -->
@@ -234,8 +234,8 @@
     {{#each storage}}    
     <input form="editStorage" type="hidden" name="editStorageID" value="{{storageID}}">
     <tr>
-    <th>Lagernavn: </th> 
-    <td><input form="editStorage" required="required" type="text" name="editStorageName" value="{{storageName}}" autocomplete="off"></td> 
+    <th id="bordernone">Lagernavn: </th> 
+    <td id="bordernone"><input class="form-control" form="editStorage" required="required" type="text" name="editStorageName" value="{{storageName}}" autocomplete="off"></td> 
     </tr>
     {{/each}}            
 </script>  

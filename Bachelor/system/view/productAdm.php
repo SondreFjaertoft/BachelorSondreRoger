@@ -64,35 +64,35 @@
                 </div>
                 <div class="modal-body">
                     <div>
-                        <table class="table table-bordered table-striped table-responsive">
+                        <table class="table">
                         <form action="?page=addProductEngine" method="post" id="createProduct">
                             <tr>
-                                <th>Produktnavn:</th>
-                                <td><input type="text" required="required" name="givenProductName" value="" autocomplete="off"></td>
+                                <th id="bordernone">Produktnavn:</th>
+                                <td id="bordernone"><input class="form-control" type="text" required="required" name="givenProductName" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Kjøpspris:</th>
-                                <td><input type="int" required="required" name="givenBuyPrice" value="" autocomplete="off"></td>
+                                <td><input class="form-control"class="form-control" type="int" required="required" name="givenBuyPrice" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Salgspris:</th>
-                                <td><input type="int" required="required" name="givenSalePrice" value="" autocomplete="off"></td>
+                                <td><input class="form-control" type="int" required="required" name="givenSalePrice" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Kategori:</th>
-                                <td><input type="int" required="required" name="givenCategoryID" value="" autocomplete="off"></td>
+                                <td><input class="form-control" type="int" required="required" name="givenCategoryID" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Media:</th>
-                                <td><input type="int" required="required" name="givenMediaID" value="" autocomplete="off"></td>
+                                <td><input class="form-control" type="int" required="required" name="givenMediaID" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Produktnummer:</th>
-                                <td><input type="text" required="required" name="givenProductNumber" value="" autocomplete="off"></td>
+                                <td><input class="form-control" type="text" required="required" name="givenProductNumber" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>MacAdresse:</th>
-                                <td><input type="checkbox" id="TRUE" name="givenMacAdresse" value="TRUE"></td>
+                                <td><input class="form-control" type="checkbox" id="TRUE" name="givenMacAdresse" value="TRUE"></td>
                             </tr>
                             
                             
@@ -126,7 +126,7 @@
             
             <form action="?page=editProductEngine" method="post" id="editProduct"></form>
             <div class="modal-body" >
-                <table class="table table-striped table-bordered">
+                <table class="table">
                     <tbody id="editProductContainer">
                 <!-- Innhold fra Handlebars Template-->
                     </tbody>
@@ -217,28 +217,28 @@
 {{#each product}}    
     <input form="editProduct" type="hidden" name="editProductID" value="{{productID}}">
     <tr>
-    <th>Produktnavn:</th>
-    <td><input form="editProduct" type="text" required="required" name="editProductName" value="{{productName}}" autocomplete="off"></td>
+    <th id="bordernone">Produktnavn:</th>
+    <td id="bordernone"><input class="form-control" form="editProduct" type="text" required="required" name="editProductName" value="{{productName}}" autocomplete="off"></td>
     </tr>
     <tr>
     <th>Kjøpspris: </th>
-    <td><input form="editProduct" type="int" required="required" name="editBuyPrice" value="{{buyPrice}}" autocomplete="off"></td>
+    <td><input class="form-control" form="editProduct" type="int" required="required" name="editBuyPrice" value="{{buyPrice}}" autocomplete="off"></td>
     </tr>
     <tr>
     <th>Salgspris:</th>
-    <td><input form="editProduct" type="int" required="required" name="editSalePrice" value="{{salePrice}}" autocomplete="off"></td>
+    <td><input class="form-control" form="editProduct" type="int" required="required" name="editSalePrice" value="{{salePrice}}" autocomplete="off"></td>
     </tr>
     <tr>
     <th>Kategori:</th>
-    <td><input form="editProduct" type="int" required="required" name="editCategoryID" value="{{categoryID}}" autocomplete="off"></td>
+    <td><input class="form-control" form="editProduct" type="int" required="required" name="editCategoryID" value="{{categoryID}}" autocomplete="off"></td>
     </tr>
     <tr>
     <th>Media: </th>
-    <td><input form="editProduct" type="int" required="required" name="editMediaID" value="{{mediaID}}" autocomplete="off"></td>
+    <td><input class="form-control" form="editProduct" type="int" required="required" name="editMediaID" value="{{mediaID}}" autocomplete="off"></td>
     </tr>
     <tr>
     <th>Produktnummer:</th>
-    <td><input form="editProduct" type="text" required="required" name="editProductNumber" value="{{productNumber}}" autocomplete="off"></td>
+    <td><input class="form-control" form="editProduct" type="text" required="required" name="editProductNumber" value="{{productNumber}}" autocomplete="off"></td>
      </tr>   
 {{/each}} 
 </script>  

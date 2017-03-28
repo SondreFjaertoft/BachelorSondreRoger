@@ -17,14 +17,12 @@
                     <input class="form-control" form="searchForUser" type="submit" value="Søk">
                                              
                 <button onclick="UpdateUsersTable()" class="btn btn-default" type="button">Alle brukere</button>
-                </div>    
+                </div>
              
-
             <div class="col-md-1 col-md-offset-15">
                 <button class="btn btn-default " type="button" data-toggle="modal" data-target="#createUserModal">Opprett bruker</button>
             </div>
             </div>
-            
             <button  id="setRestriction" onclick="getStorageInfo()" data-toggle="modal" data-target="#userRestrictionModal" class="btn btn-default" type="button">Velg Lager</button>
         </form> 
 
@@ -93,7 +91,7 @@
 
     
 
-    <!-- DISPLAY USER CONTAINER    --->       
+    <!-- DISPLAY USER CONTAINER    -->       
     <br>
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -226,7 +224,7 @@
                 </div>
                 <form action="?page=editUserEngine" method="post" id="editUser"></form>
                 <div class="modal-body text-center">
-                    <table class="table table-striped table-bordered" id="editUserContainer">
+                    <table class="table" id="editUserContainer">
 
                     <!-- Innhold fra Handlebars Template--> 
                     </table>
@@ -263,25 +261,25 @@
     {{#each user}}
     <input form="editUser" type="hidden" name="editUserID" value="{{userID}}">
     <tr>
-    <th>Navn: </th>
-    <td><input form="editUser" type="text" required="required" name="editName" value="{{name}}"></td>
+    <th id="bordernone">Navn: </th>
+    <td id="bordernone"><input class="form-control" form="editUser" type="text" required="required" name="editName" value="{{name}}"></td>
     </tr>
     <tr>
     <th>Brukernavn: </th>
-    <td><input form="editUser" type="text" required="required" name="editUsername" value="{{username}}"></td>
+    <td><input class="form-control" form="editUser" type="text" required="required" name="editUsername" value="{{username}}"></td>
     </tr>
     <tr>
     <th>Passord: </th>
-    <td><input form="editUser" type="password" required="required" name="editPassword" value="{{password}}"></td>
+    <td><input class="form-control" form="editUser" type="password" required="required" name="editPassword" value="{{password}}"></td>
     </tr>
     <tr>
     <th>Epost:</th>
-    <td><input form="editUser" type="text" required="required" name="editEmail" value="{{email}}"></td>
+    <td><input class="form-control" form="editUser" type="text" required="required" name="editEmail" value="{{email}}"></td>
     </tr>
     <tr>
     <th>Brukernivå: </th>
     
-    <td><div class="col-md-4 col-md-offset-4">
+    <td><div class="">
     <select form="editUser" type="text" required="required" name="editUserLevel" class="form-control" autocomplete="off">
         <option></option>
         <option value="User">User</option>

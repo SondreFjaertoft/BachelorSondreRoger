@@ -13,9 +13,9 @@
         <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="style/home.css" rel="stylesheet">
         <script src="js/handlebars-v4.0.5.js"></script>
-           <!-- MetisMenu CSS -->
+        <!-- MetisMenu CSS -->
    
-         <script src="Bootstrap/js/bootstrap.min.js"></script>
+        <script src="Bootstrap/js/bootstrap.min.js"></script>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -35,7 +35,8 @@
                     </a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#usernav"><span class="glyphicon glyphicon-user"></span> <?php echo  $_SESSION["nameOfUser"]; ?> <span class="caret"></span></a>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#usernav"><span class="glyphicon glyphicon-user"></span> 
+                        <?php echo  $_SESSION["nameOfUser"]; ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a>Rediger profil</a></li>
                             <li><a href="../">Logout</a></li>
@@ -90,6 +91,9 @@
 
             </div>
             </nav>
+        
+        
+        
       
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -97,7 +101,7 @@
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="Bootstrap/js/bootstrap.min.js"></script>
         <script src="Charts/Chart.js"></script>
-        
+ 
 <script>
 
 

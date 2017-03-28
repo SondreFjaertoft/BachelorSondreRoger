@@ -192,8 +192,8 @@
                                 <table class="table">
                                 <form action="?page=addUserEngine" method="post" id="createUser">
                                     <tr>
-                                        <th style="border: none">Name:</th>
-                                        <td style="border: none"><input class="form-control" type="text" name="givenName" required="required" value="" autocomplete="off"></td>
+                                        <th id="bordernone">Name:</th>
+                                        <td id="bordernone"><input class="form-control" type="text" name="givenName" required="required" value="" autocomplete="off"></td>
                                     </tr>
                                     <tr>
                                         <th>Brukernavn:</th>
@@ -252,31 +252,31 @@
                 </div>
                 <div class="modal-body">
                     <div>
-                        <table class="table table-bordered table-striped table-responsive">
+                        <table class="table">
                         <form action="?page=addProductEngine" method="post" id="createProduct">
                             <tr>
-                                <th>Produktnavn:</th>
-                                <td><input type="text" required="required" name="givenProductName" value="" autocomplete="off"></td>
+                                <th id="bordernone">Produktnavn:</th>
+                                <td id="bordernone"><input class="form-control" type="text" required="required" name="givenProductName" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Kjøpspris:</th>
-                                <td><input type="int" required="required" name="givenBuyPrice" value="" autocomplete="off"></td>
+                                <td><input class="form-control" type="int" required="required" name="givenBuyPrice" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Salgspris:</th>
-                                <td><input type="int" required="required" name="givenSalePrice" value="" autocomplete="off"></td>
+                                <td><input class="form-control" type="int" required="required" name="givenSalePrice" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Kategori:</th>
-                                <td><input type="int" required="required" name="givenCategoryID" value="" autocomplete="off"></td>
+                                <td><input class="form-control" type="int" required="required" name="givenCategoryID" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Media:</th>
-                                <td><input type="int" required="required" name="givenMediaID" value="" autocomplete="off"></td>
+                                <td><input class="form-control" type="int" required="required" name="givenMediaID" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Produktnummer:</th>
-                                <td><input type="text" required="required" name="givenProductNumber" value="" autocomplete="off"></td>
+                                <td><input class="form-control" type="text" required="required" name="givenProductNumber" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>MacAdresse:</th>
@@ -313,11 +313,11 @@
             </div>
             <div class="modal-body">
                 <div style="text-align: center">
-                    <table class="table table-bordered table-striped table-responsive">
+                    <table class="table">
                     <form action="?page=addStorageEngine" method="post" id="createStorage">
                         <tr>
-                            <th>Lagernavn:</th>
-                            <td><input type="text" required="required" name="givenStorageName" value=""></td>
+                            <th id="bordernone">Lagernavn:</th>
+                            <td id="bordernone"><input class="form-control" type="text" required="required" name="givenStorageName" value=""></td>
                         </tr>
                     </form> 
                     </table>
@@ -348,17 +348,21 @@
                 <h4 class="modal-title">Last opp bilde</h4>
             </div>
             <div class="modal-body">
-                <div style="text-align: center">
-
+                
                     <form action="?page=uploadImageShortcut" id="uploadImage" method="post" enctype="multipart/form-data">
-                        <p>Velg bilde for å laste opp:</p>
+                    
+                        <h3 class="panel-title">Velg bilde for å laste opp:</h3>
+                            
+                            
                         <input type="file" name="fileToUpload" required="required" id="fileToUpload"><br>
                         velg en katerogi:
                         <input type="text" name="givenCaterogy" required="required"><br>
+                          
+                        
                         
 
                     </form>
-                </div>
+                
             </div>
             <div class="modal-footer">
                 <input form="uploadImage" type="submit" value="Upload Image" name="submit" href="?page=uploadImage">
