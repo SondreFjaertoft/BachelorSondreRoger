@@ -94,6 +94,8 @@
 
     <!-- DISPLAY USER CONTAINER    -->       
     <br>
+     <form action="?page=addRestriction" id="editRestriction" method="post">
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title text-center"><b>Brukeroversikt</b></h3>
@@ -107,10 +109,8 @@
             </tbody>    
         </table>
     </div>
-    </div>
-</div>
-
-    <!-- Set restrictions -->
+         
+        <!-- Set restrictions -->
 
     
     <div class="modal fade" id="userRestrictionModal" role="dialog">
@@ -122,7 +122,6 @@
                     <h4 class="modal-title">Velg lager tilgang(er)</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="?page=addRestriction" id="editRestriction" method="post">
                     <table class="table table-striped table-bordered" id="storageRestrictionContainer">
 
                         <!-- Handlebars information -->
@@ -135,10 +134,20 @@
                     <button form="editRestriction" class="btn btn-success" type="submit">Velg lagertilgang</button> 
 
                 </div>
-                </form> 
+                 
             </div>
         </div>
-    </div> 
+    </div>      
+         
+      
+     </form>    
+         
+         
+         
+    </div>  
+</div>
+
+
 
 
 
