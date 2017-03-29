@@ -148,6 +148,39 @@
 </div>    
     
     
+<div class="modal fade" id="deleteMediaModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Innholdet til Modalen -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Slett bilde?</h4>
+            </div>
+            <form action="?page=deleteMedia" method="post" id="deleteMedia"></form>
+            <div class="modal-body" id="deleteMediaContainer">
+                  
+                <!-- Innhold fra Handlebars Template -->
+            </div>    
+            <div class="modal-footer">
+                <input form="deleteMedia" class="btn btn-success" type="submit" value="Slett">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+            </div>
+        </div>
+    </div>
+</div>      
+    
+    
+    
+<!-- Display what media you are deleting-->
+<script id="deleteMediaTemplate" type="text/x-handlebars-template">
+    <p> Er du sikker på at du vil slette:  <P>
+    {{#each mediaInfo}}
+    <b>{{mediaName}}</b>
+    <input type="hidden" form="deleteMedia" name="deleteMediaID" value="{{mediaID}}">    
+    <br><br>
+    <img class="img-responsive" src="image/{{mediaName}}" alt="Home">            
+    {{/each}} 
+</script>       
 
 <!-- Edit media -->
 <script id="editMediaTemplate" type="text/x-handlebars-template">
@@ -281,6 +314,7 @@ function showMedia(givenMediaID) {
 
                     var $displayMediaInformation = $('#mediaInformationContainer');
                     $displayMediaInformation.empty().append('<img class="img-responsive" src="image/' + item.mediaName + '"alt="Home">');
+                    
                      });
                 }
             });
@@ -343,6 +377,71 @@ function showMedia(givenMediaID) {
                     $('#editMediaModal').modal('hide');
                     UpdateMediaTable();
                 
+                }
+            });
+            return false;
+        });
+    });
+
+</script>
+
+
+<!--    DELETE STORAGE     -->
+
+
+<!-- Display what media to delete storage modal -->
+<script>
+    $(function POSTdeleteStorageModal() {
+
+        $('#displayMediaContainer').delegate('.delete', 'click', function () {
+            var givenMediaID = $(this).attr('data-id');
+            $('#deleteMediaModal').modal('show');
+            $.ajax({
+                type: 'POST',
+                url: '?page=getMediaByID',
+                data: {givenMediaID: givenMediaID},
+                dataType: 'json',
+                success: function (data) {
+                    deleteMediaTemplate(data);
+                    $('#deleteMediaModal').modal('show');                   
+                }
+            });
+            return false;
+
+        });
+    });
+</script> 
+
+<!-- Delete media template-->         
+<script>
+    function deleteMediaTemplate(data) {
+        var rawTemplate = document.getElementById("deleteMediaTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var deleteMediaGeneratedHTML = compiledTemplate(data);
+
+        var mediaContainer = document.getElementById("deleteMediaContainer");
+        mediaContainer.innerHTML = deleteMediaGeneratedHTML;
+    }
+</script>
+
+<!-- Delete the storage that is selected-->
+<script>
+    $(function deleteStorageByID() {
+
+        $('#deleteMedia').submit(function () {
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+
+                    UpdateMediaTable();
+                    $('#deleteMediaModal').modal('hide');
+
                 }
             });
             return false;

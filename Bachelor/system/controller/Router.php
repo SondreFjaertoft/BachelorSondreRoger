@@ -101,6 +101,7 @@ class Router {
                 case "uploadImageShortcut" :
                 case "getMediaByID" :  
                 case "editMedia" :    
+                case "deleteMedia" :    
                     return new mediaController();
                     }
                 }

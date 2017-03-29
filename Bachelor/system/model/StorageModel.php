@@ -36,17 +36,13 @@ class StorageModel {
     }
 
     
-    // kommer tilbake til, ved oppretting av bruker
+
     public function addStorage($givenStorageName) {
         return $this->addStmt->execute(array("givenStorageName" =>  $givenStorageName));
-    }
+    }    
     
-    
-    // kommer tilbake til, ved sletting av bruker
-    public function removeStorage($removeStorageID)
-    {
+    public function removeStorage($removeStorageID)    {
        return $this->delStmt->execute(array("removeStorageID" => $removeStorageID));
-
     }
     
     public function editStorage($editStorageName, $editStorageID){

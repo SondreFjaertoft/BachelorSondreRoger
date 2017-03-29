@@ -19,6 +19,8 @@ class mediaController extends Controller {
             $this->getMediaByID();
         } else if ($page == "editMedia"){
             $this->editMedia();
+        } else if ($page == "deleteMedia"){
+            $this->deleteMedia();
         }
     }
 
@@ -130,7 +132,22 @@ class mediaController extends Controller {
         $edited = $mediaModel->editMedia($editMediaID, $editMediaName, $editCategory);
         
         if($edited){
-        echo json_encode("success");
+            echo json_encode("success");
+        }
+    }
+    
+    private function deleteMedia(){
+        $deleteMediaID = $_REQUEST["deleteMediaID"];
+        
+        $mediaModel = $GLOBALS["mediaModel"];
+        $result = $mediaModel->getMediaByID($deleteMediaID);
+        
+        $mediaName = $result[0]["mediaName"];
+        $deleted = $mediaModel->deletetMediaByID($deleteMediaID);
+        
+        if($deleted){
+            unlink("image/".$mediaName);
+            echo json_encode("success");
         }
     }
 
