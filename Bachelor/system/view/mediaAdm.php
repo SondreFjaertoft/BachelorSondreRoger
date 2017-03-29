@@ -92,6 +92,34 @@
             </div>
         </div>
     </div> 
+    
+    
+    
+    
+    <!-- GET PRODUCT INFORMATION MODAL -->
+
+<div class="modal fade" id="showMediaInformationModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Innholdet til Modalen -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Media informasjon</h4>
+            </div>
+            <div class="modal-body">
+                <div id="mediaInformationContainer">
+                    
+                <!-- Her kommer bilde Template -->
+                
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+            </div>
+        </div>
+    </div>
+</div> 
+    
 
     <script id="displayMediaTemplate" type="text/x-handlebars-template">
 {{#each mediaInfo}}
@@ -102,7 +130,7 @@
 {{mediaName}}
 </div>
 <a href="#">
-<img class="img-thumbnail"  onclick=alert("masseinfo"); id="{{mediaID}}" src="image/{{mediaName}}" alt="Home">
+<img class="img-thumbnail"  onclick=showMedia({{mediaID}}); id="{{mediaID}}" src="image/{{mediaName}}" alt="Home">
 </a>
 <div class="caption">
 
@@ -189,4 +217,25 @@
         });
     });
 
+</script>
+
+ <script>
+function showMedia(givenMediaID) {
+    $('#showMediaInformationModal').modal('show');
+            $.ajax({
+                type: 'POST',
+                url: '?page=getMediaByID',
+                data: {givenMediaID: givenMediaID},
+                dataType: 'json',
+                success: function (data) {
+                    $.each(data, function(i, item){
+                    var $displayMediaInformation = $('#mediaInformationContainer');
+                    $displayMediaInformation.empty().append('<img class="img-responsive" src="image/' + item.mediaName + '"alt="Home">');
+                    });
+                }
+            });
+            return false;
+
+        };
+  
 </script>

@@ -15,6 +15,8 @@ class mediaController extends Controller {
         } else if ($page == "uploadImageShortcut"){
             $this->uploadImage();
             $this->homePage();
+        } else if ($page == "getMediaByID"){
+            $this->getMediaByID();
         }
     }
 
@@ -100,6 +102,18 @@ class mediaController extends Controller {
         $data = json_encode(array("mediaInfo" => $mediaInfo));
 
         echo $data;
+    }
+    
+    private function getMediaByID(){
+        $givenMediaID = $_REQUEST["givenMediaID"];
+        
+        $mediaModel = $GLOBALS["mediaModel"];
+        $mediaInfo = $mediaModel->getMediaByID($givenMediaID);
+        
+        $data = json_encode($mediaInfo);
+
+        echo $data;
+        
     }
 
 }
