@@ -209,7 +209,7 @@
     <!-- Opprett bruker modal -->
     
     
-    <div class="modal fade" id="createUserModal" role="dialog">
+            <div class="modal fade" id="createUserModal" role="dialog">
                 <div class="modal-dialog">
                     <!-- Innholdet til Modalen -->
                     <div class="modal-content">
@@ -222,8 +222,8 @@
                                 <table class="table">
                                 <form action="?page=addUserEngine" method="post" id="createUser">
                                     <tr>
-                                        <th id="bordernone">Name:</th>
-                                        <td id="bordernone"><input class="form-control" type="text" name="givenName" required="required" value="" autocomplete="off"></td>
+                                        <th style="border: none">Name:</th>
+                                        <td style="border: none"><input class="form-control" type="text" name="givenName" required="required" value="" autocomplete="off"></td>
                                     </tr>
                                     <tr>
                                         <th>Brukernavn:</th>
@@ -241,7 +241,7 @@
                                         <th>UserLevel:</th>                                       
                                         <td><div>
                                                 <select name="givenUserLevel" required="required" class="form-control" autocomplete="off">
-                                                    <option>-Velg rettigheter-</option>
+                                                    <option></option>
                                                     <option value="User">User</option>
                                                     <option value="Administrator">Administrator</option>
                                                 </select>  
@@ -250,7 +250,7 @@
                                     </tr>
                                     
                                    
-                                </form>
+                                
                                     </table>
                             </div>
                         </div>
@@ -262,10 +262,11 @@
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
                         </div>
+                        </form>
 
                     </div>
                 </div>
-            </div>
+            </div> 
     
 </div>
     
@@ -314,7 +315,7 @@
                             </tr>
                             
                             
-                        </form>
+                        
                         </table>
                     </div>
                 </div>
@@ -324,7 +325,7 @@
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
                 </div>
-
+                </form>
             </div>
         </div>
     </div>
@@ -342,14 +343,14 @@
                 <h4 class="modal-title">Opprett bruker</h4>
             </div>
             <div class="modal-body">
+                <form action="?page=addStorageEngine" method="post" id="createStorage">
                 <div style="text-align: center">
-                    <table class="table">
-                    <form action="?page=addStorageEngine" method="post" id="createStorage">
+                    <table class="table">                   
                         <tr>
                             <th id="bordernone">Lagernavn:</th>
                             <td id="bordernone"><input class="form-control" type="text" required="required" name="givenStorageName" value=""></td>
                         </tr>
-                    </form> 
+                     
                     </table>
                 </div>
             </div>
@@ -361,7 +362,7 @@
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
             </div>
-
+            </form>
         </div>
     </div>
 </div> 
@@ -402,7 +403,7 @@
                         
                         
 
-                    </form>
+                    
                 
             </div>
             <div class="modal-footer">
@@ -410,7 +411,7 @@
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
             </div>
-
+            </form>
         </div>
     </div>
 </div> 
