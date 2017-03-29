@@ -103,7 +103,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Bruker informasjon</h4>
+                <h4 class="modal-title">Lager informasjon</h4>
             </div>
             <form action="?page=editStorageEngine" method="post" id="editStorage"></form>
             <div class="modal-body">

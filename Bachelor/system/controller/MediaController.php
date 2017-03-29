@@ -17,11 +17,13 @@ class mediaController extends Controller {
             $this->homePage();
         } else if ($page == "getMediaByID"){
             $this->getMediaByID();
+        } else if ($page == "editMedia"){
+            $this->editMedia();
         }
     }
 
     private function mediaPage() {
-    //    rename("image/test.png","image/pictures.png");
+    
         return $this->render("mediaAdm");
     }
     
@@ -110,10 +112,26 @@ class mediaController extends Controller {
         $mediaModel = $GLOBALS["mediaModel"];
         $mediaInfo = $mediaModel->getMediaByID($givenMediaID);
         
-        $data = json_encode($mediaInfo);
-
-        echo $data;
+        $data = json_encode(array("mediaInfo" => $mediaInfo));
+        echo $data;   
+    }
+    
+    private function editMedia(){
+        $editMediaID = $_REQUEST["editMediaID"];
+        $editMediaName = $_REQUEST["editMediaName"];
+        $editCategory = $_REQUEST["editCategory"];
         
+        $mediaModel = $GLOBALS["mediaModel"];
+        $result = $mediaModel->getMediaByID($editMediaID);
+        
+        $oldName = $result[0]["mediaName"];
+        rename("image/".$oldName."","image/".$editMediaName);
+        
+        $edited = $mediaModel->editMedia($editMediaID, $editMediaName, $editCategory);
+        
+        if($edited){
+        echo json_encode("success");
+        }
     }
 
 }

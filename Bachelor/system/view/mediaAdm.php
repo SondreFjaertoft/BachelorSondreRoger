@@ -96,7 +96,7 @@
     
     
     
-    <!-- GET PRODUCT INFORMATION MODAL -->
+    <!-- GET MEDIA INFORMATION MODAL -->
 
 <div class="modal fade" id="showMediaInformationModal" role="dialog">
     <div class="modal-dialog">
@@ -104,7 +104,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Media informasjon</h4>
+                <h4 class="modal-title" id="mediaTitle"></h4>
             </div>
             <div class="modal-body">
                 <div id="mediaInformationContainer">
@@ -120,8 +120,53 @@
     </div>
 </div> 
     
+    
+    <!-- EDIT MEDIA MODAL -->
+    
+<div class="modal fade" id="editMediaModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Innholdet til Modalen -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="mediaTitle">Rediger media</h4>
+            </div>
+            <div class="modal-body">
+                <form action="?page=editMedia" method="post" id="editMedia"></form>
+                <div id="editMediaContainer">
+                    
+                <!-- Her kommer bilde Template -->
+                
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-success" type="submit" value="Lagre" form="editMedia">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+            </div>
+        </div>
+    </div>
+</div>    
+    
+    
 
-    <script id="displayMediaTemplate" type="text/x-handlebars-template">
+<!-- Edit media -->
+<script id="editMediaTemplate" type="text/x-handlebars-template">
+{{#each mediaInfo}}    
+    <input form="editMedia" type="hidden" name="editMediaID" value="{{mediaID}}">
+    <tr>
+    <th id="bordernone">Medianavn: </th> 
+    <td id="bordernone"><input class="form-control" form="editMedia" required="required" type="text" name="editMediaName" value="{{mediaName}}" autocomplete="off"></td> 
+    </tr>
+    <tr>
+    <th id="bordernone">Kategori: </th> 
+    <td id="bordernone"><input class="form-control" form="editMedia" required="required" type="text" name="editCategory" value="{{category}}" autocomplete="off"></td> 
+    </tr>
+{{/each}} 
+
+</script>
+    
+<!-- Display all images -->
+<script id="displayMediaTemplate" type="text/x-handlebars-template">
 {{#each mediaInfo}}
 <div class="col-md-2">
 
@@ -149,10 +194,10 @@
 </div>
 {{/each}}
     
-    </script>    
+</script>    
 
 
-    <script>
+<script>
         $('#dropdown').show();
         $(function () {
             $.ajax({
@@ -219,7 +264,7 @@
 
 </script>
 
- <script>
+<script>
 function showMedia(givenMediaID) {
     $('#showMediaInformationModal').modal('show');
             $.ajax({
@@ -228,14 +273,80 @@ function showMedia(givenMediaID) {
                 data: {givenMediaID: givenMediaID},
                 dataType: 'json',
                 success: function (data) {
-                    $.each(data, function(i, item){
+                    
+                    $.each(data.mediaInfo, function(i, item) {
+                        
+                    var $mediaTitle = $('#mediaTitle');
+                    $mediaTitle.empty().append(item.mediaName);
+
                     var $displayMediaInformation = $('#mediaInformationContainer');
                     $displayMediaInformation.empty().append('<img class="img-responsive" src="image/' + item.mediaName + '"alt="Home">');
-                    });
+                     });
                 }
             });
             return false;
 
         };
   
+</script>
+
+<!-- EDIT STORAGE -->
+
+<script>
+    $(function POSTeditMediaModal() {
+
+        $('#displayMediaContainer').delegate('.edit', 'click', function () {
+            var givenMediaID = $(this).attr('data-id');
+
+            $.ajax({
+                type: 'POST',
+                url: '?page=getMediaByID',
+                data: {givenMediaID: givenMediaID},
+                dataType: 'json',
+                success: function (data) {
+                    $('#editMediaModal').modal('show');
+                    editMediaTemplate(data); 
+                }
+            });
+            return false;
+
+        });
+    });
+</script>
+
+<script>
+    function editMediaTemplate(data) {
+        var rawTemplate = document.getElementById("editMediaTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var editMediaGeneratedHTML = compiledTemplate(data);
+
+        var editContainer = document.getElementById("editMediaContainer");
+        editContainer.innerHTML = editMediaGeneratedHTML;
+    }
+</script>
+
+
+<!-- POST results from editing, and updating the table-->
+<script>
+    $(function POSTeditMediaInfo() {
+        
+        $('#editMedia').submit(function () {
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+            
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function () {
+                    $('#editMediaModal').modal('hide');
+                    UpdateMediaTable();
+                
+                }
+            });
+            return false;
+        });
+    });
+
 </script>

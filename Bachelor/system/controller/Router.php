@@ -99,7 +99,8 @@ class Router {
                 case "uploadImage" :  
                 case "getAllMediaInfo" :
                 case "uploadImageShortcut" :
-                case "getMediaByID" :   
+                case "getMediaByID" :  
+                case "editMedia" :    
                     return new mediaController();
                     }
                 }
