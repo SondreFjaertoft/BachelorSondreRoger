@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 24. Mar, 2017 13:05 p.m.
+-- Generation Time: 30. Mar, 2017 01:21 a.m.
 -- Server-versjon: 5.5.54
 -- PHP Version: 5.6.28
 
@@ -31,11 +31,6 @@ CREATE TABLE `categories` (
   `categoryName` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dataark for tabell `categories`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -61,12 +56,6 @@ CREATE TABLE `inventory` (
   `productID` int(11) UNSIGNED NOT NULL,
   `quantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dataark for tabell `inventory`
---
-
-
 
 -- --------------------------------------------------------
 
@@ -104,14 +93,8 @@ CREATE TABLE `macadresse` (
 CREATE TABLE `media` (
   `mediaID` int(11) UNSIGNED NOT NULL,
   `mediaName` varchar(255) NOT NULL,
-  `fileType` varchar(100) NOT NULL
+  `category` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dataark for tabell `media`
---
-
-
 
 -- --------------------------------------------------------
 
@@ -131,11 +114,6 @@ CREATE TABLE `products` (
   `macAdresse` varchar(8) DEFAULT 'FALSE'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dataark for tabell `products`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -147,12 +125,6 @@ CREATE TABLE `restrictions` (
   `userID` int(11) UNSIGNED NOT NULL,
   `storageID` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dataark for tabell `restrictions`
---
-
-
 
 -- --------------------------------------------------------
 
@@ -171,11 +143,6 @@ CREATE TABLE `returns` (
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
---
--- Dataark for tabell `returns`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -193,11 +160,6 @@ CREATE TABLE `sales` (
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dataark for tabell `sales`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -208,11 +170,6 @@ CREATE TABLE `storage` (
   `storageID` int(11) UNSIGNED NOT NULL,
   `storageName` varchar(60) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dataark for tabell `storage`
---
-
 
 -- --------------------------------------------------------
 
@@ -226,15 +183,10 @@ CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `userLevel` varchar(50) NOT NULL,
-  `image` varchar(255) DEFAULT 'tafjord.jpg',
+  `mediaID` int(11) UNSIGNED DEFAULT NULL,
   `lastLogin` datetime DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dataark for tabell `users`
---
-
 
 --
 -- Indexes for dumped tables
@@ -285,7 +237,8 @@ ALTER TABLE `macadresse`
 --
 ALTER TABLE `media`
   ADD PRIMARY KEY (`mediaID`),
-  ADD UNIQUE KEY `mediaName` (`mediaName`);
+  ADD UNIQUE KEY `mediaName` (`mediaName`),
+  ADD KEY `media_ibfk_2` (`category`);
 
 --
 -- Indexes for table `products`
@@ -334,7 +287,8 @@ ALTER TABLE `storage`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`userID`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD UNIQUE KEY `username` (`username`),
+  ADD KEY `users_ibfk_2` (`mediaID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -344,7 +298,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `categoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `categoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `checkout`
 --
@@ -369,37 +323,37 @@ ALTER TABLE `macadresse`
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `mediaID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `mediaID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `restrictions`
 --
 ALTER TABLE `restrictions`
-  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT for table `returns`
 --
 ALTER TABLE `returns`
-  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT for table `storage`
 --
 ALTER TABLE `storage`
-  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `userID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- Begrensninger for dumpede tabeller
 --
@@ -433,6 +387,12 @@ ALTER TABLE `macadresse`
   ADD CONSTRAINT `macadresse_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`);
 
 --
+-- Begrensninger for tabell `media`
+--
+ALTER TABLE `media`
+  ADD CONSTRAINT `media_ibfk_2` FOREIGN KEY (`category`) REFERENCES `categories` (`categoryID`);
+
+--
 -- Begrensninger for tabell `products`
 --
 ALTER TABLE `products`
@@ -461,6 +421,12 @@ ALTER TABLE `sales`
   ADD CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
   ADD CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`),
   ADD CONSTRAINT `sales_ibfk_3` FOREIGN KEY (`storageID`) REFERENCES `storage` (`storageID`);
+
+--
+-- Begrensninger for tabell `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`mediaID`) REFERENCES `media` (`mediaID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

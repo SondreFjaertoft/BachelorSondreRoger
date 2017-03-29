@@ -11,7 +11,7 @@ class mediaController extends Controller {
             $this->uploadImage();
             $this->mediaPage();
         } else if ($page == "getAllMediaInfo"){
-            $this->getAllMediaInfo();
+            $this->getMediaSearchResult();
         } else if ($page == "uploadImageShortcut"){
             $this->uploadImage();
             $this->homePage();
@@ -92,15 +92,15 @@ class mediaController extends Controller {
         }
     }
     
-    private function getAllMediaInfo(){
+    private function getMediaSearchResult(){
         $mediaModel = $GLOBALS["mediaModel"];
         
         if (isset($_POST['givenMediaSearchWord'])) {
             $givenStorageSearchWord = "%{$_REQUEST["givenMediaSearchWord"]}%";
-            $mediaInfo = $mediaModel->getAllMediaInfo($givenStorageSearchWord);
+            $mediaInfo = $mediaModel->getMediaSearchResult($givenStorageSearchWord);
         } else {
             $givenStorageSearchWord = "%%";
-            $mediaInfo = $mediaModel->getAllMediaInfo($givenStorageSearchWord);
+            $mediaInfo = $mediaModel->getMediaSearchResult($givenStorageSearchWord);
         }
         
         $data = json_encode(array("mediaInfo" => $mediaInfo));

@@ -20,7 +20,7 @@
                 </div>
              
             <div class="col-md-1 col-md-offset-15">
-                <button class="btn btn-default " type="button" data-toggle="modal" data-target="#createUserModal">Opprett bruker</button>
+                <button class="btn btn-default " onclick="getMediaInfo();" type="button" data-toggle="modal" data-target="#createUserModal">Opprett bruker</button>
             </div>
             </div>
             <button  id="setRestriction" onclick="getStorageInfo()" data-toggle="modal" data-target="#userRestrictionModal" class="btn btn-default" type="button">Velg Lager</button>
@@ -36,10 +36,11 @@
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">Opprett bruker</h4>
                         </div>
+                        <form action="?page=addUserEngine" method="post" id="createUser">
                         <div class="modal-body">
                             <div class="text-center">
                                 <table class="table">
-                                <form action="?page=addUserEngine" method="post" id="createUser">
+                                
                                     <tr>
                                         <th style="border: none">Name:</th>
                                         <td style="border: none"><input class="form-control" type="text" name="givenName" required="required" value="" autocomplete="off"></td>
@@ -58,18 +59,22 @@
                                     </tr>
                                     <tr>
                                         <th>UserLevel:</th>                                       
-                                        <td><div>
-                                                <select name="givenUserLevel" required="required" class="form-control" autocomplete="off">
-                                                    <option></option>
-                                                    <option value="User">User</option>
-                                                    <option value="Administrator">Administrator</option>
+                                        <td>
+                                            <select name="givenUserLevel" required="required" class="form-control" autocomplete="off">
+                                                <option></option>
+                                                <option value="User">User</option>
+                                                <option value="Administrator">Administrator</option>
                                                 </select>  
-                                            </div>
-                                            </td>
+                                         </td>
                                     </tr>
-                                    
-                                   
-                                
+                                    <tr>
+                                        <th>Media:</th>
+                                        <td>
+                                            <select name="givenMediaID" id="selectMediaID" required="required" class="form-control" autocomplete="off">
+                                            </select>
+                                        </td>
+                                    </tr>
+
                                     </table>
                             </div>
                         </div>
@@ -291,18 +296,32 @@
     <tr>
     <th>Brukernivå: </th>
     
-    <td><div class="">
+    <td>
     <select form="editUser" type="text" required="required" name="editUserLevel" class="form-control" autocomplete="off">
-        <option></option>
+        <option>{{userLevel}}</option>
         <option value="User">User</option>
         <option value="Administrator">Administrator</option>
     </select>
-    </div>
     </td>
     </tr>
     
-        
+    <tr>
+    <th>Media: </th>
+
+    <td>
+    <select form="editUser" type="text" required="required" name="editMediaID" class="form-control" autocomplete="off">
+        <option value="{{mediaID}}">{{mediaName}}</option>
     {{/each}}
+        {{#each media}}            
+        <option value="{{mediaID}}">{{mediaName}}</option>
+        {{/each}}
+    </select>
+    </td>
+    </tr>
+    
+    
+        
+    
 </script>   
 
 
@@ -345,7 +364,7 @@
     <td>{{lastLogin}}</td>
     </tr> 
     <tr>
-    <td><img src="image/{{image}}" alt="Home"></td>
+    <td><img class="img-responsive" src="image/{{mediaName}}" alt="Home"></td>
     </tr>
 
   
@@ -810,4 +829,29 @@
         });
     });
 
+</script>
+
+<script>
+ function getMediaInfo() {
+    var $displayMediaInformation = $('#selectMediaID');
+    $displayMediaInformation.empty();
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getAllMediaInfo',
+            dataType: 'json',
+            success: function (data) {
+                
+                $.each(data.mediaInfo, function(i, item) {
+
+                
+                $displayMediaInformation.append('<option value="'+item.mediaID+'">'+item.mediaName+'</option>');
+                    
+                });                
+                
+                
+            }
+        });
+    });
+ }
 </script>

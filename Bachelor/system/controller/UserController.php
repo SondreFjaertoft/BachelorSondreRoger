@@ -44,9 +44,10 @@ class UserController extends Controller {
         $editPassword = $_REQUEST["editPassword"];
         $editUserLevel = $_REQUEST["editUserLevel"];
         $editEmail = $_REQUEST["editEmail"];
+        $editMediaID = $_REQUEST["editMediaID"];
 
         $userEditInfo = $GLOBALS["userModel"];
-        $userEditInfo->editUser($editName, $editUsername, $editPassword, $editUserLevel, $editEmail, $editUserID);
+        $userEditInfo->editUser($editName, $editUsername, $editPassword, $editUserLevel, $editEmail, $editUserID, $editMediaID);
 
         echo json_encode("success");
         
@@ -101,9 +102,10 @@ class UserController extends Controller {
         $givenPassword = $_REQUEST["givenPassword"];
         $givenUserLevel = $_REQUEST["givenUserLevel"];
         $givenEmail = $_REQUEST["givenEmail"];
+        $givenMediaID = $_REQUEST["givenMediaID"];
 
         $userCreationInfo = $GLOBALS["userModel"];
-        $added = $userCreationInfo->addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail);
+        $added = $userCreationInfo->addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail, $givenMediaID);
         if($added){
         $data = json_encode("success");
         
@@ -122,7 +124,11 @@ class UserController extends Controller {
         $userInfo = $GLOBALS["userModel"];
         $userModel = $userInfo->getAllUserInfoFromID($givenUserID);
         
-        $data = json_encode(array("user" => $userModel));
+        $mediaModel = $GLOBALS["mediaModel"];
+        $mediaInfo = $mediaModel->getAllMediaInfo();
+        
+        
+        $data = json_encode(array("user" => $userModel, "media" => $mediaInfo));
         echo $data;
         
     }

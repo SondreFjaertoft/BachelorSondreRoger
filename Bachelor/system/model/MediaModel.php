@@ -11,6 +11,7 @@ class MediaModel {
     const ID_QUERY = "SELECT * FROM " . MediaModel::TABLE . " WHERE mediaID LIKE :givenMediaID";
     const UPDATE_QUERY = "UPDATE " . MediaModel::TABLE . " SET mediaName = :editMediaName, category = :editCategory WHERE mediaID = :editMediaID"; 
     const DELETE_QUERY = "DELETE FROM " . MediaModel::TABLE . " WHERE mediaID = :deleteMediaID";
+    const SELECT_QUERY = "SELECT * FROM " . MediaModel::TABLE;
 
     
     public function __construct(PDO $dbConn) { 
@@ -20,9 +21,11 @@ class MediaModel {
       $this->byIdStmt = $this->dbConn->prepare(MediaModel::ID_QUERY);
       $this->editStmt = $this->dbConn->prepare(MediaModel::UPDATE_QUERY);
       $this->delStmt = $this->dbConn->prepare(MediaModel::DELETE_QUERY);
+      $this->selStmt = $this->dbConn->prepare(MediaModel::SELECT_QUERY);
+
     }
     
-    public function getAllMediaInfo($givenSearchWord){
+    public function getMediaSearchResult($givenSearchWord){
         $this->searchStmt->execute(array("givenSearchWord" => $givenSearchWord));
         return $this->searchStmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -44,6 +47,11 @@ class MediaModel {
     
     public function deletetMediaByID($deleteMediaID)    {
        return $this->delStmt->execute(array("deleteMediaID" => $deleteMediaID));
+    }
+    
+    public function getAllMediaInfo(){
+        $this->selStmt->execute();
+        return $this->selStmt->fetchAll(PDO::FETCH_ASSOC); 
     }
 }
 

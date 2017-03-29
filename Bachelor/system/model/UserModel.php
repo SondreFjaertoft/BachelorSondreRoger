@@ -5,11 +5,11 @@ class UserModel {
     private $dbConn;
 
     const TABLE = "users";
-    const UPDATE_QUERY = "UPDATE " . UserModel::TABLE . " SET name = :editName, username = :editUsername, password = :editPassword, userLevel = :editUserLevel, email = :editEmail WHERE userID = :editUserID";
-    const SELECT_QUERY = "SELECT * FROM " . UserModel::TABLE;
-    const SELECT_QUERY_USERID = "SELECT * FROM " . UserModel::TABLE . " WHERE userID = :givenUserID";
+    const UPDATE_QUERY = "UPDATE " . UserModel::TABLE . " SET name = :editName, username = :editUsername, password = :editPassword, userLevel = :editUserLevel, email = :editEmail, mediaID = :editMediaID WHERE userID = :editUserID";
+    const SELECT_QUERY = "SELECT * FROM " . UserModel::TABLE . " INNER JOIN media ON users.mediaID = media.mediaID";
+    const SELECT_QUERY_USERID = "SELECT * FROM " . UserModel::TABLE . " INNER JOIN media ON users.mediaID = media.mediaID WHERE userID = :givenUserID";
     const SEARCH_QUERY = "SELECT * FROM " . UserModel::TABLE . " WHERE name LIKE :givenSearchWord OR username LIKE :givenSearchWord";
-    const INSERT_QUERY = "INSERT INTO " . UserModel::TABLE . " (name, username, password, userLevel, email) VALUES (:givenName, :givenUsername, :givenPassword, :givenUserLevel, :givenEmail)";
+    const INSERT_QUERY = "INSERT INTO " . UserModel::TABLE . " (name, username, password, userLevel, email, mediaID) VALUES (:givenName, :givenUsername, :givenPassword, :givenUserLevel, :givenEmail, :givenMediaID)";
     const DELETE_QUERY = "DELETE FROM " . UserModel::TABLE . " WHERE userID = :removeUserID";
     const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
     const ACTIVATE_CONS = "SET FOREIGN_KEY_CHECKS=1;";
@@ -48,13 +48,13 @@ class UserModel {
         return $this->selUserID->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function editUser($editName, $editUsername, $editPassword, $editUserLevel, $editEmail, $editUserID) {
-        return $this->editStmt->execute(array("editName" => $editName, "editUsername" => $editUsername, "editPassword" => $editPassword, "editUserLevel" => $editUserLevel, "editEmail" => $editEmail, "editUserID" => $editUserID));
+    public function editUser($editName, $editUsername, $editPassword, $editUserLevel, $editEmail, $editUserID, $editMediaID) {
+        return $this->editStmt->execute(array("editName" => $editName, "editUsername" => $editUsername, "editPassword" => $editPassword, "editUserLevel" => $editUserLevel, "editEmail" => $editEmail, "editUserID" => $editUserID, "editMediaID" => $editMediaID));
     }
 
     // kommer tilbake til, ved oppretting av bruker
-    public function addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail) {
-        $this->addStmt->execute(array("givenName" => $givenName, "givenUsername" => $givenUsername, "givenPassword" => $givenPassword, "givenUserLevel" => $givenUserLevel, "givenEmail" => $givenEmail));
+    public function addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail, $givenMediaID) {
+        $this->addStmt->execute(array("givenName" => $givenName, "givenUsername" => $givenUsername, "givenPassword" => $givenPassword, "givenUserLevel" => $givenUserLevel, "givenEmail" => $givenEmail, "givenMediaID" => $givenMediaID));
         $lastAdded = $this->dbConn->lastInsertId('users');
         return $lastAdded;
     }
