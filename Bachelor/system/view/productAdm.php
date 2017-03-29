@@ -103,6 +103,7 @@
                 <div class="modal-footer">
 
                     <input class="btn btn-success" form="createProduct" type="submit" value="Opprett Produkt">
+                    
                     <button class="btn btn-danger" type="button" data-dismiss="modal">Avslutt</button>
 
                 </div>

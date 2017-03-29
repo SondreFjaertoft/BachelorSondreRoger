@@ -68,7 +68,8 @@ class Router {
                   
                 case "getUserInfo" :    
                 case "getUserByID" :   
-                case "getUserRestriction" :   
+                case "getUserRestriction" :  
+                case "editUser" :
                     return new UserController();     
                         
             }

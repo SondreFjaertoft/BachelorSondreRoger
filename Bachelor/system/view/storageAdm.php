@@ -71,6 +71,7 @@
                         <tr>
                             <th id="bordernone">Lagernavn:</th>
                             <td id="bordernone"><input class="form-control" type="text" required="required" name="givenStorageName" value=""></td>
+                            <input type="submit" id="submitCreateStorage" class="hidden" />
                         </tr>
                     </form> 
                     </table>
@@ -78,8 +79,7 @@
             </div>
             <div class="modal-footer">
 
-                <input class="btn btn-success" form="createStorage" type="submit" value="Opprett Lager" href="?page=storageAdm">
-
+                <label for="submitCreateStorage" class="btn btn-success" >Opprett Lager</label>
 
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
@@ -105,7 +105,9 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Lager informasjon</h4>
             </div>
-            <form action="?page=editStorageEngine" method="post" id="editStorage"></form>
+            <form action="?page=editStorageEngine" method="post" id="editStorage">
+            <input type="submit" id="submitEditStorage" class="hidden" />    
+            
             <div class="modal-body">
                 <table class="table" id="editStorageContainer">
                     
@@ -114,7 +116,9 @@
                     
                 </table>
             </div>
+            </form>
             <div class="modal-footer">
+                <label for="submitEditStorage" class="btn btn-success" >Edit</label>
                 <input class="btn btn-success" type="submit" value="Lagre" form="editStorage">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
@@ -384,7 +388,7 @@
 <script>
     $(function POSTdeleteStorageModal() {
 
-        $('#displayStorageContainer').delegate('.delete', 'click', function () {
+        $('#displayStorageContainer').delegate('.delete', 'click', function () {  
             var givenStorageID = $(this).attr('data-id');
 
             $.ajax({
@@ -721,6 +725,7 @@
     $(function POSTstorageInfo() {
 
         $('#createStorage').submit(function () {
+ 
             var url = $(this).attr('action');
             var data = $(this).serialize();
 

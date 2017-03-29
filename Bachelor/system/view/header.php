@@ -3,6 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -38,7 +39,7 @@
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#usernav"><span class="glyphicon glyphicon-user"></span> 
                         <?php echo  $_SESSION["nameOfUser"]; ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a>Rediger profil</a></li>
+                            <li><a href="?page=editUser">Rediger profil</a></li>
                             <li><a href="../">Logout</a></li>
                         </ul>
                     </li> 

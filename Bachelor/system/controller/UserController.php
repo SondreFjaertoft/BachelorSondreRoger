@@ -23,12 +23,18 @@ class UserController extends Controller {
             $this->userEditEngine();
         } else if ($page == "deleteSingleRes"){
             $this->deleteSingleRes();
-        }
+        } else if ($page == "editUser"){
+            $this->editUserPage();
+        } 
             
     }
 
     private function userAdmPage() {
         return $this->render("userAdm");
+    }
+    
+    private function editUserPage() {
+        return $this->render("editUser");
     }
 
     private function userEditEngine() {
@@ -108,8 +114,11 @@ class UserController extends Controller {
     }
     
     private function getUserByID(){
+        if (isset($_POST['givenUserID']) ) {
         $givenUserID = $_REQUEST["givenUserID"];
-        
+        } else {
+            $givenUserID = $_SESSION["userID"];
+        }
         $userInfo = $GLOBALS["userModel"];
         $userModel = $userInfo->getAllUserInfoFromID($givenUserID);
         
