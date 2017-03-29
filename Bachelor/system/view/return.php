@@ -6,7 +6,8 @@
 
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group"> 
         
-               <div class="col-sm-3 col-md-4">
+        <form id="returnProducts" action="?page=returnProduct" method="post">
+            <div class="col-sm-3 col-md-4">
             <label>Returner til:</label>
             <select name="toStorageID" form="returnProducts" id="returnRestrictionContainer" class="form-control">
 
@@ -51,12 +52,13 @@
 
             </table>
 
-            <form id="returnProducts" action="?page=returnProduct" method="post"></form>
+            
             <input form="returnProducts" type="hidden" id="date" name="date">
             
             <button form="returnProducts" type="submit" class="btn btn-default" id="returnButton">Overfør</button>
             <p id="errorMessage"></p>
-        </div>          
+        </div> 
+        </form>
         
         
         

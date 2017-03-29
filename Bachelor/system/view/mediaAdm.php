@@ -80,15 +80,14 @@
                                 <td id="bordernone"><input class="form-control" type="text" name="givenCaterogy" required="required"></td>
                             </tr>
                         </table>
-                        </form>
+                        
                     </div>
                 </div>
                 <div class="modal-footer">
                 <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?page=uploadImage">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-
                 </div>
-
+                </form>
             </div>
         </div>
     </div> 
@@ -132,7 +131,7 @@
                 <h4 class="modal-title" id="mediaTitle">Rediger media</h4>
             </div>
             <div class="modal-body">
-                <form action="?page=editMedia" method="post" id="editMedia"></form>
+                <form action="?page=editMedia" method="post" id="editMedia">
                 <div id="editMediaContainer">
                     
                 <!-- Her kommer bilde Template -->
@@ -143,10 +142,12 @@
                 <input class="btn btn-success" type="submit" value="Lagre" form="editMedia">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
+            </form>
         </div>
     </div>
 </div>    
     
+    <!-- DELETE MEDIA -->
     
 <div class="modal fade" id="deleteMediaModal" role="dialog">
     <div class="modal-dialog">
@@ -156,7 +157,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Slett bilde?</h4>
             </div>
-            <form action="?page=deleteMedia" method="post" id="deleteMedia"></form>
+            <form action="?page=deleteMedia" method="post" id="deleteMedia">
             <div class="modal-body" id="deleteMediaContainer">
                   
                 <!-- Innhold fra Handlebars Template -->
@@ -165,6 +166,7 @@
                 <input form="deleteMedia" class="btn btn-success" type="submit" value="Slett">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
+            </form>    
         </div>
     </div>
 </div>      

@@ -9,7 +9,7 @@
 
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
 
-
+        <form id="withdrawProducts" action="?page=withdrawProduct" method="post">
         <div class="col-sm-3 col-md-4">
             <label>Uttak fra:</label>
             <select name="fromStorageID" form="withdrawProducts" id="withdrawrRestrictionContainer" class="form-control">
@@ -56,12 +56,13 @@
 
             </table>
 
-            <form id="withdrawProducts" action="?page=withdrawProduct" method="post"></form>
+            
             <input form="withdrawProducts" type="hidden" id="date" name="date">
             
             <button form="withdrawProducts" type="submit" class="btn btn-default" id="withdrawButton" hidden>Overfør</button>
             <p id="errorMessage"></p>
-        </div>    
+        </div>
+        </form>
 
 
 

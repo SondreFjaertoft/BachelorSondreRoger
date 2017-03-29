@@ -69,7 +69,7 @@
                                     </tr>
                                     
                                    
-                                </form>
+                                
                                     </table>
                             </div>
                         </div>
@@ -81,6 +81,7 @@
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
                         </div>
+                        </form>
 
                     </div>
                 </div>
@@ -121,7 +122,7 @@
                     <h4 class="modal-title">Velg lager tilgang(er)</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="?page=addRestriction" id="editRestriction" method="post"></form>
+                    <form action="?page=addRestriction" id="editRestriction" method="post">
                     <table class="table table-striped table-bordered" id="storageRestrictionContainer">
 
                         <!-- Handlebars information -->
@@ -134,7 +135,7 @@
                     <button form="editRestriction" class="btn btn-success" type="submit">Velg lagertilgang</button> 
 
                 </div>
-
+                </form> 
             </div>
         </div>
     </div> 
@@ -155,7 +156,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Bruker informasjon</h4>
                 </div>
-                <form action="?page=deleteUserEngine" method="post" id="deleteUser"></form>
+                <form action="?page=deleteUserEngine" method="post" id="deleteUser">
                 <div class="modal-body" id="deleteUserContainer">
 
                     <!-- Innhold fra Handlebars Template-->
@@ -166,6 +167,7 @@
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
             </div>
+            </form>
         </div>
     </div>  
 
@@ -222,7 +224,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Bruker informasjon</h4>
                 </div>
-                <form action="?page=editUserEngine" method="post" id="editUser"></form>
+                <form action="?page=editUserEngine" method="post" id="editUser">
                 <div class="modal-body text-center">
                     <table class="table" id="editUserContainer">
 
@@ -233,6 +235,7 @@
                     <input class="btn btn-success" type="submit" value="Lagre" form="editUser">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
+                </form>    
             </div>
         </div>
     </div>             

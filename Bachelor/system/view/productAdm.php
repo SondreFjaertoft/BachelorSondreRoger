@@ -96,7 +96,7 @@
                             </tr>
                             
                             
-                        </form>
+                        
                         </table>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                     <button class="btn btn-danger" type="button" data-dismiss="modal">Avslutt</button>
 
                 </div>
-
+                </form>
             </div>
         </div>
     </div>
@@ -125,7 +125,7 @@
                 <h4 class="modal-title">Produkt informasjon</h4>
             </div>
             
-            <form action="?page=editProductEngine" method="post" id="editProduct"></form>
+            <form action="?page=editProductEngine" method="post" id="editProduct">
             <div class="modal-body" >
                 <table class="table">
                     <tbody id="editProductContainer">
@@ -137,6 +137,7 @@
                 <input class="btn btn-success" type="submit" value="Lagre" form="editProduct">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
+            </form>
         </div>
     </div>
 </div> 
@@ -195,7 +196,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Product informasjon</h4>
             </div>
-            <form action="?page=deleteProductEngine" method="post" id="deleteProduct"></form>
+            <form action="?page=deleteProductEngine" method="post" id="deleteProduct">
             <div class="modal-body" id="deleteProductContainer">
                 
                 <!-- Innhold fra Handlebars Template -->
@@ -205,6 +206,7 @@
                 <input class="btn btn-success" type="submit" value="Slett" form="deleteProduct">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
+            </form>
         </div>
     </div>
 </div>

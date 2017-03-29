@@ -6,7 +6,7 @@
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
 
 
-        
+    <form id="transferProducts" action="?page=transferProduct" method="post">    
         <div class="col-sm-3 col-md-4">
             <label>Overfør Fra:</label>
             <select name="fromStorageID" form="transferProducts" id="fromTransferRestrictionContainer" class="form-control">
@@ -47,11 +47,11 @@
             </table>
             
             
-            <form id="transferProducts" action="?page=transferProduct" method="post"></form>
+            
             <button form="transferProducts" type="submit" class="btn btn-default" id="transferButton">Overfør</button>
 
         </div>    
-
+    </form>
             
    
  

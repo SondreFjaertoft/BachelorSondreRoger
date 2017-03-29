@@ -68,23 +68,24 @@
                 <div style="text-align: center">
                     <table class="table">
                     <form action="?page=addStorageEngine" method="post" id="createStorage">
+                         
                         <tr>
                             <th id="bordernone">Lagernavn:</th>
                             <td id="bordernone"><input class="form-control" type="text" required="required" name="givenStorageName" value=""></td>
-                            <input type="submit" id="submitCreateStorage" class="hidden" />
+                            
                         </tr>
-                    </form> 
+                    
                     </table>
                 </div>
             </div>
             <div class="modal-footer">
 
-                <label for="submitCreateStorage" class="btn btn-success" >Opprett Lager</label>
+                <input class="btn btn-success" form="createStorage" type="submit" value="Opprett Lager">
 
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
             </div>
-
+            </form>
         </div>
     </div>
 </div> 
@@ -105,8 +106,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Lager informasjon</h4>
             </div>
-            <form action="?page=editStorageEngine" method="post" id="editStorage">
-            <input type="submit" id="submitEditStorage" class="hidden" />    
+            <form action="?page=editStorageEngine" method="post" id="editStorage"> 
             
             <div class="modal-body">
                 <table class="table" id="editStorageContainer">
@@ -116,12 +116,12 @@
                     
                 </table>
             </div>
-            </form>
+            
             <div class="modal-footer">
-                <label for="submitEditStorage" class="btn btn-success" >Edit</label>
-                <input class="btn btn-success" type="submit" value="Lagre" form="editStorage">
+                <input class="btn btn-success" form="editStorage" type="submit" value="Lagre" form="editStorage">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
+            </form>
         </div>
     </div>
 </div> 
@@ -215,7 +215,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Lager informasjon</h4>
             </div>
-            <form action="?page=deleteStorageEngine" method="post" id="deleteStorage"></form>
+            <form action="?page=deleteStorageEngine" method="post" id="deleteStorage">
             <div class="modal-body" id="deleteStorageContainer">
 
                 <!-- Innhold fra Handlebars Template -->
@@ -225,6 +225,7 @@
                 <input form="deleteStorage" class="btn btn-success" type="submit" value="Slett">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
+            </form>    
         </div>
     </div>
 </div>   
