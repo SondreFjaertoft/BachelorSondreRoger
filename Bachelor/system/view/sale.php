@@ -207,7 +207,7 @@ $('#withdrawButton').hide();
             }
             
             $(this).data('clicked', true);
-            
+         // gjør knappen trykkbar igjen:  $(this).data('clicked', false);
             var givenProductID = $(this).attr('data-id');
 
 
@@ -303,11 +303,11 @@ document.getElementById("date").value  = d.yyyymmdd();
 </script>
 
 <script>
-    $(function POSTdeleteStorageModal() {
+    $(function removeSelectedProductModal() {
 
         $('#withdrawQuantityContainer').delegate('.remove', 'click', function () {
            var $tr = $(this).closest('tr');
-           
+          
            $tr.fadeOut(150, function() {
             $(this).remove();
            });
