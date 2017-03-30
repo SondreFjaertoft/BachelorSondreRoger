@@ -230,9 +230,56 @@
     </div>
 </div>   
 
+
+
+<!-- STOCKTAKING MODAL -->
+
+<div class="modal fade" id="stocktakingModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Innholdet til Modalen -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Lagertelling</h4>
+            </div>
+            <form action="?page=stocktacking" method="post" id="stocktaking">
+                <table class="table">
+            <div class="modal-body" id="stocktakingContainer">
+                
+                <!-- Innhold fra Handlebars Template -->
+   
+            </div>
+                <table>    
+            <div class="modal-footer">
+                <input form="stocktaking" class="btn btn-success" type="submit" value="Oppdater">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+            </div>
+            </form>    
+        </div>
+    </div>
+</div>   
+
+
+
+
 </div>
 
 <!-- TEMPLATES -->
+
+
+<!-- Display stocktacing product-->
+<script id="stocktakingTemplate" type="text/x-handlebars-template">
+<input form="stocktaking" name="givenStorageID" type="hidden" value="{{storageProduct.0.storageID}}">
+{{#each storageProduct}}
+    <tr>
+       <th id="bordernone">{{productName}}:</th>    
+           <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
+           <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}">                       
+       <td><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="{{quantity}}" autocomplete="off"></td>
+    </tr>   
+  {{/each}} 
+  
+</script>
 
 <!-- Display editStorage-->                    
 <script id="editStorageTemplate" type="text/x-handlebars-template">
@@ -324,6 +371,11 @@
     <span class="glyphicon glyphicon-remove" style="color: red"></span>
     </button>
 
+    <!-- Knapp som aktiverer Model for varetelling av lager  --> 
+
+    <button id="redigerknapp" data-id="{{storageID}}" class="update" data-toggle="tooltip" title="Varetelling">
+    <span class="glyphicon glyphicon-check" style="color: #002E5F"></span>
+    </button>
     </td>
 
     <!-- Printer ut lagernavn inn i tabellen -->
@@ -456,12 +508,64 @@
 </script>
 
 
+<!-- STOCKTAKING OF STORAGE -->
 
+<!-- stocktaking modal -->
+<script>
+    $(function POSTstocktakingModal() {
 
+        $('#displayStorageContainer').delegate('.update', 'click', function () {  
+            var givenStorageID = $(this).attr('data-id');
 
+            $.ajax({
+                type: 'POST',
+                url: '?page=getStorageProduct',
+                data: {givenStorageID: givenStorageID},
+                dataType: 'json',
+                success: function (data) {
+                    $('#stocktakingModal').modal('show');
+                    stocktakingTemplate(data);  
+                }
+            });
+            return false;
 
+        });
+    });
+</script>  
 
+<!-- stocktaking storage template-->         
+<script>
+    function stocktakingTemplate(data) {
+        var rawTemplate = document.getElementById("stocktakingTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var stocktakingStorageGeneratedHTML = compiledTemplate(data);
 
+        var storageContainer = document.getElementById("stocktakingContainer");
+        storageContainer.innerHTML = stocktakingStorageGeneratedHTML;
+    }
+</script>
+
+<!-- POST results from stocktaking, and updating the table-->
+<script>
+    $(function POSTeditStorageInfo() {
+
+        $('#stocktaking').submit(function () {
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function () {
+                    $('#stocktakingModal').modal('hide');
+                }
+            });
+            return false;
+        });
+    });
+
+</script>
 
 
 <!-- SHOW STORAGE INFORMATION -->

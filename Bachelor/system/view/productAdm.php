@@ -18,7 +18,7 @@
                     <button onclick="UpdateProductTable()" class="btn btn-default " type="button">Alle producter</button>
                 </div>
                 <div class="col-md-1 col-md-offset-15">
-                    <button class="btn btn-default" type="button" data-toggle="modal" data-target="#createProductModal">Opprett Produkt</button>
+                    <button class="btn btn-default" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal">Opprett Produkt</button>
                 </div>
             </div> 
         </form>
@@ -71,31 +71,29 @@
                                 <td id="bordernone"><input class="form-control" type="text" required="required" name="givenProductName" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
-                                <th>Kjøpspris:</th>
-                                <td><input class="form-control"class="form-control" type="int" required="required" name="givenBuyPrice" value="" autocomplete="off"></td>
-                            </tr>
-                            <tr>
-                                <th>Salgspris:</th>
-                                <td><input class="form-control" type="int" required="required" name="givenSalePrice" value="" autocomplete="off"></td>
+                                <th>Pris:</th>
+                                <td><input class="form-control" type="int" required="required" name="givenPrice" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Kategori:</th>
-                                <td><input class="form-control" type="int" required="required" name="givenCategoryID" value="" autocomplete="off"></td>
+                                <td>
+                                    <select name="givenCategoryID" id="selectCategoryID" required="required" class="form-control" autocomplete="off">
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
                                 <th>Media:</th>
-                                <td><input class="form-control" type="int" required="required" name="givenMediaID" value="" autocomplete="off"></td>
-                            </tr>
-                            <tr>
-                                <th>Produktnummer:</th>
-                                <td><input class="form-control" type="text" required="required" name="givenProductNumber" value="" autocomplete="off"></td>
+                                <td>
+                                    <select name="givenMediaID" id="selectMediaID" required="required" class="form-control" autocomplete="off">
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
                                 <th>MacAdresse:</th>
                                 <td><input type="checkbox" id="TRUE" name="givenMacAdresse" value="TRUE"></td>
                             </tr>
                             
-                            
+                            <input form="createProduct" type="hidden" id="date" name="date">
                         
                         </table>
                     </div>
@@ -224,26 +222,35 @@
     <td id="bordernone"><input class="form-control" form="editProduct" type="text" required="required" name="editProductName" value="{{productName}}" autocomplete="off"></td>
     </tr>
     <tr>
-    <th>Kjøpspris: </th>
-    <td><input class="form-control" form="editProduct" type="int" required="required" name="editBuyPrice" value="{{buyPrice}}" autocomplete="off"></td>
-    </tr>
-    <tr>
-    <th>Salgspris:</th>
-    <td><input class="form-control" form="editProduct" type="int" required="required" name="editSalePrice" value="{{salePrice}}" autocomplete="off"></td>
+    <th>Pris: </th>
+    <td><input class="form-control" form="editProduct" type="int" required="required" name="editPrice" value="{{price}}" autocomplete="off"></td>
     </tr>
     <tr>
     <th>Kategori:</th>
-    <td><input class="form-control" form="editProduct" type="int" required="required" name="editCategoryID" value="{{categoryID}}" autocomplete="off"></td>
+    <td>
+        <select form="editProduct" type="text" required="required" name="editCategoryID" class="form-control" autocomplete="off">
+        <option value="{{categoryID}}">{{categoryName}}</option>
+    {{/each}}    
+        {{#each category}}            
+        <option value="{{categoryID}}">{{categoryName}}</option>
+        {{/each}}
+    </select>
+    </td>
     </tr>
     <tr>
     <th>Media: </th>
-    <td><input class="form-control" form="editProduct" type="int" required="required" name="editMediaID" value="{{mediaID}}" autocomplete="off"></td>
-    </tr>
-    <tr>
-    <th>Produktnummer:</th>
-    <td><input class="form-control" form="editProduct" type="text" required="required" name="editProductNumber" value="{{productNumber}}" autocomplete="off"></td>
-     </tr>   
-{{/each}} 
+    <td>
+    <select form="editProduct" type="text" required="required" name="editMediaID" class="form-control" autocomplete="off">
+        
+        <option value="{{product.0.mediaID}}">{{product.0.mediaName}}</option>
+      
+        {{#each media}}            
+        <option value="{{mediaID}}">{{mediaName}}</option>
+        {{/each}}
+    </select>
+    </td>
+    </tr>  
+
 </script>  
 
 <!-- Display productInformation-->
@@ -258,25 +265,20 @@
     <td>{{productName}}</td>
 </tr>
 <tr>
-    <th>Kjøpspris: </th>
-    <td>{{buyPrice}}</td>
-</tr>
-<tr>
-    <th>Salgspris: </th>
-    <td>{{salePrice}}</td>
+    <th>Pris: </th>
+    <td>{{price}}</td>
 </tr>
 <tr>
     <th>Kategori: </th>
-    <td>{{categoryID}}</td>
+    <td>{{categoryName}}</td>
 </tr>
 <tr>
-    <th>Media: </th>
-    <td>{{mediaID}}</td>
+    <th>Opprettet: </th>
+    <td>{{date}}</td>
 </tr>
 <tr>
-    <th>Produktnummer: </th>
-    <td>{{productNumber}}</td>
-</tr>    
+    <td><img class="img-responsive" src="image/{{mediaName}}" alt="{{mediaName}}"></td>
+</tr>   
 {{/each}}                                                  
 </script>
 
@@ -332,8 +334,8 @@
 
     <th>Produktnavn: </th>
     <td>{{productName}}</td>
-    <th>Katerogi: </th>
-    <td>{{categoryID}}</td>    
+    <th>Kategori: </th>
+    <td>{{categoryName}}</td>    
 
     {{/each}}
     </tr>
@@ -635,5 +637,75 @@
             return false;
         });
     });
+
+</script>
+
+<script>
+function createProductInfo(){
+    getMediaInfo();
+    getCategoryInfo();
+}                    
+</script>
+<script>
+ function getMediaInfo() {
+    var $displayMediaInformation = $('#selectMediaID');
+    $displayMediaInformation.empty();
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getAllMediaInfo',
+            dataType: 'json',
+            success: function (data) {
+                
+                $.each(data.mediaInfo, function(i, item) {
+
+                
+                $displayMediaInformation.append('<option value="'+item.mediaID+'">'+item.mediaName+'</option>');
+                    
+                });                
+                
+                
+            }
+        });
+    });
+ }
+</script>
+
+<script>
+ function getCategoryInfo() {
+    var $displayCategoryInformation = $('#selectCategoryID');
+    $displayCategoryInformation.empty();
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getAllCategoryInfo',
+            dataType: 'json',
+            success: function (data) {
+                
+                $.each(data.categoryInfo, function(i, item) {
+
+                
+                $displayCategoryInformation.append('<option value="'+item.categoryID+'">'+item.categoryName+'</option>');
+                    
+                });                
+                
+                
+            }
+        });
+    });
+ }
+</script>
+
+
+<script>
+Date.prototype.yyyymmdd = function() {
+   var yyyy = this.getFullYear();
+   var mm = this.getMonth() < 9 ? "0" + (this.getMonth() + 1) : (this.getMonth() + 1); // getMonth() is zero-based
+   var dd  = this.getDate() < 10 ? "0" + this.getDate() : this.getDate();
+   return "".concat(yyyy).concat(mm).concat(dd);
+  };
+
+var d = new Date();
+document.getElementById("date").value  = d.yyyymmdd();
 
 </script>

@@ -19,7 +19,7 @@
                             <button class="btn btn-success btn-lg" type="button" data-toggle="modal" data-target="#createUserModal"><span class="glyphicon glyphicon-user"></span> <br/>Opprett bruker</button>
                           <button class="btn btn-warning btn-lg" type="button" data-toggle="modal" data-target="#createProductModal"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Opprett produkt</button>
                           <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
-                          <button class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-folder-open"></span> <br/>Oprett kategori</button>
+                          <button class="btn btn-info btn-lg" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Oprett kategori</button>
                           <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
                           
                         </div>
@@ -414,7 +414,45 @@
             </form>
         </div>
     </div>
-</div> 
+</div>
+    
+    
+    <!-- CREATE CATEGORY MODAL -->
+
+
+<div class="modal fade" id="createCategoryModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Innholdet til Modalen -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Opprett bruker</h4>
+            </div>
+            <div class="modal-body">
+                <form action="?page=addCategoryEngine" method="post" id="createCategory">
+                <div style="text-align: center">
+                    <table class="table">                   
+                        <tr>
+                            <th id="bordernone">Kateroginavn:</th>
+                            <td id="bordernone"><input class="form-control" type="text" required="required" name="givenCategoryName" value=""></td>
+                        </tr>
+                     
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <input class="btn btn-success" form="createCategory" type="submit" value="Opprett Kategori">
+
+
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+
+            </div>
+            </form>
+        </div>
+    </div>
+</div>     
+    
     
 <!-- Create product -->
 <script>
@@ -489,6 +527,29 @@
                 success: function () {
                     $("#createStorage")[0].reset();
                     $('#createStorageModal').modal('hide');
+                }
+            });
+            return false;
+        });
+    });
+
+</script>
+
+<script>
+    $(function POSTstorageInfo() {
+
+        $('#createCategory').submit(function () {
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function () {
+                    $("#createCategory")[0].reset();
+                    $('#createCategoryModal').modal('hide');
                 }
             });
             return false;

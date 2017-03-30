@@ -64,6 +64,7 @@ class Router {
                 case "getStorageRestriction" :
                 case "getStorageProduct" :  
                 case "chartProduct" :    
+                case "stocktacking" :    
                     return new StorageController(); 
                   
                 case "getUserInfo" :    
@@ -84,6 +85,7 @@ class Router {
                 case "addProductEngine" :
                 case "editProductEngine" :
                 case "deleteProductEngine" :  
+                case "getAllCategoryInfo" :   
                     return new ProductController();
                     
                 case "storageAdm":
@@ -109,6 +111,10 @@ class Router {
                 case "editMedia" :    
                 case "deleteMedia" :
                     return new mediaController();
+                    
+                case "addCategoryEngine" :
+                    return new HomeController();
+                    
                     }
                 }
             
