@@ -83,8 +83,14 @@ class SaleController extends Controller {
         $givenUserID = $_SESSION["userID"];
         
         $saleModel = $GLOBALS["saleModel"];
-        
-        $mySales = $saleModel->getMySales($givenUserID);
+
+        if (isset($_POST['givenProductSearchWord'])) {
+            $givenProductSearchWord = "%{$_REQUEST["givenProductSearchWord"]}%";
+            $mySales = $saleModel->getMySales($givenUserID, $givenProductSearchWord);
+        } else {
+            $givenProductSearchWord = "%%";
+            $mySales = $saleModel->getMySales($givenUserID, $givenProductSearchWord);
+        }
         
         $data = json_encode(array("mySales" => $mySales));
         echo $data;

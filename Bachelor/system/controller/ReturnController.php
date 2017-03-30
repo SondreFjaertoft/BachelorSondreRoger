@@ -57,7 +57,14 @@ class ReturnController extends Controller {
         $givenUserID = $_SESSION["userID"];
         
         $returnModel = $GLOBALS["returnModel"];
-        $myReturns = $returnModel->getAllReturnInfo($givenUserID);
+        
+        if (isset($_POST['givenProductSearchWord'])) {
+            $givenProductSearchWord = "%{$_REQUEST["givenProductSearchWord"]}%";
+            $myReturns = $returnModel->getAllReturnInfo($givenUserID, $givenProductSearchWord);
+        } else {
+            $givenProductSearchWord = "%%";
+            $myReturns = $returnModel->getAllReturnInfo($givenUserID, $givenProductSearchWord);
+        }
         
         $data = json_encode(array("myReturns" => $myReturns));
         echo $data;
