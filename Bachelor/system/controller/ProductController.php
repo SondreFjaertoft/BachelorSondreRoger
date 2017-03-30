@@ -22,6 +22,8 @@ class ProductController extends Controller {
             $this->getProductByID();
         } else if ($page == "getProductLocation") {
             $this->getProductLocation();
+        } else if ($page == "getAllCategoryInfo"){
+            $this->getAllCategoryInfo();
         }
     }
     
@@ -35,7 +37,7 @@ class ProductController extends Controller {
         $givenPrice = $_REQUEST["givenPrice"];
         $givenCategoryID = $_REQUEST["givenCategoryID"];
         $givenMediaID = $_REQUEST["givenMediaID"];
-        $givenProductDate = "2017-02-21 00:00:00";
+        $givenProductDate = $_REQUEST["date"];
         if (isset($_POST['givenMacAdresse'])) {
         $givenMacAdresse = $_REQUEST["givenMacAdresse"];
         } else {
@@ -110,6 +112,14 @@ class ProductController extends Controller {
 
         $data = json_encode(array("productLocation" => $inventoryModel));
         echo $data; 
+    }
+    
+    private function getAllCategoryInfo(){
+        $categoryModel = $GLOBALS["categoryModel"];
+        $categoryInfo = $categoryModel->getAllCategoryInfo();
+        
+        $data = json_encode(array("categoryInfo" => $categoryInfo));
+        echo $data;
     }
 
 } 

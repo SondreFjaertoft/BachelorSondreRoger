@@ -7,9 +7,9 @@ class ProductModel {
     const TABLE = "products";
     
     const SELECT_QUERY_PRODUCTID = "SELECT productID, productName, price, products.categoryID, categories.categoryName, products.mediaID, date, macAdresse, media.mediaName FROM " . ProductModel::TABLE . " INNER JOIN media ON products.mediaID = media.mediaID INNER JOIN categories ON products.categoryID = categories.categoryID WHERE productID = :givenProductID";
-    const SELECT_QUERY = "SELECT * FROM " . ProductModel::TABLE;
+    const SELECT_QUERY = "SELECT * FROM " . ProductModel::TABLE . " INNER JOIN categories ON products.categoryID = categories.categoryID" ;
     const UPDATE_QUERY = "UPDATE " . ProductModel::TABLE . " SET productName = :editProductName, price = :editPrice, categoryID = :editCategoryID, mediaID = :editMediaID WHERE productID = :editProductID" ;
-    const SEARCH_QUERY = "SELECT * FROM " . ProductModel::TABLE . " WHERE productName LIKE :givenSearchWord";
+    const SEARCH_QUERY = "SELECT * FROM " . ProductModel::TABLE . " INNER JOIN categories ON products.categoryID = categories.categoryID WHERE productName LIKE :givenSearchWord";
     const INSERT_QUERY = "INSERT INTO " . ProductModel::TABLE . " (productName, price, CategoryID, MediaID, date, macAdresse) VALUES (:givenProductName, :givenPrice, :givenCategoryID, :givenMediaID, :givenProductDate, :givenMacAdresse)";
     const DELETE_QUERY = "DELETE FROM " . ProductModel::TABLE . " WHERE productID = :removeProductID";
 

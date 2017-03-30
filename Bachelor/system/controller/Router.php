@@ -81,6 +81,7 @@ class Router {
                 case "addProductEngine" :
                 case "editProductEngine" :
                 case "deleteProductEngine" :  
+                case "getAllCategoryInfo" :   
                     return new ProductController();
                     
                 case "storageAdm":
@@ -109,6 +110,7 @@ class Router {
                     
                 case "addCategoryEngine" :
                     return new HomeController();
+                    
                     }
                 }
             
