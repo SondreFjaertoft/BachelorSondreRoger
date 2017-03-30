@@ -23,9 +23,12 @@ class StorageController extends Controller {
             $this->getStorageProduct();
         } else if ($page == "chartProduct"){
             $this->chartProduct();
+        } else if ($page == "deleteSingleProd"){
+            $this->deleteSingleProd();
         }
     }
 
+    
     private function storageAdmPage() {
         return $this->render("storageAdm");
     }
@@ -52,6 +55,9 @@ class StorageController extends Controller {
     private function deleteStorageEngine() {
         $removeStorageID = $_REQUEST["deleteStorageID"];
 
+        $deleteInventory = $GLOBALS["inventoryModel"];
+        $deleteInventory->deleteInventory($removeStorageID);
+        
         $removeStorage = $GLOBALS["storageModel"];
         $removeStorage->removeStorage($removeStorageID);
 
@@ -104,7 +110,7 @@ class StorageController extends Controller {
         echo $data;
     }
 
-        private function chartProduct() {
+    private function chartProduct() {
         $givenStorageID = $_REQUEST['givenStorageID'];
 
         $inventoryInfo = $GLOBALS["inventoryModel"];
@@ -112,5 +118,17 @@ class StorageController extends Controller {
 
         $data = json_encode($inventoryModel);
         echo $data;
+    }
+    
+    private function deleteSingleProd(){
+        $givenProductID = $_REQUEST["givenProductID"];
+        $givenStorageID = $_REQUEST["givenStorageID"];
+        
+        $deletedProd = $GLOBALS["inventoryModel"];
+        $deleted = $deletedProd->deleteSingleProduct($givenProductID, $givenStorageID);
+        
+        if($deleted){
+        echo json_encode("success");
+        }
     }
 }

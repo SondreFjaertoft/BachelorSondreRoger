@@ -263,14 +263,22 @@
 <!-- Display StorageRetricton-->
 <script id="storageRestrictionTemplate" type="text/x-handlebars-template">
     {{#each storageRestriction}}  
-    {{name}}<br>
+    {{name}}
+    <button id="redigerknapp" data-id="{{userID}}" class="deleteUserRestriction" data-toggle="tooltip" title="Fjern lagertilgang">
+        <span class="glyphicon glyphicon-remove" style="color: red"></span>
+    </button>     
+    <br>        
     {{/each}}       
 </script>
 
 <!-- Display StorageProduct-->
 <script id="storageProductTemplate" type="text/x-handlebars-template">
     {{#each storageProduct}}          
-    {{productName}} , Antall: {{quantity}}<br>   
+    {{productName}} , Antall: {{quantity}}
+        <button id="redigerknapp" data-id="{{productID}}" class="deleteStorageInventory" data-toggle="tooltip" title="Fjern lagertilgang">
+            <span class="glyphicon glyphicon-remove" style="color: red"></span>
+        </button>    
+        <br>   
     {{/each}}    
 </script>
 
@@ -596,8 +604,9 @@
 
 <!-- Get restrictions from selected storage -->
 <script>
+         var givenStorageID;
     function POSTstorageRestriction(data) {
-        var givenStorageID = data;
+        givenStorageID = data;
         $(function () {
             $.ajax({
                 type: 'POST',
@@ -611,6 +620,29 @@
         });
     }
 </script>
+
+<script>
+    $(function deleteUserRestriction() {
+        $('#storageRestrictionContainer').delegate('.deleteUserRestriction', 'click', function () {
+
+            var givenUserID = $(this).attr('data-id');
+            
+            $.ajax({
+                type: 'POST',
+                url: '?page=deleteSingleRes',
+                data: {givenUserID: givenUserID, givenStorageID: givenStorageID},
+                dataType: 'json',
+                success: function () {
+                    POSTstorageRestriction(givenStorageID);
+
+                }
+            });
+            return false;
+
+        });
+    });               
+</script> 
+
 
 <!-- Display restrictionInformation Template-->
 <script>
@@ -626,8 +658,9 @@
 
 <!-- Get storageInventory from selected storage-->
 <script>
+    var givenStorageID;
     function POSTstorageProduct(data) {
-        var givenStorageID = data;
+        givenStorageID = data;
         $(function () {
             $.ajax({
                 type: 'POST',
@@ -642,6 +675,28 @@
         });
     }
 </script>
+
+<script>
+    $(function deleteStorageInventory() {
+        $('#storageProductContainer').delegate('.deleteStorageInventory', 'click', function () {
+
+            var givenProductID = $(this).attr('data-id');
+            
+            $.ajax({
+                type: 'POST',
+                url: '?page=deleteSingleProd',
+                data: {givenProductID: givenProductID, givenStorageID: givenStorageID},
+                dataType: 'json',
+                success: function () {
+                    POSTstorageProduct(givenStorageID);
+
+                }
+            });
+            return false;
+
+        });
+    });               
+</script> 
 
 <!-- Display productInformation Template -->
 <script>

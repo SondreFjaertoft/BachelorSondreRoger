@@ -11,7 +11,10 @@ class StorageModel {
     const SEARCH_QUERY = "SELECT * FROM " . StorageModel::TABLE . " WHERE storageName LIKE :givenSearchWord ";
     const INSERT_QUERY = "INSERT INTO " . StorageModel::TABLE . " (storageName) VALUES (:givenStorageName)";
     const DELETE_QUERY = "DELETE FROM " . StorageModel::TABLE . " WHERE storageID = :removeStorageID";
-
+    const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
+    const ACTIVATE_CONS = "SET FOREIGN_KEY_CHECKS=1;";
+    
+    
     private $selStmt;
     private $addStmt;
 
@@ -23,6 +26,8 @@ class StorageModel {
         $this->searchStmt = $this->dbConn->prepare(StorageModel::SEARCH_QUERY);
         $this->editStmt = $this->dbConn->prepare(StorageModel::UPDATE_QUERY);
         $this->selStorageID = $this->dbConn->prepare(StorageModel::SELECT_QUERY_STORAGEID);
+        $this->disabCons = $this->dbConn->prepare(StorageModel::DISABLE_CONS);
+        $this->actCons = $this->dbConn->prepare(StorageModel::ACTIVATE_CONS);
     }
 
     public function getSearchResult($givenSearchWord) {
@@ -42,7 +47,9 @@ class StorageModel {
     }    
     
     public function removeStorage($removeStorageID)    {
+       $this->disabCons->execute(); 
        return $this->delStmt->execute(array("removeStorageID" => $removeStorageID));
+       $this->actCons->execute();
     }
     
     public function editStorage($editStorageName, $editStorageID){

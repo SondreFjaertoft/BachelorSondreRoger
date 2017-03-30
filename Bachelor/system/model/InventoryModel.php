@@ -15,6 +15,9 @@ class InventoryModel {
     const SELECT_QUERY = "SELECT storageID, products.productName, products.productID, quantity FROM " . InventoryModel::TABLE . " INNER JOIN products ON products.productID = inventory.productID";
     const SELECT_QUERY_STORAGEID = "SELECT storageID, products.productName, products.productID, quantity FROM " . InventoryModel::TABLE . " INNER JOIN products ON products.productID = inventory.productID WHERE storageID = :givenStorageID";
     const SELECT_FROM_stoID_proID = "SELECT products.productID, productName, quantity FROM products INNER JOIN " . InventoryModel::TABLE . " on products.productID LIKE inventory.productID WHERE storageID = :givenStorageID AND products.productID = :givenProductID";
+    const DELETE_QUERY = "DELETE FROM " . InventoryModel::TABLE . " WHERE storageID = :givenStorageID";
+    const DELETE_SINGLE_QUERY = "DELETE FROM " . InventoryModel::TABLE . " WHERE productID = :givenProductID AND storageID = :givenStorageID";
+
     
     private $selStmt;
 
@@ -28,8 +31,10 @@ class InventoryModel {
         $this->addStmt = $this->dbConn->prepare(InventoryModel::ADD_QUERY);
         $this->findStm = $this->dbConn->prepare(InventoryModel::FIND_QUERY);
         $this->stoID_proID = $this->dbConn->prepare(InventoryModel::SELECT_FROM_stoID_proID);
-    }
+        $this->delStmt = $this->dbConn->prepare(InventoryModel::DELETE_QUERY);
+        $this->delSingleStmt = $this->dbConn->prepare(InventoryModel::DELETE_SINGLE_QUERY);
 
+    }
 
     public function getAllStorageInventory() {
         $this->selStmt->execute();
@@ -69,6 +74,14 @@ class InventoryModel {
     public function getProdFromStorageIDAndProductID($givenStorageID, $givenProductID){
         $this->stoID_proID->execute(array("givenStorageID" => $givenStorageID, "givenProductID" => $givenProductID));
         return $this->stoID_proID->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function deleteInventory($givenStorageID){
+        return $this->delStmt->execute(array("givenStorageID" => $givenStorageID));
+    }
+    
+    public function deleteSingleProduct($givenProductID, $givenStorageID){
+        return $this->delSingleStmt->execute(array("givenProductID" => $givenProductID, "givenStorageID" => $givenStorageID));  
     }
 }   
     

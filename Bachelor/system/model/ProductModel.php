@@ -12,6 +12,7 @@ class ProductModel {
     const SEARCH_QUERY = "SELECT * FROM " . ProductModel::TABLE . " WHERE productName LIKE :givenSearchWord";
     const INSERT_QUERY = "INSERT INTO " . ProductModel::TABLE . " (productName, BuyPrice, SalePrice, CategoryID, MediaID, ProductNumber, date, macAdresse) VALUES (:givenProductName, :givenBuyPrice, :givenSalePrice, :givenCategoryID, :givenMediaID, :givenProductNumber, :givenProductDate, :givenMacAdresse)";
     const DELETE_QUERY = "DELETE FROM " . ProductModel::TABLE . " WHERE productID = :removeProductID";
+
     
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;
@@ -52,5 +53,7 @@ class ProductModel {
         $this->selProductID->execute(array("givenProductID" => $givenProductID));
         return $this->selProductID->fetchAll(PDO::FETCH_ASSOC);
     } 
+    
+
     
 }
