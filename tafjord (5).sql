@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 30. Mar, 2017 01:21 a.m.
+-- Generation Time: 30. Mar, 2017 21:16 p.m.
 -- Server-versjon: 5.5.54
 -- PHP Version: 5.6.28
 
@@ -93,7 +93,7 @@ CREATE TABLE `macadresse` (
 CREATE TABLE `media` (
   `mediaID` int(11) UNSIGNED NOT NULL,
   `mediaName` varchar(255) NOT NULL,
-  `category` int(11) UNSIGNED NOT NULL
+  `categoryID` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -105,12 +105,10 @@ CREATE TABLE `media` (
 CREATE TABLE `products` (
   `productID` int(11) UNSIGNED NOT NULL,
   `productName` varchar(255) NOT NULL,
-  `buyPrice` decimal(25,2) DEFAULT NULL,
-  `salePrice` decimal(25,2) NOT NULL,
+  `price` decimal(25,2) DEFAULT NULL,
   `categoryID` int(11) UNSIGNED NOT NULL,
   `mediaID` int(11) UNSIGNED NOT NULL,
-  `productNumber` varchar(15) DEFAULT NULL,
-  `date` datetime NOT NULL,
+  `date` date NOT NULL,
   `macAdresse` varchar(8) DEFAULT 'FALSE'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -184,7 +182,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `userLevel` varchar(50) NOT NULL,
   `mediaID` int(11) UNSIGNED DEFAULT NULL,
-  `lastLogin` datetime DEFAULT NULL,
+  `lastLogin` date DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -238,7 +236,7 @@ ALTER TABLE `macadresse`
 ALTER TABLE `media`
   ADD PRIMARY KEY (`mediaID`),
   ADD UNIQUE KEY `mediaName` (`mediaName`),
-  ADD KEY `media_ibfk_2` (`category`);
+  ADD KEY `media_ibfk_2` (`categoryID`);
 
 --
 -- Indexes for table `products`
@@ -298,7 +296,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `categoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `categoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `checkout`
 --
@@ -308,7 +306,7 @@ ALTER TABLE `checkout`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 --
 -- AUTO_INCREMENT for table `logg`
 --
@@ -323,17 +321,17 @@ ALTER TABLE `macadresse`
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `mediaID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `mediaID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `restrictions`
 --
 ALTER TABLE `restrictions`
-  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 --
 -- AUTO_INCREMENT for table `returns`
 --
@@ -343,7 +341,7 @@ ALTER TABLE `returns`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `storage`
 --
@@ -390,7 +388,7 @@ ALTER TABLE `macadresse`
 -- Begrensninger for tabell `media`
 --
 ALTER TABLE `media`
-  ADD CONSTRAINT `media_ibfk_2` FOREIGN KEY (`category`) REFERENCES `categories` (`categoryID`);
+  ADD CONSTRAINT `media_ibfk_2` FOREIGN KEY (`categoryID`) REFERENCES `categories` (`categoryID`);
 
 --
 -- Begrensninger for tabell `products`

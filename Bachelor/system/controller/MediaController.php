@@ -41,7 +41,7 @@ class mediaController extends Controller {
     }
 
     private function uploadImage() {
-        $givenCaterogy = $_REQUEST["givenCaterogy"];
+        $givenCaterogyID = $_REQUEST["givenCategoryID"];
         $imageName = "";
         $target_dir = "image/";
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -81,7 +81,7 @@ class mediaController extends Controller {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                 echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
                 $imageName = basename($_FILES["fileToUpload"]["name"]);
-                $this->addMedia($imageName, $givenCaterogy);
+                $this->addMedia($imageName, $givenCaterogyID);
             } else {
                 echo "Sorry, there was an error uploading your file.";
             }           
@@ -121,14 +121,17 @@ class mediaController extends Controller {
         $mediaModel = $GLOBALS["mediaModel"];
         $mediaInfo = $mediaModel->getMediaByID($givenMediaID);
         
-        $data = json_encode(array("mediaInfo" => $mediaInfo));
+        $categoryModel = $GLOBALS["categoryModel"];
+        $categoryInfo = $categoryModel->getAllCategoryInfo();
+        
+        $data = json_encode(array("mediaInfo" => $mediaInfo, "category" => $categoryInfo));
         echo $data;   
     }
     
     private function editMedia(){
         $editMediaID = $_REQUEST["editMediaID"];
         $editMediaName = $_REQUEST["editMediaName"];
-        $editCategory = $_REQUEST["editCategory"];
+        $editCategoryID = $_REQUEST["editCategoryID"];
         
         $mediaModel = $GLOBALS["mediaModel"];
         $result = $mediaModel->getMediaByID($editMediaID);
@@ -136,7 +139,7 @@ class mediaController extends Controller {
         $oldName = $result[0]["mediaName"];
         rename("image/".$oldName."","image/".$editMediaName);
         
-        $edited = $mediaModel->editMedia($editMediaID, $editMediaName, $editCategory);
+        $edited = $mediaModel->editMedia($editMediaID, $editMediaName, $editCategoryID);
         
         if($edited){
             echo json_encode("success");

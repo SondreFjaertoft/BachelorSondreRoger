@@ -27,6 +27,8 @@ and open the template in the editor.
                         <form class="form-signin" id="login" action="?page=loginEngine" method="post">
                             <input type="text" class="form-control" placeholder="Brukernavn" name="givenUsername" required autofocus>
                             <input type="password" id="psw" autocomplete="off" class="form-control" placeholder="Passord" name="givenPassword" required>
+                            <input form="login" type="hidden" id="date" name="givenLastLogin">
+
                             <label class="checkbox">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="show-hide" value="">
                                 Vis passord
@@ -35,7 +37,7 @@ and open the template in the editor.
                                 Logg inn</button>
 
 
-
+                            
                         </form>
                     </div>
                     <a href="http://www.google.com" class="text-center new-account">I dont work at Tafjord wtf am i doing here?? </a>
@@ -51,3 +53,17 @@ and open the template in the editor.
         <script src="../Bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>
+
+
+<script>
+Date.prototype.yyyymmdd = function() {
+   var yyyy = this.getFullYear();
+   var mm = this.getMonth() < 9 ? "0" + (this.getMonth() + 1) : (this.getMonth() + 1); // getMonth() is zero-based
+   var dd  = this.getDate() < 10 ? "0" + this.getDate() : this.getDate();
+   return "".concat(yyyy).concat(mm).concat(dd);
+  };
+
+var d = new Date();
+document.getElementById("date").value  = d.yyyymmdd();
+
+</script>

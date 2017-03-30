@@ -16,7 +16,7 @@
                     <button onclick="UpdateMediaTable()" class="btn btn-default " type="button">Alle producter</button>
                 </div>
                 <div class="col-md-1 col-md-offset-15">
-                    <button class="btn btn-default" type="button" data-toggle="modal" data-target="#uploadImageModal">Last opp bilde</button>
+                    <button class="btn btn-default" onclick="getCategoryInfo()" type="button" data-toggle="modal" data-target="#uploadImageModal">Last opp bilde</button>
                 </div>
             </div>
         </form>  
@@ -77,7 +77,10 @@
                                         <input type="file" name="fileToUpload" required="required" id="fileToUpload" style="display: none;" onchange="$('#upload-file-info').html($(this).val());"></td>
                                     </label>
                                 <td id="bordernone"><span class="label label-default" id="upload-file-info"></span></td>
-                                <td id="bordernone"><input class="form-control" type="text" name="givenCaterogy" required="required"></td>
+                                <td>
+                                    <select name="givenCategoryID" id="selectCategoryID" required="required" class="form-control" autocomplete="off">
+                                    </select>
+                                </td>
                             </tr>
                         </table>
                         
@@ -110,6 +113,10 @@
                     
                 <!-- Her kommer bilde Template -->
                 
+                </div>
+                <br>
+                <div id="mediaCategory">
+                    
                 </div>
             </div>
             <div class="modal-footer">
@@ -194,9 +201,17 @@
     </tr>
     <tr>
     <th id="bordernone">Kategori: </th> 
-    <td id="bordernone"><input class="form-control" form="editMedia" required="required" type="text" name="editCategory" value="{{category}}" autocomplete="off"></td> 
+    <td>
+        <select form="editMedia" type="text" required="required" name="editCategoryID" class="form-control" autocomplete="off">
+        <option value="{{categoryID}}">{{categoryName}}</option>
+    {{/each}}    
+        {{#each category}}            
+        <option value="{{categoryID}}">{{categoryName}}</option>
+        {{/each}}
+    </select>                
+    </td>            
     </tr>
-{{/each}} 
+ 
 
 </script>
     
@@ -313,9 +328,12 @@ function showMedia(givenMediaID) {
                         
                     var $mediaTitle = $('#mediaTitle');
                     $mediaTitle.empty().append(item.mediaName);
+                    
+                    var mediaCategory = $('#mediaCategory');
+                    mediaCategory.empty().append('<p><b>Kategori: </b>' + item.categoryName + '</p>');
 
                     var $displayMediaInformation = $('#mediaInformationContainer');
-                    $displayMediaInformation.empty().append('<img class="img-responsive" src="image/' + item.mediaName + '"alt="Home">');
+                    $displayMediaInformation.empty().append('<img class="img-responsive" src="image/' + item.mediaName + '"alt="' + item.mediaName + '">');
                     
                      });
                 }
@@ -450,4 +468,29 @@ function showMedia(givenMediaID) {
         });
     });
 
+</script>
+
+<script>
+ function getCategoryInfo() {
+    var $displayCategoryInformation = $('#selectCategoryID');
+    $displayCategoryInformation.empty();
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getAllCategoryInfo',
+            dataType: 'json',
+            success: function (data) {
+                
+                $.each(data.categoryInfo, function(i, item) {
+
+                
+                $displayCategoryInformation.append('<option value="'+item.categoryID+'">'+item.categoryName+'</option>');
+                    
+                });                
+                
+                
+            }
+        });
+    });
+ }
 </script>
