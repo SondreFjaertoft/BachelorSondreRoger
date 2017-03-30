@@ -22,11 +22,11 @@ html,body
 {
     border: none;
 }
-#leftmargin2
+#handhover
 {
-    margin-left: 10px;
+    cursor: pointer;
+    
 }
-
 
 #redigerknapp
 {

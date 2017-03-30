@@ -11,7 +11,7 @@
         
         
         <form action="?page=editUserEngine" method="post" id="editUser">
-        <table class="table table-bordered" id="displayUserContainer">
+        <table class="table" id="displayUserContainer">
             
         </table>
             <div id="editSaved" style="display: none">
@@ -19,7 +19,7 @@
             </div>
             
                 <a href="javascript:history.back()" class="btn btn-danger pull-right">Tilbake</a>
-                <input class="btn btn-success" type="submit" value="Lagre" form="editUser" onclick="document.getElementById('editSaved').style.display = 'block';">  
+                <input href="?page=editUser" class="btn btn-success" type="submit" value="Lagre" form="editUser" onclick="document.getElementById('editSaved').style.display = 'block';">  
             
         </form>
       
@@ -106,12 +106,12 @@
     <select form="editUser" type="text" required="required" name="editMediaID" class="form-control" autocomplete="off">
         <option value="{{mediaID}}">{{mediaName}}</option>
     {{/each}}
-        {{#each media}}            
+        {{#each media}}        
         <option value="{{mediaID}}">{{mediaName}}</option>
         {{/each}}
     </select>
     {{#each user}}
-    <a type="button" data-toggle="modal" data-target="#uploadImageModal">Last opp nytt bilde</a>
+    <a id="handhover" type="button" data-toggle="modal" data-target="#uploadImageModal">Last opp nytt bilde</a>
     </td>
     </tr>
     <tr>
@@ -120,6 +120,8 @@
     </tr>
     
     {{/each}}
+        
+   
         
 </script>
         
