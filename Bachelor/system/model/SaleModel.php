@@ -13,6 +13,7 @@ class SaleModel {
     const SELECT_STORAGE = "SELECT * FROM " . SaleModel::TABLE . " WHERE storageID = :givenStorageID";
     const UPDATE_QUERY = "UPDATE " . SaleModel::TABLE . " SET productName = :editProductName, buyPrice = :editBuyPrice, salePrice = :editSalePrice, categoryID = :editCategoryID, mediaID = :editMediaID, productNumber = :editProductNumber WHERE productID = :editProductID" ;
     const INSERT_QUERY = "INSERT INTO " . SaleModel::TABLE . " (productID, date, customerNr, comment, userID, storageID, quantity) VALUES (:givenProductID, :givenDate, :givenCustomerNumber, :givenComment, :givenUserID, :givenStorageID, :givenQuantity)";
+    const SELECT_FROM_ID = "SELECT * FROM " . SaleModel::TABLE . " WHERE salesID = :givenSalesID";
     
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;
@@ -21,6 +22,7 @@ class SaleModel {
       $this->selStmt = $this->dbConn->prepare(SaleModel::SELECT_QUERY);
       $this->selStorage = $this->dbConn->prepare(SaleModel::SELECT_STORAGE);
       $this->mySales = $this->dbConn->prepare(SaleModel::SELECT_MY_SALES);
+      $this->selFromID = $this->dbConn->prepare(SaleModel::SELECT_FROM_ID);
     }
     
 
@@ -42,9 +44,14 @@ class SaleModel {
     }
     
     public function getMySales($givenUserID, $givenProductSearchWord){
-         $this->mySales->execute(array("givenUserID" =>  $givenUserID, "givenProductSearchWord" => $givenProductSearchWord));
+        $this->mySales->execute(array("givenUserID" =>  $givenUserID, "givenProductSearchWord" => $givenProductSearchWord));
         return $this->mySales->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    public function getSaleFromID($givenSalesID){
+        $this->selFromID->execute(array("givenSalesID" =>  $givenSalesID)); 
+        return $this->selFromID->fetchAll(PDO::FETCH_ASSOC);
+        
+    }
     
 }

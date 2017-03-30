@@ -44,7 +44,8 @@
     <th>Lager</th>     
     <th>Antall</th>
     <th>Kommentar</th>
-    <th>dato</th>    
+    <th>dato</th> 
+    <th></th>    
 </tr>        
 {{#each mySales}}  
 <tr>
@@ -53,7 +54,10 @@
     <td>{{storageName}}</td>
     <td>{{quantity}}</td>    
     <td>{{comment}}</td>    
-    <td>{{date}}</td>    
+    <td>{{date}}</td>   
+    <td><button id="redigerknapp" data-id="{{salesID}}" class="editSales" data-toggle="tooltip" title="rediger sales">
+    <span class="glyphicon glyphicon-edit" style="color: green"></span>
+    </button> </td>    
 <tr>
 {{/each}}
 </script>  
@@ -128,3 +132,25 @@
     });
 
 </script>
+
+<script>
+    $(function editMySales() {
+        $('#mySalesContainer').delegate('.editSales', 'click', function () {
+
+            var givenSalesID = $(this).attr('data-id');
+            alert(givenSalesID)
+            $.ajax({
+                type: 'POST',
+                url: '?page=getSalesFromID',
+                data: {givenSalesID: givenSalesID},
+                dataType: 'json',
+                success: function () {
+                    
+
+                }
+            });
+            return false;
+
+        });
+    });               
+</script>  

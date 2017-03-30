@@ -17,6 +17,8 @@ class SaleController extends Controller {
             $this->getMySalesPage();
         } else if ($page == "getMySales"){
             $this->getAllMySales();
+        } else if ($page == "getSalesFromID"){
+            $this->getSalesFromID();
         }
     }
 
@@ -94,7 +96,19 @@ class SaleController extends Controller {
         
         $data = json_encode(array("mySales" => $mySales));
         echo $data;
-
+    }
+    
+    private function getSalesFromID(){
+        $givenSalesID = $_REQUEST["givenSalesID"];
+        
+        $saleModel = $GLOBALS["saleModel"];
+        
+        $saleFromID = $saleModel->getSaleFromID($givenSalesID);
+        
+        $data = json_encode(array("saleFromID" => $saleFromID));
+        echo $data;
+        
+        
     }
 }
     
