@@ -77,7 +77,7 @@
                                         <input type="file" name="fileToUpload" required="required" id="fileToUpload" style="display: none;" onchange="$('#upload-file-info').html($(this).val());"></td>
                                     </label>
                                 <td id="bordernone"><span class="label label-default" id="upload-file-info"></span></td>
-                                <td>
+                                <td id="bordernone">
                                     <select name="givenCategoryID" id="selectCategoryID" required="required" class="form-control" autocomplete="off">
                                     </select>
                                 </td>

@@ -11,7 +11,7 @@
         
         
         <form action="?page=editUserEngine" method="post" id="editUser">
-        <table class="table" id="displayUserContainer">
+        <table class="table table-bordered" id="displayUserContainer">
             
         </table>
             <div id="editSaved" style="display: none">
@@ -29,17 +29,18 @@
 </div>
 
 <div class="modal fade" id="uploadImageModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Innholdet til Modalen -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Last opp bilde</h4>
-            </div>
-            <div class="modal-body">
-                
-                    <form action="?page=uploadImageShortcut2" id="uploadImage" method="post" enctype="multipart/form-data">
-                        <h4 class="text-center">Velg bilde for å laste opp</h4>
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Last opp bilde</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: center">
+
+                        <form action="?page=uploadImage" id="uploadImage" method="post" enctype="multipart/form-data">
+                            <h4 class="text-center">Velg bilde for å laste opp</h4>
                         <table class="table">
                             <tr>
                                 <th class="col-sm-4 col-md-4" id="bordernone">Velg en fil:</th>
@@ -55,24 +56,23 @@
                                         <input type="file" name="fileToUpload" required="required" id="fileToUpload" style="display: none;" onchange="$('#upload-file-info').html($(this).val());"></td>
                                     </label>
                                 <td id="bordernone"><span class="label label-default" id="upload-file-info"></span></td>
-                                <td id="bordernone"><input class="form-control" type="text" name="givenCaterogy" required="required"></td>
+                                <td id="bordernone">
+                                    <select name="givenCategoryID" id="selectCategoryID" required="required" class="form-control" autocomplete="off">
+                                    </select>
+                                </td>
                             </tr>
                         </table>
                         
-                        
-
-                    
-                
-            </div>
-            <div class="modal-footer">
+                    </div>
+                </div>
+                <div class="modal-footer">
                 <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?page=uploadImage">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-
+                </div>
+                </form>
             </div>
-            </form>
         </div>
-    </div>
-</div>
+    </div> 
 
 
 
@@ -113,7 +113,7 @@
             
     </select>
     {{#each user}}
-    <a id="handhover" type="button" data-toggle="modal" data-target="#uploadImageModal">Last opp nytt bilde</a>
+    <a id="handhover" type="button" onclick="getCategoryInfo()" data-toggle="modal" data-target="#uploadImageModal">Last opp nytt bilde</a>
     </td>
     </tr>
     <tr>
@@ -177,3 +177,27 @@
 
 </script>
 
+<script>
+ function getCategoryInfo() {
+    var $displayCategoryInformation = $('#selectCategoryID');
+    $displayCategoryInformation.empty();
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getAllCategoryInfo',
+            dataType: 'json',
+            success: function (data) {
+                
+                $.each(data.categoryInfo, function(i, item) {
+
+                
+                $displayCategoryInformation.append('<option value="'+item.categoryID+'">'+item.categoryName+'</option>');
+                    
+                });                
+                
+                
+            }
+        });
+    });
+ }
+</script>
