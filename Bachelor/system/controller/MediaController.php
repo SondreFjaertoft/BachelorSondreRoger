@@ -15,6 +15,9 @@ class mediaController extends Controller {
         } else if ($page == "uploadImageShortcut"){
             $this->uploadImage();
             $this->homePage();
+        } else if ($page == "uploadImageShortcut2"){
+            $this->uploadImage();
+            $this->editUserPage();
         } else if ($page == "getMediaByID"){
             $this->getMediaByID();
         } else if ($page == "editMedia"){
@@ -31,6 +34,10 @@ class mediaController extends Controller {
     
     private function homePage(){
         return $this->render("home");
+    }
+    
+    private function editUserPage(){
+        return $this->render("editUser");
     }
 
     private function uploadImage() {

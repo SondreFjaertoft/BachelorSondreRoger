@@ -362,7 +362,7 @@
     <tr>
     <th>Sist inlogget: </th>
     <td>{{lastLogin}}</td>
-    </tr> 
+    </tr>
     <tr>
     <td><img class="img-responsive" src="image/{{mediaName}}" alt="Home"></td>
     </tr>

@@ -70,7 +70,11 @@ class Router {
                 case "getUserByID" :   
                 case "getUserRestriction" :  
                 case "editUser" :
-                    return new UserController();     
+                case "editUserEngine" :
+                    return new UserController();
+                    
+                case "uploadImageShortcut2" :
+                    return new mediaController();
                         
             }
             
@@ -103,7 +107,7 @@ class Router {
                 case "uploadImageShortcut" :
                 case "getMediaByID" :  
                 case "editMedia" :    
-                case "deleteMedia" :    
+                case "deleteMedia" :
                     return new mediaController();
                     }
                 }

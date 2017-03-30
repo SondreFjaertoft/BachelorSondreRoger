@@ -22,6 +22,10 @@ html,body
 {
     border: none;
 }
+#leftmargin2
+{
+    margin-left: 10px;
+}
 
 
 #redigerknapp
