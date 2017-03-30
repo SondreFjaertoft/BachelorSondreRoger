@@ -15,15 +15,16 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-xs-6 col-md-8 text-center">
+                                <div class="col-xs-6 col-md-9 text-center">
                                     <button class="btn btn-success btn-lg" type="button" data-toggle="modal" data-target="#createUserModal"><span class="glyphicon glyphicon-user"></span> <br/>Opprett bruker</button>
                                     <button class="btn btn-warning btn-lg" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Opprett produkt</button>
                                     <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
                                     <button class="btn btn-info btn-lg" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Oprett kategori</button>
-                                    <button class="btn btn-info btn-lg" onclick="getCategoryInfo()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
-
+                                    <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
+                                    <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#varetellingModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varetelling</button>
+                                    <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#vareleveringModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varelevering</button>
                                 </div>
-                                <div class="col-xs-6 col-md-offset-1 col-md-3 text-center">
+                                <div class="col-xs-6 col-md-3 text-center">
                                     <a href="?page=editUser" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Rediger Profil</a>
                                     <a href="../" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-log-out"></span> <br/>Logg ut</a>
                                 </div>
@@ -206,6 +207,56 @@
         <!-- HER KOMMER INNHOLDET>   -->                
 
 
+        <!-- Tom modal til Roger -->
+        
+        <div class="modal fade" id="varetellingModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Innholdet til Modalen -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Tom modal til Roger</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tom modal til Roger -->
+        
+        
+        <div class="modal fade" id="vareleveringModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Innholdet til Modalen -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Tom modal til Roger</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
         <!-- Opprett bruker modal -->
 
 
