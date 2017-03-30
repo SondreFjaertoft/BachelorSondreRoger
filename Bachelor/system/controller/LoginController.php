@@ -21,8 +21,12 @@ class LoginController extends Controller {
         
         $givenUsername = $_REQUEST["givenUsername"];
         $givenPassword = $_REQUEST["givenPassword"];
+        $givenLastLogin = $_REQUEST["givenLastLogin"]; 
+        
 
         $userModel = $GLOBALS["userModel"];
+        $userModel->updateLastLogin($givenLastLogin, $givenUsername);
+        
         $Users = $userModel->getAllUserInfo();
 
         foreach ($Users as $User) {

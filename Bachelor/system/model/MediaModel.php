@@ -8,7 +8,7 @@ class MediaModel {
     
     const SEARCH_QUERY = "SELECT * FROM " . MediaModel::TABLE . " WHERE mediaName LIKE :givenSearchWord";
     const INSERT_QUERY = "INSERT INTO " . MediaModel::TABLE . " (mediaName, categoryID) VALUES (:givenFileName, :givenCaterogy)";
-    const ID_QUERY = "SELECT * FROM " . MediaModel::TABLE . " WHERE mediaID LIKE :givenMediaID";
+    const ID_QUERY = "SELECT * FROM " . MediaModel::TABLE . " INNER JOIN categories ON media.categoryID = categories.categoryID WHERE mediaID LIKE :givenMediaID";
     const UPDATE_QUERY = "UPDATE " . MediaModel::TABLE . " SET mediaName = :editMediaName, categoryID = :editCategory WHERE mediaID = :editMediaID"; 
     const DELETE_QUERY = "DELETE FROM " . MediaModel::TABLE . " WHERE mediaID = :deleteMediaID";
     const SELECT_QUERY = "SELECT * FROM " . MediaModel::TABLE;

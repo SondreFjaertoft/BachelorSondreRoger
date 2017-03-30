@@ -11,6 +11,7 @@ class UserModel {
     const SEARCH_QUERY = "SELECT * FROM " . UserModel::TABLE . " WHERE name LIKE :givenSearchWord OR username LIKE :givenSearchWord";
     const INSERT_QUERY = "INSERT INTO " . UserModel::TABLE . " (name, username, password, userLevel, email, mediaID) VALUES (:givenName, :givenUsername, :givenPassword, :givenUserLevel, :givenEmail, :givenMediaID)";
     const DELETE_QUERY = "DELETE FROM " . UserModel::TABLE . " WHERE userID = :removeUserID";
+    const UPDATE_LOGINDATE = "UPDATE " . UserModel::TABLE . " SET lastLogin = :givenLastLogin WHERE username = :givenUsername";
     const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
     const ACTIVATE_CONS = "SET FOREIGN_KEY_CHECKS=1;";
 
@@ -31,6 +32,7 @@ class UserModel {
         $this->selUserID = $this->dbConn->prepare(UserModel::SELECT_QUERY_USERID);
         $this->disabCons = $this->dbConn->prepare(UserModel::DISABLE_CONS);
         $this->actCons = $this->dbConn->prepare(UserModel::ACTIVATE_CONS);
+        $this->lastLogin = $this->dbConn->prepare(UserModel::UPDATE_LOGINDATE);
     }
 
     public function getSearchResult($givenSearchWord) {
@@ -64,6 +66,10 @@ class UserModel {
        $this->disabCons->execute();
        $this->delStmt->execute(array("removeUserID" => $removeUserID));
        $this->actCons->execute();
+    }
+    
+    public function updateLastLogin($givenLastLogin, $givenUsername){
+        return $this->lastLogin->execute(array("givenLastLogin" => $givenLastLogin, "givenUsername" => $givenUsername));
     }
 
 }
