@@ -19,7 +19,7 @@
             </div>
             
                 <a href="javascript:history.back()" class="btn btn-danger pull-right">Tilbake</a>
-                <input href="?page=editUser" class="btn btn-success" type="submit" value="Lagre" form="editUser" onclick="document.getElementById('editSaved').style.display = 'block';">  
+                <input class="btn btn-success" type="submit" value="Lagre" form="editUser" onclick="document.getElementById('editSaved').style.display = 'block'; javascript:history.go(0)">  
             
         </form>
       
@@ -108,7 +108,9 @@
     {{/each}}
         {{#each media}}        
         <option value="{{mediaID}}">{{mediaName}}</option>
+                
         {{/each}}
+            
     </select>
     {{#each user}}
     <a id="handhover" type="button" data-toggle="modal" data-target="#uploadImageModal">Last opp nytt bilde</a>
