@@ -44,4 +44,5 @@ class SaleModel {
         return $this->mySales->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    
 }

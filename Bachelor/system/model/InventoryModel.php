@@ -17,6 +17,7 @@ class InventoryModel {
     const SELECT_FROM_stoID_proID = "SELECT products.productID, productName, quantity FROM products INNER JOIN " . InventoryModel::TABLE . " on products.productID LIKE inventory.productID WHERE storageID = :givenStorageID AND products.productID = :givenProductID";
     const DELETE_QUERY = "DELETE FROM " . InventoryModel::TABLE . " WHERE storageID = :givenStorageID";
     const DELETE_SINGLE_QUERY = "DELETE FROM " . InventoryModel::TABLE . " WHERE productID = :givenProductID AND storageID = :givenStorageID";
+    const UPDATE_QUERY = "UPDATE " . InventoryModel::TABLE . " SET quantity = :givenQuantity WHERE storageID = :givenStorageID AND productID = :givenProductID"; 
 
     
     private $selStmt;
@@ -33,7 +34,7 @@ class InventoryModel {
         $this->stoID_proID = $this->dbConn->prepare(InventoryModel::SELECT_FROM_stoID_proID);
         $this->delStmt = $this->dbConn->prepare(InventoryModel::DELETE_QUERY);
         $this->delSingleStmt = $this->dbConn->prepare(InventoryModel::DELETE_SINGLE_QUERY);
-
+        $this->editStmt = $this->dbConn->prepare(InventoryModel::UPDATE_QUERY);
     }
 
     public function getAllStorageInventory() {
@@ -82,6 +83,10 @@ class InventoryModel {
     
     public function deleteSingleProduct($givenProductID, $givenStorageID){
         return $this->delSingleStmt->execute(array("givenProductID" => $givenProductID, "givenStorageID" => $givenStorageID));  
+    }
+    
+    public function updateInventory($givenStorageID, $givenProductID, $givenQuantity){
+       return $this->editStmt->execute(array("givenStorageID" => $givenStorageID, "givenProductID" => $givenProductID, "givenQuantity" => $givenQuantity)); 
     }
 }   
     

@@ -71,12 +71,8 @@
                                 <td id="bordernone"><input class="form-control" type="text" required="required" name="givenProductName" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
-                                <th>Kjøpspris:</th>
-                                <td><input class="form-control"class="form-control" type="int" required="required" name="givenBuyPrice" value="" autocomplete="off"></td>
-                            </tr>
-                            <tr>
-                                <th>Salgspris:</th>
-                                <td><input class="form-control" type="int" required="required" name="givenSalePrice" value="" autocomplete="off"></td>
+                                <th>Pris:</th>
+                                <td><input class="form-control" type="int" required="required" name="givenPrice" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Kategori:</th>
@@ -85,10 +81,6 @@
                             <tr>
                                 <th>Media:</th>
                                 <td><input class="form-control" type="int" required="required" name="givenMediaID" value="" autocomplete="off"></td>
-                            </tr>
-                            <tr>
-                                <th>Produktnummer:</th>
-                                <td><input class="form-control" type="text" required="required" name="givenProductNumber" value="" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>MacAdresse:</th>
@@ -224,12 +216,8 @@
     <td id="bordernone"><input class="form-control" form="editProduct" type="text" required="required" name="editProductName" value="{{productName}}" autocomplete="off"></td>
     </tr>
     <tr>
-    <th>Kjøpspris: </th>
-    <td><input class="form-control" form="editProduct" type="int" required="required" name="editBuyPrice" value="{{buyPrice}}" autocomplete="off"></td>
-    </tr>
-    <tr>
-    <th>Salgspris:</th>
-    <td><input class="form-control" form="editProduct" type="int" required="required" name="editSalePrice" value="{{salePrice}}" autocomplete="off"></td>
+    <th>Pris: </th>
+    <td><input class="form-control" form="editProduct" type="int" required="required" name="editPrice" value="{{price}}" autocomplete="off"></td>
     </tr>
     <tr>
     <th>Kategori:</th>
@@ -238,11 +226,7 @@
     <tr>
     <th>Media: </th>
     <td><input class="form-control" form="editProduct" type="int" required="required" name="editMediaID" value="{{mediaID}}" autocomplete="off"></td>
-    </tr>
-    <tr>
-    <th>Produktnummer:</th>
-    <td><input class="form-control" form="editProduct" type="text" required="required" name="editProductNumber" value="{{productNumber}}" autocomplete="off"></td>
-     </tr>   
+    </tr>  
 {{/each}} 
 </script>  
 
@@ -258,25 +242,16 @@
     <td>{{productName}}</td>
 </tr>
 <tr>
-    <th>Kjøpspris: </th>
-    <td>{{buyPrice}}</td>
-</tr>
-<tr>
-    <th>Salgspris: </th>
-    <td>{{salePrice}}</td>
+    <th>Pris: </th>
+    <td>{{price}}</td>
 </tr>
 <tr>
     <th>Kategori: </th>
-    <td>{{categoryID}}</td>
+    <td>{{categoryName}}</td>
 </tr>
 <tr>
-    <th>Media: </th>
-    <td>{{mediaID}}</td>
-</tr>
-<tr>
-    <th>Produktnummer: </th>
-    <td>{{productNumber}}</td>
-</tr>    
+    <td><img class="img-responsive" src="image/{{mediaName}}" alt="{{mediaName}}"></td>
+</tr>   
 {{/each}}                                                  
 </script>
 

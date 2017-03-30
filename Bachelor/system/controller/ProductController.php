@@ -32,11 +32,9 @@ class ProductController extends Controller {
 
     private function addProductEngine() {
         $givenProductName = $_REQUEST["givenProductName"];
-        $givenBuyPrice = $_REQUEST["givenBuyPrice"];
-        $givenSalePrice = $_REQUEST["givenSalePrice"];
+        $givenPrice = $_REQUEST["givenPrice"];
         $givenCategoryID = $_REQUEST["givenCategoryID"];
         $givenMediaID = $_REQUEST["givenMediaID"];
-        $givenProductNumber = $_REQUEST["givenProductNumber"];
         $givenProductDate = "2017-02-21 00:00:00";
         if (isset($_POST['givenMacAdresse'])) {
         $givenMacAdresse = $_REQUEST["givenMacAdresse"];
@@ -45,22 +43,20 @@ class ProductController extends Controller {
         }
         
         $productCreationInfo = $GLOBALS["productModel"];
-        $productCreationInfo->addProduct($givenProductName, $givenBuyPrice, $givenSalePrice, $givenCategoryID, $givenMediaID, $givenProductNumber, $givenProductDate, $givenMacAdresse);
+        $productCreationInfo->addProduct($givenProductName, $givenPrice, $givenCategoryID, $givenMediaID, $givenProductDate, $givenMacAdresse);
 
         echo json_encode("success");
     }
 
     private function editProductEngine() {
         $editProductName = $_REQUEST["editProductName"];
-        $editBuyPrice = $_REQUEST["editBuyPrice"];
-        $editSalePrice = $_REQUEST["editSalePrice"];
+        $editPrice = $_REQUEST["editPrice"];
         $editCategoryID = $_REQUEST["editCategoryID"];
         $editMediaID = $_REQUEST["editMediaID"];
-        $editProductNumber = $_REQUEST["editProductNumber"];
         $editProductID = $_REQUEST["editProductID"];
 
         $productEditInfo = $GLOBALS["productModel"];
-        $productEditInfo->editProduct($editProductName, $editBuyPrice, $editSalePrice, $editCategoryID, $editMediaID, $editProductNumber, $editProductID);
+        $productEditInfo->editProduct($editProductName, $editProductID, $editPrice, $editCategoryID, $editMediaID);
 
         echo json_encode("success");
     }
@@ -96,7 +92,13 @@ class ProductController extends Controller {
         $productInfo = $GLOBALS["productModel"];
         $productModel = $productInfo->getAllProductInfoFromID($givenProductID);
 
-        $data = json_encode(array("product" => $productModel));
+        $mediaModel = $GLOBALS["mediaModel"];
+        $mediaInfo = $mediaModel->getAllMediaInfo();
+        
+        $categoryModel = $GLOBALS["categoryModel"];
+        $categoryInfo = $categoryModel->getAllCategoryInfo();
+        
+        $data = json_encode(array("product" => $productModel, "media" => $mediaInfo, "category" => $categoryInfo));
         echo $data;
     }
     

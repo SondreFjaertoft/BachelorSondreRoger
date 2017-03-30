@@ -6,11 +6,11 @@ class ProductModel {
     
     const TABLE = "products";
     
-    const SELECT_QUERY_PRODUCTID = "SELECT * FROM " . ProductModel::TABLE . " WHERE productID = :givenProductID";
+    const SELECT_QUERY_PRODUCTID = "SELECT productID, productName, price, products.categoryID, categories.categoryName, products.mediaID, date, macAdresse, media.mediaName FROM " . ProductModel::TABLE . " INNER JOIN media ON products.mediaID = media.mediaID INNER JOIN categories ON products.categoryID = categories.categoryID WHERE productID = :givenProductID";
     const SELECT_QUERY = "SELECT * FROM " . ProductModel::TABLE;
-    const UPDATE_QUERY = "UPDATE " . ProductModel::TABLE . " SET productName = :editProductName, buyPrice = :editBuyPrice, salePrice = :editSalePrice, categoryID = :editCategoryID, mediaID = :editMediaID, productNumber = :editProductNumber WHERE productID = :editProductID" ;
+    const UPDATE_QUERY = "UPDATE " . ProductModel::TABLE . " SET productName = :editProductName, price = :editPrice, categoryID = :editCategoryID, mediaID = :editMediaID WHERE productID = :editProductID" ;
     const SEARCH_QUERY = "SELECT * FROM " . ProductModel::TABLE . " WHERE productName LIKE :givenSearchWord";
-    const INSERT_QUERY = "INSERT INTO " . ProductModel::TABLE . " (productName, BuyPrice, SalePrice, CategoryID, MediaID, ProductNumber, date, macAdresse) VALUES (:givenProductName, :givenBuyPrice, :givenSalePrice, :givenCategoryID, :givenMediaID, :givenProductNumber, :givenProductDate, :givenMacAdresse)";
+    const INSERT_QUERY = "INSERT INTO " . ProductModel::TABLE . " (productName, price, CategoryID, MediaID, date, macAdresse) VALUES (:givenProductName, :givenPrice, :givenCategoryID, :givenMediaID, :givenProductDate, :givenMacAdresse)";
     const DELETE_QUERY = "DELETE FROM " . ProductModel::TABLE . " WHERE productID = :removeProductID";
 
     
@@ -36,12 +36,12 @@ class ProductModel {
         return $this->selStmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    public function editProduct($editProductName, $editBuyPrice, $editSalePrice, $editCategoryID, $editMediaID, $editProductNumber, $editProductID) {
-       return $this->editStmt->execute(array("editProductName" =>  $editProductName, "editBuyPrice" => $editBuyPrice, "editSalePrice" => $editSalePrice, "editCategoryID" => $editCategoryID, "editMediaID" => $editMediaID, "editProductNumber" => $editProductNumber, "editProductID" => $editProductID)); 
+    public function editProduct($editProductName, $editProductID, $editPrice, $editCategoryID, $editMediaID) {
+       return $this->editStmt->execute(array("editProductName" =>  $editProductName, "editProductID" => $editProductID, "editPrice" => $editPrice, "editCategoryID" => $editCategoryID, "editMediaID" => $editMediaID)); 
     }
     
-    public function addProduct($givenProductName, $givenBuyPrice, $givenSalePrice, $givenCategoryID, $givenMediaID, $givenProductNumber, $givenProductDate, $givenMacAdresse) {
-        return $this->addStmt->execute(array("givenProductName" =>  $givenProductName, "givenBuyPrice" => $givenBuyPrice, "givenSalePrice" => $givenSalePrice, "givenCategoryID" => $givenCategoryID, "givenMediaID" => $givenMediaID, "givenProductNumber" => $givenProductNumber, "givenProductDate" => $givenProductDate, "givenMacAdresse" => $givenMacAdresse));
+    public function addProduct($givenProductName, $givenPrice, $givenCategoryID, $givenMediaID, $givenProductDate, $givenMacAdresse) {
+        return $this->addStmt->execute(array("givenProductName" =>  $givenProductName, "givenPrice" => $givenPrice, "givenCategoryID" => $givenCategoryID, "givenMediaID" => $givenMediaID, "givenProductDate" => $givenProductDate, "givenMacAdresse" => $givenMacAdresse));
     }
     
     public function removeProduct($removeProductID)

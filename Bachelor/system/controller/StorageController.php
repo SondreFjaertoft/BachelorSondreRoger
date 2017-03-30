@@ -25,7 +25,9 @@ class StorageController extends Controller {
             $this->chartProduct();
         } else if ($page == "deleteSingleProd"){
             $this->deleteSingleProd();
-        }
+        } else if ($page == "stocktacking"){
+            $this->stocktacking();
+        } 
     }
 
     
@@ -36,8 +38,8 @@ class StorageController extends Controller {
     private function storageCreationEngine() {
         $givenStorageName = $_REQUEST["givenStorageName"];
 
-        $userCreationInfo = $GLOBALS["storageModel"];
-        $userCreationInfo->addStorage($givenStorageName);
+        $storageCreationInfo = $GLOBALS["storageModel"];
+        $storageCreationInfo->addStorage($givenStorageName);
 
         echo json_encode("success");
     }
@@ -130,5 +132,18 @@ class StorageController extends Controller {
         if($deleted){
         echo json_encode("success");
         }
+    }
+    
+    private function stocktacking(){
+        $givenStorageID = $_REQUEST["givenStorageID"];
+        $givenProductIDArray = $_REQUEST["givenProductArray"];
+        $givenQuantityArray = $_REQUEST["givenQuantityArray"];
+        
+        for ($i = 0; $i < sizeof($givenProductIDArray); $i++){
+            $inventoryInfo = $GLOBALS["inventoryModel"];
+            $inventoryInfo->updateInventory($givenStorageID, $givenProductIDArray[$i], $givenQuantityArray[$i]);
+        }
+        
+        echo json_encode("success");
     }
 }
