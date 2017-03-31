@@ -46,13 +46,16 @@ class Router {
                 case "getProdQuantity" :   
                 case "mySales" :   
                 case "getMySales"   : 
-                case "getSalesFromID" :    
+                case "getSalesFromID" :   
+                case "editMySale" :    
                     return new SaleController();
                     
                 case "return" :
                 case "myReturns" :
                 case "getMyReturns" :
-                case "returnProduct" :    
+                case "returnProduct" :
+                case "getReturnsFromID" :    
+                case "editMyReturn" :
                     return new ReturnController();
                     
                 case "getAllProductInfo" :

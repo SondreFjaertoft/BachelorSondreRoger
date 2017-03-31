@@ -11,7 +11,7 @@ class SaleModel {
             " INNER JOIN products ON sales.productID = products.productID INNER JOIN storage ON sales.storageID = storage.storageID WHERE customerNr LIKE :givenProductSearchWord OR comment LIKE "
             . ":givenProductSearchWord OR productName LIKE :givenProductSearchWord OR storageName LIKE :givenProductSearchWord AND userID = :givenUserID ORDER BY date DESC";
     const SELECT_STORAGE = "SELECT * FROM " . SaleModel::TABLE . " WHERE storageID = :givenStorageID";
-    const UPDATE_QUERY = "UPDATE " . SaleModel::TABLE . " SET productName = :editProductName, buyPrice = :editBuyPrice, salePrice = :editSalePrice, categoryID = :editCategoryID, mediaID = :editMediaID, productNumber = :editProductNumber WHERE productID = :editProductID" ;
+    const UPDATE_QUERY = "UPDATE " . SaleModel::TABLE . " SET customerNr = :editCustomerNr, comment = :editComment  WHERE salesID = :editSaleID" ;
     const INSERT_QUERY = "INSERT INTO " . SaleModel::TABLE . " (productID, date, customerNr, comment, userID, storageID, quantity) VALUES (:givenProductID, :givenDate, :givenCustomerNumber, :givenComment, :givenUserID, :givenStorageID, :givenQuantity)";
     const SELECT_FROM_ID = "SELECT * FROM " . SaleModel::TABLE . " WHERE salesID = :givenSalesID";
     
@@ -35,8 +35,8 @@ class SaleModel {
         return $this->selStorage->execute(array("givenStorageID" =>  $givenStorageID)); 
     }
     
-    public function editSale($editProductName, $editBuyPrice, $editSalePrice, $editCategoryID, $editMediaID, $editProductNumber, $editProductID) {
-       return $this->editStmt->execute(array("editProductName" =>  $editProductName, "editBuyPrice" => $editBuyPrice, "editSalePrice" => $editSalePrice, "editCategoryID" => $editCategoryID, "editMediaID" => $editMediaID, "editProductNumber" => $editProductNumber, "editProductID" => $editProductID)); 
+    public function editMySale($editSaleID, $editCustomerNr, $editComment) {
+       return $this->editStmt->execute(array("editSaleID" =>  $editSaleID, "editCustomerNr" => $editCustomerNr, "editComment" => $editComment)); 
     }
     
     public function newSale($givenStorageID, $givenCustomerNumber, $givenProductID, $givenQuantity, $givenUserID, $givenComment, $givenDate) {
@@ -50,8 +50,7 @@ class SaleModel {
     
     public function getSaleFromID($givenSalesID){
         $this->selFromID->execute(array("givenSalesID" =>  $givenSalesID)); 
-        return $this->selFromID->fetchAll(PDO::FETCH_ASSOC);
-        
+        return $this->selFromID->fetchAll(PDO::FETCH_ASSOC);  
     }
     
 }

@@ -9,12 +9,16 @@ class ReturnModel {
             " INNER JOIN products ON returns.productID = products.productID INNER JOIN storage ON returns.storageID = storage.storageID WHERE customerNr LIKE :givenProductSearchWord OR comment LIKE "
             . ":givenProductSearchWord OR productName LIKE :givenProductSearchWord OR storageName LIKE :givenProductSearchWord AND userID = :givenUserID ORDER BY date DESC";
     const INSERT_QUERY = "INSERT INTO " . ReturnModel::TABLE . " (productID, date, customerNr, comment, userID, storageID, quantity) VALUES (:givenProductID, :givenDate, :givenCustomerNumber, :givenComment, :givenUserID, :givenStorageID, :givenQuantity)";
+    const SELECT_FROM_ID = "SELECT * FROM " . ReturnModel::TABLE . " WHERE returnID = :givenReturnID";
+    const UPDATE_QUERY = "UPDATE " . ReturnModel::TABLE . " SET customerNr = :editCustomerNr, comment = :editComment  WHERE returnID = :editReturnID" ;
    
     
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;
       $this->selStmt = $this->dbConn->prepare(ReturnModel::SELECT_QUERY);
       $this->addStmt = $this->dbConn->prepare(ReturnModel::INSERT_QUERY);
+      $this->selFromID = $this->dbConn->prepare(ReturnModel::SELECT_FROM_ID);
+      $this->editStmt = $this->dbConn->prepare(ReturnModel::UPDATE_QUERY);  
     }
     
     public function getAllReturnInfo($givenUserID, $givenProductSearchWord){
@@ -25,7 +29,16 @@ class ReturnModel {
     }
     
     public function newReturn($givenStorageID, $givenCustomerNumber, $givenProductID, $givenQuantity, $givenUserID, $givenComment, $givenDate) {
-    return $this->addStmt->execute(array("givenStorageID" =>  $givenStorageID, "givenCustomerNumber" => $givenCustomerNumber, "givenProductID" => $givenProductID, "givenQuantity" => $givenQuantity, "givenUserID" => $givenUserID, "givenComment" => $givenComment, "givenDate" => $givenDate));
+        return $this->addStmt->execute(array("givenStorageID" =>  $givenStorageID, "givenCustomerNumber" => $givenCustomerNumber, "givenProductID" => $givenProductID, "givenQuantity" => $givenQuantity, "givenUserID" => $givenUserID, "givenComment" => $givenComment, "givenDate" => $givenDate));
+    }
+    
+    public function getReturnFromID($givenReturnID){
+        $this->selFromID->execute(array("givenReturnID" =>  $givenReturnID)); 
+        return $this->selFromID->fetchAll(PDO::FETCH_ASSOC);  
+    }
+    
+    public function editMyReturn($editReturnID, $editCustomerNr, $editComment) {
+       return $this->editStmt->execute(array("editReturnID" =>  $editReturnID, "editCustomerNr" => $editCustomerNr, "editComment" => $editComment)); 
     }
 }
 

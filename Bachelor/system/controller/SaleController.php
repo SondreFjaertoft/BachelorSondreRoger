@@ -19,6 +19,8 @@ class SaleController extends Controller {
             $this->getAllMySales();
         } else if ($page == "getSalesFromID"){
             $this->getSalesFromID();
+        } else if ($page == "editMySale"){
+            $this->editMySale();
         }
     }
 
@@ -105,10 +107,21 @@ class SaleController extends Controller {
         
         $saleFromID = $saleModel->getSaleFromID($givenSalesID);
         
-        $data = json_encode(array("saleFromID" => $saleFromID));
+        $data = json_encode(array("sale" => $saleFromID));
         echo $data;
+    }
+    
+    private function editMySale(){
+        $editSaleID = $_REQUEST["editSaleID"];
+        $editCustomerNr = $_REQUEST["editCustomerNr"];
+        $editComment = $_REQUEST["editComment"];
         
-        
+        $saleModel = $GLOBALS["saleModel"];
+        $edited = $saleModel->editMySale($editSaleID, $editCustomerNr, $editComment);        
+           
+        if($edited){
+            echo json_encode("success");
+        }
     }
 }
     

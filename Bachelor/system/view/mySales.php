@@ -36,6 +36,51 @@
         </div>
     </div>    
 </div>    
+    
+    
+<div class="modal fade" id="editSaleModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Innholdet til Modalen -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Salgsinformasjon</h4>
+            </div>
+            <form action="?page=editMySale" method="post" id="editSale"> 
+            
+            <div class="modal-body">
+                <table class="table" id="editSaleContainer">
+                    
+
+                <!-- Innhold fra Handlebars Template -->
+                    
+                </table>
+            </div>
+            
+            <div class="modal-footer">
+                <input class="btn btn-success" form="editSale" type="submit" value="Lagre">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>     
+    
+    
+<!-- Display editSale-->                    
+<script id="editSaleTemplate" type="text/x-handlebars-template">
+    {{#each sale}}    
+    <input form="editSale" type="hidden" name="editSaleID" value="{{salesID}}">
+    <tr>
+    <th id="bordernone">Kundenr: </th> 
+    <td id="bordernone"><input class="form-control" form="editSale" required="required" type="text" name="editCustomerNr" value="{{customerNr}}" autocomplete="off"></td> 
+    </tr>
+    <tr>
+    <th id="bordernone">Kommentar: </th> 
+    <td id="bordernone"><input class="form-control" form="editSale" required="required" type="text" name="editComment" value="{{comment}}" autocomplete="off"></td> 
+    </tr>
+    {{/each}}            
+</script> 
 
 <script id="mySalesTemplate" type="text/x-handlebars-template">        
 <tr>
@@ -138,14 +183,16 @@
         $('#mySalesContainer').delegate('.editSales', 'click', function () {
 
             var givenSalesID = $(this).attr('data-id');
-            alert(givenSalesID)
+
             $.ajax({
                 type: 'POST',
                 url: '?page=getSalesFromID',
                 data: {givenSalesID: givenSalesID},
                 dataType: 'json',
-                success: function () {
-                    
+                success: function (data) {
+                    editSaleTemplate(data);
+                   
+                   $('#editSaleModal').modal('show'); 
 
                 }
             });
@@ -154,3 +201,38 @@
         });
     });               
 </script>  
+
+<!-- Display edit sale Template -->
+<script>
+    function editSaleTemplate(data) {
+        var rawTemplate = document.getElementById("editSaleTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var editSaleGeneratedHTML = compiledTemplate(data);
+        
+        var saleContainer = document.getElementById("editSaleContainer");
+        saleContainer.innerHTML = editSaleGeneratedHTML;
+    }
+</script>
+
+<!-- POST results from editing, and updating the table-->
+<script>
+    $(function POSTeditSaleInfo() {
+
+        $('#editSale').submit(function () {
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function () {
+                    $('#editSaleModal').modal('hide');
+                    UpdateSalesTable();
+                }
+            });
+            return false;
+        });
+    });
+
+</script>
