@@ -33,7 +33,7 @@ if (isset($GLOBALS["errorMessage"])) {
                                     <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
                                     <button class="btn btn-info btn-lg" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Oprett kategori</button>
                                     <button class="btn btn-info btn-lg" onclick="getTheFuckingCategory()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
-                                    <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#varetellingModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varetelling</button>
+                                    <button class="btn btn-info btn-lg" onclick="getStorageInfo()" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varetelling</button>
                                     <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#vareleveringModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varelevering</button>
                                 
                                 </div>
@@ -193,29 +193,6 @@ if (isset($GLOBALS["errorMessage"])) {
 
         <!-- Tom modal til Roger -->
 
-        <div class="modal fade" id="varetellingModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Innholdet til Modalen -->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Tom modal til Roger</h4>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-
-                    </div>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-
-        <!-- Tom modal til Roger -->
-
-
         <div class="modal fade" id="vareleveringModal" role="dialog">
             <div class="modal-dialog">
                 <!-- Innholdet til Modalen -->
@@ -235,10 +212,6 @@ if (isset($GLOBALS["errorMessage"])) {
                 </div>
             </div>
         </div>
-
-
-
-
 
 
         <!-- Opprett bruker modal -->
@@ -433,7 +406,7 @@ if (isset($GLOBALS["errorMessage"])) {
                                     </label>
                                 <td id="bordernone"><span class="label label-default" id="upload-file-info"></span></td>
                                 <td id="bordernone">
-                                    <select name="givenCategoryID" id="selectCategoryID" required="required" class="form-control" autocomplete="off">
+                                    <select name="givenCategoryID" id="selectCategory" required="required" class="form-control" autocomplete="off">
                                     </select>
                                 </td>
                             </tr>
@@ -486,6 +459,134 @@ if (isset($GLOBALS["errorMessage"])) {
                     </div>
                 </div>
             </div>     
+            
+        <!-- Tom modal til Roger -->
+
+
+        <div class="modal fade" id="stockTakingModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Innholdet til Modalen -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Varetelling</h4>
+                    </div>
+                    <form action="?page=stocktacking" method="post" id="stocktaking">
+                    
+                    <div class="modal-body">
+                        <select name="storageID" form="stocktaking" id="selectStorageContainer" class="form-control">
+                            
+                        </select>
+                        <br>
+                        <table class="table" id="stockTakingContainer">
+                            
+                        </table>
+
+                    </div>
+                    <div class="modal-footer">
+                        <input form="stocktaking" class="btn btn-success" type="submit" value="Oppdater">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                    </div>
+                    </form>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+            
+<script id="stockTakingTemplate" type="text/x-handlebars-template">
+<input form="stocktaking" name="givenStorageID" type="hidden" value="{{storageProduct.0.storageID}}">
+{{#each storageProduct}}
+    
+    <tr>
+       <th id="bordernone">{{productName}}:</th>    
+           <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
+           <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}">                       
+       <td id="bordernone"><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="{{quantity}}" autocomplete="off"></td>
+    </tr>
+    
+    
+  {{/each}} 
+</script>        
+            
+<!-- Display storages in drop down meny Template -->
+<script id="selectStorageTemplate" type="text/x-handlebars-template">
+ 
+<option data-id="0" value="0" class="stockTaking">Velg et lager</option>
+{{#each storageInfo}}    
+<tr>
+    <option data-id="{{storageID}}" value="{{storageID}}" class="stockTaking">{{storageName}}</option>
+</tr>   
+{{/each}}
+        
+</script>        
+
+<!-- Get storage information with user restriction -->
+<script>
+function getStorageInfo() {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getAllStorageInfo',
+            dataType: 'json',
+            success: function (data) {
+                selectStorageTemplate(data);
+            }
+        });
+    }
+</script>
+
+<!-- Display storages in drop down meny Template -->
+<script>
+    function selectStorageTemplate(data) {
+        
+        var rawTemplate = document.getElementById("selectStorageTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var selectStorageGeneratedHTML = compiledTemplate(data);
+
+        var storageContainer = document.getElementById("selectStorageContainer");
+        storageContainer.innerHTML = selectStorageGeneratedHTML;
+        
+
+    }
+</script>
+
+<!-- Get the selected storage, and POST this to retrive inventory-->
+
+<script>
+    var givenStorageID;
+    $(function POSTfromStorageModal() {
+        
+        $('#selectStorageContainer').on('change', function () {
+            givenStorageID = $(this).find("option:selected").data('id');
+         
+            if (givenStorageID > 0) {
+                $.ajax({
+                    type: 'POST',
+                    url: '?page=getStorageProduct',
+                    data: {givenStorageID: givenStorageID},
+                    dataType: 'json',
+                    success: function (data) {
+                        stockTakingTemplate(data);             
+                    }
+                });
+            } 
+           return false;
+
+        });
+    });
+</script>
+
+<!-- Display products in storage Template -->
+<script>
+    function stockTakingTemplate(data) {
+        var rawTemplate = document.getElementById("stockTakingTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var stockTakingGeneratedHTML = compiledTemplate(data);
+
+        var stockTaking = document.getElementById("stockTakingContainer");
+        stockTaking.innerHTML = stockTakingGeneratedHTML;
+    }
+</script>
 
 
             <!-- Create product -->
@@ -632,7 +733,7 @@ if (isset($GLOBALS["errorMessage"])) {
             </script>
 <script>
  function getCategoryInfo() {
-    var $displayCategoryInformation = $('#selectCategoryID');
+    var $displayCategoryInformation = $('#selectCategory');
     $displayCategoryInformation.empty();
     $(function () {
         $.ajax({
@@ -656,5 +757,26 @@ if (isset($GLOBALS["errorMessage"])) {
 </script>
 
 
+<!-- POST results from stocktaking, and updating the table-->
+<script>
+    $(function POSTeditStorageInfo() {
+
+        $('#stocktaking').submit(function () {
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function () {
+                    $('#stockTakingModal').modal('hide');
+                }
+            });
+            return false;
+        });
+    });
+
+</script>
 
 

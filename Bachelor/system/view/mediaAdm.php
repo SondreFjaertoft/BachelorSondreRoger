@@ -154,11 +154,12 @@ $test = $GLOBALS["errorMessage"];
             </div>
             <div class="modal-body">
                 <form action="?page=editMedia" method="post" id="editMedia">
-                <div id="editMediaContainer">
+                  
+                <table class="table" id="editMediaContainer">
                     
                 <!-- Her kommer bilde Template -->
                 
-                </div>
+               </table>
             </div>
             <div class="modal-footer">
                 <input class="btn btn-success" type="submit" value="Lagre" form="editMedia">

@@ -68,7 +68,7 @@ $test = $GLOBALS["errorMessage"];
                                     </label>
                                 <td id="bordernone"><span class="label label-default" id="upload-file-info"></span></td>
                                 <td id="bordernone">
-                                    <select name="givenCategoryID" id="selectCategoryID" required="required" class="form-control" autocomplete="off">
+                                    <select name="givenCategoryID" id="selectCategoryEdit" required="required" class="form-control" autocomplete="off">
                                     </select>
                                 </td>
                             </tr>
@@ -190,7 +190,7 @@ $test = $GLOBALS["errorMessage"];
 
 <script>
  function getCategoryInfo() {
-    var $displayCategoryInformation = $('#selectCategoryID');
+    var $displayCategoryInformation = $('#selectCategoryEdit');
     $displayCategoryInformation.empty();
     $(function () {
         $.ajax({
