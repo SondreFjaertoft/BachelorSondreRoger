@@ -8,7 +8,7 @@
         
         <form id="searchForSale" class="form-inline" action="?page=getMySales" method="post">
             <div class="form-group">
-                <div class="col-md-9">
+                <div class="col-md-12">
                     <input class="form-control" form="searchForSale" type="text" name="givenProductSearchWord" value="" placeholder="Søk etter salg.." autocomplete="off">  
                     <input class="form-control" form="searchForSale" type="submit" value="Søk">
                     

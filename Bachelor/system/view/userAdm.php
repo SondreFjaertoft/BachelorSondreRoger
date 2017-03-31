@@ -350,7 +350,7 @@
         <tr>
             <th id="bordernone">Navn</th>
             <td id="bordernone">{{name}}</td>            
-        </tr> 
+        </tr>
         <tr>
             <th>UserID:</th> 
             <td>{{userID}}</td>
