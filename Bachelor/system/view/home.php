@@ -514,7 +514,7 @@ if (isset($GLOBALS["errorMessage"])) {
     <tr class="selectQuantity">
         <th>Produkt:   </th>
         <td>{{productName}}</td>
-        <input name="deliveryProductID[]" form="stockDelivery" type="hidden" value="{{productID}}"/>
+        <input name="deliveryProductID[]" id="{{productID}}" form="stockDelivery" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
         <td><input name="deliveryQuantity[]" form="stockDelivery" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
         
@@ -601,11 +601,12 @@ if (isset($GLOBALS["errorMessage"])) {
     $(function POSTselectedProduct() {
 
         $('#stockDeliveryContainer').delegate('.product', 'click', function () {
-            if ($(this).data('clicked')) {
-                return false;
-            }
-            $(this).data('clicked', true);    
             var givenProductID = $(this).attr('data-id');
+              if( $('#'+givenProductID).length )   
+            {
+                return false;
+            } else {
+            
             
             $.ajax({
                 type: 'POST',
@@ -618,7 +619,7 @@ if (isset($GLOBALS["errorMessage"])) {
             });
             return false;
 
-
+        }
         });
     });
 </script> 
@@ -936,14 +937,9 @@ if (isset($GLOBALS["errorMessage"])) {
             <script>
 $(document).ready(function()
 {
-
-    // codes works on all bootstrap modal windows in application
     $('#stockDeliveryModal').on('hidden.bs.modal', function(e)
     { 
       $('#deliveryQuantityContainer').empty();
-
     }) ;
-
- 
 });
             </script>

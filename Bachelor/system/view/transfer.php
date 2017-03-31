@@ -72,7 +72,7 @@
     <tr class="selectQuantity">
         <th>Produkt:   </th>
         <td>{{productName}}</td>
-        <input name="transferProductID[]" form="transferProducts" type="hidden" value="{{productID}}"/>
+        <input name="transferProductID[]" id="{{productID}}" form="transferProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
         <td><input name="transferQuantity[]" form="transferProducts" required="required" type="number" min="1" max="{{quantity}}" value="" autocomplete="off"/></td> 
         <th>Tilgjengelig:</th>
@@ -192,13 +192,11 @@ $(function () {
     $(function POSTeditUserModal() {
         
         $('#transferProductContainer').delegate('.product', 'click', function () {
-            if($(this).data('clicked')) { 
+        var givenProductID = $(this).attr('data-id');
+              if( $('#'+givenProductID).length )   
+            {
                 return false;
-            }    
-             
-            $(this).data('clicked', true);
-            
-            var givenProductID = $(this).attr('data-id');
+            } else {
             
             
             $.ajax({
@@ -213,7 +211,7 @@ $(function () {
                 }
             });
             return false;
-            
+        }
             
         });
     });

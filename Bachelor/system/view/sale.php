@@ -78,7 +78,7 @@
     <tr class="selectQuantity">
         <th>Produkt:   </th>
         <td>{{productName}}</td>
-        <input name="withdrawProductID[]" form="withdrawProducts" type="hidden" value="{{productID}}"/>
+        <input name="withdrawProductID[]" id="{{productID}}" form="withdrawProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
         <td><input name="withdrawQuantity[]" form="withdrawProducts" required="required" type="number" min="1" max="{{quantity}}" value="" autocomplete="off"/></td> 
         <th>Tilgjengelig:</th>
@@ -202,13 +202,11 @@ $('#withdrawButton').hide();
     $(function POSTselectedProduct() {
 
         $('#withdrawProductContainer').delegate('.product', 'click', function () {
-            if ($(this).data('clicked')) {
+        var givenProductID = $(this).attr('data-id');
+              if( $('#'+givenProductID).length )   
+            {
                 return false;
-            }
-            
-            $(this).data('clicked', true);
-         // gjør knappen trykkbar igjen:  $(this).data('clicked', false);
-            var givenProductID = $(this).attr('data-id');
+            } else {
 
 
             $.ajax({
@@ -225,7 +223,7 @@ $('#withdrawButton').hide();
             });
             return false;
 
-
+        }
         });
     });
 </script> 

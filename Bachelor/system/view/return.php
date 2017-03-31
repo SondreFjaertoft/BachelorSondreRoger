@@ -72,7 +72,7 @@
     <tr class="selectQuantity">
         <th>Produkt:   </th>
         <td>{{productName}}</td>
-        <input name="returnProductID[]" form="returnProducts" type="hidden" value="{{productID}}"/>
+        <input name="returnProductID[]" id="{{productID}}" form="returnProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
         <td><input name="returnQuantity[]" form="returnProducts" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
         
@@ -192,13 +192,11 @@
     $(function POSTselectedProduct() {
 
         $('#returnProductContainer').delegate('.product', 'click', function () {
-            if ($(this).data('clicked')) {
+        var givenProductID = $(this).attr('data-id');
+              if( $('#'+givenProductID).length )   
+            {
                 return false;
-            }
-            
-            $(this).data('clicked', true);
-            
-            var givenProductID = $(this).attr('data-id');
+            } else {
 
 
             $.ajax({
@@ -215,7 +213,7 @@
             });
             return false;
 
-
+            }
         });
     });
 </script> 
