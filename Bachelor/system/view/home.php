@@ -1,9 +1,21 @@
 <?php require("view/header.php"); ?>
 
+<?php
+if (isset($GLOBALS["errorMessage"])) {
+    $test = $GLOBALS["errorMessage"];
+}
+?>
 
 
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div id="message">
+        <?php
+        if (isset($GLOBALS["errorMessage"])) {
+            echo $test;
+        }
+        ?>
+    </div> 
     <div id="snarveidiv">
         <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
             <div class="row">
@@ -208,7 +220,7 @@
 
 
         <!-- Tom modal til Roger -->
-        
+
         <div class="modal fade" id="varetellingModal" role="dialog">
             <div class="modal-dialog">
                 <!-- Innholdet til Modalen -->
@@ -218,20 +230,20 @@
                         <h4 class="modal-title">Tom modal til Roger</h4>
                     </div>
                     <div class="modal-body">
-                        
+
                     </div>
                     <div class="modal-footer">
-                        
+
                     </div>
                     </form>
 
                 </div>
             </div>
         </div>
-        
+
         <!-- Tom modal til Roger -->
-        
-        
+
+
         <div class="modal fade" id="vareleveringModal" role="dialog">
             <div class="modal-dialog">
                 <!-- Innholdet til Modalen -->
@@ -241,22 +253,22 @@
                         <h4 class="modal-title">Tom modal til Roger</h4>
                     </div>
                     <div class="modal-body">
-                        
+
                     </div>
                     <div class="modal-footer">
-                        
+
                     </div>
                     </form>
 
                 </div>
             </div>
         </div>
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
         <!-- Opprett bruker modal -->
 
 
@@ -335,363 +347,362 @@
                 <div class="modal-body">
                     <div>
                         <table class="table">
-                        <form action="?page=addProductEngine" method="post" id="createProduct">
-                            <tr>
-                                <th id="bordernone">Produktnavn:</th>
-                                <td id="bordernone"><input class="form-control" type="text" required="required" name="givenProductName" value="" autocomplete="off"></td>
-                            </tr>
-                            <tr>
-                                <th>Pris:</th>
-                                <td><input class="form-control" type="int" required="required" name="givenPrice" value="" autocomplete="off"></td>
-                            </tr>
-                            <tr>
-                                <th>Kategori:</th>
-                                <td>
-                                    <select name="givenCategoryID" id="selectCategoryID" required="required" class="form-control" autocomplete="off">
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Media:</th>
-                                <td>
-                                    <select name="givenMediaID" id="selectMediaID" required="required" class="form-control" autocomplete="off">
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>MacAdresse:</th>
-                                <td><input type="checkbox" id="TRUE" name="givenMacAdresse" value="TRUE"></td>
-                            </tr>
-                            
-                            <input form="createProduct" type="hidden" id="date" name="date">
-                        
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-
-                    <input class="btn btn-success" form="createProduct" type="submit" value="Opprett Produkt">
-                    
-                    <button class="btn btn-danger" type="button" data-dismiss="modal">Avslutt</button>
-
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- CREATE STORAGE MODAL -->
-
-
-    <div class="modal fade" id="createStorageModal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Opprett bruker</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="?page=addStorageEngine" method="post" id="createStorage">
-                        <div style="text-align: center">
-                            <table class="table">                   
+                            <form action="?page=addProductEngine" method="post" id="createProduct">
                                 <tr>
-                                    <th id="bordernone">Lagernavn:</th>
-                                    <td id="bordernone"><input class="form-control" type="text" required="required" name="givenStorageName" value=""></td>
+                                    <th id="bordernone">Produktnavn:</th>
+                                    <td id="bordernone"><input class="form-control" type="text" required="required" name="givenProductName" value="" autocomplete="off"></td>
+                                </tr>
+                                <tr>
+                                    <th>Pris:</th>
+                                    <td><input class="form-control" type="int" required="required" name="givenPrice" value="" autocomplete="off"></td>
+                                </tr>
+                                <tr>
+                                    <th>Kategori:</th>
+                                    <td>
+                                        <select name="givenCategoryID" id="selectCategoryID" required="required" class="form-control" autocomplete="off">
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Media:</th>
+                                    <td>
+                                        <select name="givenMediaID" id="selectMediaID" required="required" class="form-control" autocomplete="off">
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>MacAdresse:</th>
+                                    <td><input type="checkbox" id="TRUE" name="givenMacAdresse" value="TRUE"></td>
                                 </tr>
 
-                            </table>
-                        </div>
-                </div>
-                <div class="modal-footer">
+                                <input form="createProduct" type="hidden" id="date" name="date">
 
-                    <input class="btn btn-success" form="createStorage" type="submit" value="Opprett Lager" href="?page=storageAdm">
+                                </table>
+                                </div>
+                                </div>
+                                <div class="modal-footer">
 
+                                    <input class="btn btn-success" form="createProduct" type="submit" value="Opprett Produkt">
 
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                                    <button class="btn btn-danger" type="button" data-dismiss="modal">Avslutt</button>
 
-                </div>
-                </form>
-            </div>
-        </div>
-    </div> 
-
-    <!-- UPLOAD IMAGE MODAL -->
-
-
-    <div class="modal fade" id="uploadImageModal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Last opp bilde</h4>
-                </div>
-                <div class="modal-body">
-                    <div style="text-align: center">
-
-                        <form action="?page=uploadImage" id="uploadImage" method="post" enctype="multipart/form-data">
-                            <h4 class="text-center">Velg bilde for å laste opp</h4>
-                        <table class="table">
-                            <tr>
-                                <th class="col-sm-4 col-md-4" id="bordernone">Velg en fil:</th>
-                                <th class="col-sm-4 col-md-4" id="bordernone"></th>
-                                <th class="col-sm-4 col-md-4" id="bordernone">Velg en katerogi:</th>
-                            </tr>
-                        
-                            
-                            <tr>                           
-                                <td id="bordernone">
-                                    <label class="btn btn-primary" for="fileToUpload">
-                                        Legg til bilde
-                                        <input type="file" name="fileToUpload" required="required" id="fileToUpload" style="display: none;" onchange="$('#upload-file-info').html($(this).val());"></td>
-                                    </label>
-                                <td id="bordernone"><span class="label label-default" id="upload-file-info"></span></td>
-                                <td id="bordernone">
-                                    <select name="givenCategoryID" id="selectCategoryID" required="required" class="form-control" autocomplete="off">
-                                    </select>
-                                </td>
-                            </tr>
-                        </table>
-                        
+                                </div>
+                            </form>
                     </div>
                 </div>
-                <div class="modal-footer">
-                <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?page=uploadImage">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-                </div>
-                </form>
             </div>
-        </div>
-    </div> 
 
 
-    <!-- CREATE CATEGORY MODAL -->
+            <!-- CREATE STORAGE MODAL -->
 
 
-    <div class="modal fade" id="createCategoryModal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Opprett bruker</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="?page=addCategoryEngine" method="post" id="createCategory">
-                        <div style="text-align: center">
-                            <table class="table">                   
-                                <tr>
-                                    <th id="bordernone">Kateroginavn:</th>
-                                    <td id="bordernone"><input class="form-control" type="text" required="required" name="givenCategoryName" value=""></td>
-                                </tr>
-
-                            </table>
+            <div class="modal fade" id="createStorageModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Innholdet til Modalen -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Opprett bruker</h4>
                         </div>
+                        <div class="modal-body">
+                            <form action="?page=addStorageEngine" method="post" id="createStorage">
+                                <div style="text-align: center">
+                                    <table class="table">                   
+                                        <tr>
+                                            <th id="bordernone">Lagernavn:</th>
+                                            <td id="bordernone"><input class="form-control" type="text" required="required" name="givenStorageName" value=""></td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+
+                            <input class="btn btn-success" form="createStorage" type="submit" value="Opprett Lager" href="?page=storageAdm">
+
+
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+
+                        </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="modal-footer">
+            </div> 
 
-                    <input class="btn btn-success" form="createCategory" type="submit" value="Opprett Kategori">
+            <!-- UPLOAD IMAGE MODAL -->
 
 
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+            <div class="modal fade" id="uploadImageModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Innholdet til Modalen -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Last opp bilde</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div style="text-align: center">
 
+                                <form action="?page=uploadImage" id="uploadImage" method="post" enctype="multipart/form-data">
+                                    <h4 class="text-center">Velg bilde for å laste opp</h4>
+                                    <table class="table">
+                                        <tr>
+                                            <th class="col-sm-4 col-md-4" id="bordernone">Velg en fil:</th>
+                                            <th class="col-sm-4 col-md-4" id="bordernone"></th>
+                                            <th class="col-sm-4 col-md-4" id="bordernone">Velg en katerogi:</th>
+                                        </tr>
+
+
+                                        <tr>                           
+                                            <td id="bordernone">
+                                                <label class="btn btn-primary" for="fileToUpload">
+                                                    Legg til bilde
+                                                    <input type="file" name="fileToUpload" required="required" id="fileToUpload" style="display: none;" onchange="$('#upload-file-info').html($(this).val());"></td>
+                                                </label>
+                                            <td id="bordernone"><span class="label label-default" id="upload-file-info"></span></td>
+                                            <td id="bordernone">
+                                                <select name="givenCategoryID" id="selectCategoryID" required="required" class="form-control" autocomplete="off">
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?page=uploadImage">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                        </div>
+                        </form>
+                    </div>
                 </div>
-                </form>
-            </div>
-        </div>
-    </div>     
+            </div> 
 
 
-    <!-- Create product -->
-    <script>
-        $(function POSTuserInfo() {
-
-            $('#createUser').submit(function () {
-                var url = $(this).attr('action');
-                var data = $(this).serialize();
-
-                $.ajax({
-                    type: 'POST',
-                    url: url,
-                    data: data,
-                    dataType: 'json',
-                    error: function () {
-                        var $displayError = $('#errorMessage');
-                        $displayError.empty().append("Brukernavn trolig i bruk");
-                    },
-                    success: function () {
-                        $("#createUser")[0].reset();
-                        $('#createUserModal').modal('hide');
-                        $('#errorMessage').remove();
-
-                    }
-                });
-                return false;
-            });
-        });
-
-    </script>
-
-    <!-- CREATE PRODUCT -->
-
-    <script>
-        $(function POSTproductInfo() {
-
-            $('#createProduct').submit(function () {
-                var url = $(this).attr('action');
-                var data = $(this).serialize();
-
-                $.ajax({
-                    type: 'POST',
-                    url: url,
-                    data: data,
-                    dataType: 'json',
-                    success: function () {
-                        $("#createProduct")[0].reset();
-                        $('#createProductModal').modal('hide');
-                    }
-                });
-                return false;
-            });
-        });
-
-    </script>
-
-    <!-- CREATE STORAGE -->
+            <!-- CREATE CATEGORY MODAL -->
 
 
-    <script>
-        $(function POSTstorageInfo() {
+            <div class="modal fade" id="createCategoryModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Innholdet til Modalen -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Opprett bruker</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="?page=addCategoryEngine" method="post" id="createCategory">
+                                <div style="text-align: center">
+                                    <table class="table">                   
+                                        <tr>
+                                            <th id="bordernone">Kateroginavn:</th>
+                                            <td id="bordernone"><input class="form-control" type="text" required="required" name="givenCategoryName" value=""></td>
+                                        </tr>
 
-            $('#createStorage').submit(function () {
-                var url = $(this).attr('action');
-                var data = $(this).serialize();
+                                    </table>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
 
-                $.ajax({
-                    type: 'POST',
-                    url: url,
-                    data: data,
-                    dataType: 'json',
-                    success: function () {
-                        $("#createStorage")[0].reset();
-                        $('#createStorageModal').modal('hide');
-                    }
-                });
-                return false;
-            });
-        });
-
-    </script>
-
-    <script>
-        $(function POSTstorageInfo() {
-
-            $('#createCategory').submit(function () {
-                var url = $(this).attr('action');
-                var data = $(this).serialize();
-
-                $.ajax({
-                    type: 'POST',
-                    url: url,
-                    data: data,
-                    dataType: 'json',
-                    success: function () {
-                        $("#createCategory")[0].reset();
-                        $('#createCategoryModal').modal('hide');
-                    }
-                });
-                return false;
-            });
-        });
-
-    </script>
-
-    <script>
-        function getCategoryInfo() {
-            var $displayCategoryInformation = $('#selectCategoryID');
-            $displayCategoryInformation.empty();
-            $(function () {
-                $.ajax({
-                    type: 'GET',
-                    url: '?page=getAllCategoryInfo',
-                    dataType: 'json',
-                    success: function (data) {
-
-                        $.each(data.categoryInfo, function (i, item) {
+                            <input class="btn btn-success" form="createCategory" type="submit" value="Opprett Kategori">
 
 
-                            $displayCategoryInformation.append('<option value="' + item.categoryID + '">' + item.categoryName + '</option>');
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>     
+
+
+            <!-- Create product -->
+            <script>
+                $(function POSTuserInfo() {
+
+                    $('#createUser').submit(function () {
+                        var url = $(this).attr('action');
+                        var data = $(this).serialize();
+
+                        $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: data,
+                            dataType: 'json',
+                            error: function () {
+                                var $displayError = $('#errorMessage');
+                                $displayError.empty().append("Brukernavn trolig i bruk");
+                            },
+                            success: function () {
+                                $("#createUser")[0].reset();
+                                $('#createUserModal').modal('hide');
+                                $('#errorMessage').remove();
+
+                            }
                         });
-
-
-                    }
+                        return false;
+                    });
                 });
-            });
-        }
-    </script>
-    
-    <script>
-function createProductInfo(){
-    getMediaInfo();
-    getCategoryInfo();
-}                    
-</script>
-<script>
- function getMediaInfo() {
-    var $displayMediaInformation = $('#selectMediaID');
-    $displayMediaInformation.empty();
-    $(function () {
-        $.ajax({
-            type: 'GET',
-            url: '?page=getAllMediaInfo',
-            dataType: 'json',
-            success: function (data) {
-                
-                $.each(data.mediaInfo, function(i, item) {
 
-                
-                $displayMediaInformation.append('<option value="'+item.mediaID+'">'+item.mediaName+'</option>');
-                    
-                });                
-                
-                
-            }
-        });
-    });
- }
-</script>
+            </script>
 
-<script>
- function getCategoryInfo() {
-    var $displayCategoryInformation = $('#selectCategoryID');
-    $displayCategoryInformation.empty();
-    $(function () {
-        $.ajax({
-            type: 'GET',
-            url: '?page=getAllCategoryInfo',
-            dataType: 'json',
-            success: function (data) {
-                
-                $.each(data.categoryInfo, function(i, item) {
+            <!-- CREATE PRODUCT -->
 
-                
-                $displayCategoryInformation.append('<option value="'+item.categoryID+'">'+item.categoryName+'</option>');
-                    
-                });                
-                
-                
-            }
-        });
-    });
- }
-</script>
-    
-    
-    
-    
-    
-    
-    
+            <script>
+                $(function POSTproductInfo() {
+
+                    $('#createProduct').submit(function () {
+                        var url = $(this).attr('action');
+                        var data = $(this).serialize();
+
+                        $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: data,
+                            dataType: 'json',
+                            success: function () {
+                                $("#createProduct")[0].reset();
+                                $('#createProductModal').modal('hide');
+                            }
+                        });
+                        return false;
+                    });
+                });
+
+            </script>
+
+            <!-- CREATE STORAGE -->
+
+
+            <script>
+                $(function POSTstorageInfo() {
+
+                    $('#createStorage').submit(function () {
+                        var url = $(this).attr('action');
+                        var data = $(this).serialize();
+
+                        $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: data,
+                            dataType: 'json',
+                            success: function () {
+                                $("#createStorage")[0].reset();
+                                $('#createStorageModal').modal('hide');
+                            }
+                        });
+                        return false;
+                    });
+                });
+
+            </script>
+
+            <script>
+                $(function POSTstorageInfo() {
+
+                    $('#createCategory').submit(function () {
+                        var url = $(this).attr('action');
+                        var data = $(this).serialize();
+
+                        $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: data,
+                            dataType: 'json',
+                            success: function () {
+                                $("#createCategory")[0].reset();
+                                $('#createCategoryModal').modal('hide');
+                            }
+                        });
+                        return false;
+                    });
+                });
+
+            </script>
+
+            <script>
+                function getCategoryInfo() {
+                    var $displayCategoryInformation = $('#selectCategoryID');
+                    $displayCategoryInformation.empty();
+                    $(function () {
+                        $.ajax({
+                            type: 'GET',
+                            url: '?page=getAllCategoryInfo',
+                            dataType: 'json',
+                            success: function (data) {
+
+                                $.each(data.categoryInfo, function (i, item) {
+
+
+                                    $displayCategoryInformation.append('<option value="' + item.categoryID + '">' + item.categoryName + '</option>');
+
+                                });
+
+
+                            }
+                        });
+                    });
+                }
+            </script>
+
+            <script>
+                function createProductInfo() {
+                    getMediaInfo();
+                    getCategoryInfo();
+                }
+            </script>
+            <script>
+                function getMediaInfo() {
+                    var $displayMediaInformation = $('#selectMediaID');
+                    $displayMediaInformation.empty();
+                    $(function () {
+                        $.ajax({
+                            type: 'GET',
+                            url: '?page=getAllMediaInfo',
+                            dataType: 'json',
+                            success: function (data) {
+
+                                $.each(data.mediaInfo, function (i, item) {
+
+
+                                    $displayMediaInformation.append('<option value="' + item.mediaID + '">' + item.mediaName + '</option>');
+
+                                });
+
+
+                            }
+                        });
+                    });
+                }
+            </script>
+
+            <script>
+                function getCategoryInfo() {
+                    var $displayCategoryInformation = $('#selectCategoryID');
+                    $displayCategoryInformation.empty();
+                    $(function () {
+                        $.ajax({
+                            type: 'GET',
+                            url: '?page=getAllCategoryInfo',
+                            dataType: 'json',
+                            success: function (data) {
+
+                                $.each(data.categoryInfo, function (i, item) {
+
+
+                                    $displayCategoryInformation.append('<option value="' + item.categoryID + '">' + item.categoryName + '</option>');
+
+                                });
+
+
+                            }
+                        });
+                    });
+                }
+            </script>
+
+
+
+
+
+

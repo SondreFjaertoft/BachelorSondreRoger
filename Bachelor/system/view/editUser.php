@@ -1,10 +1,21 @@
 <?php require("view/header.php"); ?>
 
-
+<?php
+if (isset($GLOBALS["errorMessage"])){
+$test = $GLOBALS["errorMessage"];
+}
+?>
 
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
  <div class="container"> 
+                 <div id="message">
+                <?php 
+                if (isset($GLOBALS["errorMessage"])){
+                     echo $test;
+                    }
+                ?>
+            </div>  
     <div class="col-md-4 col-md-offset-4" >
         
         <h3 class="text-center">Rediger bruker</h3>

@@ -1,12 +1,20 @@
 <?php require("view/header.php"); ?>
 
+<?php
+if (isset($GLOBALS["errorMessage"])){
+$test = $GLOBALS["errorMessage"];
+}
+?>
+
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
+    
     <div class="container"> 
 
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group"> 
             
+              
         <form id="searchForMedia" class="form-inline" action="?page=getAllMediaInfo" method="post">    
             <div class="form-group">
                 <div class="col-md-9">
@@ -19,8 +27,15 @@
                     <button class="btn btn-default" onclick="getCategoryInfo()" type="button" data-toggle="modal" data-target="#uploadImageModal">Last opp bilde</button>
                 </div>
             </div>
-        </form>  
+        </form>
             
+            <div id="message">
+                <?php 
+                if (isset($GLOBALS["errorMessage"])){
+                     echo $test;
+                    }
+                ?>
+            </div>  
               <br><br>
 
             <div class="panel panel-default">

@@ -5,19 +5,20 @@ require_once("Controller.php");
 class mediaController extends Controller {
 
     public function show($page) {
+        $renderMediaAdm = "mediaAdm";
+        $renderHome = "home";
+        $renderEditUser = "editUser";
+        
         if ($page == "mediaAdm") {
             $this->mediaPage();
         } else if($page == "uploadImage"){
-            $this->uploadImage();
-            $this->mediaPage();
+            $this->uploadImage($renderMediaAdm);
         } else if ($page == "getAllMediaInfo"){
             $this->getMediaSearchResult();
         } else if ($page == "uploadImageShortcut"){
-            $this->uploadImage();
-            $this->homePage();
+            $this->uploadImage($renderHome);
         } else if ($page == "uploadImageShortcut2"){
-            $this->uploadImage();
-            $this->editUserPage();
+            $this->uploadImage($renderEditUser);
         } else if ($page == "getMediaByID"){
             $this->getMediaByID();
         } else if ($page == "editMedia"){
@@ -28,19 +29,11 @@ class mediaController extends Controller {
     }
 
     private function mediaPage() {
-    
         return $this->render("mediaAdm");
     }
     
-    private function homePage(){
-        return $this->render("home");
-    }
-    
-    private function editUserPage(){
-        return $this->render("editUser");
-    }
 
-    private function uploadImage() {
+    private function uploadImage($data) {
         $givenCaterogyID = $_REQUEST["givenCategoryID"];
         $imageName = "";
         $target_dir = "image/";
@@ -51,40 +44,50 @@ class mediaController extends Controller {
         if (isset($_POST["submit"])) {
             $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
             if ($check !== false) {
-                echo "File is an image - " . $check["mime"] . ".";
+                "File is an image - " . $check["mime"] . ".";
                 $uploadOk = 1;
             } else {
-                echo "File is not an image.";
+                "File is not an image.";
                 $uploadOk = 0;
             }
         }
         // Check if file already exists
         if (file_exists($target_file)) {
-            echo "Sorry, file already exists.";
+            $errorMessage = "Sorry, file already exists.";
             $uploadOk = 0;
         }
         // Check file size
         if ($_FILES["fileToUpload"]["size"] > 500000) {
-            echo "Sorry, your file is too large.";
+            $errorMessage = "Sorry, your file is too large.";
             $uploadOk = 0;
         }
         // Allow certain file formats
         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            $errorMessage = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
             $uploadOk = 0;
         }
         // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 0) {
-            echo "Sorry, your file was not uploaded.";
+            $errorMessage = "Sorry, your file was not uploaded.";
         // if everything is ok, try to upload file
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
+               $errorMessage = "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
                 $imageName = basename($_FILES["fileToUpload"]["name"]);
                 $this->addMedia($imageName, $givenCaterogyID);
             } else {
-                echo "Sorry, there was an error uploading your file.";
+                $errorMessage = "Sorry, there was an error uploading your file.";
             }           
+        }
+        
+        $message = array("errorMessage" => $errorMessage);
+        
+        if($data == "mediaAdm"){
+            return $this->render("mediaAdm", $message);
+        } else if ($data == "home"){
+            return $this->render("home" , $message);
+        } else if ($data == "editUser"){
+            return $this->render("editUser", $message);
         }
         
         
@@ -95,7 +98,7 @@ class mediaController extends Controller {
         $added = $mediaModel->addMedia($fileName, $givenCaterogy);
         
         if($added){
-            echo "workiiiing!";
+            
         }
     }
     
