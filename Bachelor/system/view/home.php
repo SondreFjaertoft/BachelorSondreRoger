@@ -17,37 +17,37 @@ if (isset($GLOBALS["errorMessage"])) {
         ?>
     </div> 
     <div id="snarveidiv">
-        
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                <span class="glyphicon glyphicon-bookmark"></span> Snarveier</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-xs-6 col-md-9 text-center">
-                                    <button class="btn btn-success btn-lg" type="button" data-toggle="modal" data-target="#createUserModal"><span class="glyphicon glyphicon-user"></span> <br/>Opprett bruker</button>
-                                    <button class="btn btn-warning btn-lg" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Opprett produkt</button>
-                                    <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
-                                    <button class="btn btn-info btn-lg" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Oprett kategori</button>
-                                    <button class="btn btn-info btn-lg" onclick="getTheFuckingCategory()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
-                                    <button class="btn btn-info btn-lg" onclick="getStorageInfo()" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varetelling</button>
-                                    <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#vareleveringModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varelevering</button>
-                                
-                                </div>
-                                <div class="col-xs-6 col-md-3 text-center">
-                                    <a href="?page=editUser" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Rediger Profil</a>
-                                    <a href="../" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-log-out"></span> <br/>Logg ut</a>
-                                </div>
-                            </div>
 
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="glyphicon glyphicon-bookmark"></span> Snarveier</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-9 text-center">
+                                <button class="btn btn-success btn-lg" type="button" data-toggle="modal" data-target="#createUserModal"><span class="glyphicon glyphicon-user"></span> <br/>Opprett bruker</button>
+                                <button class="btn btn-warning btn-lg" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Opprett produkt</button>
+                                <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
+                                <button class="btn btn-info btn-lg" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Oprett kategori</button>
+                                <button class="btn btn-info btn-lg" onclick="getCategory()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
+                                <button class="btn btn-info btn-lg" onclick="getStorageInfo()" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varetelling</button>
+                                <button class="btn btn-info btn-lg" type="button" onclick="getStorageProduct()" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varelevering</button>
+
+                            </div>
+                            <div class="col-xs-6 col-md-3 text-center">
+                                <a href="?page=editUser" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Rediger Profil</a>
+                                <a href="../" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-log-out"></span> <br/>Logg ut</a>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
-        
+        </div>
+
 
     </div>
     <div class="container">
@@ -189,30 +189,6 @@ if (isset($GLOBALS["errorMessage"])) {
         </div>
 
         <!-- HER KOMMER INNHOLDET>   -->                
-
-
-        <!-- Tom modal til Roger -->
-
-        <div class="modal fade" id="vareleveringModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Innholdet til Modalen -->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Tom modal til Roger</h4>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-
-                    </div>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-
 
         <!-- Opprett bruker modal -->
 
@@ -378,50 +354,50 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
             <div class="modal fade" id="uploadImageModal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Innholdet til Modalen -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Last opp bilde</h4>
-                </div>
-                <div class="modal-body">
-                    <div style="text-align: center">
+                <div class="modal-dialog">
+                    <!-- Innholdet til Modalen -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Last opp bilde</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div style="text-align: center">
 
-                        <form action="?page=uploadImageShortcut" id="uploadImage" method="post" enctype="multipart/form-data">
-                            <h4 class="text-center">Velg bilde for å laste opp</h4>
-                        <table class="table">
-                            <tr>
-                                <th class="col-sm-4 col-md-4" id="bordernone">Velg en fil:</th>
-                                <th class="col-sm-4 col-md-4" id="bordernone"></th>
-                                <th class="col-sm-4 col-md-4" id="bordernone">Velg en katerogi:</th>
-                            </tr>
-                        
-                            
-                            <tr>                           
-                                <td id="bordernone">
-                                    <label class="btn btn-primary" for="fileToUpload">
-                                        Legg til bilde
-                                        <input type="file" name="fileToUpload" required="required" id="fileToUpload" style="display: none;" onchange="$('#upload-file-info').html($(this).val());"></td>
-                                    </label>
-                                <td id="bordernone"><span class="label label-default" id="upload-file-info"></span></td>
-                                <td id="bordernone">
-                                    <select name="givenCategoryID" id="selectCategory" required="required" class="form-control" autocomplete="off">
-                                    </select>
-                                </td>
-                            </tr>
-                        </table>
-                        
+                                <form action="?page=uploadImageShortcut" id="uploadImage" method="post" enctype="multipart/form-data">
+                                    <h4 class="text-center">Velg bilde for å laste opp</h4>
+                                    <table class="table">
+                                        <tr>
+                                            <th class="col-sm-4 col-md-4" id="bordernone">Velg en fil:</th>
+                                            <th class="col-sm-4 col-md-4" id="bordernone"></th>
+                                            <th class="col-sm-4 col-md-4" id="bordernone">Velg en katerogi:</th>
+                                        </tr>
+
+
+                                        <tr>                           
+                                            <td id="bordernone">
+                                                <label class="btn btn-primary" for="fileToUpload">
+                                                    Legg til bilde
+                                                    <input type="file" name="fileToUpload" required="required" id="fileToUpload" style="display: none;" onchange="$('#upload-file-info').html($(this).val());"></td>
+                                                </label>
+                                            <td id="bordernone"><span class="label label-default" id="upload-file-info"></span></td>
+                                            <td id="bordernone">
+                                                <select name="givenCategoryID" id="selectCategory" required="required" class="form-control" autocomplete="off">
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?page=uploadImage">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                        </div>
+                        </form>
                     </div>
                 </div>
-                <div class="modal-footer">
-                <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?page=uploadImage">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>  
+            </div>  
 
 
             <!-- CREATE CATEGORY MODAL -->
@@ -459,134 +435,312 @@ if (isset($GLOBALS["errorMessage"])) {
                     </div>
                 </div>
             </div>     
-            
-        <!-- Tom modal til Roger -->
+
+            <!-- Tom modal til Roger -->
 
 
-        <div class="modal fade" id="stockTakingModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Innholdet til Modalen -->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Varetelling</h4>
+            <div class="modal fade" id="stockTakingModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Innholdet til Modalen -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Varetelling</h4>
+                        </div>
+                        <form action="?page=stocktacking" method="post" id="stocktaking">
+
+                            <div class="modal-body">
+                                <select name="storageID" form="stocktaking" id="selectStorageContainer" class="form-control">
+
+                                </select>
+                                <br>
+                                <table class="table" id="stockTakingContainer">
+
+                                </table>
+
+                            </div>
+                            <div class="modal-footer">
+                                <input form="stocktaking" class="btn btn-success" type="submit" value="Oppdater">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                            </div>
+                        </form>
+                        </form>
+
                     </div>
-                    <form action="?page=stocktacking" method="post" id="stocktaking">
-                    
-                    <div class="modal-body">
-                        <select name="storageID" form="stocktaking" id="selectStorageContainer" class="form-control">
-                            
-                        </select>
-                        <br>
-                        <table class="table" id="stockTakingContainer">
-                            
-                        </table>
-
-                    </div>
-                    <div class="modal-footer">
-                        <input form="stocktaking" class="btn btn-success" type="submit" value="Oppdater">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-                    </div>
-                    </form>
-                    </form>
-
                 </div>
             </div>
-        </div>
+
+            <div class="modal fade" id="stockDeliveryModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Innholdet til Modalen -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Varelevering</h4>
+                        </div>
+                        <form action="?page=stockDelivery" method="post" id="stockDelivery">
+                            <div class="modal-body">
+                                <label>Velg produkt som inn på hovedlager</label>
+                                <div id="stockDeliveryContainer">
+
+                                </div>
+                                <br><br>
+                                <div>
+                                    <table class="table table-bordered table-striped table-responsive" id="deliveryQuantityContainer">
+
+                                        <!-- Lar deg velge antall enheter -->
+
+                                    </table>
+
+                                    
+                                </div>                        
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button form="stockDelivery" type="submit" class="btn btn-success" id="deliveryButton">Overfør</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                            </div>
+                        </form>
+                        </form>
+
+                    </div>
+                </div>
+            </div>        
+
             
-<script id="stockTakingTemplate" type="text/x-handlebars-template">
-<input form="stocktaking" name="givenStorageID" type="hidden" value="{{storageProduct.0.storageID}}">
-{{#each storageProduct}}
-    
-    <tr>
-       <th id="bordernone">{{productName}}:</th>    
-           <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
-           <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}">                       
-       <td id="bordernone"><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="{{quantity}}" autocomplete="off"></td>
+<script id="deliveryQuantityTemplate" type="text/x-handlebars-template">
+{{#each product}} 
+    <tr class="selectQuantity">
+        <th>Produkt:   </th>
+        <td>{{productName}}</td>
+        <input name="deliveryProductID[]" form="stockDelivery" type="hidden" value="{{productID}}"/>
+        <th>Antall:</th>
+        <td><input name="deliveryQuantity[]" form="stockDelivery" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
+        
+        <td>
+            <button class="remove" data-toggle="tooltip" 
+                style="appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                outline: none;
+                border: 0;
+                background: transparent;
+                display: inline;">
+                <span class="glyphicon glyphicon-remove" style="color: red"></span>
+            </button>
+        </td>    
+        
     </tr>
+{{/each}}  
+</script>
+
+            <script id="stockTakingTemplate" type="text/x-handlebars-template">
+            <input form="stocktaking" name="givenStorageID" type="hidden" value="{{storageProduct.0.storageID}}">
+            {{#each storageProduct}}
+    
+                <tr>
+                   <th id="bordernone">{{productName}}:</th>    
+                       <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
+                       <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}">                       
+                   <td id="bordernone"><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="{{quantity}}" autocomplete="off"></td>
+                </tr>
     
     
-  {{/each}} 
-</script>        
+              {{/each}} 
+            </script>    
+
+            <script id="stockDeliveryTemplate" type="text/x-handlebars-template">
+                <br>  
+                {{#each productInfo}} 
+                <button data-id="{{productID}}" class="btn btn-default product">{{productName}}</button>
+                {{/each}} 
+            </script>
+
+            <!-- Display storages in drop down meny Template -->
+            <script id="selectStorageTemplate" type="text/x-handlebars-template">
+            <option data-id="0" value="0" class="stockTaking">Velg et lager</option>
+                {{#each storageInfo}}    
+                    <tr>
+                        <option data-id="{{storageID}}" value="{{storageID}}" class="stockTaking">{{storageName}}</option>
+                    </tr>   
+                {{/each}}
+            </script>        
+
+            <!-- Get the selected storage, and POST this to retrive inventory-->
+            <script>
+
+                function getStorageProduct() {
+                    $.ajax({
+                        type: 'GET',
+                        url: '?page=getAllProductInfo',
+                        dataType: 'json',
+                        success: function (data) {
+                            stockDeliveryTemplate(data);
+                        }
+                    });
+                    return false;
+                }
+            </script>
+
+            <!-- Display products in storage Template -->
+            <script>
+                function stockDeliveryTemplate(data) {
+                    var rawTemplate = document.getElementById("stockDeliveryTemplate").innerHTML;
+                    var compiledTemplate = Handlebars.compile(rawTemplate);
+                    var deliverytGeneratedHTML = compiledTemplate(data);
+
+                    var deliveryContainer = document.getElementById("stockDeliveryContainer");
+                    deliveryContainer.innerHTML = deliverytGeneratedHTML;
+                }
+            </script>
             
-<!-- Display storages in drop down meny Template -->
-<script id="selectStorageTemplate" type="text/x-handlebars-template">
- 
-<option data-id="0" value="0" class="stockTaking">Velg et lager</option>
-{{#each storageInfo}}    
-<tr>
-    <option data-id="{{storageID}}" value="{{storageID}}" class="stockTaking">{{storageName}}</option>
-</tr>   
-{{/each}}
-        
-</script>        
-
-<!-- Get storage information with user restriction -->
+            <!-- Get productInfo from selected ID -->
 <script>
-function getStorageInfo() {
-        $.ajax({
-            type: 'GET',
-            url: '?page=getAllStorageInfo',
-            dataType: 'json',
-            success: function (data) {
-                selectStorageTemplate(data);
+                            
+    $(function POSTselectedProduct() {
+
+        $('#stockDeliveryContainer').delegate('.product', 'click', function () {
+            if ($(this).data('clicked')) {
+                return false;
             }
+            $(this).data('clicked', true);    
+            var givenProductID = $(this).attr('data-id');
+            
+            $.ajax({
+                type: 'POST',
+                url: '?page=getProductByID',
+                data: {givenProductID: givenProductID},
+                dataType: 'json',
+                success: function (data) {
+                    deliveryQuantityTemplate(data);
+                }
+            });
+            return false;
+
+
         });
-    }
-</script>
+    });
+</script> 
 
-<!-- Display storages in drop down meny Template -->
 <script>
-    function selectStorageTemplate(data) {
-        
-        var rawTemplate = document.getElementById("selectStorageTemplate").innerHTML;
+    function deliveryQuantityTemplate(data) {
+        var rawTemplate = document.getElementById("deliveryQuantityTemplate").innerHTML;
         var compiledTemplate = Handlebars.compile(rawTemplate);
-        var selectStorageGeneratedHTML = compiledTemplate(data);
+        var transferProductGeneratedHTML = compiledTemplate(data);
 
-        var storageContainer = document.getElementById("selectStorageContainer");
-        storageContainer.innerHTML = selectStorageGeneratedHTML;
+        var transferContainer = document.getElementById("deliveryQuantityContainer");
+        transferContainer.innerHTML += transferProductGeneratedHTML;
         
-
     }
 </script>
 
-<!-- Get the selected storage, and POST this to retrive inventory-->
-
 <script>
-    var givenStorageID;
-    $(function POSTfromStorageModal() {
-        
-        $('#selectStorageContainer').on('change', function () {
-            givenStorageID = $(this).find("option:selected").data('id');
-         
-            if (givenStorageID > 0) {
-                $.ajax({
-                    type: 'POST',
-                    url: '?page=getStorageProduct',
-                    data: {givenStorageID: givenStorageID},
-                    dataType: 'json',
-                    success: function (data) {
-                        stockTakingTemplate(data);             
-                    }
-                });
-            } 
-           return false;
+    $(function POSTtransferProducts() {
 
+        $('#stockDelivery').submit(function () {
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                error: function () {
+                    var $displayUsers = $('#errorMessage');
+                    $displayUsers.empty().append("Kunne ikke overføre");
+                },
+                success: function (data) {
+                    $('#deliveryQuantityContainer').empty();
+                    $('#stockDeliveryModal').modal('hide');
+                }
+            });
+            return false;
         });
     });
 </script>
 
-<!-- Display products in storage Template -->
+<!-- remove product -->
 <script>
-    function stockTakingTemplate(data) {
-        var rawTemplate = document.getElementById("stockTakingTemplate").innerHTML;
-        var compiledTemplate = Handlebars.compile(rawTemplate);
-        var stockTakingGeneratedHTML = compiledTemplate(data);
+    $(function POSTdeleteStorageModal() {
 
-        var stockTaking = document.getElementById("stockTakingContainer");
-        stockTaking.innerHTML = stockTakingGeneratedHTML;
-    }
-</script>
+        $('#deliveryQuantityContainer').delegate('.remove', 'click', function () {
+           var $tr = $(this).closest('tr');        
+          
+           $tr.fadeOut(150, function() {
+            $(this).remove();
+           });       
+        });
+    });
+</script>  
+
+            <!-- Get storage information  -->
+            <script>
+                function getStorageInfo() {
+                    $.ajax({
+                        type: 'GET',
+                        url: '?page=getAllStorageInfo',
+                        dataType: 'json',
+                        success: function (data) {
+                            selectStorageTemplate(data);
+                        }
+                    });
+                }
+            </script>
+
+            <!-- Display storages in drop down meny Template -->
+            <script>
+                function selectStorageTemplate(data) {
+
+                    var rawTemplate = document.getElementById("selectStorageTemplate").innerHTML;
+                    var compiledTemplate = Handlebars.compile(rawTemplate);
+                    var selectStorageGeneratedHTML = compiledTemplate(data);
+
+                    var storageContainer = document.getElementById("selectStorageContainer");
+                    storageContainer.innerHTML = selectStorageGeneratedHTML;
+
+
+                }
+            </script>
+
+            <!-- Get the selected storage, and POST this to retrive inventory-->
+
+            <script>
+                var givenStorageID;
+                $(function POSTfromStorageModal() {
+
+                    $('#selectStorageContainer').on('change', function () {
+                        givenStorageID = $(this).find("option:selected").data('id');
+
+                        if (givenStorageID > 0) {
+                            $.ajax({
+                                type: 'POST',
+                                url: '?page=getStorageProduct',
+                                data: {givenStorageID: givenStorageID},
+                                dataType: 'json',
+                                success: function (data) {
+                                    stockTakingTemplate(data);
+                                }
+                            });
+                        }
+                        return false;
+
+                    });
+                });
+            </script>
+
+            <!-- Display products in storage Template -->
+            <script>
+                function stockTakingTemplate(data) {
+                    var rawTemplate = document.getElementById("stockTakingTemplate").innerHTML;
+                    var compiledTemplate = Handlebars.compile(rawTemplate);
+                    var stockTakingGeneratedHTML = compiledTemplate(data);
+
+                    var stockTaking = document.getElementById("stockTakingContainer");
+                    stockTaking.innerHTML = stockTakingGeneratedHTML;
+                }
+            </script>
 
 
             <!-- Create product -->
@@ -693,7 +847,7 @@ function getStorageInfo() {
 
             </script>
 
-            
+
 
             <script>
                 function createProductInfo() {
@@ -702,11 +856,11 @@ function getStorageInfo() {
                 }
             </script>
             <script>
-                function getTheFuckingCategory()
+                function getCategory()
                 {
                     getCategoryInfo();
                 }
-                </script>
+            </script>
             <script>
                 function getMediaInfo() {
                     var $displayMediaInformation = $('#selectMediaID');
@@ -731,52 +885,65 @@ function getStorageInfo() {
                     });
                 }
             </script>
-<script>
- function getCategoryInfo() {
-    var $displayCategoryInformation = $('#selectCategory');
-    $displayCategoryInformation.empty();
-    $(function () {
-        $.ajax({
-            type: 'GET',
-            url: '?page=getAllCategoryInfo',
-            dataType: 'json',
-            success: function (data) {
-                
-                $.each(data.categoryInfo, function(i, item) {
+            <script>
+                function getCategoryInfo() {
+                    var $displayCategoryInformation = $('#selectCategory');
+                    $displayCategoryInformation.empty();
+                    $(function () {
+                        $.ajax({
+                            type: 'GET',
+                            url: '?page=getAllCategoryInfo',
+                            dataType: 'json',
+                            success: function (data) {
 
-                
-                $displayCategoryInformation.append('<option value="'+item.categoryID+'">'+item.categoryName+'</option>');
-                    
-                });                
-                
-                
-            }
-        });
-    });
- }
-</script>
+                                $.each(data.categoryInfo, function (i, item) {
 
 
-<!-- POST results from stocktaking, and updating the table-->
-<script>
-    $(function POSTeditStorageInfo() {
+                                    $displayCategoryInformation.append('<option value="' + item.categoryID + '">' + item.categoryName + '</option>');
 
-        $('#stocktaking').submit(function () {
-            var url = $(this).attr('action');
-            var data = $(this).serialize();
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: data,
-                dataType: 'json',
-                success: function () {
-                    $('#stockTakingModal').modal('hide');
+                                });
+
+
+                            }
+                        });
+                    });
                 }
-            });
-            return false;
-        });
-    });
-
-</script>
+            </script>
 
 
+            <!-- POST results from stocktaking, and updating the table-->
+            <script>
+                $(function POSTeditStorageInfo() {
+
+                    $('#stocktaking').submit(function () {
+                        var url = $(this).attr('action');
+                        var data = $(this).serialize();
+                        $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: data,
+                            dataType: 'json',
+                            success: function () {
+                                $('#stockTakingModal').modal('hide');
+                            }
+                        });
+                        return false;
+                    });
+                });
+
+            </script>
+
+            <script>
+$(document).ready(function()
+{
+
+    // codes works on all bootstrap modal windows in application
+    $('#stockDeliveryModal').on('hidden.bs.modal', function(e)
+    { 
+      $('#deliveryQuantityContainer').empty();
+
+    }) ;
+
+ 
+});
+            </script>

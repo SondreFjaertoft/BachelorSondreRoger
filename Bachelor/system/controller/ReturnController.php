@@ -17,6 +17,8 @@ class ReturnController extends Controller {
             $this->getReturnsFromID();
         } else if ($page == "editMyReturn"){
             $this->editMyReturn();
+        } else if ($page == "stockDelivery"){
+            $this->stockDelivery();
         }
     }
     
@@ -98,4 +100,25 @@ class ReturnController extends Controller {
         }
     }
     
+    private function stockDelivery(){
+        $transferProductIDArray = $_REQUEST["deliveryProductID"];
+        $transferQuantityArray = $_REQUEST["deliveryQuantity"];
+        $toStorageID = "1";
+
+            $inventoryInfo = $GLOBALS["inventoryModel"];
+
+            for ($i = 0; $i < sizeof($transferProductIDArray); $i++) {
+                $count = $inventoryInfo->doesProductExistInStorage($toStorageID, $transferProductIDArray[$i]);
+
+                    if ($count[0]["COUNT(*)"] < 1) {
+
+                        $inventoryInfo->addInventory($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
+                    } else {
+                        $inventoryInfo->transferToStorage($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
+                    }     
+            }
+
+        $data = json_encode("success");
+        echo $data;
+    }          
 }

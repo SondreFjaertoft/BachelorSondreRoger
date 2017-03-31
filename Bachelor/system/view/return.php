@@ -90,8 +90,7 @@
         </td>    
         
     </tr>
-{{/each}}
-     
+{{/each}}  
 </script>
 
 <script id="returnProductTemplate" type="text/x-handlebars-template">

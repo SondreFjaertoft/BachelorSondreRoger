@@ -56,6 +56,7 @@ class Router {
                 case "returnProduct" :
                 case "getReturnsFromID" :    
                 case "editMyReturn" :
+                case "stockDelivery" :    
                     return new ReturnController();
                     
                 case "getAllProductInfo" :
