@@ -17,7 +17,7 @@ if (isset($GLOBALS["errorMessage"])) {
         ?>
     </div> 
     <div id="snarveidiv">
-        <?php if ($_SESSION["userLevel"] == "Administrator") { ?>
+        
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
@@ -32,9 +32,10 @@ if (isset($GLOBALS["errorMessage"])) {
                                     <button class="btn btn-warning btn-lg" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Opprett produkt</button>
                                     <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
                                     <button class="btn btn-info btn-lg" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Oprett kategori</button>
-                                    <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
+                                    <button class="btn btn-info btn-lg" onclick="getTheFuckingCategory()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
                                     <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#varetellingModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varetelling</button>
                                     <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#vareleveringModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varelevering</button>
+                                
                                 </div>
                                 <div class="col-xs-6 col-md-3 text-center">
                                     <a href="?page=editUser" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Rediger Profil</a>
@@ -46,36 +47,7 @@ if (isset($GLOBALS["errorMessage"])) {
                     </div>
                 </div>
             </div>
-        <?php } else { ?>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                <span class="glyphicon glyphicon-bookmark"></span> Snarveier</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-xs-6 col-md-7 text-center">
-                                    <a href="#" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-list-alt"></span> <br/>Bæsjj</a>
-                                    <a href="#" class="btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-bookmark"></span> <br/>Registrer Retur</a>
-                                    <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-signal"></span> <br/>Overføring</a>
-                                    <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-comment"></span> <br/>Dine Salg</a>
-                                    <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-signal"></span> <br/>Dine Returer</a>
-
-                                </div>
-                                <div class="col-xs-6 col-md-offset-2 col-md-3 text-center">
-                                    <a href="#" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Rediger Profil</a>
-                                    <a href="../" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-log-out"></span> <br/>Logg ut</a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
+        
 
     </div>
     <div class="container">
@@ -433,50 +405,50 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
             <div class="modal fade" id="uploadImageModal" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Innholdet til Modalen -->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Last opp bilde</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div style="text-align: center">
+        <div class="modal-dialog">
+            <!-- Innholdet til Modalen -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Last opp bilde</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: center">
 
-                                <form action="?page=uploadImage" id="uploadImage" method="post" enctype="multipart/form-data">
-                                    <h4 class="text-center">Velg bilde for å laste opp</h4>
-                                    <table class="table">
-                                        <tr>
-                                            <th class="col-sm-4 col-md-4" id="bordernone">Velg en fil:</th>
-                                            <th class="col-sm-4 col-md-4" id="bordernone"></th>
-                                            <th class="col-sm-4 col-md-4" id="bordernone">Velg en katerogi:</th>
-                                        </tr>
-
-
-                                        <tr>                           
-                                            <td id="bordernone">
-                                                <label class="btn btn-primary" for="fileToUpload">
-                                                    Legg til bilde
-                                                    <input type="file" name="fileToUpload" required="required" id="fileToUpload" style="display: none;" onchange="$('#upload-file-info').html($(this).val());"></td>
-                                                </label>
-                                            <td id="bordernone"><span class="label label-default" id="upload-file-info"></span></td>
-                                            <td id="bordernone">
-                                                <select name="givenCategoryID" id="selectCategoryID" required="required" class="form-control" autocomplete="off">
-                                                </select>
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?page=uploadImage">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
-                        </div>
-                        </form>
+                        <form action="?page=uploadImageShortcut" id="uploadImage" method="post" enctype="multipart/form-data">
+                            <h4 class="text-center">Velg bilde for å laste opp</h4>
+                        <table class="table">
+                            <tr>
+                                <th class="col-sm-4 col-md-4" id="bordernone">Velg en fil:</th>
+                                <th class="col-sm-4 col-md-4" id="bordernone"></th>
+                                <th class="col-sm-4 col-md-4" id="bordernone">Velg en katerogi:</th>
+                            </tr>
+                        
+                            
+                            <tr>                           
+                                <td id="bordernone">
+                                    <label class="btn btn-primary" for="fileToUpload">
+                                        Legg til bilde
+                                        <input type="file" name="fileToUpload" required="required" id="fileToUpload" style="display: none;" onchange="$('#upload-file-info').html($(this).val());"></td>
+                                    </label>
+                                <td id="bordernone"><span class="label label-default" id="upload-file-info"></span></td>
+                                <td id="bordernone">
+                                    <select name="givenCategoryID" id="selectCategoryID" required="required" class="form-control" autocomplete="off">
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        
                     </div>
                 </div>
-            </div> 
+                <div class="modal-footer">
+                <input class="btn btn-success" form="uploadImage" type="submit" value="Upload Image" name="submit" href="?page=uploadImage">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>  
 
 
             <!-- CREATE CATEGORY MODAL -->
@@ -620,30 +592,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
             </script>
 
-            <script>
-                function getCategoryInfo() {
-                    var $displayCategoryInformation = $('#selectCategoryID');
-                    $displayCategoryInformation.empty();
-                    $(function () {
-                        $.ajax({
-                            type: 'GET',
-                            url: '?page=getAllCategoryInfo',
-                            dataType: 'json',
-                            success: function (data) {
-
-                                $.each(data.categoryInfo, function (i, item) {
-
-
-                                    $displayCategoryInformation.append('<option value="' + item.categoryID + '">' + item.categoryName + '</option>');
-
-                                });
-
-
-                            }
-                        });
-                    });
-                }
-            </script>
+            
 
             <script>
                 function createProductInfo() {
@@ -651,6 +600,12 @@ if (isset($GLOBALS["errorMessage"])) {
                     getCategoryInfo();
                 }
             </script>
+            <script>
+                function getTheFuckingCategory()
+                {
+                    getCategoryInfo();
+                }
+                </script>
             <script>
                 function getMediaInfo() {
                     var $displayMediaInformation = $('#selectMediaID');
@@ -675,33 +630,30 @@ if (isset($GLOBALS["errorMessage"])) {
                     });
                 }
             </script>
+<script>
+ function getCategoryInfo() {
+    var $displayCategoryInformation = $('#selectCategoryID');
+    $displayCategoryInformation.empty();
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getAllCategoryInfo',
+            dataType: 'json',
+            success: function (data) {
+                
+                $.each(data.categoryInfo, function(i, item) {
 
-            <script>
-                function getCategoryInfo() {
-                    var $displayCategoryInformation = $('#selectCategoryID');
-                    $displayCategoryInformation.empty();
-                    $(function () {
-                        $.ajax({
-                            type: 'GET',
-                            url: '?page=getAllCategoryInfo',
-                            dataType: 'json',
-                            success: function (data) {
-
-                                $.each(data.categoryInfo, function (i, item) {
-
-
-                                    $displayCategoryInformation.append('<option value="' + item.categoryID + '">' + item.categoryName + '</option>');
-
-                                });
-
-
-                            }
-                        });
-                    });
-                }
-            </script>
-
-
+                
+                $displayCategoryInformation.append('<option value="'+item.categoryID+'">'+item.categoryName+'</option>');
+                    
+                });                
+                
+                
+            }
+        });
+    });
+ }
+</script>
 
 
 

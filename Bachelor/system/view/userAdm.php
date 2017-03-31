@@ -193,31 +193,33 @@
     <div class="modal fade" id="showUserInformationModal" role="dialog">
         <div class="modal-dialog">
             <!-- Innholdet til Modalen -->
-            <div class="modal-content">
+            <div class="modal-content row">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Bruker informasjon</h4>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped table-bordered">
-                        <tbody id="userInformationContainer">
-
-                            <!-- Innhold fra Handlebars Template-->
-
-                        </tbody>   
-                    </table> 
-                    <table class="table table-striped table-bordered">   
-                        <tbody > 
-                            <tr> 
-                                <th>Lagertilgang:</th>
-                                <td id="userRestrictionContainer">
-
+                    <div id="userInformationContainer">
+                        
+                        <!-- Innhold fra Handlebars Template-->
+                    </div>
+                    <div>
+                    
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Lagertilgang</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userRestrictionContainer"> 
+                           
                                     <!-- Innhold fra Handlebars Template-->
 
-                                </td>
-                            </tr>  
                         </tbody>
                     </table>
+                
+                </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
@@ -328,46 +330,53 @@
 <!-- show user restriction template-->
 <script id="userRestrictionTemplate" type="text/x-handlebars-template">
 {{#each restriction}}
-{{storageName}}
+<tr>
+    <td id="bordernone">
     <button id="redigerknapp" data-id="{{storageID}}" class="deleteRestriction" data-toggle="tooltip" title="Fjern lagertilgang">
     <span class="glyphicon glyphicon-remove" style="color: red"></span>
-    </button> 
-<br>    
+    </button>
+    </td>
+<td id="bordernone">{{storageName}}</td>
+</tr>    
+    
 {{/each}}      
 </script>
 
 <!-- Show user information template -->
 <script id="userInformationTemplate" type="text/x-handlebars-template">
-    {{#each user}} 
-    <tr>
-    <th>Navn</th>
-    <td>{{name}}</td>            
-    </tr> 
-    <tr>
-    <th>UserID:</th> 
-    <td>{{userID}}</td>
-    </tr>
-    <tr>
-    <th>Brukernavn:</th>
-    <td>{{username}}</td>
-    </tr>
-    <tr>
-    <th>Brukernivå:</th>
-    <td>{{userLevel}}</td>
-    </tr>
-    <tr>
-    <th>E-post:</th>
-    <td>{{email}}</td>
-    </tr>
-    <tr>
-    <th>Sist inlogget: </th>
-    <td>{{lastLogin}}</td>
-    </tr>
-    <tr>
-    <td><img class="img-responsive" src="image/{{mediaName}}" alt="Home"></td>
-    </tr>
-
-  
+    {{#each user}}
+    <div class="col-md-6">
+    <table class="table">
+        <tr>
+            <th id="bordernone">Navn</th>
+            <td id="bordernone">{{name}}</td>            
+        </tr> 
+        <tr>
+            <th>UserID:</th> 
+            <td>{{userID}}</td>
+        </tr>
+        <tr>
+            <th>Brukernavn:</th>
+            <td>{{username}}</td>
+        </tr>
+        <tr>
+            <th>Brukernivå:</th>
+            <td>{{userLevel}}</td>
+        </tr>
+        <tr>
+            <th>E-post:</th>
+            <td>{{email}}</td>
+        </tr>
+        <tr>
+            <th>Sist inlogget: </th>
+            <td>{{lastLogin}}</td>
+        </tr>
+        
+    </table>
+    </div>
+    <div class="col-md-6">
+        <td><img class="img-responsive" src="image/{{mediaName}}" alt="Home"></td>
+    </div>
     
     {{/each}}     
 </script>    

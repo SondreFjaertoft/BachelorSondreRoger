@@ -141,46 +141,57 @@
             </div>
             <div class="modal-body row">
                 <div class="col-sm-3 col-md-5">
-                    <table class="table table-striped table-bordered">
+                    <div class="col-md-12">
+                    <table class="table">
                         <tbody id="storageInformationContainer">
 
                             <!-- Her kommer handlebars Template -->
 
                         </tbody>
                     </table>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h2 class="panel-title text-center"><b>Brukere med tilgang</b></h2>
-                        </div>
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
+                    </div>
+                    <div class="col-md-6">
+                    
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title text-center"><b>Brukere med tilgang</b></h2>
+                            </div>
+                    <table class="table">
+                        
+                        <tbody id="storageRestrictionContainer">
+                            
                                 
-                                <td id="storageRestrictionContainer">
+                                
 
                                     <!-- Her kommer handlebars Template -->
 
-                                </td>
-                            </tr>                      
+                                
+                                                  
                         </tbody>    
                     </table>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h2 class="panel-title text-center"><b>Innhold i lageret</b></h2>
                         </div>
-                    <table class="table table-striped table-bordered">
-                        <tbody>
+                    </div>
+                    <div class="col-md-6">
+                    <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title text-center"><b>Produkt i lager</b></h2>
+                            </div>
+                    <table class="table">
+                        <thead>
                             <tr>
-                                
-                                <td id="storageProductContainer">
-
-                                    <!-- Her kommer handlebars Template -->
-
-                                </td>
-                            </tr>                      
+                                <th></th>
+                                <th>Produkt</th>
+                                <th>Antall</th>  
+                            </tr>
+                          </thead>  
+                        <tbody id="storageProductContainer">
+                            
                         </tbody>
+
+                     
+                        
                     </table>
+                    </div>
                     </div>
                 </div>
                 <div class="col-sm-9 col-md-7">
@@ -243,13 +254,13 @@
                 <h4 class="modal-title">Lagertelling</h4>
             </div>
             <form action="?page=stocktacking" method="post" id="stocktaking">
-                <table class="table">
-            <div class="modal-body" id="stocktakingContainer">
-                
+               
+            <div class="modal-body" >
+                <table class="table" id="stocktakingContainer">
                 <!-- Innhold fra Handlebars Template -->
-   
+                </table>
             </div>
-                <table>    
+                   
             <div class="modal-footer">
                 <input form="stocktaking" class="btn btn-success" type="submit" value="Oppdater">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
@@ -271,12 +282,15 @@
 <script id="stocktakingTemplate" type="text/x-handlebars-template">
 <input form="stocktaking" name="givenStorageID" type="hidden" value="{{storageProduct.0.storageID}}">
 {{#each storageProduct}}
+    
     <tr>
        <th id="bordernone">{{productName}}:</th>    
            <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
            <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}">                       
-       <td><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="{{quantity}}" autocomplete="off"></td>
-    </tr>   
+       <td id="bordernone"><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="{{quantity}}" autocomplete="off"></td>
+    </tr>
+    
+    
   {{/each}} 
   
 </script>
@@ -297,8 +311,8 @@
 <script id="storageInformationTemplate" type="text/x-handlebars-template">
     {{#each storage}}    
     <tr>  
-    <th class="col-md-1">LagerID: </th>
-    <td>{{storageID}}</td> 
+    <th id="bordernone" class="col-md-1">LagerID: </th>
+    <td id="bordernone">{{storageID}}</td> 
     </tr>
     <tr>
     <th class="col-md-1">lagernavn: </th>
@@ -309,23 +323,31 @@
 
 <!-- Display StorageRetricton-->
 <script id="storageRestrictionTemplate" type="text/x-handlebars-template">
-    {{#each storageRestriction}}  
-    {{name}}
-    <button id="redigerknapp" data-id="{{userID}}" class="deleteUserRestriction" data-toggle="tooltip" title="Fjern lagertilgang">
-        <span class="glyphicon glyphicon-remove" style="color: red"></span>
-    </button>     
-    <br>        
+    {{#each storageRestriction}}
+    <tr>
+        <td >
+            <button id="redigerknapp" data-id="{{userID}}" class="deleteUserRestriction" data-toggle="tooltip" title="Fjern lagertilgang">
+            <span class="glyphicon glyphicon-remove" style="color: red"></span>
+            </button>
+        </td>
+    <td >{{name}}</td>    
+    </tr>        
     {{/each}}       
 </script>
 
 <!-- Display StorageProduct-->
 <script id="storageProductTemplate" type="text/x-handlebars-template">
-    {{#each storageProduct}}          
-    {{productName}} , Antall: {{quantity}}
+    {{#each storageProduct}}
+    <tr>
+        <td >
         <button id="redigerknapp" data-id="{{productID}}" class="deleteStorageInventory" data-toggle="tooltip" title="Fjern lagertilgang">
             <span class="glyphicon glyphicon-remove" style="color: red"></span>
-        </button>    
-        <br>   
+        </button>
+        </td>
+        <th >{{productName}}</th>
+        <td > {{quantity}}</td>
+     
+    </tr>
     {{/each}}    
 </script>
 

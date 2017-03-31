@@ -148,19 +148,19 @@
 <div class="modal fade" id="showProductInformationModal" role="dialog">
     <div class="modal-dialog">
         <!-- Innholdet til Modalen -->
-        <div class="modal-content">
+        <div class="modal-content row">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Product informasjon</h4>
             </div>
             <div class="modal-body">
-                <table class="table table-striped table-bordered">
-                    <tbody id="productInformationContainer">
-
-                        <!-- Her kommer handlebars Template -->
-
-                    </tbody>
-                </table>
+                
+                <div id="productInformationContainer">
+                    <!-- Her kommer handlebars Template -->
+                
+                </div>
+                
+                <div>
                 <table class="table table-striped table-bordered">
                     <tbody>
                         <tr> 
@@ -173,6 +173,7 @@
                         </tr>        
                     </tbody>
                 </table>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
@@ -256,29 +257,36 @@
 <!-- Display productInformation-->
 <script id="productInformationTemplate" type="text/x-handlebars-template">
 {{#each product}}
-<tr>
-    <th>ProduktID: </th>
-    <td>{{productID}}</td>
-</tr>
-<tr>
-    <th>Produktnavn: </th>
-    <td>{{productName}}</td>
-</tr>
-<tr>
-    <th>Pris: </th>
-    <td>{{price}}</td>
-</tr>
-<tr>
-    <th>Kategori: </th>
-    <td>{{categoryName}}</td>
-</tr>
-<tr>
-    <th>Opprettet: </th>
-    <td>{{date}}</td>
-</tr>
-<tr>
-    <td><img class="img-responsive" src="image/{{mediaName}}" alt="{{mediaName}}"></td>
-</tr>   
+<div class="col-md-6">
+    <table class="table">
+        <tr>
+            <th id="bordernone">ProduktID: </th>
+            <td id="bordernone">{{productID}}</td>
+        </tr>
+        <tr>
+            <th>Produktnavn: </th>
+            <td>{{productName}}</td>
+        </tr>
+        <tr>
+            <th>Pris: </th>
+            <td>{{price}}</td>
+        </tr>
+        <tr>
+            <th>Kategori: </th>
+            <td>{{categoryName}}</td>
+        </tr>
+        <tr>
+            <th>Opprettet: </th>
+            <td>{{date}}</td>
+        </tr>
+        
+        
+    </table>
+</div>
+
+<div class="col-md-6">
+   <td><img class="img-responsive" src="image/{{mediaName}}" alt="{{mediaName}}"></td>
+</div>
 {{/each}}                                                  
 </script>
 
