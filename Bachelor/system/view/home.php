@@ -8,7 +8,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
 
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main row">
     <div id="message">
         <?php
         if (isset($GLOBALS["errorMessage"])) {
@@ -51,9 +51,53 @@ if (isset($GLOBALS["errorMessage"])) {
 
     </div>
     <div class="container">
-
-
-
+        <div class="col-md-12">
+            <div class="col-md-2">
+            <select class="form-control"></select>
+            </div>
+            <div class="col-md-5">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Produkt</th>
+                            <th>Antall</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Produkt1</td>
+                            <td>24</td>
+                        </tr>
+                        <tr>
+                            <td>Produkt1</td>
+                            <td>24</td>
+                        </tr>
+                        <tr>
+                            <td>Produkt1</td>
+                            <td>24</td>
+                        </tr>
+                        <tr>
+                            <td>Produkt1</td>
+                            <td>24</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+            <div class="col-md-5" style="border: solid black 1px;">
+                <p>Chart her elns</p>
+                <br>
+                <p>Sleit me Ajax1, need help from the master xD</p>
+                <br>
+                <p>Va d nokke sånt du tenkte?</p>
+                <br>
+                <br>
+                <br>
+                <br>
+                
+                
+            </div>
+        </div>
 
 
 
@@ -519,14 +563,7 @@ if (isset($GLOBALS["errorMessage"])) {
         <td><input name="deliveryQuantity[]" form="stockDelivery" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
         
         <td>
-            <button class="remove" data-toggle="tooltip" 
-                style="appearance: none;
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                outline: none;
-                border: 0;
-                background: transparent;
-                display: inline;">
+            <button id="redigerknapp" class="remove" data-toggle="tooltip" >
                 <span class="glyphicon glyphicon-remove" style="color: red"></span>
             </button>
         </td>    
