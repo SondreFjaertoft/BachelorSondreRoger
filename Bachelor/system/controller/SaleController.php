@@ -21,11 +21,22 @@ class SaleController extends Controller {
             $this->getSalesFromID();
         } else if ($page == "editMySale"){
             $this->editMySale();
+        } else if ($page == "getResCount"){
+            $this->getResCount();
+        } else if ($page == "saleSingle"){
+            $this->saleSinglePage();
         }
+            
     }
 
     private function salePage() {
+   
         return $this->render("sale");
+    }
+    
+     private function saleSinglePage() {
+   
+        return $this->render("saleSingle");
     }
     
     private function getMySalesPage() {
@@ -72,12 +83,21 @@ class SaleController extends Controller {
     }
     
     private function getProdQuantity(){
-        $givenStorageID = $_REQUEST["givenStorageID"];
         $givenProductID = $_REQUEST["givenProductID"];
-        
         $inventoryInfo = $GLOBALS["inventoryModel"];
         
-        $inventoryModel = $inventoryInfo->getProdFromStorageIDAndProductID($givenStorageID, $givenProductID);
+        if (isset($_POST['givenStorageID'])) {
+            $givenStorageID = $_REQUEST['givenStorageID'];
+            $inventoryModel = $inventoryInfo->getProdFromStorageIDAndProductID($givenStorageID, $givenProductID);
+        } else {
+            $givenUserID = $_SESSION["userID"];
+            $restrictionInfo = $GLOBALS["restrictionModel"];
+            $restrictionModel = $restrictionInfo->getAllRestrictionInfoFromUserID($givenUserID);
+            
+            $givenStorageID = $restrictionModel[0]['storageID'];;
+            $inventoryModel = $inventoryInfo->getProdFromStorageIDAndProductID($givenStorageID, $givenProductID);
+        }
+        
 
         $data = json_encode(array("prodInfo" => $inventoryModel));
         echo $data;   
@@ -123,5 +143,18 @@ class SaleController extends Controller {
             echo json_encode("success");
         }
     }
+    
+    private function getResCount(){
+        $givenUserID = "27";
+        $restrictionModel = $GLOBALS["restrictionModel"];
+        
+        $count = $restrictionModel->resCount($givenUserID);
+        
+        $resCount = $count[0]["COUNT(*)"];
+        
+  
+        echo json_encode($resCount);
+    }
+   
 }
     

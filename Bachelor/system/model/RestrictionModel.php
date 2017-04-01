@@ -11,6 +11,8 @@ class RestritionModel{
     const SELECT_FROM_STORAGEID = "SELECT users.name, restrictions.storageID, restrictions.userID FROM users INNER JOIN " . RestritionModel::TABLE . " ON users.userID = restrictions.userID WHERE storageID = :givenStorageID";
     const SELECT_FROM_USERID = "SELECT storage.storageName, restrictions.storageID, restrictions.userID FROM storage INNER JOIN " . RestritionModel::TABLE . " ON storage.storageID = restrictions.storageID WHERE userID = :givenUserID";
     const FIND_QUERY = "SELECT COUNT(*) FROM " . RestritionModel::TABLE . " WHERE storageID = :givenStorageID AND userID = :givenUserID";
+    const COUNT_QUERY = "SELECT COUNT(*) FROM " . RestritionModel::TABLE . " WHERE userID = :givenUserID";
+    const DELETE_STO_ID_QUERY = "DELETE FROM " . RestritionModel::TABLE . " WHERE storageID = :givenStorageID";
 
     const SELECT_STORAGE_QUERY = "SELECT storage.storageName, restrictions.storageID, restrictions.userID FROM storage INNER JOIN " . RestritionModel::TABLE . " ON storage.storageID = restrictions.storageID";
     const SELECT_USER_QUERY = "SELECT users.name, restrictions.storageID, restrictions.userID FROM users INNER JOIN " . RestritionModel::TABLE . " ON users.userID = restrictions.userID";
@@ -33,7 +35,8 @@ class RestritionModel{
     $this->delStmt = $this->dbConn->prepare(RestritionModel::DELETE_QUERY);
     $this->delSingleStmt = $this->dbConn->prepare(RestritionModel::DELETE_SINGLE_QUERY);
     $this->findStm = $this->dbConn->prepare(RestritionModel::FIND_QUERY);
-
+    $this->resCount = $this->dbConn->prepare(RestritionModel::COUNT_QUERY);
+    $this->delResFromSto = $this->dbConn->prepare(RestritionModel::DELETE_STO_ID_QUERY);
     }
     
     /**
@@ -75,18 +78,19 @@ class RestritionModel{
         return $this->findStm->fetchAll(PDO::FETCH_ASSOC); 
     }
     
-    
-    
-   // Er ikke i bruk for øyeblikket:
-    
     public function addRestriction($givenUserID, $givenStorageID){
         $this->addStmt->execute(array("givenUserID" => $givenUserID, "givenStorageID" => $givenStorageID));
     }
     
     
-    public function testingAjax(){
-        echo "dette er en test";
-      
+    public function resCount($givenUserID){
+        $this->resCount->execute(array("givenUserID" => $givenUserID));  
+        return $this->resCount->fetchAll(PDO::FETCH_ASSOC); 
+    }
+    
+    public function deleteResStorageID($givenStorageID){
+        return $this->delResFromSto->execute(array("givenStorageID" => $givenStorageID));  
+        
     }
     
 }

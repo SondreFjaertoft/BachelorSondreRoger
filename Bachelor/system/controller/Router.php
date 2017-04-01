@@ -38,7 +38,8 @@ class Router {
                     
                 case "transfer" :
                 case "getTransferRestriction" :
-                case "transferProduct" :    
+                case "transferProduct" : 
+                case "transferSingle" :    
                     return new TransferController();
                     
                 case "sale" :
@@ -47,7 +48,9 @@ class Router {
                 case "mySales" :   
                 case "getMySales"   : 
                 case "getSalesFromID" :   
-                case "editMySale" :    
+                case "editMySale" :  
+                case "getResCount" :
+                case "saleSingle" :    
                     return new SaleController();
                     
                 case "return" :
@@ -56,7 +59,8 @@ class Router {
                 case "returnProduct" :
                 case "getReturnsFromID" :    
                 case "editMyReturn" :
-                case "stockDelivery" :    
+                case "stockDelivery" :
+                case "returnSingle" :    
                     return new ReturnController();
                     
                 case "getAllProductInfo" :

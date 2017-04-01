@@ -62,6 +62,9 @@ class StorageController extends Controller {
         
         $removeStorage = $GLOBALS["storageModel"];
         $removeStorage->removeStorage($removeStorageID);
+        
+        $restrictionModel = $GLOBALS["restrictionModel"];
+        $restrictionModel->deleteResStorageID($removeStorageID);
 
         echo json_encode("success");
     }
@@ -102,11 +105,22 @@ class StorageController extends Controller {
         echo $data;
     }
 
-    private function getStorageProduct() {
-        $givenStorageID = $_REQUEST['givenStorageID'];
-
+    private function getStorageProduct() {       
         $inventoryInfo = $GLOBALS["inventoryModel"];
-        $inventoryModel = $inventoryInfo->getAllStorageInventoryByStorageID($givenStorageID);
+        
+        if (isset($_POST['givenStorageID'])) {
+            $givenStorageID = $_REQUEST['givenStorageID'];
+            $inventoryModel = $inventoryInfo->getAllStorageInventoryByStorageID($givenStorageID);
+        } else {
+            $givenUserID = $_SESSION["userID"];
+            $restrictionInfo = $GLOBALS["restrictionModel"];
+            $restrictionModel = $restrictionInfo->getAllRestrictionInfoFromUserID($givenUserID);
+            
+            $givenStorageID = $restrictionModel[0]['storageID'];;
+            $inventoryModel = $inventoryInfo->getAllStorageInventoryByStorageID($givenStorageID);
+        }
+
+        
 
         $data = json_encode(array("storageProduct" => $inventoryModel));
         echo $data;

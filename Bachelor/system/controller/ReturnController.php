@@ -19,11 +19,17 @@ class ReturnController extends Controller {
             $this->editMyReturn();
         } else if ($page == "stockDelivery"){
             $this->stockDelivery();
+        } else if ($page == "returnSingle"){
+            $this->returnSinlePage();
         }
     }
     
     private function returnPage() {
         return $this->render("return");
+    }
+    
+    private function returnSinlePage() {
+        return $this->render("returnSingle");
     }
     
     private function myReturnsPage(){
