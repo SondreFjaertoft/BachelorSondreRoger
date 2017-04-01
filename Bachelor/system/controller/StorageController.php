@@ -57,6 +57,7 @@ class StorageController extends Controller {
     private function deleteStorageEngine() {
         $removeStorageID = $_REQUEST["deleteStorageID"];
 
+        if($removeStorageID != 1){
         $deleteInventory = $GLOBALS["inventoryModel"];
         $deleteInventory->deleteInventory($removeStorageID);
         
@@ -67,6 +68,7 @@ class StorageController extends Controller {
         $restrictionModel->deleteResStorageID($removeStorageID);
 
         echo json_encode("success");
+        }
     }
 
     private function getAllStorageInfo() {

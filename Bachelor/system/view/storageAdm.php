@@ -232,6 +232,9 @@
                 <!-- Innhold fra Handlebars Template -->
 
             </div>
+                <p id="errorMessage">
+                    
+                </p>    
             <div class="modal-footer">
                 <input form="deleteStorage" class="btn btn-success" type="submit" value="Slett">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
@@ -473,6 +476,8 @@
 
         $('#displayStorageContainer').delegate('.delete', 'click', function () {  
             var givenStorageID = $(this).attr('data-id');
+            var $displayUsers = $('#errorMessage');
+            $displayUsers.empty();
 
             $.ajax({
                 type: 'POST',
@@ -510,12 +515,17 @@
         $('#deleteStorage').submit(function () {
             var url = $(this).attr('action');
             var data = $(this).serialize();
-
+            var $displayUsers = $('#errorMessage');
+            $displayUsers.empty();
+            
             $.ajax({
                 type: 'POST',
                 url: url,
                 data: data,
                 dataType: 'json',
+                error: function() {         
+                    $displayUsers.empty().append("Du kan ikke slette hovedlageret");
+                },
                 success: function (data) {
 
                     UpdateStorageTable();
@@ -946,6 +956,7 @@
                 success: function (data) {
                     $("#searchForStorage")[0].reset();
                     storageTableTemplate(data);
+                    
                 }
             });
             return false;
