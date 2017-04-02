@@ -54,17 +54,38 @@ if (isset($GLOBALS["errorMessage"])) {
         <div class="col-md-12">
             
             <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        
+                        <select name="fromStorageID" id="chooseStorageContainer" class="form-control">
+
+                                <!-- Her kommer Handlebars Template-->
+
+                        </select>
+                        
+                    </div>
                 
 
-                <select name="fromStorageID" id="chooseStorageContainer" class="form-control">
-
-                <!-- Her kommer Handlebars Template-->
-
-            </select>
-
-            
+                
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Produkt navn</th>
+                            <th>Antall</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody id="chosenStorageContainer">
+                        
+                    <!-- Her kommer Handlebars Template-->
+                    </tbody>
+                </table>
             </div>
-            
+            </div>
+            <div class="col-md-6">
+                
+                <canvas id="myChart"></canvas>
+                
               
             </div>
             
@@ -72,61 +93,8 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
 
-        <div class="col-sm-3 col-md-4" style="border: solid black 1px">
-            <h3 class="col-md-6"> LAGERSTATUS</h3>   
-            <p style="margin-top: 22px">-- (Dropdown her med velg lager?)</p>
-            <script>
-                document.write('<p>Klokka di rågær: <span id="date-time">', new Date().toLocaleString(), '<\/span>.<\/p>');
-                if (document.getElementById)
-                    onload = function () {
-                        setInterval("document.getElementById ('date-time').firstChild.data = new Date().toLocaleString()", 50);
-                    };
-            </script>
-
-            <canvas id="lagerstatus"></canvas>
-            <script>
-                var ctx = document.getElementById('lagerstatus').getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ["FMG", "Dekoder", "Roger", "Sondre", "Ole", "Tafjord", "DØØMEEE"],
-                        datasets: [
-                            {
-                                label: "Antall produkter i lageret",
-                                backgroundColor: [
-                                    'rgba(0, 46, 96, 0.7)',
-                                    'rgba(255, 211, 0, 0.7)',
-                                    'rgba(0, 46, 96, 0.7)',
-                                    'rgba(255, 211, 0, 0.7)',
-                                    'rgba(0, 46, 96, 0.7)',
-                                    'rgba(255, 211, 0, 0.7)',
-                                    'rgba(0, 46, 96, 0.7)'
-
-                                ],
-                                borderColor: [
-                                    'rgba(0, 46, 96, 1)',
-                                    'rgba(255, 211, 0, 1)',
-                                    'rgba(0, 46, 96, 1)',
-                                    'rgba(255, 211, 0, 1)',
-                                    'rgba(0, 46, 96, 1)',
-                                    'rgba(255, 211, 0, 1)',
-                                    'rgba(0, 46, 96, 1)'
-                                ],
-                                borderWidth: 1,
-                                data: [65, 59, 80, 81, 56, 55, 0]
-                            }
-                        ]
-                    },
-                    options: {
-                        legend: {
-                            display: false
-                        }
-                    }
-
-                });
-            </script>
-        </div>
-        <div class="col-sm-3 col-md-4">
+        <div class="col-md-12">
+        <div class="col-sm-3 col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title text-center"><b>Lite ting og tang on the lager</b></h3>
@@ -164,7 +132,8 @@ if (isset($GLOBALS["errorMessage"])) {
                 </table>
             </div>
         </div>
-        <div class="col-sm-3 col-md-4">
+        
+        <div class="col-sm-3 col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title text-center"><b>Siste hendelser</b></h3>
@@ -201,6 +170,7 @@ if (isset($GLOBALS["errorMessage"])) {
             </div>
 
 
+        </div>
         </div>
 
         <!-- HER KOMMER INNHOLDET>   -->                
@@ -999,6 +969,8 @@ $(document).ready(function()
         
         $('#chooseStorageContainer').on('change', function () {
             givenStorageID = $(this).find("option:selected").data('id');
+            
+            chartTest(givenStorageID);
 
             if (givenStorageID > 0) {
                 $.ajax({
@@ -1007,17 +979,11 @@ $(document).ready(function()
                     data: {givenStorageID: givenStorageID},
                     dataType: 'json',
                     success: function (data) {
-                        withdrawProductTemplate(data);
-                        $('.selectQuantity').remove();
-                        $('#transferButton').hide();
-                        $('#commentContainer').hide();
-                
+                        chosenStorageTemplate(data);
+                       
                     }
                 });
-            } else {
-                $('.product').remove();
-                $('.selectQuantity').remove();
-            }
+            } 
 
             return false;
 
@@ -1025,20 +991,139 @@ $(document).ready(function()
     });
 </script>
 
-<script id="withdrawProductTemplate" type="text/x-handlebars-template">
-    <br>  
-    {{#each storageProduct}} 
-    <button data-id="{{productID}}" class="btn btn-default product">{{productName}}</button>
-    {{/each}} 
-</script>
-
 <script>
-    function withdrawProductTemplate(data) {
-        var rawTemplate = document.getElementById("withdrawProductTemplate").innerHTML;
+    function chosenStorageTemplate(data) {
+        var rawTemplate = document.getElementById("chosenStorageTemplate").innerHTML;
         var compiledTemplate = Handlebars.compile(rawTemplate);
         var transferProductGeneratedHTML = compiledTemplate(data);
 
-        var transferContainer = document.getElementById("withdrawProductContainer");
+        var transferContainer = document.getElementById("chosenStorageContainer");
         transferContainer.innerHTML = transferProductGeneratedHTML;
     }
 </script>
+
+<script id="chosenStorageTemplate" type="text/x-handlebars-template">
+     
+    {{#each storageProduct}}
+    <tr>
+    <td>{{productName}}</td>
+    <td>{{quantity}}</td>
+    </tr>
+    {{/each}} 
+</script>
+
+<!-- Get storageInventory from selected storage-->
+<script>
+    function chartTest(data) {
+         
+        var givenStorageID = data;
+       
+        $(function () {
+          
+            $.ajax({
+                type: 'POST',
+                url: '?page=chartProduct',
+                data: {givenStorageID: givenStorageID},
+                dataType: 'json',
+                success: function (data) {
+
+                    
+                    drawChart(data);
+                    
+                }
+            });
+        });
+    }
+    var myChart;
+    
+    function drawChart(data)
+    {
+        if(myChart)
+        {
+            myChart.destroy();
+        }
+          var ctx = document.getElementById('myChart').getContext('2d');
+
+                   
+                    
+
+                    var product = [];
+                    var antall = [];
+
+                        $.each(data, function(i, item){
+                        product.push(item.productName);
+                        antall.push(item.quantity);
+                        });
+
+                            myChart = new Chart(ctx, {
+
+                            type: 'bar',
+                            data: {
+                                labels: product,
+                                datasets: [
+                                    {
+                                        label: "Antall",
+                                        backgroundColor: [
+                                            'rgba(0, 46, 96, 0.7)',
+                                            'rgba(255, 211, 0, 0.7)'
+                                            
+
+                                        ],
+                                        borderColor: [
+                                            'rgba(0, 46, 96, 1)',
+                                            'rgba(255, 211, 0, 1)'
+                                            
+                                        ],
+                                        borderWidth: 1,
+                                        data: antall
+                                    }
+                                ]
+                            },
+                            options: {
+                                legend: {
+                                    display: false
+                                }
+                            }
+
+                        });
+    }
+</script>
+
+<!-- 
+var barChartData ={
+labels: product,
+datasets:[
+{
+    label: "My First dataset",
+    fillColor: "rgba(220,220,220,0.5)", 
+    strokeColor: "rgba(220,220,220,0.8)", 
+    highlightFill: "rgba(220,220,220,0.75)",
+    highlightStroke: "rgba(220,220,220,1)",
+    data: antall
+}
+]
+};
+
+var bars = myObjBar.datasets[0].bars;
+    for(i=0;i<bars.length;i++){
+       var color="green";
+       //You can check for bars[i].value and put your conditions here
+       if(bars[i].value<3){
+       	color="red";
+       }
+       else if(bars[i].value<5){
+       	color="orange"
+       
+       }
+       else if(bars[i].value<8){
+       	color="yellow"
+       }
+       else{
+       	color="green"
+       }
+       
+       bars[i].fillColor = color;
+
+    }
+-->
+

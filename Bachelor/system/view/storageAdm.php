@@ -195,9 +195,7 @@
                 <div class="col-sm-9 col-md-7">
 
                     <canvas id="myChart"></canvas>
-                    <script>
-
-                    </script>
+                    
                 </div>
                     
             </div>
@@ -898,7 +896,7 @@ $('.quantityColor').filter(function(index){
 }).siblings().andSelf().attr('class', 'bg-success');
 
 $('.quantityColor').filter(function(index){
-    return parseInt(this.innerHTML) < 10 && parseInt(this.innerHTML) > 5;
+    return parseInt(this.innerHTML) < 10 && parseInt(this.innerHTML) >= 5;
 }).siblings().andSelf().attr('class', 'bg-warning');
 
 $('.quantityColor').filter(function(index){
