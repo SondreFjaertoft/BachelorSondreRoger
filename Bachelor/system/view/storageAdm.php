@@ -264,7 +264,7 @@
             </div>
                    
             <div class="modal-footer">
-                <input form="stocktaking" class="btn btn-success" type="submit" value="Oppdater">
+                <input form="stocktaking" class="btn btn-success" id="saveStocktaking" type="submit" value="Neste">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
             </form>    
@@ -297,9 +297,14 @@
         <td>{{newQuantity}}</td>
         <td>{{differance}}</td>    
     </tr>
-
 </tbody>
-{{/each}} 
+<input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
+<input form="stocktaking" name="givenQuantityArray[]" type="hidden" value="{{newQuantity}}"> 
+{{/each}}
+
+<input form="stocktaking" name="givenStorageID" type="hidden" value="{{differanceArray.0.storageID}}">
+
+            
   
 </script>
 
@@ -307,16 +312,17 @@
 <!-- Display stocktacing product-->
 <script id="stocktakingTemplate" type="text/x-handlebars-template">
 <input form="stocktaking" name="givenStorageID" type="hidden" value="{{storageProduct.0.storageID}}">
+
 {{#each storageProduct}}
     
     <tr>
        <th id="bordernone">{{productName}}:</th>    
            <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
            <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}"> 
-           <input form="stocktaking" name="givenProductNAmeArray[]" type="hidden" value="{{productName}}">            
+           <input form="stocktaking" name="givenProductNameArray[]" type="hidden" value="{{productName}}">            
        <td id="bordernone"><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="{{quantity}}" autocomplete="off"></td>
     </tr>
-    
+     
     
   {{/each}} 
   
@@ -572,15 +578,17 @@
 
         $('#displayStorageContainer').delegate('.update', 'click', function () {  
             var givenStorageID = $(this).attr('data-id');
-
+            
             $.ajax({
                 type: 'POST',
                 url: '?page=getStorageProduct',
                 data: {givenStorageID: givenStorageID},
                 dataType: 'json',
                 success: function (data) {
+                    
                     $('#stocktakingModal').modal('show');
                     stocktakingTemplate(data);  
+                    
                 }
             });
             return false;
@@ -614,11 +622,16 @@
                 data: data,
                 dataType: 'json',
                 success: function (data) {
-                    
+                if(document.getElementById("saveStocktaking").value === "Lagre"){
+                var $displayUsers = $('#stocktakingResultContainer');
+                    $displayUsers.empty();
+                    $('#stocktakingModal').modal('hide');
+                } else {    
                 var $displayUsers = $('#stocktakingContainer');
                 $displayUsers.empty();
-                
+                document.getElementById("saveStocktaking").value = "Lagre";
                 stocktakingResultTemplate(data);
+                }
                     
                 }
             });
@@ -1024,3 +1037,5 @@ $('.quantityColor').filter(function(index){
     });
 
 </script>
+
+                       
