@@ -260,6 +260,9 @@
                 <table class="table" id="stocktakingContainer">
                 <!-- Innhold fra Handlebars Template -->
                 </table>
+                <table class="table" id="stocktakingResultContainer">
+                <!-- Innhold fra Handlebars Template -->
+                </table>
             </div>
                    
             <div class="modal-footer">
@@ -278,6 +281,30 @@
 
 <!-- TEMPLATES -->
 
+<!-- Display stocktacing product-->
+<script id="stocktakingResultTemplate" type="text/x-handlebars-template">
+ <thead>
+    <tr>
+        <th>Produkt</th>
+        <th>Gammel verdi</th>
+        <th>Ny verdi</th>
+        <th>differanse</th>    
+    </tr>
+</thead>
+<tbody>
+{{#each differanceArray}}
+    <tr>
+        <td>{{productName}}</td>
+        <td>{{oldQuantity}}</td>
+        <td>{{newQuantity}}</td>
+        <td>{{differance}}</td>    
+    </tr>
+
+</tbody>
+{{/each}} 
+  
+</script>
+
 
 <!-- Display stocktacing product-->
 <script id="stocktakingTemplate" type="text/x-handlebars-template">
@@ -287,7 +314,8 @@
     <tr>
        <th id="bordernone">{{productName}}:</th>    
            <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
-           <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}">            
+           <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}"> 
+           <input form="stocktaking" name="givenProductNAmeArray[]" type="hidden" value="{{productName}}">            
        <td id="bordernone"><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="{{quantity}}" autocomplete="off"></td>
     </tr>
     
@@ -577,7 +605,7 @@
 
 <!-- POST results from stocktaking, and updating the table-->
 <script>
-    $(function POSTeditStorageInfo() {
+    $(function POSTstocktakingResult() {
 
         $('#stocktaking').submit(function () {
             var url = $(this).attr('action');
@@ -587,14 +615,31 @@
                 url: url,
                 data: data,
                 dataType: 'json',
-                success: function () {
-                    $('#stocktakingModal').modal('hide');
+                success: function (data) {
+                    
+                var $displayUsers = $('#stocktakingContainer');
+                $displayUsers.empty();
+                
+                stocktakingResultTemplate(data);
+                    
                 }
             });
             return false;
         });
     });
 
+</script>
+
+<!-- stocktaking storage template-->         
+<script>
+    function stocktakingResultTemplate(data) {
+        var rawTemplate = document.getElementById("stocktakingResultTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var stocktakingStorageGeneratedHTML = compiledTemplate(data);
+
+        var storageContainer = document.getElementById("stocktakingResultContainer");
+        storageContainer.innerHTML = stocktakingStorageGeneratedHTML;
+    }
 </script>
 
 
