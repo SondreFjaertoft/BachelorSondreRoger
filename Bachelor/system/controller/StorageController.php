@@ -155,10 +155,28 @@ class StorageController extends Controller {
         $givenProductIDArray = $_REQUEST["givenProductArray"];
         $givenQuantityArray = $_REQUEST["givenQuantityArray"];
         $oldQuantityArray = $_REQUEST["oldQuantityArray"];
+        $givenProductNameArray = $_REQUEST["givenProductNAmeArray"];
         
+    
         for ($i = 0; $i < sizeof($givenProductIDArray); $i++){
             $differance = $givenQuantityArray[$i] - $oldQuantityArray[$i];
-            array($givenProductIDArray[$i] => $differance);
+
+            $differanceArray[] = (object) array('productID' => $givenProductIDArray[$i], 'differance' => $differance, 'oldQuantity' => $oldQuantityArray[$i], 
+                'newQuantity' => $givenQuantityArray[$i], 'productName' => $givenProductNameArray[$i]);
+        }
+        
+        $data = json_encode(array("differanceArray" => $differanceArray));
+        echo $data;
+    }
+    
+    
+    private function updateStocktaking(){
+        $givenStorageID = $_REQUEST["givenStorageID"];
+        $givenProductIDArray = $_REQUEST["givenProductArray"];
+        $givenQuantityArray = $_REQUEST["givenQuantityArray"];
+            
+        for ($i = 0; $i < sizeof($givenProductIDArray); $i++){
+
             $inventoryInfo = $GLOBALS["inventoryModel"];
             $inventoryInfo->updateInventory($givenStorageID, $givenProductIDArray[$i], $givenQuantityArray[$i]);
         }
