@@ -151,22 +151,39 @@ class StorageController extends Controller {
     }
     
     private function stocktacking(){
+        if (isset($_POST['oldQuantityArray'])) {
         $givenStorageID = $_REQUEST["givenStorageID"];
-        $givenProductIDArray = $_REQUEST["givenProductArray"];
+        $givenProductIDArray = $_REQUEST["givenProductArray"]; 
+        $oldQuantityArray = $_REQUEST["oldQuantityArray"];  
+        $givenProductNameArray = $_REQUEST["givenProductNameArray"];
         $givenQuantityArray = $_REQUEST["givenQuantityArray"];
-        $oldQuantityArray = $_REQUEST["oldQuantityArray"];
-        $givenProductNameArray = $_REQUEST["givenProductNAmeArray"];
-        
     
         for ($i = 0; $i < sizeof($givenProductIDArray); $i++){
             $differance = $givenQuantityArray[$i] - $oldQuantityArray[$i];
 
             $differanceArray[] = (object) array('productID' => $givenProductIDArray[$i], 'differance' => $differance, 'oldQuantity' => $oldQuantityArray[$i], 
-                'newQuantity' => $givenQuantityArray[$i], 'productName' => $givenProductNameArray[$i]);
+                'newQuantity' => $givenQuantityArray[$i], 'productName' => $givenProductNameArray[$i], 'storageID' =>  $givenStorageID);
         }
         
         $data = json_encode(array("differanceArray" => $differanceArray));
         echo $data;
+        
+        }else{
+
+        $givenStorageID = $_REQUEST["givenStorageID"];
+        $givenProductIDArray = $_REQUEST["givenProductArray"];
+        $givenQuantityArray = $_REQUEST["givenQuantityArray"];
+        
+        for ($i = 0; $i < sizeof($givenProductIDArray); $i++){
+
+            $inventoryInfo = $GLOBALS["inventoryModel"];
+            $inventoryInfo->updateInventory($givenStorageID, $givenProductIDArray[$i], $givenQuantityArray[$i]);
+        }
+        
+        echo json_encode("success");
+        
+
+        }   
     }
     
     
