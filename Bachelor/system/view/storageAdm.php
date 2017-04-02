@@ -850,15 +850,15 @@ function rowColor(){
     
 $('.quantityColor').filter(function(index){
     return parseInt(this.innerHTML) >= 10;
-}).siblings().andSelf().css({'background-color':'green'});
+}).siblings().andSelf().attr('class', 'bg-success');
 
 $('.quantityColor').filter(function(index){
-    return parseInt(this.innerHTML) < 10;
-}).siblings().andSelf().css({'background-color':'yellow'});
+    return parseInt(this.innerHTML) < 10 && parseInt(this.innerHTML) > 5;
+}).siblings().andSelf().attr('class', 'bg-warning');
 
 $('.quantityColor').filter(function(index){
     return parseInt(this.innerHTML) < 5;
-}).siblings().andSelf().css({'background-color':'red'});
+}).siblings().andSelf().attr('class', 'bg-danger');
 }
 
 </script>
