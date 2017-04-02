@@ -145,7 +145,7 @@ class SaleController extends Controller {
     }
     
     private function getResCount(){
-        $givenUserID = "27";
+        $givenUserID = $_SESSION["userID"];
         $restrictionModel = $GLOBALS["restrictionModel"];
         
         $count = $restrictionModel->resCount($givenUserID);

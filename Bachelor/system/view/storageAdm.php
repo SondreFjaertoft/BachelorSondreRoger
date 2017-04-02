@@ -287,7 +287,7 @@
     <tr>
        <th id="bordernone">{{productName}}:</th>    
            <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
-           <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}">                       
+           <input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{quantity}}">            
        <td id="bordernone"><input class="form-control" type="int" required="required" name="givenQuantityArray[]" value="{{quantity}}" autocomplete="off"></td>
     </tr>
     
@@ -345,8 +345,8 @@
             <span class="glyphicon glyphicon-remove" style="color: red"></span>
         </button>
         </td>
-        <th >{{productName}}</th>
-        <td > {{quantity}}</td>
+        <th class="test">{{productName}}</th>
+        <td class="test"> {{quantity}}</td>
      
     </tr>
     {{/each}}    
@@ -803,6 +803,7 @@
                 dataType: 'json',
                 success: function (data) {
                     storageProductTemplate(data); 
+                    rowColor();
 
                 }
             });
@@ -842,6 +843,24 @@
         var storageContainer = document.getElementById("storageProductContainer");
         storageContainer.innerHTML = storageProductGeneratedHTML;
     }
+</script>
+
+<script>
+function rowColor(){
+    
+$('.test').filter(function(index){
+    return parseInt(this.innerHTML) >= 10;
+}).siblings().andSelf().css({'background-color':'green'});
+
+$('.test').filter(function(index){
+    return parseInt(this.innerHTML) < 10;
+}).siblings().andSelf().css({'background-color':'yellow'});
+
+$('.test').filter(function(index){
+    return parseInt(this.innerHTML) < 5;
+}).siblings().andSelf().css({'background-color':'red'});
+}
+
 </script>
 
 

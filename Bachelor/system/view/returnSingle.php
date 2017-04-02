@@ -7,7 +7,7 @@
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
             <form id="returnProducts" action="?page=returnProduct" method="post">
                 <div class="col-sm-3 col-md-4">
-                    <label>Uttak fra: </label><div id="returnRestrictionContainer"></div>
+                    <label>Returner til: </label><div id="returnRestrictionContainer"></div>
                 </div>
 
                 <br><br><br><br>

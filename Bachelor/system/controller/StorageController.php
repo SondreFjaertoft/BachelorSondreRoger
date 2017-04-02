@@ -154,8 +154,11 @@ class StorageController extends Controller {
         $givenStorageID = $_REQUEST["givenStorageID"];
         $givenProductIDArray = $_REQUEST["givenProductArray"];
         $givenQuantityArray = $_REQUEST["givenQuantityArray"];
+        $oldQuantityArray = $_REQUEST["oldQuantityArray"];
         
         for ($i = 0; $i < sizeof($givenProductIDArray); $i++){
+            $differance = $givenQuantityArray[$i] - $oldQuantityArray[$i];
+            echo json_encode($differance);
             $inventoryInfo = $GLOBALS["inventoryModel"];
             $inventoryInfo->updateInventory($givenStorageID, $givenProductIDArray[$i], $givenQuantityArray[$i]);
         }
