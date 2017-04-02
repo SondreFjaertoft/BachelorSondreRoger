@@ -625,6 +625,7 @@
                 if(document.getElementById("saveStocktaking").value === "Lagre"){
                 var $displayUsers = $('#stocktakingResultContainer');
                     $displayUsers.empty();
+                    document.getElementById("saveStocktaking").value = "Neste";
                     $('#stocktakingModal').modal('hide');
                 } else {    
                 var $displayUsers = $('#stocktakingContainer');
