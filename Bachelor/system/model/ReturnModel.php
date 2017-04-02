@@ -6,8 +6,8 @@ class ReturnModel {
     
     const TABLE = "returns";
     const SELECT_QUERY = "SELECT returnID, customerNr, products.productName, returns.date, comment, storage.storageName, quantity FROM " . ReturnModel::TABLE . 
-            " INNER JOIN products ON returns.productID = products.productID INNER JOIN storage ON returns.storageID = storage.storageID WHERE customerNr LIKE :givenProductSearchWord OR comment LIKE "
-            . ":givenProductSearchWord OR productName LIKE :givenProductSearchWord OR storageName LIKE :givenProductSearchWord AND userID = :givenUserID ORDER BY date DESC";
+            " INNER JOIN products ON returns.productID = products.productID INNER JOIN storage ON returns.storageID = storage.storageID WHERE userID = :givenUserID AND customerNr LIKE :givenProductSearchWord OR comment LIKE "
+            . ":givenProductSearchWord OR productName LIKE :givenProductSearchWord OR storageName LIKE :givenProductSearchWord ORDER BY date DESC";
     const INSERT_QUERY = "INSERT INTO " . ReturnModel::TABLE . " (productID, date, customerNr, comment, userID, storageID, quantity) VALUES (:givenProductID, :givenDate, :givenCustomerNumber, :givenComment, :givenUserID, :givenStorageID, :givenQuantity)";
     const SELECT_FROM_ID = "SELECT * FROM " . ReturnModel::TABLE . " WHERE returnID = :givenReturnID";
     const UPDATE_QUERY = "UPDATE " . ReturnModel::TABLE . " SET customerNr = :editCustomerNr, comment = :editComment  WHERE returnID = :editReturnID" ;
