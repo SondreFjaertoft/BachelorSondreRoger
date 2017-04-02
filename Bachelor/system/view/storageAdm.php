@@ -345,8 +345,8 @@
             <span class="glyphicon glyphicon-remove" style="color: red"></span>
         </button>
         </td>
-        <th class="test">{{productName}}</th>
-        <td class="test"> {{quantity}}</td>
+        <th>{{productName}}</th>
+        <td class="quantityColor"> {{quantity}}</td>
      
     </tr>
     {{/each}}    
@@ -848,15 +848,15 @@
 <script>
 function rowColor(){
     
-$('.test').filter(function(index){
+$('.quantityColor').filter(function(index){
     return parseInt(this.innerHTML) >= 10;
 }).siblings().andSelf().css({'background-color':'green'});
 
-$('.test').filter(function(index){
+$('.quantityColor').filter(function(index){
     return parseInt(this.innerHTML) < 10;
 }).siblings().andSelf().css({'background-color':'yellow'});
 
-$('.test').filter(function(index){
+$('.quantityColor').filter(function(index){
     return parseInt(this.innerHTML) < 5;
 }).siblings().andSelf().css({'background-color':'red'});
 }
