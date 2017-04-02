@@ -52,51 +52,22 @@ if (isset($GLOBALS["errorMessage"])) {
     </div>
     <div class="container">
         <div class="col-md-12">
-            <div class="col-md-2">
-            <select class="form-control"></select>
-            </div>
-            <div class="col-md-5">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Produkt</th>
-                            <th>Antall</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Produkt1</td>
-                            <td>24</td>
-                        </tr>
-                        <tr>
-                            <td>Produkt1</td>
-                            <td>24</td>
-                        </tr>
-                        <tr>
-                            <td>Produkt1</td>
-                            <td>24</td>
-                        </tr>
-                        <tr>
-                            <td>Produkt1</td>
-                            <td>24</td>
-                        </tr>
-                    </tbody>
-                </table>
+            
+            <div class="col-md-6">
                 
+
+                <select name="fromStorageID" id="chooseStorageContainer" class="form-control">
+
+                <!-- Her kommer Handlebars Template-->
+
+            </select>
+
+            
             </div>
-            <div class="col-md-5" style="border: solid black 1px;">
-                <p>Chart her elns</p>
-                <br>
-                <p>Sleit me Ajax1, need help from the master xD</p>
-                <br>
-                <p>Va d nokke sånt du tenkte?</p>
-                <br>
-                <br>
-                <br>
-                <br>
-                
-                
+            
+              
             </div>
+            
         </div>
 
 
@@ -980,3 +951,94 @@ $(document).ready(function()
     }) ;
 });
             </script>
+
+
+            <!-- Get storage information with user restriction -->
+<script>
+ 
+
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '?page=getTransferRestriction',
+            dataType: 'json',
+            success: function (data) {
+                withdrawRestrictionTemplate(data);
+            }
+        });
+    });
+</script>
+
+<!-- Display storages in drop down meny Template -->
+<script>
+    function withdrawRestrictionTemplate(data) {
+        var rawTemplate = document.getElementById("chooseStorageTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var transferRestrictionGeneratedHTML = compiledTemplate(data);
+
+        var transferContainer = document.getElementById("chooseStorageContainer");
+        transferContainer.innerHTML = transferRestrictionGeneratedHTML;
+
+    }
+</script>
+
+<!-- Display storages in drop down meny Template -->
+<script id="chooseStorageTemplate" type="text/x-handlebars-template">
+<option data-id="0" value="0" class="withdrawStorage">Velg et lager</option>
+{{#each transferRestriction}}    
+<tr>
+    <option data-id="{{storageID}}" value="{{storageID}}" class="withdrawStorage">{{storageName}}</option>
+</tr>   
+{{/each}}
+        
+</script> 
+<!-- Get the selected storage, and POST this to retrive inventory-->
+<script>
+    var givenStorageID;
+    $(function POSTfromStorageModal() {
+        
+        $('#chooseStorageContainer').on('change', function () {
+            givenStorageID = $(this).find("option:selected").data('id');
+
+            if (givenStorageID > 0) {
+                $.ajax({
+                    type: 'POST',
+                    url: '?page=getStorageProduct',
+                    data: {givenStorageID: givenStorageID},
+                    dataType: 'json',
+                    success: function (data) {
+                        withdrawProductTemplate(data);
+                        $('.selectQuantity').remove();
+                        $('#transferButton').hide();
+                        $('#commentContainer').hide();
+                
+                    }
+                });
+            } else {
+                $('.product').remove();
+                $('.selectQuantity').remove();
+            }
+
+            return false;
+
+        });
+    });
+</script>
+
+<script id="withdrawProductTemplate" type="text/x-handlebars-template">
+    <br>  
+    {{#each storageProduct}} 
+    <button data-id="{{productID}}" class="btn btn-default product">{{productName}}</button>
+    {{/each}} 
+</script>
+
+<script>
+    function withdrawProductTemplate(data) {
+        var rawTemplate = document.getElementById("withdrawProductTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var transferProductGeneratedHTML = compiledTemplate(data);
+
+        var transferContainer = document.getElementById("withdrawProductContainer");
+        transferContainer.innerHTML = transferProductGeneratedHTML;
+    }
+</script>

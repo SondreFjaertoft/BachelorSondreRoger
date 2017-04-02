@@ -86,14 +86,7 @@
         <td>{{quantity}} stk</td>    
          
         <td>
-            <button class="remove" data-toggle="tooltip" 
-                style="appearance: none;
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                outline: none;
-                border: 0;
-                background: transparent;
-                display: inline;">
+            <button id="redigerknapp" class="remove" data-toggle="tooltip">
                 <span class="glyphicon glyphicon-remove" style="color: red"></span>
             </button>
         </td> 
