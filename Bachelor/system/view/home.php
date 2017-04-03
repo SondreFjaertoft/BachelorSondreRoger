@@ -1034,13 +1034,14 @@ $(document).ready(function()
             });
         });
     }
-    var myChart;
+    
+    var myObjBar;
     
     function drawChart(data)
     {
-        if(myChart)
+        if(myObjBar)
         {
-            myChart.destroy();
+            myObjBar.destroy();
         }
           var ctx = document.getElementById('myChart').getContext('2d');
 
@@ -1054,8 +1055,10 @@ $(document).ready(function()
                         product.push(item.productName);
                         antall.push(item.quantity);
                         });
+                        
+                           
 
-                            myChart = new Chart(ctx, {
+                            window.myObjBar = new Chart(ctx, {
 
                             type: 'bar',
                             data: {
@@ -1063,67 +1066,54 @@ $(document).ready(function()
                                 datasets: [
                                     {
                                         label: "Antall",
-                                        backgroundColor: [
-                                            'rgba(0, 46, 96, 0.7)',
-                                            'rgba(255, 211, 0, 0.7)'
-                                            
-
-                                        ],
-                                        borderColor: [
-                                            'rgba(0, 46, 96, 1)',
-                                            'rgba(255, 211, 0, 1)'
-                                            
-                                        ],
-                                        borderWidth: 1,
+                                        backgroundColor: "blue", 
+                                        
                                         data: antall
                                     }
                                 ]
                             },
+                            
+                            
                             options: {
                                 legend: {
                                     display: false
                                 }
-                            }
+                            },
+                            responsive : true
 
                         });
-    }
+                        
+                        
+                        
+                        
+}
+                        var bars = myObjBar.datasets[0].bars;
+                        for(i = 0; i < bars.length; i++){
+                        var color="green";
+                        //You can check for bars[i].value and put your conditions here
+                        if(bars[i].label < 3)
+                        {
+                        color= "red";
+                        }
+                        else if(bars[i].label < 5)
+                        {
+                        color="orange";
+                        }
+                        else if(bars[i].label < 8)
+                        {
+                            color="yellow";
+                        }
+                        else
+                        {
+                            color="green";
+                        }
+       
+                        bars[i].backgroundColor = color;
+
+                         }
+                         
+                        myObjBar.update();
+
 </script>
 
-<!-- 
-var barChartData ={
-labels: product,
-datasets:[
-{
-    label: "My First dataset",
-    fillColor: "rgba(220,220,220,0.5)", 
-    strokeColor: "rgba(220,220,220,0.8)", 
-    highlightFill: "rgba(220,220,220,0.75)",
-    highlightStroke: "rgba(220,220,220,1)",
-    data: antall
-}
-]
-};
-
-var bars = myObjBar.datasets[0].bars;
-    for(i=0;i<bars.length;i++){
-       var color="green";
-       //You can check for bars[i].value and put your conditions here
-       if(bars[i].value<3){
-       	color="red";
-       }
-       else if(bars[i].value<5){
-       	color="orange"
-       
-       }
-       else if(bars[i].value<8){
-       	color="yellow"
-       }
-       else{
-       	color="green"
-       }
-       
-       bars[i].fillColor = color;
-
-    }
--->
 
