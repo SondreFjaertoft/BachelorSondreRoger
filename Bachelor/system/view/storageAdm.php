@@ -295,7 +295,7 @@
         <td>{{productName}}</td>
         <td>{{oldQuantity}}</td>
         <td>{{newQuantity}}</td>
-        <td>{{differance}}</td>    
+        <td class="stockResult">{{differance}}</td>    
     </tr>
 </tbody>
 <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
@@ -625,12 +625,14 @@
                 if(document.getElementById("saveStocktaking").value === "Lagre"){
                 var $displayUsers = $('#stocktakingResultContainer');
                     $displayUsers.empty();
+                    document.getElementById("saveStocktaking").value = "Neste";
                     $('#stocktakingModal').modal('hide');
                 } else {    
                 var $displayUsers = $('#stocktakingContainer');
                 $displayUsers.empty();
                 document.getElementById("saveStocktaking").value = "Lagre";
                 stocktakingResultTemplate(data);
+                rowColor();
                 }
                     
                 }
@@ -653,7 +655,17 @@
     }
 </script>
 
-
+            <script>
+$(document).ready(function()
+{
+    $('#stocktakingModal').on('hidden.bs.modal', function(e)
+    { 
+      $('#stocktakingResultContainer').empty();
+      $('#stocktakingContainer').empty();
+      document.getElementById("saveStocktaking").value = "Neste";
+    }) ;
+});
+            </script>
 <!-- SHOW STORAGE INFORMATION -->
 
 <!-- get information from selected storage-->
@@ -904,6 +916,7 @@
 <script>
 function rowColor(){
     
+// storageInformation    
 $('.quantityColor').filter(function(index){
     return parseInt(this.innerHTML) >= 10;
 }).siblings().andSelf().attr('class', 'bg-success');
@@ -915,6 +928,23 @@ $('.quantityColor').filter(function(index){
 $('.quantityColor').filter(function(index){
     return parseInt(this.innerHTML) < 5;
 }).siblings().andSelf().attr('class', 'bg-danger');
+
+
+// stocktaking result
+// || 
+    
+$('.stockResult').filter(function(index){
+    return parseInt(this.innerHTML) >= 10 || parseInt(this.innerHTML) <= -10;
+}).siblings().andSelf().attr('class', 'bg-danger');
+
+$('.stockResult').filter(function(index){
+    return parseInt(this.innerHTML) < 10 && parseInt(this.innerHTML) >= 5 || parseInt(this.innerHTML) > -10 && parseInt(this.innerHTML) <= -5;
+}).siblings().andSelf().attr('class', 'bg-warning');
+
+$('.stockResult').filter(function(index){
+    return parseInt(this.innerHTML) < 5 || parseInt(this.innerHTML) > -5;
+}).siblings().andSelf().attr('class', 'bg-success');
+
 }
 
 </script>

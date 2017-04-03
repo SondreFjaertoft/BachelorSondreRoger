@@ -116,6 +116,7 @@ class SaleController extends Controller {
             $mySales = $saleModel->getMySales($givenUserID, $givenProductSearchWord);
         }
         
+       
         $data = json_encode(array("mySales" => $mySales));
         echo $data;
     }
