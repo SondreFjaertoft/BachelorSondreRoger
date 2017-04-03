@@ -1044,36 +1044,54 @@ $(document).ready(function()
             myObjBar.destroy();
         }
           var ctx = document.getElementById('myChart').getContext('2d');
+          var product = [];
+          var antall = [];
+          var farge = [];
+          
 
-                   
-                    
-
-                    var product = [];
-                    var antall = [];
 
                         $.each(data, function(i, item){
                         product.push(item.productName);
                         antall.push(item.quantity);
-                        });
+                        });     
                         
-                           
-
+                        var bars = antall;
+                        for(i = 0; i < bars.length; i++){
+                        //You can check for bars[i].value and put your conditions here
+                        if(bars[i] <= 3)
+                        {
+                            farge.push("red");
+                        }
+                        else if(bars[i] < 5)
+                        {
+                            farge.push("yellow");
+                        }
+                        else if(bars[i] >= 10)
+                        {
+                            farge.push("green");
+                        }
+                        else
+                        {
+                            farge.push("yellow");
+                        }
+                        }
                             window.myObjBar = new Chart(ctx, {
-
+                                
                             type: 'bar',
                             data: {
-                                labels: product,
+                                labels: ["January", "February", "March"],
                                 datasets: [
                                     {
                                         label: "Antall",
-                                        backgroundColor: "blue", 
-                                        
+ 
+                                        borderColor: "black",
+                                        backgroundColor: farge,
+                                        borderWidth: 1,
                                         data: antall
-                                    }
-                                ]
-                            },
-                            
-                            
+                                      }
+                            ]
+                            },                    
+                        
                             options: {
                                 legend: {
                                     display: false
@@ -1082,38 +1100,7 @@ $(document).ready(function()
                             responsive : true
 
                         });
-                        
-                        
-                        
-                        
 }
-                        var bars = myObjBar.datasets[0].bars;
-                        for(i = 0; i < bars.length; i++){
-                        var color="green";
-                        //You can check for bars[i].value and put your conditions here
-                        if(bars[i].label < 3)
-                        {
-                        color= "red";
-                        }
-                        else if(bars[i].label < 5)
-                        {
-                        color="orange";
-                        }
-                        else if(bars[i].label < 8)
-                        {
-                            color="yellow";
-                        }
-                        else
-                        {
-                            color="green";
-                        }
-       
-                        bars[i].backgroundColor = color;
-
-                         }
-                         
-                        myObjBar.update();
-
 </script>
 
 
