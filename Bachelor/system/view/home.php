@@ -1079,7 +1079,7 @@ $(document).ready(function()
                                 
                             type: 'bar',
                             data: {
-                                labels: ["January", "February", "March"],
+                                labels: product,
                                 datasets: [
                                     {
                                         label: "Antall",

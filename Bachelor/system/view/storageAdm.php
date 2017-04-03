@@ -678,7 +678,12 @@
                                 datasets: [
                                     {
                                         label: "Antall",
-  
+                                        backgroundColor: [
+                                            'rgba(0, 46, 96, 0.7)',
+                                            'rgba(255, 211, 0, 0.7)'
+                                            
+
+                                        ],
                                         borderColor: [
                                             'rgba(0, 46, 96, 1)',
                                             'rgba(255, 211, 0, 1)'
