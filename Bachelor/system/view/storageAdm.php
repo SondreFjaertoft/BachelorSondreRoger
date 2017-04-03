@@ -261,9 +261,14 @@
                 <table class="table" id="stocktakingResultContainer">
                 <!-- Innhold fra Handlebars Template -->
                 </table>
+                <canvas id="stocktakingResultChart"></canvas>
+                
+                        
+
             </div>
                    
             <div class="modal-footer">
+                <a href="#" id="saveToCSV" class="btn btn-success">Eksporter til csv</a>
                 <input form="stocktaking" class="btn btn-success" id="saveStocktaking" type="submit" value="Neste">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
@@ -289,7 +294,7 @@
         <th>differanse</th>    
     </tr>
 </thead>
-<tbody>
+<tbody id="tbodyid">
 {{#each differanceArray}}
     <tr>
         <td>{{productName}}</td>
@@ -303,7 +308,6 @@
 {{/each}}
 
 <input form="stocktaking" name="givenStorageID" type="hidden" value="{{differanceArray.0.storageID}}">
-
             
   
 </script>
@@ -633,6 +637,7 @@
                 document.getElementById("saveStocktaking").value = "Lagre";
                 stocktakingResultTemplate(data);
                 rowColor();
+                stocktakingResultChart(data);
                 }
                     
                 }
@@ -640,8 +645,65 @@
             return false;
         });
     });
-
+    
 </script>
+<script>
+ 
+    
+ function stocktakingResultChart(data)
+    {
+        
+        var myChart;
+        if(myChart)
+        {
+            myChart.destroy();
+        }
+
+          var ctx = document.getElementById('stocktakingResultChart').getContext('2d');
+          
+                    var product = [];
+                    var antall = [];
+
+                        $.each(data.differanceArray, function(i, item){
+                            product.push(item.productName);
+                            antall.push(item.differance);
+
+                        });
+
+                            myChart = new Chart(ctx, {
+
+                            type: 'bar',
+                            data: {
+                                labels: product,
+                                datasets: [
+                                    {
+                                        label: "Antall",
+                                        backgroundColor: [
+                                            'rgba(0, 46, 96, 0.7)',
+                                            'rgba(255, 211, 0, 0.7)'
+                                            
+
+                                        ],
+                                        borderColor: [
+                                            'rgba(0, 46, 96, 1)',
+                                            'rgba(255, 211, 0, 1)'
+                                            
+                                        ],
+                                        borderWidth: 1,
+                                        data: antall
+                                    }
+                                ]
+                            },
+                            options: {
+                                legend: {
+                                    display: false
+                                }
+                            }
+
+                        });
+    }
+</script>
+
 
 <!-- stocktaking storage template-->         
 <script>
@@ -654,18 +716,76 @@
         storageContainer.innerHTML = stocktakingStorageGeneratedHTML;
     }
 </script>
+<script>
+$(document).ready(function () {
 
-            <script>
+	function exportTableToCSV($table, filename) {
+    
+        var $rows = $table.find('tr:has(td),tr:has(th)'),
+    
+            // Temporary delimiter characters unlikely to be typed by keyboard
+            // This is to avoid accidentally splitting the actual contents
+            tmpColDelim = String.fromCharCode(11), // vertical tab character
+            tmpRowDelim = String.fromCharCode(0), // null character
+    
+            // actual delimiter characters for CSV format
+            colDelim = '","',
+            rowDelim = '"\r\n"',
+    
+            // Grab text from table into CSV formatted string
+            csv = '"' + $rows.map(function (i, row) {
+                var $row = $(row), $cols = $row.find('td,th');
+    
+                return $cols.map(function (j, col) {
+                    var $col = $(col), text = $col.text();
+    
+                    return text.replace(/"/g, '""'); // escape double quotes
+    
+                }).get().join(tmpColDelim);
+    
+            }).get().join(tmpRowDelim)
+                .split(tmpRowDelim).join(rowDelim)
+                .split(tmpColDelim).join(colDelim) + '"',
+    
+            
+    
+            // Data URI
+            csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+            
+            console.log(csv);
+            
+        	if (window.navigator.msSaveBlob) { // IE 10+
+        		//alert('IE' + csv);
+        		window.navigator.msSaveOrOpenBlob(new Blob([csv], {type: "text/plain;charset=utf-8;"}), "csvname.csv")
+        	} 
+        	else {
+        		$(this).attr({ 'download': filename, 'href': csvData, 'target': '_blank' }); 
+        	}
+    }
+    
+    // This must be a hyperlink
+    $("#saveToCSV").on('click', function (event) {
+    	
+        exportTableToCSV.apply(this, [$('#stocktakingResultContainer'), 'export.csv']);
+        
+        // IF CSV, don't do event.preventDefault() or return false
+        // We actually need this to be a typical hyperlink
+    });
+
+});
+</script>
+<script>
 $(document).ready(function()
 {
     $('#stocktakingModal').on('hidden.bs.modal', function(e)
     { 
       $('#stocktakingResultContainer').empty();
       $('#stocktakingContainer').empty();
+      $('#stocktakingResultChart').empty();
       document.getElementById("saveStocktaking").value = "Neste";
     }) ;
 });
-            </script>
+</script>
 <!-- SHOW STORAGE INFORMATION -->
 
 <!-- get information from selected storage-->
