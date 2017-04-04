@@ -28,5 +28,7 @@ abstract class Controller {
         include($templatePath);
         return true;
     }
+    
 
 }
+//$type, $desc, $storageID, $fromStorageID, $toStorageID, $quantity, $oldQuantity, $newQuantity, $differential, $userID, $onUserID, $productID, $date, $customerNr

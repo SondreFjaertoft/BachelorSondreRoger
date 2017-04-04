@@ -28,6 +28,7 @@ class LoginController extends Controller {
         $userModel->updateLastLogin($givenLastLogin, $givenUsername);
         
         $Users = $userModel->getAllUserInfo();
+        
 
         foreach ($Users as $User) {
             if ($User["username"] == $givenUsername) {

@@ -67,6 +67,7 @@
                         <li><a href="?page=myReturns"><span class="glyphicon glyphicon-stats"></span> Dine Returer</a></li>
                            
                         <?php if ($_SESSION["userLevel"] == "Administrator") {?>
+                        <li><a href="?page=logg"><span class="glyphicon glyphicon-stats"></span> Logg</a></li>
                         <li><a id="show-hide-toogle" href="#"><span class="glyphicon glyphicon-wrench"></span> Administrering<span class="caret"></span></a>
                         
                             <ul id="dropdown" class="nav nav-second-level" hidden>

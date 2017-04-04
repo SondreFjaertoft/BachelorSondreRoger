@@ -1,0 +1,8 @@
+DELIMITER $$
+CREATE TRIGGER createUser_Logg
+    BEFORE INSERT ON users
+    FOR EACH ROW 
+BEGIN
+    INSERT INTO logg (logg.type, logg.desc, logg.onUserID, logg.date) VALUES ('Oppretting', 'Av bruker', NEW.userID, NOW());
+END$$
+DELIMITER ;

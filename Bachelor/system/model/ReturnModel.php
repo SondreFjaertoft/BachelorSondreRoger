@@ -24,8 +24,6 @@ class ReturnModel {
     public function getAllReturnInfo($givenUserID, $givenProductSearchWord){
         $this->selStmt->execute(array("givenUserID" =>  $givenUserID, "givenProductSearchWord" => $givenProductSearchWord));
         return $this->selStmt->fetchAll(PDO::FETCH_ASSOC); 
-
-       
     }
     
     public function newReturn($givenStorageID, $givenCustomerNumber, $givenProductID, $givenQuantity, $givenUserID, $givenComment, $givenDate) {

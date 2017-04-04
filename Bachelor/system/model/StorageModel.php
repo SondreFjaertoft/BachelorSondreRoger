@@ -13,6 +13,7 @@ class StorageModel {
     const DELETE_QUERY = "DELETE FROM " . StorageModel::TABLE . " WHERE storageID = :removeStorageID";
     const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
     const ACTIVATE_CONS = "SET FOREIGN_KEY_CHECKS=1;";
+    const SET_SESSION_VAR = "SET @sessionUserID := :sessionUserID";
     
     
     private $selStmt;
@@ -28,6 +29,8 @@ class StorageModel {
         $this->selStorageID = $this->dbConn->prepare(StorageModel::SELECT_QUERY_STORAGEID);
         $this->disabCons = $this->dbConn->prepare(StorageModel::DISABLE_CONS);
         $this->actCons = $this->dbConn->prepare(StorageModel::ACTIVATE_CONS);
+        $this->sessionVar = $this->dbConn->prepare(UserModel::SET_SESSION_VAR);
+        
     }
 
     public function getSearchResult($givenSearchWord) {
@@ -42,13 +45,14 @@ class StorageModel {
 
     
 
-    public function addStorage($givenStorageName) {
+    public function addStorage($givenStorageName, $sessionID) {
+        $this->setSession($sessionID);
         return $this->addStmt->execute(array("givenStorageName" =>  $givenStorageName));
     }    
     
     public function removeStorage($removeStorageID)    {
        $this->disabCons->execute(); 
-       return $this->delStmt->execute(array("removeStorageID" => $removeStorageID));
+       $this->delStmt->execute(array("removeStorageID" => $removeStorageID));
        $this->actCons->execute();
     }
     
@@ -60,5 +64,9 @@ class StorageModel {
         $this->selStorageID->execute(array("givenStorageID" => $givenStorageID));
         return $this->selStorageID->fetchAll(PDO::FETCH_ASSOC);
     }    
+    
+    public function setSession($sessionID){
+        $this->sessionVar->execute(array("sessionUserID" => $sessionID));
+    }
 
 }

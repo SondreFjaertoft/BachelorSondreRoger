@@ -10,3 +10,4 @@ require_once("TransferController.php");
 require_once("SaleController.php");
 require_once("ReturnController.php");
 require_once("mediaController.php");
+require_once("LoggController.php");

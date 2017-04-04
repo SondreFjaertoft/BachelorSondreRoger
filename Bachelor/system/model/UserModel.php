@@ -12,6 +12,7 @@ class UserModel {
     const INSERT_QUERY = "INSERT INTO " . UserModel::TABLE . " (name, username, password, userLevel, email, mediaID) VALUES (:givenName, :givenUsername, :givenPassword, :givenUserLevel, :givenEmail, :givenMediaID)";
     const DELETE_QUERY = "DELETE FROM " . UserModel::TABLE . " WHERE userID = :removeUserID";
     const UPDATE_LOGINDATE = "UPDATE " . UserModel::TABLE . " SET lastLogin = :givenLastLogin WHERE username = :givenUsername";
+    const SET_SESSION_VAR = "SET @sessionUserID := :sessionUserID";
     const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
     const ACTIVATE_CONS = "SET FOREIGN_KEY_CHECKS=1;";
 
@@ -33,6 +34,7 @@ class UserModel {
         $this->disabCons = $this->dbConn->prepare(UserModel::DISABLE_CONS);
         $this->actCons = $this->dbConn->prepare(UserModel::ACTIVATE_CONS);
         $this->lastLogin = $this->dbConn->prepare(UserModel::UPDATE_LOGINDATE);
+        $this->sessionVar = $this->dbConn->prepare(UserModel::SET_SESSION_VAR);
     }
 
     public function getSearchResult($givenSearchWord) {
@@ -55,7 +57,8 @@ class UserModel {
     }
 
     // kommer tilbake til, ved oppretting av bruker
-    public function addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail, $givenMediaID) {
+    public function addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail, $givenMediaID, $sessionID) {
+        $this->setSession($sessionID);
         $this->addStmt->execute(array("givenName" => $givenName, "givenUsername" => $givenUsername, "givenPassword" => $givenPassword, "givenUserLevel" => $givenUserLevel, "givenEmail" => $givenEmail, "givenMediaID" => $givenMediaID));
         $lastAdded = $this->dbConn->lastInsertId('users');
         return $lastAdded;
@@ -70,6 +73,10 @@ class UserModel {
     
     public function updateLastLogin($givenLastLogin, $givenUsername){
         return $this->lastLogin->execute(array("givenLastLogin" => $givenLastLogin, "givenUsername" => $givenUsername));
+    }
+    
+    public function setSession($sessionID){
+        $this->sessionVar->execute(array("sessionUserID" => $sessionID));
     }
 
 }
