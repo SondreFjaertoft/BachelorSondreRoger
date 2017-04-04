@@ -103,9 +103,10 @@ class UserController extends Controller {
         $givenUserLevel = $_REQUEST["givenUserLevel"];
         $givenEmail = $_REQUEST["givenEmail"];
         $givenMediaID = $_REQUEST["givenMediaID"];
-
+        $sessionID = $_SESSION["userID"];
+        
         $userCreationInfo = $GLOBALS["userModel"];
-        $added = $userCreationInfo->addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail, $givenMediaID);
+        $added = $userCreationInfo->addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail, $givenMediaID, $sessionID);
         if($added){
         $data = json_encode("success");
         

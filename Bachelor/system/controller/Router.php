@@ -124,6 +124,9 @@ class Router {
                 case "addCategoryEngine" :
                     return new HomeController();
                     
+                case "logg" :
+                case "getAllLoggInfo" :    
+                    return new LoggController();
                     }
                 }
             

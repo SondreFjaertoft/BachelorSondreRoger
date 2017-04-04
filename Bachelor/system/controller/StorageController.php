@@ -37,9 +37,9 @@ class StorageController extends Controller {
 
     private function storageCreationEngine() {
         $givenStorageName = $_REQUEST["givenStorageName"];
-
+        $sessionID = $_SESSION["userID"];
         $storageCreationInfo = $GLOBALS["storageModel"];
-        $storageCreationInfo->addStorage($givenStorageName);
+        $storageCreationInfo->addStorage($givenStorageName, $sessionID);
 
         echo json_encode("success");
     }
@@ -185,19 +185,5 @@ class StorageController extends Controller {
 
         }   
     }
-    
-    
-    private function updateStocktaking(){
-        $givenStorageID = $_REQUEST["givenStorageID"];
-        $givenProductIDArray = $_REQUEST["givenProductArray"];
-        $givenQuantityArray = $_REQUEST["givenQuantityArray"];
-            
-        for ($i = 0; $i < sizeof($givenProductIDArray); $i++){
 
-            $inventoryInfo = $GLOBALS["inventoryModel"];
-            $inventoryInfo->updateInventory($givenStorageID, $givenProductIDArray[$i], $givenQuantityArray[$i]);
-        }
-        
-        echo json_encode("success");
-    }
 }

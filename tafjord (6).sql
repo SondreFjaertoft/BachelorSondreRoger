@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 30. Mar, 2017 21:16 p.m.
+-- Generation Time: 04. Apr, 2017 19:56 p.m.
 -- Server-versjon: 5.5.54
 -- PHP Version: 5.6.28
 
@@ -30,6 +30,15 @@ CREATE TABLE `categories` (
   `categoryID` int(11) UNSIGNED NOT NULL,
   `categoryName` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dataark for tabell `categories`
+--
+
+INSERT INTO `categories` (`categoryID`, `categoryName`) VALUES
+(2, 'Internett'),
+(4, 'testing'),
+(3, 'TV');
 
 -- --------------------------------------------------------
 
@@ -65,10 +74,20 @@ CREATE TABLE `inventory` (
 
 CREATE TABLE `logg` (
   `loggID` int(11) UNSIGNED NOT NULL,
-  `userID` int(11) UNSIGNED NOT NULL,
-  `inventoryID` int(11) UNSIGNED NOT NULL,
-  `incidentDesc` text,
-  `date` datetime NOT NULL
+  `type` varchar(255) NOT NULL,
+  `desc` varchar(255) NOT NULL,
+  `storageID` int(11) UNSIGNED DEFAULT NULL,
+  `fromStorageID` int(11) UNSIGNED DEFAULT NULL,
+  `toStorageID` int(11) UNSIGNED DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `oldQuantity` int(11) DEFAULT NULL,
+  `newQuantity` int(11) DEFAULT NULL,
+  `differential` int(11) DEFAULT NULL,
+  `userID` int(11) UNSIGNED DEFAULT NULL,
+  `onUserID` int(11) UNSIGNED DEFAULT NULL,
+  `productID` int(11) UNSIGNED DEFAULT NULL,
+  `date` date NOT NULL,
+  `customerNr` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -96,6 +115,16 @@ CREATE TABLE `media` (
   `categoryID` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dataark for tabell `media`
+--
+
+INSERT INTO `media` (`mediaID`, `mediaName`, `categoryID`) VALUES
+(21, 'defaultUser.png', 4),
+(22, 'Boston City Flow.jpg', 2),
+(23, 'fugl.jpg', 2),
+(25, 'Costa Rican Frog.jpg', 4);
+
 -- --------------------------------------------------------
 
 --
@@ -111,6 +140,13 @@ CREATE TABLE `products` (
   `date` date NOT NULL,
   `macAdresse` varchar(8) DEFAULT 'FALSE'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dataark for tabell `products`
+--
+
+INSERT INTO `products` (`productID`, `productName`, `price`, `categoryID`, `mediaID`, `date`, `macAdresse`) VALUES
+(27, 'Dekoder', '998.00', 4, 22, '2017-03-08', 'FALSE');
 
 -- --------------------------------------------------------
 
@@ -169,6 +205,24 @@ CREATE TABLE `storage` (
   `storageName` varchar(60) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dataark for tabell `storage`
+--
+
+INSERT INTO `storage` (`storageID`, `storageName`) VALUES
+(1, 'Hovedlager'),
+(63, 'Kundesenter');
+
+--
+-- Triggere `storage`
+--
+DELIMITER $$
+CREATE TRIGGER `createStorage_Logg` AFTER INSERT ON `storage` FOR EACH ROW BEGIN
+    INSERT INTO logg (logg.type, logg.desc, logg.storageID, logg.userID, logg.date) VALUES ('Opprettelse', 'Nytt lager', NEW.storageID, @sessionUserID, NOW());
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -185,6 +239,23 @@ CREATE TABLE `users` (
   `lastLogin` date DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dataark for tabell `users`
+--
+
+INSERT INTO `users` (`userID`, `name`, `username`, `password`, `userLevel`, `mediaID`, `lastLogin`, `email`) VALUES
+(27, 'Roger Kolesth', 'rogkol', 'test123', 'Administrator', 22, '2017-04-04', 'roger.kolseth@gmail.com');
+
+--
+-- Triggere `users`
+--
+DELIMITER $$
+CREATE TRIGGER `createUser_Logg` AFTER INSERT ON `users` FOR EACH ROW BEGIN
+    INSERT INTO logg (logg.type, logg.desc, logg.userID, logg.onUserID, logg.date) VALUES ('Opprettelse', 'Ny bruker', @sessionUserID, NEW.userID, NOW());
+END
+$$
+DELIMITER ;
 
 --
 -- Indexes for dumped tables
@@ -218,8 +289,12 @@ ALTER TABLE `inventory`
 --
 ALTER TABLE `logg`
   ADD PRIMARY KEY (`loggID`),
-  ADD KEY `inventoryID` (`inventoryID`),
-  ADD KEY `logg_ibfk_1` (`userID`);
+  ADD KEY `logg_ibfk_1` (`userID`),
+  ADD KEY `logg_ibfk_2` (`storageID`),
+  ADD KEY `logg_ibfk_3` (`fromStorageID`),
+  ADD KEY `logg_ibfk_4` (`toStorageID`),
+  ADD KEY `logg_ibfk_5` (`onUserID`),
+  ADD KEY `logg_ibfk_6` (`productID`);
 
 --
 -- Indexes for table `macadresse`
@@ -306,12 +381,12 @@ ALTER TABLE `checkout`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 --
 -- AUTO_INCREMENT for table `logg`
 --
 ALTER TABLE `logg`
-  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 --
 -- AUTO_INCREMENT for table `macadresse`
 --
@@ -321,37 +396,37 @@ ALTER TABLE `macadresse`
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `mediaID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `mediaID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- AUTO_INCREMENT for table `restrictions`
 --
 ALTER TABLE `restrictions`
-  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 --
 -- AUTO_INCREMENT for table `returns`
 --
 ALTER TABLE `returns`
-  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT for table `storage`
 --
 ALTER TABLE `storage`
-  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `userID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 --
 -- Begrensninger for dumpede tabeller
 --
@@ -375,7 +450,11 @@ ALTER TABLE `inventory`
 --
 ALTER TABLE `logg`
   ADD CONSTRAINT `logg_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
-  ADD CONSTRAINT `logg_ibfk_2` FOREIGN KEY (`inventoryID`) REFERENCES `inventory` (`inventoryID`);
+  ADD CONSTRAINT `logg_ibfk_2` FOREIGN KEY (`storageID`) REFERENCES `storage` (`storageID`),
+  ADD CONSTRAINT `logg_ibfk_3` FOREIGN KEY (`fromStorageID`) REFERENCES `storage` (`storageID`),
+  ADD CONSTRAINT `logg_ibfk_4` FOREIGN KEY (`toStorageID`) REFERENCES `storage` (`storageID`),
+  ADD CONSTRAINT `logg_ibfk_5` FOREIGN KEY (`onUserID`) REFERENCES `users` (`userID`),
+  ADD CONSTRAINT `logg_ibfk_6` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`);
 
 --
 -- Begrensninger for tabell `macadresse`

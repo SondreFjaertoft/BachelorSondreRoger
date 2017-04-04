@@ -1,0 +1,13 @@
+DELIMITER $$
+CREATE TRIGGER createUser_Logg
+    AFTER INSERT ON users
+    FOR EACH ROW 
+BEGIN
+    INSERT INTO logg (logg.type, logg.desc, logg.onUserID, logg.date) VALUES ('Oppretting', 'Av bruker', NEW.userID, NOW());
+END$$
+DELIMITER ;
+
+
+
+SET @var_userID = 1;
+SELECT @var_userID as loggedInUser

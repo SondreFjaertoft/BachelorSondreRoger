@@ -663,12 +663,33 @@
           
                     var product = [];
                     var antall = [];
+                    var farge = [];
 
                         $.each(data.differanceArray, function(i, item){
                             product.push(item.productName);
                             antall.push(item.differance);
-
                         });
+                        
+                        var bars = antall;
+                        for(i = 0; i < bars.length; i++){
+                        //You can check for bars[i].value and put your conditions here
+                        if(bars[i] <= 3)
+                        {
+                            farge.push("red");
+                        }
+                        else if(bars[i] < 5)
+                        {
+                            farge.push("yellow");
+                        }
+                        else if(bars[i] >= 10)
+                        {
+                            farge.push("green");
+                        }
+                        else
+                        {
+                            farge.push("yellow");
+                        }
+                        }
 
                             myChart = new Chart(ctx, {
 

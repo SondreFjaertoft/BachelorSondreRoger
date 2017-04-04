@@ -1,25 +1,10 @@
-SELECT inventory.productID, inventory.storageID, COUNT(*) FROM inventory GROUP BY productID, storageID
-
-
-SQL for å få opp antall produkt per lager
-
-
-
-Øke / minske med 1
-UPDATE inventory SET quantity = quantity + 1 WHERE productID = 1 AND storageID = 1
-
-
-
-Salg/lager historikk med graf
-varsling ved nesten tomt på lager (mailvarsel)
-Graf til mest solgte produkter
-
-graf på logg
-
-bizagi
-
-help ploppopp rute
-
+﻿SELECT l.type, l.desc, s1.storageName, s2.storageName, s3.storageName, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.name, u2.name, p.productName, l.customerNr, l.date FROM logg AS l 
+LEFT JOIN storage as s1 ON l.storageID = s1.storageID 
+LEFT JOIN storage as s2 ON l.fromStorageID = s2.storageID
+LEFT JOIN storage as s3 ON l.toStorageID = s3.storageID
+LEFT JOIN users as u1 ON l.userID = u1.userID
+LEFT JOIN users as u2 ON l.onUserID = u2.userID
+LEFT JOIN products as p ON l.productID = p.productID
 
 
 
