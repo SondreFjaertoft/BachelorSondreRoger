@@ -15,7 +15,9 @@ if (isset($GLOBALS["errorMessage"])) {
             echo $test;
         }
         ?>
-    </div> 
+    </div>
+    
+    <?php if ($_SESSION["userLevel"] == "Administrator") {?>
     <div id="snarveidiv">
 
         <div class="row">
@@ -50,6 +52,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
     </div>
+    <?php }?>
     <div class="container">
         <div class="col-md-12">
             
@@ -1060,19 +1063,19 @@ $(document).ready(function()
                         //You can check for bars[i].value and put your conditions here
                         if(bars[i] <= 3)
                         {
-                            farge.push("red");
+                            farge.push("#d9534f");
                         }
                         else if(bars[i] < 5)
                         {
-                            farge.push("yellow");
+                            farge.push("#f0ad4e");
                         }
                         else if(bars[i] >= 10)
                         {
-                            farge.push("green");
+                            farge.push("#5cb85c");
                         }
                         else
                         {
-                            farge.push("yellow");
+                            farge.push("#f0ad4e");
                         }
                         }
                             window.myObjBar = new Chart(ctx, {
@@ -1095,6 +1098,13 @@ $(document).ready(function()
                             options: {
                                 legend: {
                                     display: false
+                                },
+                                scales:{
+                                    yAxes: [{
+                                        ticks: {
+                                        beginAtZero: true
+                                        }
+                                    }]
                                 }
                             },
                             responsive : true
