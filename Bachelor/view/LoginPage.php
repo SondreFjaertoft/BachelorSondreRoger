@@ -22,7 +22,7 @@ and open the template in the editor.
                 <div class="col-sm-6 col-md-4 col-md-offset-4">
                     <h1 class="text-center login-title">Rogers DØME paradise!!</h1>
                     <div class="account-wall">
-                        <img class="profile-img" src="system/image/TafjordLogo.png"
+                        <img class="profile-img" src="system/image/Tafjord1.jpg"
                              alt="">
                         <form class="form-signin" id="login" action="?page=loginEngine" method="post">
                             <input type="text" class="form-control" placeholder="Brukernavn" name="givenUsername" required autofocus>

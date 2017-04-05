@@ -28,8 +28,8 @@ if (isset($GLOBALS["errorMessage"])) {
                             <span class="glyphicon glyphicon-bookmark"></span> Snarveier</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="col-xs-6 col-md-9 text-center">
+                        <div class="">
+                            <div class="col-xs-6 col-md-12 text-center">
                                 <button class="btn btn-success btn-lg" type="button" data-toggle="modal" data-target="#createUserModal"><span class="glyphicon glyphicon-user"></span> <br/>Opprett bruker</button>
                                 <button class="btn btn-warning btn-lg" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Opprett produkt</button>
                                 <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
@@ -38,8 +38,7 @@ if (isset($GLOBALS["errorMessage"])) {
                                 <button class="btn btn-info btn-lg" onclick="getStorageInfo()" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varetelling</button>
                                 <button class="btn btn-info btn-lg" type="button" onclick="getStorageProduct()" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varelevering</button>
 
-                            </div>
-                            <div class="col-xs-6 col-md-3 text-center">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <a href="?page=editUser" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Rediger Profil</a>
                                 <a href="../" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-log-out"></span> <br/>Logg ut</a>
                             </div>
@@ -59,7 +58,8 @@ if (isset($GLOBALS["errorMessage"])) {
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        
+                        <h2 class="panel-title text-center"><b>Lagerbeholdning</b></h2>
+                        <br>
                         <select name="fromStorageID" id="chooseStorageContainer" class="form-control">
 
                                 <!-- Her kommer Handlebars Template-->
@@ -97,83 +97,19 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
         <div class="col-md-12">
-        <div class="col-sm-3 col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title text-center"><b>Lite ting og tang on the lager</b></h3>
-                </div>
-
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Produkt</th>
-                            <th>Lager</th>
-                            <th>Antall</th>
-                        </tr>
-                        <tr class="bg-info">
-                            <td>FMG</td>
-                            <td>Hovedlager</td>
-                            <td>7</td>
-                        </tr>
-                        <tr class="bg-warning">
-                            <td>Roger</td>
-                            <td>Hovedlager</td>
-                            <td>5</td>
-                        </tr>
-                        <tr class="bg-danger">
-                            <td>Sondre</td>
-                            <td>KS-lager</td>
-                            <td>3</td>
-                        </tr>
-
-                    </thead>
-                    <tbody>
-
-                        <!-- HER KOMMER TABELL INNHOLDET>   -->  
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
         
-        <div class="col-sm-3 col-md-6">
+            <div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title text-center"><b>Siste hendelser</b></h3>
+                    
+                    <h2 class="panel-title text-center"><b>Siste hendeleser</b></h2>
                 </div>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Aktivitet</th>
-                            <th>Bruker</th>
-                            <th>Info</th>
-                        </tr>
-                        <tr>
-                            <td>Salg</td>
-                            <td>Roger</td>
-                            <td>Fmg 4</td>
-                        </tr>
-                        <tr>
-                            <td>Retur</td>
-                            <td>Sondre</td>
-                            <td>Dekoder 2</td>
-                        </tr>
-                        <tr>
-                            <td>Sparken</td>
-                            <td>Ole</td>
-                            <td>Beeing a retard</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <!-- HER KOMMER TABELL INNHOLDET>   -->  
-
-                    </tbody>
+                <table class="table" id="loggTableContainer">
+                <!-- Innhold fra Handlebars Template -->
                 </table>
+                
             </div>
-
-
-        </div>
+            </div>
         </div>
 
         <!-- HER KOMMER INNHOLDET>   -->                
@@ -1114,3 +1050,69 @@ $(document).ready(function()
 </script>
 
 
+<script id="loggTableTemplate" type="text/x-handlebars-template">
+<thead>
+    <tr>
+        <th>Type</th>
+        <th>Beskrivelse</th>
+        <th>Lagernavn</th>
+        <th>Fra lager</th>
+        <th>Til lager</th>      
+        <th>Antall</th>
+        <th>Gammelt Antall</th>
+        <th>Nytt Antall</th>
+        <th>Differanse</th>
+        <th>Brukernavn</th>
+        <th>På bruker</th>
+        <th>produkt</th>    
+        <th>Kundenr</th>
+        <th>dato</th>            
+        </tr>
+</thead>
+<tbody id="tbodyid">
+{{#each allLoggInfo}}
+    <tr>
+        <td>{{type}}</td>
+        <td>{{desc}}</td>
+        <td>{{storageName}}</td>
+        <td>{{toStorage}}</td>
+        <td>{{fromStorage}}</td>
+        <td>{{quantity}}</td>
+        <td>{{oldQuantity}}</td>
+        <td>{{newQuantity}}</td>
+        <td>{{differential}}</td>  
+        <td>{{username}}</td>
+        <td>{{onUsername}}</td>
+        <td>{{productName}}</td>
+        <td>{{customerNr}}</td>
+        <td>{{date}}</td>
+    </tr>
+</tbody>
+{{/each}}
+            
+  
+</script>
+
+<script>
+ $(function () {
+    $.ajax({
+        type: 'GET',
+        url: '?page=getAllLoggInfo',
+        dataType: 'json',
+        success: function (data) {
+            displayLoggTable(data);
+        }
+    });
+});   
+</script>    
+
+<script>
+    function displayLoggTable(data) {
+        var rawTemplate = document.getElementById("loggTableTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var loggTableGeneratedHTML = compiledTemplate(data);
+
+        var loggContainer = document.getElementById("loggTableContainer");
+        loggContainer.innerHTML = loggTableGeneratedHTML;
+    }
+</script>

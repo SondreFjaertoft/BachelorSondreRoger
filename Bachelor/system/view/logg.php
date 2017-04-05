@@ -122,7 +122,7 @@ $(document).ready(function () {
             
         	if (window.navigator.msSaveBlob) { // IE 10+
         		//alert('IE' + csv);
-        		window.navigator.msSaveOrOpenBlob(new Blob([csv], {type: "text/plain;charset=utf-8;"}), "csvname.csv")
+        		window.navigator.msSaveOrOpenBlob(new Blob([csv], {type: "text/plain;charset=utf-8;"}), "csvname.csv");
         	} 
         	else {
         		$(this).attr({ 'download': filename, 'href': csvData, 'target': '_blank' }); 
