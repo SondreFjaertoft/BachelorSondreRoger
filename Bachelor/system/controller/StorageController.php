@@ -3,7 +3,7 @@
 require_once("Controller.php");
 
 class StorageController extends Controller {
-
+    
     public function show($page) {
         if ($page == "storageAdm") {
             $this->storageAdmPage();
@@ -159,7 +159,8 @@ class StorageController extends Controller {
     }
     
     private function stocktacking(){
-        if (isset($_POST['oldQuantityArray'])) {
+        
+        if (isset($_POST['getResult'])) {
         $givenStorageID = $_REQUEST["givenStorageID"];
         $givenProductIDArray = $_REQUEST["givenProductArray"]; 
         $oldQuantityArray = $_REQUEST["oldQuantityArray"];  
@@ -175,15 +176,22 @@ class StorageController extends Controller {
         
         $data = json_encode(array("differanceArray" => $differanceArray));
         echo $data;
-        
+
         }else{
 
         $givenStorageID = $_REQUEST["givenStorageID"];
         $givenProductIDArray = $_REQUEST["givenProductArray"];
         $givenQuantityArray = $_REQUEST["givenQuantityArray"];
+        $oldQuantityArray = $_REQUEST["oldQuantityArray"];  
+        $differanceArray = $_REQUEST["oldQuantityArray"];  
+        $type = "Varetelling";
+        $desc= "Oppdatering av antall";
+        $sessionID = $_SESSION["userID"];
+        
         
         for ($i = 0; $i < sizeof($givenProductIDArray); $i++){
-
+            $loggModel = $GLOBALS["loggModel"];
+            $loggModel->stocktaking($type, $desc, $sessionID, $givenStorageID, $givenProductIDArray[$i], $givenQuantityArray[$i], $oldQuantityArray[$i], $differanceArray[$i]);
             $inventoryInfo = $GLOBALS["inventoryModel"];
             $inventoryInfo->updateInventory($givenStorageID, $givenProductIDArray[$i], $givenQuantityArray[$i]);
         }
