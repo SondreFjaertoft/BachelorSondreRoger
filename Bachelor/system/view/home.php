@@ -51,8 +51,57 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
     </div>
-    <?php }?>
+    
+    
+    
     <div class="container">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center"><b>Snart tom lagerbeholdning</b></h2>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Produkt</th>
+                            <th>Antall</th>
+                            <th>Lager</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lowInvContainer">
+                    <!-- Handlebars -->
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center"><b>Dine siste salg</b></h2>
+                    
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>KundeNR</th>
+                            <th>Produkt</th>
+                            <th>Lager</th>
+                            <th>Antall</th>
+                            <th>Kommentar</th>
+                            <th>Dato</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lastSaleContainer">
+                        <!-- Handlebars -->
+                    </tbody>
+                </table>
+                
+            </div>
+            
+        </div>
+    </div>
         <div class="col-md-12">
             <div class="col-md-12">
             <div class="panel panel-default">
@@ -66,10 +115,10 @@ if (isset($GLOBALS["errorMessage"])) {
                 
             </div>
             </div>
-            
+           
             
         </div>
-
+ <?php }?>
 
 
         <div class="col-md-12">
@@ -1119,4 +1168,90 @@ $(document).ready(function()
         var loggContainer = document.getElementById("loggTableContainer");
         loggContainer.innerHTML = loggTableGeneratedHTML;
     }
+</script>
+
+<script>
+ $(function () {
+    $.ajax({
+        type: 'GET',
+        url: '?page=getLowInventory',
+        dataType: 'json',
+        success: function (data) {
+            displayLowInvTable(data);
+            rowColor();
+        }
+    });
+});   
+</script> 
+
+
+<script>
+    function displayLowInvTable(data) {
+        var rawTemplate = document.getElementById("lowInvTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var loggTableGeneratedHTML = compiledTemplate(data);
+
+        var loggContainer = document.getElementById("lowInvContainer");
+        loggContainer.innerHTML = loggTableGeneratedHTML;
+    }
+</script>
+
+<script id="lowInvTemplate" type="text/x-handlebars-template">
+
+
+{{#each lowInv}}
+    <tr>
+        <td class="quantityColor">{{productName}}</td>
+        <td class="quantityColor">{{quantity}}</td>
+        <td class="quantityColor" >{{storageName}}</td>
+    <tr>
+
+{{/each}}
+            
+  
+</script>
+
+
+
+<script>
+ $(function () {
+    $.ajax({
+        type: 'GET',
+        url: '?page=getLastSaleInfo',
+        dataType: 'json',
+        success: function (data) {
+            displayLastSaleTable(data);
+            
+        }
+    });
+});   
+</script>
+
+<script>
+    function displayLastSaleTable(data) {
+        var rawTemplate = document.getElementById("lastSaleTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var loggTableGeneratedHTML = compiledTemplate(data);
+
+        var loggContainer = document.getElementById("lastSaleContainer");
+        loggContainer.innerHTML = loggTableGeneratedHTML;
+    }
+</script>
+
+<script id="lastSaleTemplate" type="text/x-handlebars-template">
+
+
+{{#each lastSaleInfo}}
+    <tr>
+    <td>{{customerNr}}</td>
+    <td>{{productName}}</td>
+    <td>{{storageName}}</td>
+    <td>{{quantity}}</td>
+    <td>{{comment}}</td>
+    <td>{{date}}</td>
+    </tr>
+
+{{/each}}
+            
+  
 </script>

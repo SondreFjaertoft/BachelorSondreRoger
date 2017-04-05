@@ -25,6 +25,10 @@ class ProductController extends Controller {
         } else if ($page == "getAllCategoryInfo"){
             $this->getAllCategoryInfo();
         }
+          else if ($page == "getLowInventory")
+        {
+            $this->getLowInventory();
+        }
     }
     
 
@@ -122,6 +126,17 @@ class ProductController extends Controller {
         $categoryInfo = $categoryModel->getAllCategoryInfo();
         
         $data = json_encode(array("categoryInfo" => $categoryInfo));
+        echo $data;
+    }
+    
+    private function getLowInventory()
+    {
+        $inventoryModel = $GLOBALS["inventoryModel"];
+        
+        $inventoryInfo = $inventoryModel->getLowInventory();
+        
+        $data = json_encode(array("lowInv" => $inventoryInfo));
+        
         echo $data;
     }
 

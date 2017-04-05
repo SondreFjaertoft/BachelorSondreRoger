@@ -18,7 +18,7 @@ class InventoryModel {
     const DELETE_QUERY = "DELETE FROM " . InventoryModel::TABLE . " WHERE storageID = :givenStorageID";
     const DELETE_SINGLE_QUERY = "DELETE FROM " . InventoryModel::TABLE . " WHERE productID = :givenProductID AND storageID = :givenStorageID";
     const UPDATE_QUERY = "UPDATE " . InventoryModel::TABLE . " SET quantity = :givenQuantity WHERE storageID = :givenStorageID AND productID = :givenProductID"; 
-
+    const LOW_INV_QUERY = "SELECT storage.storageName, products.productName, inventory.quantity FROM  " . InventoryModel::TABLE . " INNER JOIN storage ON inventory.storageID = storage.storageID INNER JOIN products ON inventory.productID = products.productID  WHERE inventory.quantity < 10";
     
     private $selStmt;
 
@@ -35,6 +35,11 @@ class InventoryModel {
         $this->delStmt = $this->dbConn->prepare(InventoryModel::DELETE_QUERY);
         $this->delSingleStmt = $this->dbConn->prepare(InventoryModel::DELETE_SINGLE_QUERY);
         $this->editStmt = $this->dbConn->prepare(InventoryModel::UPDATE_QUERY);
+        $this->lowInvStmt = $this->dbConn->prepare(InventoryModel::LOW_INV_QUERY);
+    }
+    public function getLowInventory() {
+        $this->lowInvStmt->execute();
+        return $this->lowInvStmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAllStorageInventory() {

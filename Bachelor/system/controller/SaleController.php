@@ -25,6 +25,8 @@ class SaleController extends Controller {
             $this->getResCount();
         } else if ($page == "saleSingle"){
             $this->saleSinglePage();
+        }elseif ($page == "getLastSaleInfo") {
+            $this->getLastSaleInfo();
         }
             
     }
@@ -43,6 +45,18 @@ class SaleController extends Controller {
         return $this->render("mySales");
     }
     
+    private function getLastSaleInfo()
+    {
+        $userID = $_SESSION["userID"];
+        $saleModel = $GLOBALS["saleModel"];
+        $saleInfo = $saleModel->getLastSaleInfo($userID);
+
+        $data = json_encode(array("lastSaleInfo" => $saleInfo));
+
+        echo $data;
+    }
+
+
     private function saleFromStorageID(){
         $givenStorageID = $_REQUEST["saleStorageID"];
         $saleModel = $GLOBALS["saleModel"];

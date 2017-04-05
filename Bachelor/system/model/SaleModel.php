@@ -14,6 +14,8 @@ class SaleModel {
     const UPDATE_QUERY = "UPDATE " . SaleModel::TABLE . " SET customerNr = :editCustomerNr, comment = :editComment  WHERE salesID = :editSaleID" ;
     const INSERT_QUERY = "INSERT INTO " . SaleModel::TABLE . " (productID, date, customerNr, comment, userID, storageID, quantity) VALUES (:givenProductID, :givenDate, :givenCustomerNumber, :givenComment, :givenUserID, :givenStorageID, :givenQuantity)";
     const SELECT_FROM_ID = "SELECT * FROM " . SaleModel::TABLE . " WHERE salesID = :givenSalesID";
+    const SELECT_LAST_QUERY =  "SELECT salesID, customerNr, products.productName, sales.date, comment, storage.storageName, quantity FROM " . SaleModel::TABLE . 
+            " INNER JOIN products ON sales.productID = products.productID INNER JOIN storage ON sales.storageID = storage.storageID WHERE userID = :givenUserID LIMIT 10";
     
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;
@@ -23,8 +25,13 @@ class SaleModel {
       $this->selStorage = $this->dbConn->prepare(SaleModel::SELECT_STORAGE);
       $this->mySales = $this->dbConn->prepare(SaleModel::SELECT_MY_SALES);
       $this->selFromID = $this->dbConn->prepare(SaleModel::SELECT_FROM_ID);
+      $this->selLast = $this->dbConn->prepare(SaleModel::SELECT_LAST_QUERY);
     }
     
+    public function getLastSaleInfo($givenUserID) {
+        $this->selLast->execute(array("givenUserID" =>  $givenUserID));
+        return $this->selLast->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function getAllSaleInfo() {
         $this->selStmt->execute();

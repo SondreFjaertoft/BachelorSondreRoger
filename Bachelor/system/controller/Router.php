@@ -94,7 +94,8 @@ class Router {
                 case "addProductEngine" :
                 case "editProductEngine" :
                 case "deleteProductEngine" :  
-                case "getAllCategoryInfo" :   
+                case "getAllCategoryInfo" :
+                case "getLowInventory" :
                     return new ProductController();
                     
                 case "storageAdm":
