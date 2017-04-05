@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.2
+-- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 04. Apr, 2017 19:56 p.m.
--- Server-versjon: 5.5.54
+-- Generation Time: 05. Apr, 2017 21:16 PM
+-- Server-versjon: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -66,6 +66,16 @@ CREATE TABLE `inventory` (
   `quantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Triggere `inventory`
+--
+DELIMITER $$
+CREATE TRIGGER `removeProFromStorage_Logg` BEFORE DELETE ON `inventory` FOR EACH ROW BEGIN
+    INSERT INTO logg (logg.type, logg.desc, logg.fromStorageID, logg.userID, logg.productID, logg.quantity, logg.date) VALUES ('Sletting', 'Fjernet produkt fra', OLD.storageID, @sessionUserID, OLD.productID, OLD.quantity, NOW());
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -86,7 +96,7 @@ CREATE TABLE `logg` (
   `userID` int(11) UNSIGNED DEFAULT NULL,
   `onUserID` int(11) UNSIGNED DEFAULT NULL,
   `productID` int(11) UNSIGNED DEFAULT NULL,
-  `date` date NOT NULL,
+  `date` datetime NOT NULL,
   `customerNr` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -142,11 +152,14 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dataark for tabell `products`
+-- Triggere `products`
 --
-
-INSERT INTO `products` (`productID`, `productName`, `price`, `categoryID`, `mediaID`, `date`, `macAdresse`) VALUES
-(27, 'Dekoder', '998.00', 4, 22, '2017-03-08', 'FALSE');
+DELIMITER $$
+CREATE TRIGGER `createProduct_Logg` AFTER INSERT ON `products` FOR EACH ROW BEGIN
+    INSERT INTO logg (logg.type, logg.desc, logg.userID, logg.productID, logg.date) VALUES ('Opprettelse', 'Nytt produkt', @sessionUserID, NEW.productID, NOW());
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -159,6 +172,30 @@ CREATE TABLE `restrictions` (
   `userID` int(11) UNSIGNED NOT NULL,
   `storageID` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dataark for tabell `restrictions`
+--
+
+INSERT INTO `restrictions` (`resID`, `userID`, `storageID`) VALUES
+(80, 27, 1),
+(84, 27, 63);
+
+--
+-- Triggere `restrictions`
+--
+DELIMITER $$
+CREATE TRIGGER `createRestriction_Logg` AFTER INSERT ON `restrictions` FOR EACH ROW BEGIN
+    INSERT INTO logg (logg.type, logg.desc, logg.storageID, logg.userID, logg.onUserID, logg.date) VALUES ('Tilgang', 'Gav tilgang til', NEW.storageID, @sessionUserID, NEW.userID, NOW());
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `removeRestriction_Logg` BEFORE DELETE ON `restrictions` FOR EACH ROW BEGIN
+    INSERT INTO logg (logg.type, logg.desc, logg.storageID, logg.userID, logg.onUserID, logg.date) VALUES ('Tilgang', 'Fjernet tilgang til', OLD.storageID, @sessionUserID, OLD.userID, NOW());
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -177,6 +214,16 @@ CREATE TABLE `returns` (
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
+--
+-- Triggere `returns`
+--
+DELIMITER $$
+CREATE TRIGGER `newReturn_Logg` AFTER INSERT ON `returns` FOR EACH ROW BEGIN
+    INSERT INTO logg (logg.type, logg.desc, logg.toStorageID, logg.quantity, logg.productID, logg.userID, logg.customerNr, logg.date) VALUES ('Retur', 'Tok inn produkt til', NEW.storageID, NEW.quantity, NEW.productID, NEW.userID, NEW.customerNr, NOW());
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -193,6 +240,16 @@ CREATE TABLE `sales` (
   `storageID` int(11) UNSIGNED NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Triggere `sales`
+--
+DELIMITER $$
+CREATE TRIGGER `newSale_Logg` AFTER INSERT ON `sales` FOR EACH ROW BEGIN
+    INSERT INTO logg (logg.type, logg.desc, logg.fromStorageID, logg.quantity, logg.productID, logg.userID, logg.customerNr, logg.date) VALUES ('Uttak', 'Tok ut produkt fra', NEW.storageID, NEW.quantity, NEW.productID, NEW.userID, NEW.customerNr, NOW());
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -245,7 +302,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `name`, `username`, `password`, `userLevel`, `mediaID`, `lastLogin`, `email`) VALUES
-(27, 'Roger Kolesth', 'rogkol', 'test123', 'Administrator', 22, '2017-04-04', 'roger.kolseth@gmail.com');
+(27, 'Roger Kolesth', 'rogkol', 'test123', 'Administrator', 21, '2017-04-05', 'roger.kolseth@gmail.com');
 
 --
 -- Triggere `users`
@@ -381,12 +438,12 @@ ALTER TABLE `checkout`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `inventoryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 --
 -- AUTO_INCREMENT for table `logg`
 --
 ALTER TABLE `logg`
-  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `loggID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 --
 -- AUTO_INCREMENT for table `macadresse`
 --
@@ -401,32 +458,32 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `productID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `restrictions`
 --
 ALTER TABLE `restrictions`
-  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `resID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 --
 -- AUTO_INCREMENT for table `returns`
 --
 ALTER TABLE `returns`
-  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `returnID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `salesID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `storage`
 --
 ALTER TABLE `storage`
-  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `storageID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `userID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 --
 -- Begrensninger for dumpede tabeller
 --
@@ -487,16 +544,16 @@ ALTER TABLE `restrictions`
 -- Begrensninger for tabell `returns`
 --
 ALTER TABLE `returns`
-  ADD CONSTRAINT `returns_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
   ADD CONSTRAINT `returns_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`),
+  ADD CONSTRAINT `returns_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
   ADD CONSTRAINT `returns_ibfk_3` FOREIGN KEY (`storageID`) REFERENCES `storage` (`storageID`);
 
 --
 -- Begrensninger for tabell `sales`
 --
 ALTER TABLE `sales`
-  ADD CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
   ADD CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`),
+  ADD CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
   ADD CONSTRAINT `sales_ibfk_3` FOREIGN KEY (`storageID`) REFERENCES `storage` (`storageID`);
 
 --
