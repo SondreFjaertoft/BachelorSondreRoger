@@ -305,6 +305,8 @@
 </tbody>
 <input form="stocktaking" name="givenProductArray[]" type="hidden" value="{{productID}}">
 <input form="stocktaking" name="givenQuantityArray[]" type="hidden" value="{{newQuantity}}"> 
+<input form="stocktaking" name="oldQuantityArray[]" type="hidden" value="{{newQuantity}}"> 
+<input form="stocktaking" name="differanceArray[]" type="hidden" value="{{differance}}">
 {{/each}}
 
 <input form="stocktaking" name="givenStorageID" type="hidden" value="{{differanceArray.0.storageID}}">
@@ -316,7 +318,7 @@
 <!-- Display stocktacing product-->
 <script id="stocktakingTemplate" type="text/x-handlebars-template">
 <input form="stocktaking" name="givenStorageID" type="hidden" value="{{storageProduct.0.storageID}}">
-
+<input form="stocktaking" name="getResult" type="hidden" value="getResult"> 
 {{#each storageProduct}}
     
     <tr>

@@ -110,16 +110,22 @@ class ReturnController extends Controller {
         $transferProductIDArray = $_REQUEST["deliveryProductID"];
         $transferQuantityArray = $_REQUEST["deliveryQuantity"];
         $toStorageID = "1";
+        
+        $type = "Varelevering";
+        $desc= "Inn på lager";
+        $sessionID = $_SESSION["userID"];
 
+            $loggModel = $GLOBALS["loggModel"];
             $inventoryInfo = $GLOBALS["inventoryModel"];
 
             for ($i = 0; $i < sizeof($transferProductIDArray); $i++) {
                 $count = $inventoryInfo->doesProductExistInStorage($toStorageID, $transferProductIDArray[$i]);
 
                     if ($count[0]["COUNT(*)"] < 1) {
-
+                        $loggModel->stockdelivery($type, $desc, $sessionID, $toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                         $inventoryInfo->addInventory($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                     } else {
+                        $loggModel->stockdelivery($type, $desc, $sessionID, $toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                         $inventoryInfo->transferToStorage($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                     }     
             }
