@@ -44,3 +44,17 @@ class LoginController extends Controller {
     }
 
 }
+        //foreach ($Users as $User) {
+        //                $hashpas = $User["passord"];
+        //                $Uid = $User["username"];
+        //            if ($Uid == $givenUsername) {
+
+
+//                          if (password_verify($givenPassword, $hashpas)) {
+//                              $_SESSION["AreLoggedIn"] = "true";
+//                              $_SESSION["nameOfUser"] = $User["name"];  
+//                              $_SESSION["userID"] = $User["userID"]; 
+//                              $_SESSION["userLevel"] = $User["userLevel"];
+//                          }  
+//                      }       
+//                  }

@@ -106,7 +106,10 @@ class UserController extends Controller {
         $sessionID = $_SESSION["userID"];
         
         $userCreationInfo = $GLOBALS["userModel"];
+        
+        //$hash = password_hash($givenPassword, PASSWORD_DEFAULT);
         $added = $userCreationInfo->addUser($givenName, $givenUsername, $givenPassword, $givenUserLevel, $givenEmail, $givenMediaID, $sessionID);
+        
         if($added){
         $data = json_encode("success");
         
