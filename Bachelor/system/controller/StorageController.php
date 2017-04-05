@@ -51,7 +51,11 @@ class StorageController extends Controller {
     private function storageEditEngine() {
         $editStorageID = $_REQUEST["editStorageID"];
         $editStorageName = $_REQUEST["editStorageName"];
-
+        $sessionID = $_SESSION["userID"];
+        
+        $sesionLog = $GLOBALS["userModel"];
+        $sesionLog->setSession($sessionID);
+        
         $storageEditInfo = $GLOBALS["storageModel"];
         $storageEditInfo->editStorage($editStorageName, $editStorageID);
 

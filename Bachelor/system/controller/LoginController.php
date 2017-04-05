@@ -21,9 +21,12 @@ class LoginController extends Controller {
         
         $givenUsername = $_REQUEST["givenUsername"];
         $givenPassword = $_REQUEST["givenPassword"];
-        $givenLastLogin = $_REQUEST["givenLastLogin"]; 
+        $givenLastLogin = $_REQUEST["givenLastLogin"];
         
-
+        $type = "Innlogging";
+        $desc= "Bruker logget inn";
+        
+        $loggModel = $GLOBALS["loggModel"];
         $userModel = $GLOBALS["userModel"];
         $userModel->updateLastLogin($givenLastLogin, $givenUsername);
         
@@ -36,6 +39,7 @@ class LoginController extends Controller {
                     $_SESSION["nameOfUser"] = $User["name"];  
                     $_SESSION["userID"] = $User["userID"]; 
                     $_SESSION["userLevel"] = $User["userLevel"];
+                    $loggModel->loginLog($type, $desc, $User["userID"]);
                 }  
             }       
         }
