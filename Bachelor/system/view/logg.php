@@ -3,8 +3,25 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
     <div class="container">
-        <a href="#" id="loggToCSV" class="btn btn-success">Eksporter til csv</a>
+        
+        <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
+        
+        <form id="searchForLog" class="form-inline" action="?page=getAllLoggInfo" method="post">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input class="form-control" form="searchForLog" type="text" name="givenLoggSearchWord" value="" placeholder="Søk etter hendelse.." autocomplete="off">  
+                    <input class="form-control" form="searchForLog" type="submit" value="Søk">
+                    
+                    <button onclick="updateLogTable()" class="btn btn-default " type="button">All Logg</button>
+                </div>
+                
+            </div> 
+            <a href="#" id="loggToCSV" class="btn btn-success">Eksporter til csv</a>
+        </form>
+        
         <br><br>
+        
+        </div>
         <table class="table" id="loggTableContainer">
                 <!-- Innhold fra Handlebars Template -->
         </table>
@@ -71,6 +88,19 @@
 </script>    
 
 <script>
+function updateLogTable() {
+    $.ajax({
+        type: 'GET',
+        url: '?page=getAllLoggInfo',
+        dataType: 'json',
+        success: function (data) {
+            displayLoggTable(data);
+        }
+    });
+}  
+</script>   
+
+<script>
     function displayLoggTable(data) {
         var rawTemplate = document.getElementById("loggTableTemplate").innerHTML;
         var compiledTemplate = Handlebars.compile(rawTemplate);
@@ -79,6 +109,31 @@
         var loggContainer = document.getElementById("loggTableContainer");
         loggContainer.innerHTML = loggTableGeneratedHTML;
     }
+</script>
+
+<!-- SEARCH FOR LOGG -->
+
+<script>
+    $(function POSTsearchForSale() {
+
+        $('#searchForLog').submit(function () {
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+                    $("#searchForLog")[0].reset();
+                    displayLoggTable(data);
+                }
+            });
+            return false;
+        });
+    });
+
 </script>
 
 

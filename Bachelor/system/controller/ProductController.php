@@ -63,8 +63,12 @@ class ProductController extends Controller {
         $editCategoryID = $_REQUEST["editCategoryID"];
         $editMediaID = $_REQUEST["editMediaID"];
         $editProductID = $_REQUEST["editProductID"];
-
+        $sessionID = $_SESSION["userID"];
+        
+        $sesionLog = $GLOBALS["userModel"];
         $productEditInfo = $GLOBALS["productModel"];
+        $sesionLog->setSession($sessionID);
+        
         $productEditInfo->editProduct($editProductName, $editProductID, $editPrice, $editCategoryID, $editMediaID);
 
         echo json_encode("success");

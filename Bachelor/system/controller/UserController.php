@@ -45,8 +45,10 @@ class UserController extends Controller {
         $editUserLevel = $_REQUEST["editUserLevel"];
         $editEmail = $_REQUEST["editEmail"];
         $editMediaID = $_REQUEST["editMediaID"];
-
+        
+        $sessionID = $_SESSION["userID"];
         $userEditInfo = $GLOBALS["userModel"];
+        $userEditInfo->setSession($sessionID);
         if(strlen($editPassword) < 50)
         {
         $hash = password_hash($editPassword, PASSWORD_DEFAULT);

@@ -12,7 +12,7 @@ class LoggModel {
         ."LEFT JOIN storage as s3 ON l.toStorageID = s3.storageID "
         ."LEFT JOIN users as u1 ON l.userID = u1.userID "
         ."LEFT JOIN users as u2 ON l.onUserID = u2.userID "
-        ."LEFT JOIN products as p ON l.productID = p.productID";
+        ."LEFT JOIN products as p ON l.productID = p.productID ORDER BY date DESC";
     
     const SELECT_LATEST_QUERY = 
          "SELECT l.type, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, l.date FROM " . LoggModel::TABLE . " AS l "
@@ -21,7 +21,7 @@ class LoggModel {
         ."LEFT JOIN storage as s3 ON l.toStorageID = s3.storageID "
         ."LEFT JOIN users as u1 ON l.userID = u1.userID "
         ."LEFT JOIN users as u2 ON l.onUserID = u2.userID "
-        ."LEFT JOIN products as p ON l.productID = p.productID LIMIT 10";
+        ."LEFT JOIN products as p ON l.productID = p.productID ORDER BY date DESC LIMIT 10";
     
     const INSERT_QUERY = "INSERT INTO " . LoggModel::TABLE . " (type, desc, storageID, fromStorageID, toStorageID, quantity, oldQuantity, newQuantity, differential, userID, onUserID, productID, date, customerNr) "
             . "VALUES (:type, :desc, :storageID, :fromStorageID, :toStorageID, :quantity, :oldQuantity, :newQuantity, :differential, :userID, :onUserID, :productID, :date, :customerNr)";
@@ -32,9 +32,10 @@ class LoggModel {
     const INSERT_DELIV_LOGG = "INSERT INTO " . LoggModel::TABLE . " (logg.type, logg.desc, logg.toStorageID, logg.quantity, logg.userID, logg.productID, logg.date) VALUES "
             . "(:givenType, :givenDesc, :givenToStorageID, :givenQuantity, :givenSessionID, :givenProductID, NOW())";
     
-    const INSERT_StOCKTAKE_LOGG = "INSERT INTO " . LoggModel::TABLE . " (logg.type, logg.desc, logg.storageID, logg.newQuantity, logg.oldQuantity, logg.differential, logg.productID, logg.userID,logg.date) VALUES "
+    const INSERT_StOCKTAKE_LOGG = "INSERT INTO " . LoggModel::TABLE . " (logg.type, logg.desc, logg.storageID, logg.newQuantity, logg.oldQuantity, logg.differential, logg.productID, logg.userID, logg.date) VALUES "
             . "(:givenType, :givenDesc, :givenStorageID, :givenQuantity, :givenOldQuantity, :givenDifferanse, :givenProductID, :givenSessionID, NOW())";
     
+    const INSERT_LOGIN_LOGG = "INSERT INTO " . LoggModel::TABLE . " (logg.type, logg.desc, logg.userID, logg.date) VALUES (:givenType, :givenDesc, :givenUserID, NOW())";
     
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;
@@ -44,7 +45,7 @@ class LoggModel {
       $this->selLateStmt = $this->dbConn->prepare(LoggModel::SELECT_LATEST_QUERY);
       $this->addDeliveryLogg = $this->dbConn->prepare(LoggModel::INSERT_DELIV_LOGG);
       $this->stocktakeLogg = $this->dbConn->prepare(LoggModel::INSERT_StOCKTAKE_LOGG);
-
+      $this->loginLogg = $this->dbConn->prepare(LoggModel::INSERT_LOGIN_LOGG);
     }   
     
     public function getAllLoggInfo(){
@@ -62,14 +63,14 @@ class LoggModel {
     
     public function stocktaking($type, $descript, $sessionID, $givenStorageID, $givenProductID, $givenQuantity, $oldQuantity, $differance){
         return $this->stocktakeLogg->execute(array("givenType" => $type, "givenDesc" => $descript, "givenSessionID" => $sessionID, "givenStorageID" => $givenStorageID, "givenProductID" => $givenProductID, "givenQuantity" => $givenQuantity, "givenOldQuantity" => $oldQuantity, "givenDifferanse" => $differance));
-
     }
-    public function getLatestLoggInfo() 
-    {
-        $this->selLateStmt->execute();
-        return $this->selLateStmt->fetchALL(PDO::FETCH_ASSOC);
-        
-    }
-
     
+    public function getLatestLoggInfo() {
+        $this->selLateStmt->execute();
+        return $this->selLateStmt->fetchALL(PDO::FETCH_ASSOC);    
+    }
+    
+    public function loginLog($type, $desc, $givenUserID){
+        return $this->loginLogg->execute(array("givenType" => $type, "givenDesc" => $desc, "givenUserID" => $givenUserID));
+    }
 }
