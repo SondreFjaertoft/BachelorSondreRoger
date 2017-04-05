@@ -43,6 +43,9 @@ class ProductController extends Controller {
         } else {
         $givenMacAdresse = "FALSE";    
         }
+        $sessionID = $_SESSION["userID"];
+        $setSessionID = $GLOBALS["userModel"];
+        $setSessionID->setSession($sessionID);
         
         $productCreationInfo = $GLOBALS["productModel"];
         $productCreationInfo->addProduct($givenProductName, $givenPrice, $givenCategoryID, $givenMediaID, $givenProductDate, $givenMacAdresse);

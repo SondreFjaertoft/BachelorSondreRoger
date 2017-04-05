@@ -20,8 +20,8 @@
         <th>Type</th>
         <th>Beskrivelse</th>
         <th>Lagernavn</th>
-        <th>Fra lager</th>
-        <th>Til lager</th>      
+        <th>Til lager</th>
+        <th>Fra lager</th>    
         <th>Antall</th>
         <th>Gammelt Antall</th>
         <th>Nytt Antall</th>

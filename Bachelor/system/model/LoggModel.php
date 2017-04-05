@@ -17,11 +17,16 @@ class LoggModel {
     const INSERT_QUERY = "INSERT INTO " . LoggModel::TABLE . " (type, desc, storageID, fromStorageID, toStorageID, quantity, oldQuantity, newQuantity, differential, userID, onUserID, productID, date, customerNr) "
             . "VALUES (:type, :desc, :storageID, :fromStorageID, :toStorageID, :quantity, :oldQuantity, :newQuantity, :differential, :userID, :onUserID, :productID, :date, :customerNr)";
 
+    const INSERT_TRANS_LOGG = "INSERT INTO " . LoggModel::TABLE . " (logg.type, logg.desc, logg.fromStorageID, logg.toStorageID, logg.quantity, logg.userID, logg.productID, logg.date) VALUES "
+            . "(:givenType, :givenDesc, :givenFromStorageID, :givenToStorageID, :givenQuantity, :givenSessionID, :givenProductID, NOW())";
+    
+    
     
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;
       $this->selStmt = $this->dbConn->prepare(LoggModel::SELECT_QUERY);
       $this->addStmt = $this->dbConn->prepare(LoggModel::INSERT_QUERY);
+      $this->addTransLogg = $this->dbConn->prepare(LoggModel::INSERT_TRANS_LOGG);
     }   
     
     public function getAllLoggInfo(){
@@ -29,8 +34,9 @@ class LoggModel {
         return $this->selStmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    public function addLogg($arguments) {
-        return $this->addStmt->execute(array($arguments));
+    public function transferLogg($type, $descript, $sessionID, $fromStorageID, $toStorageID, $transferProductID, $transferQuantity) {
+        return $this->addTransLogg->execute(array("givenType" => $type, "givenDesc" => $descript, "givenSessionID" => $sessionID, "givenFromStorageID" => $fromStorageID, "givenToStorageID" => $toStorageID, "givenProductID" => $transferProductID, "givenQuantity" => $transferQuantity));
+
     }
     
 

@@ -53,23 +53,29 @@ class transferController extends Controller {
         $transferProductIDArray = $_REQUEST["transferProductID"];
         $transferQuantityArray = $_REQUEST["transferQuantity"];
         $toStorageID = $_REQUEST["toStorageID"];
+        
+        //LOGG
+        $type = "Overføring";
+        $desc= "Overførte produkt";
+        $sessionID = $_SESSION["userID"];
+        
 
         if ($fromStorageID == 0 || $toStorageID == 0) {
             return false;
         } else {
-
+            $loggModel = $GLOBALS["loggModel"];
             $inventoryInfo = $GLOBALS["inventoryModel"];
 
             for ($i = 0; $i < sizeof($transferProductIDArray); $i++) {
                 $count = $inventoryInfo->doesProductExistInStorage($toStorageID, $transferProductIDArray[$i]);
 
                     if ($count[0]["COUNT(*)"] < 1) {
-
-
+                        
+                        $loggModel->transferLogg($type, $desc, $sessionID, $fromStorageID, $toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                         $inventoryInfo->addInventory($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                         $inventoryInfo->transferFromStorage($fromStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                     } else {
-
+                        $loggModel->transferLogg($type, $desc, $sessionID, $fromStorageID, $toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                         $inventoryInfo->transferFromStorage($fromStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                         $inventoryInfo->transferToStorage($toStorageID, $transferProductIDArray[$i], $transferQuantityArray[$i]);
                     }

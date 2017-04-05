@@ -59,7 +59,9 @@ class UserController extends Controller {
         if (isset($_POST['userRestrictions']) && isset($_POST['storageRestrictions'])) {
             $givenUserArray = $_REQUEST['userRestrictions'];
             $givenStorageArray = $_REQUEST['storageRestrictions'];
+            $sessionID = $_SESSION["userID"];
             
+            $setSessionID = $GLOBALS["userModel"];
             $addRestriction = $GLOBALS["restrictionModel"];
             
             foreach ($givenUserArray as $givenUserID) :
@@ -67,6 +69,7 @@ class UserController extends Controller {
                 foreach ($givenStorageArray as $givenStorageID) :
                 $count = $addRestriction->doesRestrictionExist($givenUserID, $givenStorageID);
                     if ($count[0]["COUNT(*)"] < 1) {
+                        $setSessionID->setSession($sessionID);
                         $data = $addRestriction->addRestriction($givenUserID, $givenStorageID);
                     }
                 endforeach;
@@ -153,9 +156,12 @@ class UserController extends Controller {
     private function deleteSingleRes(){
         $givenUserID = $_REQUEST["givenUserID"];
         $givenStorageID = $_REQUEST["givenStorageID"];
+        $sessionID = $_SESSION["userID"];
         
-        
+        $setSessionID = $GLOBALS["userModel"];
         $deletedRes = $GLOBALS["restrictionModel"];
+        
+        $setSessionID->setSession($sessionID);
         $deletedRes->deleteSingleRestriction($givenUserID, $givenStorageID);
         
         echo json_encode("success");

@@ -94,6 +94,10 @@ class mediaController extends Controller {
     }
     
     private function addMedia($fileName, $givenCaterogy){
+        $sessionID = $_SESSION["userID"];
+        $setSessionID = $GLOBALS["userModel"];
+        $setSessionID->setSession($sessionID);
+        
         $mediaModel = $GLOBALS["mediaModel"];
         $added = $mediaModel->addMedia($fileName, $givenCaterogy);
         

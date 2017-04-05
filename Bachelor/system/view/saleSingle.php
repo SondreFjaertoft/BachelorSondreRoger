@@ -27,7 +27,7 @@
 
                         <tr>
                             <th>Kundenr:   </th> 
-                            <td><input name="customerNumber" required="required" form="withdrawProducts" type="int" value=""/></td> 
+                            <td><input name="customerNumber" required="required" form="withdrawProducts" type="number" value=""/></td> 
                         </tr>  
                         <tr>
                             <th>kommentar:  </th>

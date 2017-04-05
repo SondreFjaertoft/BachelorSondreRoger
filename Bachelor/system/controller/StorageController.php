@@ -38,8 +38,12 @@ class StorageController extends Controller {
     private function storageCreationEngine() {
         $givenStorageName = $_REQUEST["givenStorageName"];
         $sessionID = $_SESSION["userID"];
+        
+        $setSessionID = $GLOBALS["userModel"];
+        $setSessionID->setSession($sessionID);
+        
         $storageCreationInfo = $GLOBALS["storageModel"];
-        $storageCreationInfo->addStorage($givenStorageName, $sessionID);
+        $storageCreationInfo->addStorage($givenStorageName);
 
         echo json_encode("success");
     }
@@ -141,8 +145,12 @@ class StorageController extends Controller {
     private function deleteSingleProd(){
         $givenProductID = $_REQUEST["givenProductID"];
         $givenStorageID = $_REQUEST["givenStorageID"];
+        $sessionID = $_SESSION["userID"];
         
+        $setSessionID = $GLOBALS["userModel"];
         $deletedProd = $GLOBALS["inventoryModel"];
+        
+        $setSessionID->setSession($sessionID);
         $deleted = $deletedProd->deleteSingleProduct($givenProductID, $givenStorageID);
         
         if($deleted){

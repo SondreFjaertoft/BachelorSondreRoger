@@ -12,7 +12,6 @@ class ProductModel {
     const SEARCH_QUERY = "SELECT * FROM " . ProductModel::TABLE . " INNER JOIN categories ON products.categoryID = categories.categoryID WHERE productName LIKE :givenSearchWord";
     const INSERT_QUERY = "INSERT INTO " . ProductModel::TABLE . " (productName, price, CategoryID, MediaID, date, macAdresse) VALUES (:givenProductName, :givenPrice, :givenCategoryID, :givenMediaID, :givenProductDate, :givenMacAdresse)";
     const DELETE_QUERY = "DELETE FROM " . ProductModel::TABLE . " WHERE productID = :removeProductID";
-
     
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;
@@ -22,9 +21,8 @@ class ProductModel {
       $this->selStmt = $this->dbConn->prepare(ProductModel::SELECT_QUERY);
       $this->delStmt = $this->dbConn->prepare(ProductModel::DELETE_QUERY);
       $this->selProductID = $this->dbConn->prepare(ProductModel::SELECT_QUERY_PRODUCTID);
-
-      
     }
+    
     
     public function getSearchResult($givenSearchWord) {
         $this->searchStmt->execute(array("givenSearchWord" => $givenSearchWord));
@@ -53,7 +51,5 @@ class ProductModel {
         $this->selProductID->execute(array("givenProductID" => $givenProductID));
         return $this->selProductID->fetchAll(PDO::FETCH_ASSOC);
     } 
-    
-
     
 }

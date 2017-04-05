@@ -11,3 +11,19 @@ DELIMITER ;
 
 SET @var_userID = 1;
 SELECT @var_userID as loggedInUser
+
+
+
+DELIMITER $$
+CREATE TRIGGER createRestriction_Logg
+    AFTER INSERT ON restrictions
+    FOR EACH ROW 
+BEGIN
+    INSERT INTO logg (logg.type, logg.desc, logg.storageID, logg.userID, logg.onUserID, logg.date) VALUES ('Tilgang', 'Gavn tilgang til', NEW.storageID, @sessionUserID, NEW.userID, NOW());
+END$$
+DELIMITER ;
+
+$sessionID = $_SESSION["userID"];
+        
+$setSessionID = $GLOBALS["userModel"];
+$setSessionID->setSession($sessionID);
