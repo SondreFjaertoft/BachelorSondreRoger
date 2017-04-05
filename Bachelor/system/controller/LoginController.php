@@ -29,10 +29,10 @@ class LoginController extends Controller {
         
         $Users = $userModel->getAllUserInfo();
         
-
+        $hsah = '$2y$10$KvGNnb4q7nFZ9gnb/uB/z.XgiSNhqaheJne3CoKgiSmCVPNZwrK6y';
         foreach ($Users as $User) {
             if ($User["username"] == $givenUsername) {
-                if ($User["password"] == $givenPassword) {
+                if (password_verify($User["username"], $hsah)) {
                     $_SESSION["AreLoggedIn"] = "true";
                     $_SESSION["nameOfUser"] = $User["name"];  
                     $_SESSION["userID"] = $User["userID"]; 
