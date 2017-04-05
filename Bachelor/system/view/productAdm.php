@@ -72,7 +72,7 @@
                             </tr>
                             <tr>
                                 <th>Pris:</th>
-                                <td><input class="form-control" type="int" required="required" name="givenPrice" value="" autocomplete="off"></td>
+                                <td><input class="form-control" type="number" required="required" name="givenPrice" value="" placeholder="Kr" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Kategori:</th>

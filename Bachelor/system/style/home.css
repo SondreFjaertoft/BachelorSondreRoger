@@ -11,6 +11,10 @@ html,body
  .sidebar .caret {
     float: right;
 }
+#loggTableContainer
+{
+    font-size: 12px;
+}
 
 #snarveidiv
 {

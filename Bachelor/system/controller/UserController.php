@@ -47,8 +47,15 @@ class UserController extends Controller {
         $editMediaID = $_REQUEST["editMediaID"];
 
         $userEditInfo = $GLOBALS["userModel"];
+        if(strlen($editPassword) < 50)
+        {
+        $hash = password_hash($editPassword, PASSWORD_DEFAULT);
+        $userEditInfo->editUser($editName, $editUsername, $hash, $editUserLevel, $editEmail, $editUserID, $editMediaID);
+        }
+        else
+        {    
         $userEditInfo->editUser($editName, $editUsername, $editPassword, $editUserLevel, $editEmail, $editUserID, $editMediaID);
-
+        }
         echo json_encode("success");
         
     }

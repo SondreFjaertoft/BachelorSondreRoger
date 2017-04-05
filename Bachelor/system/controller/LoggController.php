@@ -10,6 +10,9 @@ class LoggController extends Controller {
         } else if ($page == "getAllLoggInfo"){
             $this->getAllLoggInfo();
         }
+        elseif ($page == "getLatestLoggInfo") {
+            $this->getLatestLoggInfo();
+    }
     }
     
     private function loggPage() {
@@ -23,6 +26,15 @@ class LoggController extends Controller {
         $data = json_encode(array("allLoggInfo" => $LoggInfo));
         echo $data;
 
+    }
+    
+    private function getLatestLoggInfo()
+    {
+        $loggModel = $GLOBALS["loggModel"];
+        $loggLateInfo = $loggModel->getLatestLoggInfo();
+        
+        $data = json_encode(array("latestLoggInfo" => $loggLateInfo));
+        echo $data;
     }
     
 }

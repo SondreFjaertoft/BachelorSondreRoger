@@ -125,7 +125,8 @@ class Router {
                     return new HomeController();
                     
                 case "logg" :
-                case "getAllLoggInfo" :    
+                case "getAllLoggInfo" :
+                case "getLatestLoggInfo" :
                     return new LoggController();
                     }
                 }

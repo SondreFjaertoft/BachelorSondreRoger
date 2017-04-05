@@ -14,6 +14,15 @@ class LoggModel {
         ."LEFT JOIN users as u2 ON l.onUserID = u2.userID "
         ."LEFT JOIN products as p ON l.productID = p.productID";
     
+    const SELECT_LATEST_QUERY = 
+         "SELECT l.type, l.desc, s1.storageName, s2.storageName AS fromStorage, s3.storageName AS toStorage, l.quantity, l.oldQuantity, l.newQuantity, l.differential, u1.username, u2.username AS onUsername, p.productName, l.customerNr, l.date FROM " . LoggModel::TABLE . " AS l "
+        ."LEFT JOIN storage as s1 ON l.storageID = s1.storageID "
+        ."LEFT JOIN storage as s2 ON l.fromStorageID = s2.storageID "
+        ."LEFT JOIN storage as s3 ON l.toStorageID = s3.storageID "
+        ."LEFT JOIN users as u1 ON l.userID = u1.userID "
+        ."LEFT JOIN users as u2 ON l.onUserID = u2.userID "
+        ."LEFT JOIN products as p ON l.productID = p.productID LIMIT 10";
+    
     const INSERT_QUERY = "INSERT INTO " . LoggModel::TABLE . " (type, desc, storageID, fromStorageID, toStorageID, quantity, oldQuantity, newQuantity, differential, userID, onUserID, productID, date, customerNr) "
             . "VALUES (:type, :desc, :storageID, :fromStorageID, :toStorageID, :quantity, :oldQuantity, :newQuantity, :differential, :userID, :onUserID, :productID, :date, :customerNr)";
 
@@ -27,6 +36,7 @@ class LoggModel {
       $this->selStmt = $this->dbConn->prepare(LoggModel::SELECT_QUERY);
       $this->addStmt = $this->dbConn->prepare(LoggModel::INSERT_QUERY);
       $this->addTransLogg = $this->dbConn->prepare(LoggModel::INSERT_TRANS_LOGG);
+      $this->selLateStmt = $this->dbConn->prepare(LoggModel::SELECT_LATEST_QUERY);
     }   
     
     public function getAllLoggInfo(){
@@ -38,7 +48,12 @@ class LoggModel {
         return $this->addTransLogg->execute(array("givenType" => $type, "givenDesc" => $descript, "givenSessionID" => $sessionID, "givenFromStorageID" => $fromStorageID, "givenToStorageID" => $toStorageID, "givenProductID" => $transferProductID, "givenQuantity" => $transferQuantity));
 
     }
-    
+    public function getLatestLoggInfo() 
+    {
+        $this->selLateStmt->execute();
+        return $this->selLateStmt->fetchALL(PDO::FETCH_ASSOC);
+        
+    }
 
     
 }

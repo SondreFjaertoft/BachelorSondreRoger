@@ -30,10 +30,10 @@ if (isset($GLOBALS["errorMessage"])) {
                     <div class="panel-body">
                         <div class="">
                             <div class="col-xs-6 col-md-12 text-center">
-                                <button class="btn btn-success btn-lg" type="button" data-toggle="modal" data-target="#createUserModal"><span class="glyphicon glyphicon-user"></span> <br/>Opprett bruker</button>
-                                <button class="btn btn-warning btn-lg" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Opprett produkt</button>
-                                <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
-                                <button class="btn btn-info btn-lg" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Oprett kategori</button>
+                                <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#createUserModal"><span class="glyphicon glyphicon-user"></span> <br/>Opprett bruker</button>
+                                <button class="btn btn-info btn-lg" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Opprett produkt</button>
+                                <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
+                                <button class="btn btn-info btn-lg" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Opprett kategori</button>
                                 <button class="btn btn-info btn-lg" onclick="getCategory()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
                                 <button class="btn btn-info btn-lg" onclick="getStorageInfo()" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varetelling</button>
                                 <button class="btn btn-info btn-lg" type="button" onclick="getStorageProduct()" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varelevering</button>
@@ -54,8 +54,26 @@ if (isset($GLOBALS["errorMessage"])) {
     <?php }?>
     <div class="container">
         <div class="col-md-12">
+            <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    
+                    <h2 class="panel-title text-center"><b>Siste hendeleser</b></h2>
+                </div>
+                <table class="table" id="loggTableContainer">
+                <!-- Innhold fra Handlebars Template -->
+                </table>
+                
+            </div>
+            </div>
             
-            <div class="col-md-6">
+            
+        </div>
+
+
+
+        <div class="col-md-12">
+        <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2 class="panel-title text-center"><b>Lagerbeholdning</b></h2>
@@ -87,31 +105,13 @@ if (isset($GLOBALS["errorMessage"])) {
             </div>
             <div class="col-md-6">
                 
-                <canvas id="myChart"></canvas>
+                <canvas id="myChart" height="280"></canvas>
                 
               
             </div>
-            
         </div>
-
-
-
-        <div class="col-md-12">
-        
-            <div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    
-                    <h2 class="panel-title text-center"><b>Siste hendeleser</b></h2>
-                </div>
-                <table class="table" id="loggTableContainer">
-                <!-- Innhold fra Handlebars Template -->
-                </table>
-                
-            </div>
-            </div>
-        </div>
-
+    </div>
+    
         <!-- HER KOMMER INNHOLDET>   -->                
 
         <!-- Opprett bruker modal -->
@@ -125,10 +125,11 @@ if (isset($GLOBALS["errorMessage"])) {
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Opprett bruker</h4>
                     </div>
-                    <div class="modal-body">
-                        <div class="text-center">
-                            <table class="table">
-                                <form action="?page=addUserEngine" method="post" id="createUser">
+                    <form action="?page=addUserEngine" method="post" id="createUser">
+                        <div class="modal-body">
+                            <div class="text-center">
+                                <table class="table">
+                                
                                     <tr>
                                         <th style="border: none">Name:</th>
                                         <td style="border: none"><input class="form-control" type="text" name="givenName" required="required" value="" autocomplete="off"></td>
@@ -147,36 +148,39 @@ if (isset($GLOBALS["errorMessage"])) {
                                     </tr>
                                     <tr>
                                         <th>UserLevel:</th>                                       
-                                        <td><div>
-                                                <select name="givenUserLevel" required="required" class="form-control" autocomplete="off">
-                                                    <option></option>
-                                                    <option value="User">User</option>
-                                                    <option value="Administrator">Administrator</option>
+                                        <td>
+                                            <select name="givenUserLevel" required="required" class="form-control" autocomplete="off">
+                                                <option></option>
+                                                <option value="User">User</option>
+                                                <option value="Administrator">Administrator</option>
                                                 </select>  
-                                            </div>
+                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Media:</th>
+                                        <td>
+                                            <select name="givenMediaID" id="selectMediaID" required="required" class="form-control" autocomplete="off">
+                                            </select>
                                         </td>
                                     </tr>
 
-
-
-                            </table>
+                                    </table>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <p id="errorMessage"></p>
-                        <input class="btn btn-success" form="createUser" type="submit" value="Opprett bruker">
+                        <div class="modal-footer">
+                            <p id="errorMessage"></p>
+                            <input class="btn btn-success" form="createUser" type="submit" value="Opprett bruker">
 
 
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
-                    </div>
-                    </form>
-
+                        </div>
+                        </form>
                 </div>
             </div>
         </div> 
 
-    </div>
+    
 
     <!-- CREATE PRODUCT MODAL -->
 
@@ -1070,7 +1074,7 @@ $(document).ready(function()
         </tr>
 </thead>
 <tbody id="tbodyid">
-{{#each allLoggInfo}}
+{{#each latestLoggInfo}}
     <tr>
         <td>{{type}}</td>
         <td>{{desc}}</td>
@@ -1097,7 +1101,7 @@ $(document).ready(function()
  $(function () {
     $.ajax({
         type: 'GET',
-        url: '?page=getAllLoggInfo',
+        url: '?page=getLatestLoggInfo',
         dataType: 'json',
         success: function (data) {
             displayLoggTable(data);
