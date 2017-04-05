@@ -50,7 +50,8 @@ class Router {
                 case "getSalesFromID" :   
                 case "editMySale" :  
                 case "getResCount" :
-                case "saleSingle" :    
+                case "saleSingle" :  
+                case "getLastSaleInfo" :
                     return new SaleController();
                     
                 case "return" :
