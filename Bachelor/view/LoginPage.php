@@ -74,23 +74,3 @@ document.getElementById("date").value  = d.yyyymmdd();
 
 </script>
 
-<script>
-    $(function POSTsearchForMedia() {
-
-        $('#login').submit(function () {
-            var url = $(this).attr('action');
-            var data = $(this).serialize();
-
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: data,
-                dataType: 'json',
-                success: function (data) {
-                }
-            });
-            return false;
-        });
-    });
-
-</script>
