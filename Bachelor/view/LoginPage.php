@@ -43,9 +43,11 @@ $error = $GLOBALS["errorMessage"];
                         </form>
                         <?php 
                         if (isset($GLOBALS["errorMessage"])){
-                            echo $error;
+                            ?> <div class="alert alert-danger">
+                            <?php echo $error;
                             }
                         ?>
+                            </div>
                     </div>
                 </div>
             </div>
