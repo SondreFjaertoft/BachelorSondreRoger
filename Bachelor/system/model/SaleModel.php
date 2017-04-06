@@ -17,10 +17,9 @@ class SaleModel {
     const SELECT_LAST_QUERY =  "SELECT salesID, customerNr, products.productName, sales.date, comment, storage.storageName, quantity FROM " . SaleModel::TABLE . 
 
             " INNER JOIN products ON sales.productID = products.productID INNER JOIN storage ON sales.storageID = storage.storageID WHERE userID = :givenUserID LIMIT 10";
+    
     const SELECT_ALL_LAST_QUERY =  "SELECT salesID, customerNr, products.productName, sales.date, comment, storage.storageName, quantity FROM " . SaleModel::TABLE . 
-            
-
-            " INNER JOIN products ON sales.productID = products.productID INNER JOIN storage ON sales.storageID = storage.storageID WHERE userID = :givenUserID ORDER BY date DESC LIMIT 10";
+            " INNER JOIN products ON sales.productID = products.productID INNER JOIN storage ON sales.storageID = storage.storageID ORDER BY date DESC LIMIT 10";
 
     
     public function __construct(PDO $dbConn) { 

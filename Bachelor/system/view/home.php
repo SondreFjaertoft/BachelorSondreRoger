@@ -1313,8 +1313,7 @@ $(document).ready(function()
 
 <script id="allLastSaleTemplate" type="text/x-handlebars-template">
 
-
-{{#each AllLastSaleInfo}}
+{{#each allLastSaleInfo}}
     <tr>
     <td>{{username}}</td>
     <td>{{customerNr}}</td>
