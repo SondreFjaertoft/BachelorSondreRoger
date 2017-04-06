@@ -1,13 +1,13 @@
 <?php require("view/header.php"); ?>
 
 
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<div class="col-sm-9 col-sm-offset-3 col-md-11 col-md-offset-2 main">
 
     <div class="container">
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
             <div id="success"></div>
             <form id="withdrawProducts" action="?page=withdrawProduct" method="post">
-                <div class="col-sm-3 col-md-4">
+                <div class="col-sm-3 col-md-4 row">
                     <label>Uttak fra: </label><div id="withdrawrRestrictionContainer"></div>
                 </div>
 
@@ -24,15 +24,15 @@
                 <br><br>
 
                 <div>
-                    <table class="table table-bordered table-striped table-responsive" id="commentContainer" hidden>
+                    <table class="table table-responsive" id="commentContainer" hidden>
 
                         <tr>
-                            <th>Kundenr:   </th> 
-                            <td><input name="customerNumber" required="required" form="withdrawProducts" type="number" value=""/></td> 
+                            <th id="bordernone" class="col-md-1">KundeNr:   </th> 
+                            <td id="bordernone"><input class="form-control" name="customerNumber" required="required" form="withdrawProducts" type="number" value=""/></td> 
                         </tr>  
                         <tr>
-                            <th>kommentar:  </th>
-                            <td><input name="withdrawComment" required="required" form="withdrawProducts" type="text" value=""/></td>
+                            <th id="bordernone" class="col-md-1">Kommentar:  </th>
+                            <td id="bordernone"><input class="form-control" name="withdrawComment" required="required" form="withdrawProducts" type="text" value=""/></td>
                         </tr>
 
                     </table>
@@ -41,7 +41,7 @@
                 <br>
 
                 <div>
-                    <table class="table table-bordered table-striped table-responsive" id="withdrawQuantityContainer">
+                    <table class="table table-responsive" id="withdrawQuantityContainer">
 
                         <!-- Lar deg velge antall enheter -->
 
@@ -83,19 +83,12 @@
     <td>{{productName}}</td>
     <input name="withdrawProductID[]" id="{{productID}}" form="withdrawProducts" type="hidden" value="{{productID}}"/>
     <th>Antall:</th>
-    <td><input name="withdrawQuantity[]" form="withdrawProducts" required="required" type="number" min="1" max="{{quantity}}" value="" autocomplete="off"/></td> 
+    <td><input class="form-control" name="withdrawQuantity[]" form="withdrawProducts" required="required" type="number" min="1" max="{{quantity}}" value="" autocomplete="off"/></td> 
     <th>Tilgjengelig:</th>
     <td>{{quantity}} stk</td>    
 
     <td>
-    <button class="remove" data-toggle="tooltip" 
-    style="appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    outline: none;
-    border: 0;
-    background: transparent;
-    display: inline;">
+    <button id="redigerknapp" class="remove" data-toggle="tooltip">
     <span class="glyphicon glyphicon-remove" style="color: red"></span>
     </button>
     </td> 

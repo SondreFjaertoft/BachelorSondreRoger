@@ -8,7 +8,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
 
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main row">
+<div class="col-sm-9 col-sm-offset-3 col-md-11 col-md-offset-2 main row">
     <div id="message">
         <?php
         if (isset($GLOBALS["errorMessage"])) {
@@ -31,13 +31,13 @@ if (isset($GLOBALS["errorMessage"])) {
                         <div class="">
                             <div class="col-xs-6 col-sm-6 col-md-12 text-center">
                                 <div class="pull-left">
-                                    <button class="btn btn-info btn-md" type="button" data-toggle="modal" data-target="#createUserModal"><span class="glyphicon glyphicon-user"></span> <br/>Opprett bruker</button>
-                                    <button class="btn btn-info btn-md" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Opprett produkt</button>
-                                    <button class="btn btn-info btn-md" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
-                                    <button class="btn btn-info btn-md" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Opprett kategori</button>
-                                    <button class="btn btn-info btn-md" onclick="getCategory()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
-                                    <button class="btn btn-info btn-md" onclick="getStorageInfo()" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varetelling</button>
-                                    <button class="btn btn-info btn-md" type="button" onclick="getStorageProduct()" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varelevering</button>
+                                    <button class="btn btn-success btn-md" type="button" data-toggle="modal" data-target="#createUserModal"><span class="glyphicon glyphicon-user"></span> <br/>Opprett bruker</button>
+                                    <button class="btn btn-success btn-md" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Opprett produkt</button>
+                                    <button class="btn btn-success btn-md" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
+                                    <button class="btn btn-success btn-md" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Opprett kategori</button>
+                                    <button class="btn btn-success btn-md" onclick="getCategory()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
+                                    <button class="btn btn-success btn-md" onclick="getStorageInfo()" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varetelling</button>
+                                    <button class="btn btn-success btn-md" type="button" onclick="getStorageProduct()" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varelevering</button>
                                 </div>
                                 <div class="pull-right">
                                     <a href="?page=editUser" class="btn btn-warning btn-md" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Rediger Profil</a>
@@ -63,7 +63,7 @@ if (isset($GLOBALS["errorMessage"])) {
     <div class="col-md-12">
         <?php if ($_SESSION["userLevel"] == "Administrator") {?>
         <div class="col-md-6">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h2 class="panel-title text-center"><b>Snart tom lagerbeholdning</b></h2>
                 </div>
@@ -85,8 +85,8 @@ if (isset($GLOBALS["errorMessage"])) {
         <?php }?>
         <?php if ($_SESSION["userLevel"] == "User") {?>
         <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="panel panel-info">
+                <div class="panel-heading" id="panelcolor">
                     <h2 class="panel-title text-center"><b>Siste salg</b></h2>
                 </div>
                 
@@ -111,7 +111,7 @@ if (isset($GLOBALS["errorMessage"])) {
         </div>
         <?php }?>
         <div class="col-md-6">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h2 class="panel-title text-center"><b>Dine siste salg</b></h2>
                     
@@ -140,8 +140,8 @@ if (isset($GLOBALS["errorMessage"])) {
         <div class="col-md-12">
             
             <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="panel panel-primary">
+                <div class="panel-heading" >
                     
                     <h2 class="panel-title text-center"><b>Siste hendeleser</b></h2>
                 </div>
@@ -159,7 +159,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
         <div class="col-md-12">
         <div class="col-md-6">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h2 class="panel-title text-center"><b>Lagerbeholdning</b></h2>
                         <br>
@@ -190,7 +190,7 @@ if (isset($GLOBALS["errorMessage"])) {
             </div>
             <div class="col-md-6">
                 
-                <canvas id="myChart" height="280"></canvas>
+                <canvas id="myChart" height="290"></canvas>
                 
               
             </div>

@@ -1,13 +1,15 @@
 <?php require("view/header.php");?>
 
 
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<div class="col-sm-9 col-sm-offset-3 col-md-11 col-md-offset-2 main">
     <div class="container">
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
         <div id="error"></div>
         <div id="success"></div>
+        
     <form id="transferProducts" action="?page=transferProduct" method="post">    
-        <div class="col-sm-3 col-md-4">
+        
+        <div class="col-sm-3 col-md-4 row">
             <label>Overfør Fra:</label>
             <select name="fromStorageID" form="transferProducts" id="fromTransferRestrictionContainer" class="form-control">
                 
@@ -27,7 +29,7 @@
             </select>
             
         </div>     
-    
+        
         <br><br><br><br>
 
         <div id="transferProductContainer">
@@ -41,7 +43,7 @@
             <br><br><br>
             
         <div>
-            <table class="table table-bordered table-striped table-responsive" id="transferQuantityContainer">
+            <table class="table table-responsive" id="transferQuantityContainer">
 
             <!-- Lar deg velge antall enheter -->
             
@@ -53,6 +55,7 @@
 
         </div>    
     </form>
+    
             
    
  
@@ -75,19 +78,12 @@
         <td>{{productName}}</td>
         <input name="transferProductID[]" id="{{productID}}" form="transferProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
-        <td><input name="transferQuantity[]" form="transferProducts" required="required" type="number" min="1" max="{{quantity}}" value="" autocomplete="off"/></td> 
+        <td><input class="form-control" name="transferQuantity[]" form="transferProducts" required="required" type="number" min="1" max="{{quantity}}" value="" autocomplete="off"/></td> 
         <th>Tilgjengelig:</th>
         <td>{{quantity}} stk</td>    
         
         <td>
-            <button class="remove" data-toggle="tooltip" 
-                style="appearance: none;
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                outline: none;
-                border: 0;
-                background: transparent;
-                display: inline;">
+            <button id="redigerknapp" class="remove" data-toggle="tooltip">
                 <span class="glyphicon glyphicon-remove" style="color: red"></span>
             </button>
         </td>

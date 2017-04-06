@@ -1,13 +1,13 @@
 <?php require("view/header.php"); ?>
 
 
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<div class="col-sm-9 col-sm-offset-3 col-md-11 col-md-offset-2 main">
 
     <div class="container">
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
             <div id="success"></div>
             <form id="returnProducts" action="?page=returnProduct" method="post">
-                <div class="col-sm-3 col-md-4">
+                <div class="col-sm-3 col-md-4 row">
                     <label>Returner til: </label><div id="returnRestrictionContainer"></div>
                 </div>
 
@@ -25,22 +25,22 @@
         <br><br><br>
 
         <div>
-            <table class="table table-bordered table-striped table-responsive" id="commentContainer">
+            <table class="table table-responsive" id="commentContainer">
 
                 <tr>
-                    <th>Kundenr:   </th> 
-                    <td><input name="customerNumber" required="required" form="returnProducts" type="number" value=""/></td> 
+                    <th id="bordernone" class="col-md-1">KundeNr:   </th> 
+                    <td id="bordernone"><input name="customerNumber" required="required" form="returnProducts" type="number" value=""/></td> 
                 </tr>  
                 <tr>
-                    <th>kommentar:  </th>
-                    <td><input name="returnComment" required="required" form="returnProducts" type="text" value=""/></td>
+                    <th id="bordernone" class="col-md-1">Kommentar:  </th>
+                    <td id="bordernone"><input name="returnComment" required="required" form="returnProducts" type="text" value=""/></td>
                 </tr>
 
             </table>
         </div>   
         
         <div>
-            <table class="table table-bordered table-striped table-responsive" id="returnQuantityContainer">
+            <table class="table table-responsive" id="returnQuantityContainer">
             
                 <!-- Lar deg velge antall enheter -->
 
@@ -65,17 +65,10 @@
         <td>{{productName}}</td>
         <input name="returnProductID[]" id="{{productID}}" form="returnProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
-        <td><input name="returnQuantity[]" form="returnProducts" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
+        <td><input class="form-control" name="returnQuantity[]" form="returnProducts" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
         
         <td>
-            <button class="remove" data-toggle="tooltip" 
-                style="appearance: none;
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                outline: none;
-                border: 0;
-                background: transparent;
-                display: inline;">
+            <button id="redigerknapp" class="remove" data-toggle="tooltip">
                 <span class="glyphicon glyphicon-remove" style="color: red"></span>
             </button>
         </td>    
