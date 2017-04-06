@@ -51,6 +51,7 @@ class StorageModel {
        $this->disabCons->execute(); 
        $this->delStmt->execute(array("removeStorageID" => $removeStorageID));
        $this->actCons->execute();
+       return $this->delStmt;
     }
     
     public function editStorage($editStorageName, $editStorageID){

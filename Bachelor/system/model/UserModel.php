@@ -72,6 +72,7 @@ class UserModel {
        $this->disabCons->execute();
        $this->delStmt->execute(array("removeUserID" => $removeUserID));
        $this->actCons->execute();
+       return $this->delStmt;
     }
     
     public function updateLastLogin($givenLastLogin, $givenUsername){

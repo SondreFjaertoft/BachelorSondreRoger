@@ -73,7 +73,7 @@
     <input form="editSale" type="hidden" name="editSaleID" value="{{salesID}}">
     <tr>
     <th id="bordernone">Kundenr: </th> 
-    <td id="bordernone"><input class="form-control" form="editSale" required="required" type="text" name="editCustomerNr" value="{{customerNr}}" autocomplete="off"></td> 
+    <td id="bordernone"><input class="form-control" form="editSale" required="required" type="number" name="editCustomerNr" value="{{customerNr}}" autocomplete="off"></td> 
     </tr>
     <tr>
     <th id="bordernone">Kommentar: </th> 

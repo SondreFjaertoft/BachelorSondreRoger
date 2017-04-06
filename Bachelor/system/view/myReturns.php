@@ -76,7 +76,7 @@
     <input form="editReturn" type="hidden" name="editReturnID" value="{{returnID}}">
     <tr>
     <th id="bordernone">Kundenr: </th> 
-    <td id="bordernone"><input class="form-control" form="editReturn" required="required" type="text" name="editCustomerNr" value="{{customerNr}}" autocomplete="off"></td> 
+    <td id="bordernone"><input class="form-control" form="editReturn" required="required" type="number" name="editCustomerNr" value="{{customerNr}}" autocomplete="off"></td> 
     </tr>
     <tr>
     <th id="bordernone">Kommentar: </th> 

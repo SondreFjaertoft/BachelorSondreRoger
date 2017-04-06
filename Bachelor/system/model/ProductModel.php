@@ -12,6 +12,8 @@ class ProductModel {
     const SEARCH_QUERY = "SELECT * FROM " . ProductModel::TABLE . " INNER JOIN categories ON products.categoryID = categories.categoryID WHERE productName LIKE :givenSearchWord";
     const INSERT_QUERY = "INSERT INTO " . ProductModel::TABLE . " (productName, price, CategoryID, MediaID, date, macAdresse) VALUES (:givenProductName, :givenPrice, :givenCategoryID, :givenMediaID, :givenProductDate, :givenMacAdresse)";
     const DELETE_QUERY = "DELETE FROM " . ProductModel::TABLE . " WHERE productID = :removeProductID";
+    const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
+    const ACTIVATE_CONS = "SET FOREIGN_KEY_CHECKS=1;";
     
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;
@@ -21,6 +23,8 @@ class ProductModel {
       $this->selStmt = $this->dbConn->prepare(ProductModel::SELECT_QUERY);
       $this->delStmt = $this->dbConn->prepare(ProductModel::DELETE_QUERY);
       $this->selProductID = $this->dbConn->prepare(ProductModel::SELECT_QUERY_PRODUCTID);
+      $this->disabCons = $this->dbConn->prepare(ProductModel::DISABLE_CONS);
+      $this->actCons = $this->dbConn->prepare(ProductModel::ACTIVATE_CONS);
     }
     
     
@@ -44,7 +48,10 @@ class ProductModel {
     
     public function removeProduct($removeProductID)
     {
-       return $this->delStmt->execute(array("removeProductID" => $removeProductID));
+       $this->disabCons->execute(); 
+       $this->delStmt->execute(array("removeProductID" => $removeProductID));
+       $this->actCons->execute();
+       return $this->delStmt;
     }
     
     public function getAllProductInfoFromID($givenProductID) {
