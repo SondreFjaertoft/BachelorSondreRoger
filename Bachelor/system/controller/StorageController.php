@@ -43,9 +43,10 @@ class StorageController extends Controller {
         $setSessionID->setSession($sessionID);
         
         $storageCreationInfo = $GLOBALS["storageModel"];
-        $storageCreationInfo->addStorage($givenStorageName);
-
-        echo json_encode("success");
+        $added = $storageCreationInfo->addStorage($givenStorageName);
+        
+        if($added){
+        echo json_encode("success");} else {return false;}
     }
 
     private function storageEditEngine() {
@@ -57,9 +58,10 @@ class StorageController extends Controller {
         $sesionLog->setSession($sessionID);
         
         $storageEditInfo = $GLOBALS["storageModel"];
-        $storageEditInfo->editStorage($editStorageName, $editStorageID);
-
-        echo json_encode("success");
+        $edited = $storageEditInfo->editStorage($editStorageName, $editStorageID);
+        
+        if($edited){
+        echo json_encode("success");} else {return false;}
     }
 
     private function deleteStorageEngine() {

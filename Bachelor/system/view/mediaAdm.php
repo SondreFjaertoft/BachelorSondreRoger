@@ -29,14 +29,15 @@ $test = $GLOBALS["errorMessage"];
             </div>
         </form>
             <br><br>
-            
-            <div id="message">
-                <?php 
-                if (isset($GLOBALS["errorMessage"])){
-                     echo $test;
-                    }
+            <div id="success"></div>
+            <?php 
+                if (isset($GLOBALS["errorMessage"])){ ?>
+            <div class="alert alert-success">
+                <?php
+                     echo $test; ?>   
+            </div>  <?php
+                     }
                 ?>
-            </div>  
               <br><br>
 
             <div class="panel panel-default">
@@ -412,6 +413,7 @@ function showMedia(givenMediaID) {
                 dataType: 'json',
                 success: function () {
                     $('#editMediaModal').modal('hide');
+                    successMessageEdit();
                     UpdateMediaTable();
                 
                 }
@@ -421,6 +423,15 @@ function showMedia(givenMediaID) {
     });
 
 </script>
+
+<script>
+function successMessageEdit() {    
+    $('<div class="alert alert-success"><strong>Redigert!</strong> Media er redigert. </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
 
 
 <!--    DELETE STORAGE     -->
@@ -440,13 +451,22 @@ function showMedia(givenMediaID) {
                 dataType: 'json',
                 success: function (data) {
                     deleteMediaTemplate(data);
-                    $('#deleteMediaModal').modal('show');                   
+                    $('#deleteMediaModal').modal('show'); 
                 }
             });
             return false;
 
         });
     });
+</script> 
+
+<script>
+function successMessageDelete() {    
+    $('<div class="alert alert-success"><strong>Slettet!</strong> Media er slettet. </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
 </script> 
 
 <!-- Delete media template-->         
@@ -478,6 +498,7 @@ function showMedia(givenMediaID) {
 
                     UpdateMediaTable();
                     $('#deleteMediaModal').modal('hide');
+                    successMessageDelete();
 
                 }
             });
