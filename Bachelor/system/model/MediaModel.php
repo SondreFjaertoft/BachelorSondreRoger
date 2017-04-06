@@ -12,7 +12,8 @@ class MediaModel {
     const UPDATE_QUERY = "UPDATE " . MediaModel::TABLE . " SET mediaName = :editMediaName, categoryID = :editCategory WHERE mediaID = :editMediaID"; 
     const DELETE_QUERY = "DELETE FROM " . MediaModel::TABLE . " WHERE mediaID = :deleteMediaID";
     const SELECT_QUERY = "SELECT * FROM " . MediaModel::TABLE;
-
+    const DISABLE_CONS = "SET FOREIGN_KEY_CHECKS=0;";
+    const ACTIVATE_CONS = "SET FOREIGN_KEY_CHECKS=1;";
     
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;
@@ -22,6 +23,8 @@ class MediaModel {
       $this->editStmt = $this->dbConn->prepare(MediaModel::UPDATE_QUERY);
       $this->delStmt = $this->dbConn->prepare(MediaModel::DELETE_QUERY);
       $this->selStmt = $this->dbConn->prepare(MediaModel::SELECT_QUERY);
+      $this->disabCons = $this->dbConn->prepare(MediaModel::DISABLE_CONS);
+      $this->actCons = $this->dbConn->prepare(MediaModel::ACTIVATE_CONS);
 
     }
     
@@ -46,7 +49,10 @@ class MediaModel {
     }
     
     public function deletetMediaByID($deleteMediaID)    {
-       return $this->delStmt->execute(array("deleteMediaID" => $deleteMediaID));
+       $this->disabCons->execute();
+       $this->delStmt->execute(array("deleteMediaID" => $deleteMediaID));
+       $this->actCons->execute();
+       return $this->delStmt;
     }
     
     public function getAllMediaInfo(){

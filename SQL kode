@@ -6,7 +6,7 @@ LEFT JOIN users as u1 ON l.userID = u1.userID
 LEFT JOIN users as u2 ON l.onUserID = u2.userID
 LEFT JOIN products as p ON l.productID = p.productID
 
-
+SELECT DISTINCT type FROM logg
 
 
 om tafjord, 

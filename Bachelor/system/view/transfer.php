@@ -167,6 +167,7 @@ $(function () {
             } else  {
                 $('.product').remove();
                 $('.selectQuantity').remove();
+                $('#transferButton').hide();
             }
             
         return false;

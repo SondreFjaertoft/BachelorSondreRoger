@@ -4,6 +4,12 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+
+<?php
+if (isset($GLOBALS["errorMessage"])){
+$error = $GLOBALS["errorMessage"];
+}
+?>
 <html>
     <head>
         <title>Login Tafjord</title>
@@ -20,7 +26,7 @@ and open the template in the editor.
             
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-md-offset-4">
-                    <h1 class="text-center login-title">Rogers DØME paradise!!</h1>
+                    
                     <div class="account-wall">
                         <img class="profile-img" src="system/image/Tafjord1.jpg" alt="">
                         <form class="form-signin" id="login" action="?page=loginEngine" method="post">
@@ -34,12 +40,13 @@ and open the template in the editor.
                             </label>
                             <button class="btn btn-lg btn-primary btn-block" type="submit">
                                 Logg inn</button>
-
-
-                            
                         </form>
+                        <?php 
+                        if (isset($GLOBALS["errorMessage"])){
+                            echo $error;
+                            }
+                        ?>
                     </div>
-                    <a href="http://www.google.com" class="text-center new-account">I dont work at Tafjord wtf am i doing here?? </a>
                 </div>
             </div>
             
@@ -66,3 +73,4 @@ var d = new Date();
 document.getElementById("date").value  = d.yyyymmdd();
 
 </script>
+

@@ -162,7 +162,7 @@ $('#withdrawButton').hide();
                     success: function (data) {
                         withdrawProductTemplate(data);
                         $('.selectQuantity').remove();
-                        $('#transferButton').hide();
+                        $('#withdrawButton').hide();
                         $('#commentContainer').hide();
                 
                     }
@@ -170,6 +170,8 @@ $('#withdrawButton').hide();
             } else {
                 $('.product').remove();
                 $('.selectQuantity').remove();
+                $('#commentContainer').hide();
+                $('#withdrawButton').hide();
             }
 
             return false;

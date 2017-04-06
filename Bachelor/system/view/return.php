@@ -150,7 +150,7 @@
         
         $('#returnRestrictionContainer').on('change', function () {
             givenStorageID = $(this).find("option:selected").data('id');
-
+            $('#returnButton').hide();
             if (givenStorageID > 0) {
                 $.ajax({
                     type: 'POST',
@@ -159,13 +159,18 @@
                     dataType: 'json',
                     success: function (data) {
                         returnProductTemplate(data);
-                        $('#transferButton').hide();
+                        $('#returnButton').hide();
                         $('#commentContainer').hide();
+                        $('.selectQuantity').remove();
+                        
                 
                     }
                 });
             } else {
                 $('.product').remove();
+                $('.selectQuantity').remove();
+                $('#commentContainer').hide();
+                $('#returnButton').hide();
             }
 
             return false;

@@ -1,0 +1,7 @@
+
+Epost varsling ved lav varebeholdning. verdien for varsling må kunne endres
+
+Info modal på hver side, som informerer kunden om hva han/ho kan gjøre
+
+Uttak med mac adresse sporing
+
