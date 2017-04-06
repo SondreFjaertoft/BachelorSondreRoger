@@ -245,7 +245,7 @@
 <!-- STOCKTAKING MODAL -->
 
 <div class="modal fade" id="stocktakingModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width: 70%">
         <!-- Innholdet til Modalen -->
         <div class="modal-content">
             <div class="modal-header">
@@ -254,15 +254,20 @@
             </div>
             <form action="?page=stocktacking" method="post" id="stocktaking">
                
-            <div class="modal-body" >
+            <div class="modal-body row" >
+                <div class="col-md-6">
                 <table class="table" id="stocktakingContainer">
                 <!-- Innhold fra Handlebars Template -->
                 </table>
+                
+                
                 <table class="table" id="stocktakingResultContainer">
                 <!-- Innhold fra Handlebars Template -->
                 </table>
+                </div>
+                <div class="col-md-6">
                 <canvas id="stocktakingResultChart"></canvas>
-                
+                </div>
                         
 
             </div>
@@ -639,7 +644,10 @@
                 document.getElementById("saveStocktaking").value = "Lagre";
                 stocktakingResultTemplate(data);
                 rowColor();
+                
                 stocktakingResultChart(data);
+                
+                
                 }
                     
                 }
@@ -650,16 +658,13 @@
     
 </script>
 <script>
- 
     
+    var resultBar;
  function stocktakingResultChart(data)
     {
         
-        var myChart;
-        if(myChart)
-        {
-            myChart.destroy();
-        }
+        
+        
 
           var ctx = document.getElementById('stocktakingResultChart').getContext('2d');
           
@@ -675,56 +680,62 @@
                         var bars = antall;
                         for(i = 0; i < bars.length; i++){
                         //You can check for bars[i].value and put your conditions here
-                        if(bars[i] <= 3)
+                        if(bars[i] >= -3)
                         {
-                            farge.push("red");
+                            farge.push("#5cb85c");
                         }
-                        else if(bars[i] < 5)
+                        else if(bars[i] <= 3)
                         {
-                            farge.push("yellow");
+                            farge.push("#5cb85c");
                         }
                         else if(bars[i] >= 10)
                         {
-                            farge.push("green");
+                            farge.push("#d9534f");
+                        }
+                        else if(bars[i] <= -10)
+                        {
+                            farge.push("#d9534f");
                         }
                         else
                         {
-                            farge.push("yellow");
+                            farge.push("#f0ad4e");
                         }
                         }
 
-                            myChart = new Chart(ctx, {
-
+                            window.resultBar = new Chart(ctx, {
+                                
                             type: 'bar',
                             data: {
                                 labels: product,
                                 datasets: [
                                     {
                                         label: "Antall",
-                                        backgroundColor: [
-                                            'rgba(0, 46, 96, 0.7)',
-                                            'rgba(255, 211, 0, 0.7)'
-                                            
-
-                                        ],
-                                        borderColor: [
-                                            'rgba(0, 46, 96, 1)',
-                                            'rgba(255, 211, 0, 1)'
-                                            
-                                        ],
+ 
+                                        borderColor: "black",
+                                        backgroundColor: farge,
                                         borderWidth: 1,
                                         data: antall
-                                    }
-                                ]
-                            },
+                                      }
+                            ]
+                            },                    
+                        
                             options: {
                                 legend: {
                                     display: false
+                                },
+                                scales:{
+                                    yAxes: [{
+                                        ticks: {
+                                        beginAtZero: true
+                                        }
+                                    }]
                                 }
-                            }
+                            },
+                            responsive : true
 
                         });
     }
+</script>
 </script>
 
 
@@ -802,6 +813,10 @@ $(document).ready(function()
 {
     $('#stocktakingModal').on('hidden.bs.modal', function(e)
     { 
+        if(resultBar)
+        {
+            resultBar.destroy();
+        }
       $('#stocktakingResultContainer').empty();
       $('#stocktakingContainer').empty();
       $('#stocktakingResultChart').empty();
@@ -863,64 +878,80 @@ $(document).ready(function()
             });
         });
     }
-    var myChart;
+    var myObjBar;
     
     function drawChart(data)
     {
-        if(myChart)
+        if(myObjBar)
         {
-            myChart.destroy();
+            myObjBar.destroy();
         }
           var ctx = document.getElementById('myChart').getContext('2d');
 
                    
                     var ctx = document.getElementById('myChart').getContext('2d');
-
                     var product = [];
                     var antall = [];
+                    var farge = [];
+          
+
 
                         $.each(data, function(i, item){
                         product.push(item.productName);
                         antall.push(item.quantity);
-                        });
+                        });     
+                        
 
-                            myChart = new Chart(ctx, {
-
+                            var bars = antall;
+                        for(i = 0; i < bars.length; i++){
+                        //You can check for bars[i].value and put your conditions here
+                        if(bars[i] <= 3)
+                        {
+                            farge.push("#d9534f");
+                        }
+                        else if(bars[i] < 5)
+                        {
+                            farge.push("#f0ad4e");
+                        }
+                        else if(bars[i] >= 10)
+                        {
+                            farge.push("#5cb85c");
+                        }
+                        else
+                        {
+                            farge.push("#f0ad4e");
+                        }
+                        }
+                            window.myObjBar = new Chart(ctx, {
+                                
                             type: 'bar',
                             data: {
                                 labels: product,
                                 datasets: [
                                     {
-                                        label: product,
-                                        backgroundColor: [
-                                            'rgba(0, 46, 96, 0.7)',
-                                            'rgba(255, 211, 0, 0.7)',
-                                            'rgba(0, 46, 96, 0.7)',
-                                            'rgba(255, 211, 0, 0.7)',
-                                            'rgba(0, 46, 96, 0.7)',
-                                            'rgba(255, 211, 0, 0.7)',
-                                            'rgba(0, 46, 96, 0.7)'
-
-                                        ],
-                                        borderColor: [
-                                            'rgba(0, 46, 96, 1)',
-                                            'rgba(255, 211, 0, 1)',
-                                            'rgba(0, 46, 96, 1)',
-                                            'rgba(255, 211, 0, 1)',
-                                            'rgba(0, 46, 96, 1)',
-                                            'rgba(255, 211, 0, 1)',
-                                            'rgba(0, 46, 96, 1)'
-                                        ],
+                                        label: "Antall",
+ 
+                                        borderColor: "black",
+                                        backgroundColor: farge,
                                         borderWidth: 1,
                                         data: antall
-                                    }
-                                ]
-                            },
+                                      }
+                            ]
+                            },                    
+                        
                             options: {
                                 legend: {
                                     display: false
+                                },
+                                scales:{
+                                    yAxes: [{
+                                        ticks: {
+                                        beginAtZero: true
+                                        }
+                                    }]
                                 }
-                            }
+                            },
+                            responsive : true
 
                         });
     }
