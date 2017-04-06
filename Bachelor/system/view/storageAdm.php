@@ -24,7 +24,10 @@
         </form>
 
 
-        <br><br><br> 
+        <br><br>
+        <div id="success"></div>
+        <div id="errorDelete"></div>
+        <br> 
 
         <!-- DISPLAY STORAGE CONTAINER -->
         <br>
@@ -79,7 +82,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-
+                <div id="error"></div>
                 <input class="btn btn-success" form="createStorage" type="submit" value="Opprett Lager">
 
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
@@ -118,6 +121,7 @@
             </div>
             
             <div class="modal-footer">
+                <div id="errorEdit"></div>
                 <input class="btn btn-success" form="editStorage" type="submit" value="Lagre" form="editStorage">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
@@ -200,7 +204,7 @@
                     
             </div>
             <div class="modal-footer">
-
+                <div id="successRes"></div>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
 
             </div>
@@ -565,10 +569,9 @@
                 data: data,
                 dataType: 'json',
                 error: function() {         
-                    $displayUsers.empty().append("Du kan ikke slette hovedlageret");
-                },
+                    errorMessageDelete();},
                 success: function (data) {
-
+                    successMessageDelete();
                     UpdateStorageTable();
                     $('#deleteStorageModal').modal('hide');
 
@@ -579,6 +582,24 @@
     });
 
 </script>
+
+<script>
+function successMessageDelete() {    
+    $('<div class="alert alert-success"><strong>Slettet!</strong> Lageret er slettet. </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
+
+<script>
+function errorMessageDelete() {    
+    $('<div class="alert alert-danger"><strong>Error!</strong> Kan ikke slette Hovedlageret. </div>').appendTo('#errorDelete')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
 
 
 <!-- STOCKTAKING OF STORAGE -->
@@ -638,6 +659,7 @@
                     $displayUsers.empty();
                     document.getElementById("saveStocktaking").value = "Neste";
                     $('#stocktakingModal').modal('hide');
+                    successMessageStock();
                 } else {    
                 var $displayUsers = $('#stocktakingContainer');
                 $displayUsers.empty();
@@ -657,6 +679,16 @@
     });
     
 </script>
+
+<script>
+function successMessageStock() {    
+    $('<div class="alert alert-success"><strong>Oppdatert!</strong> Lagerbeholdning er oppdatert. </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
+
 <script>
     
     var resultBar;
@@ -1010,7 +1042,7 @@ $(document).ready(function()
                 dataType: 'json',
                 success: function () {
                     POSTstorageRestriction(givenStorageID);
-
+                    successMessageRes();
                 }
             });
             return false;
@@ -1019,6 +1051,15 @@ $(document).ready(function()
     });               
 </script> 
 
+
+<script>
+function successMessageRes() {    
+    $('<div class="alert alert-success"><strong>Slettet!</strong> Brukertilgang er slettet. </div>').appendTo('#successRes')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
 
 <!-- Display restrictionInformation Template-->
 <script>
@@ -1066,13 +1107,22 @@ $(document).ready(function()
                 dataType: 'json',
                 success: function () {
                     POSTstorageProduct(givenStorageID);
-
+                    successMessageInv();
                 }
             });
             return false;
 
         });
     });               
+</script> 
+
+<script>
+function successMessageInv() {    
+    $('<div class="alert alert-success"><strong>Slettet!</strong> Inventar er slettet fra lager. </div>').appendTo('#successRes')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
 </script> 
 
 <!-- Display productInformation Template -->
@@ -1173,8 +1223,12 @@ $('.stockResult').filter(function(index){
                 url: url,
                 data: data,
                 dataType: 'json',
+                error: function(){
+                    errorMessageEdit();
+                },
                 success: function () {
                     $('#editStorageModal').modal('hide');
+                    successMessageEdit();
                     UpdateStorageTable();
                 }
             });
@@ -1184,7 +1238,23 @@ $('.stockResult').filter(function(index){
 
 </script>
 
+<script>
+function successMessageEdit() {    
+    $('<div class="alert alert-success"><strong>Redigert!</strong> Lager er redigert. </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
 
+<script>
+function errorMessageEdit() {    
+    $('<div class="alert alert-danger"><strong>Error!</strong> Opptatt lagernavn </div>').appendTo('#errorEdit')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
 
 
 <!-- CREATE STORAGE -->
@@ -1203,10 +1273,14 @@ $('.stockResult').filter(function(index){
                 url: url,
                 data: data,
                 dataType: 'json',
+                error: function() {         
+                    errorMessage();
+                },
                 success: function () {
                     $("#createStorage")[0].reset();
                     $('#createStorageModal').modal('hide');
                     UpdateStorageTable();
+                    successMessageCreate();
                 }
             });
             return false;
@@ -1215,6 +1289,23 @@ $('.stockResult').filter(function(index){
 
 </script>
 
+<script>
+function errorMessage() {    
+    $('<div class="alert alert-danger"><strong>Error!</strong> Opptatt lagernavn </div>').appendTo('#error')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script>
+
+<script>
+function successMessageCreate() {    
+    $('<div class="alert alert-success"><strong>Opprettet!</strong> Lager er opprettet. </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
 
 <!-- SEARCH FOR STORAGE -->
 

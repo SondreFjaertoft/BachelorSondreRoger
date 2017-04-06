@@ -144,13 +144,14 @@ class mediaController extends Controller {
         $result = $mediaModel->getMediaByID($editMediaID);
         
         $oldName = $result[0]["mediaName"];
-        rename("image/".$oldName."","image/".$editMediaName);
+        $renamed = rename("image/".$oldName."","image/".$editMediaName);
         
         $edited = $mediaModel->editMedia($editMediaID, $editMediaName, $editCategoryID);
         
-        if($edited){
+        if($edited && $renamed){
             echo json_encode("success");
-        }
+        } 
+        else {return false;}
     }
     
     private function deleteMedia(){
@@ -165,7 +166,7 @@ class mediaController extends Controller {
         if($deleted){
             unlink("image/".$mediaName);
             echo json_encode("success");
-        }
+        } else {return false;}
     }
 
 }
