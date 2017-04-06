@@ -293,14 +293,14 @@ if (isset($GLOBALS["errorMessage"])) {
                                 <tr>
                                     <th>Kategori:</th>
                                     <td>
-                                        <select name="givenCategoryID" id="selectCategoryID" required="required" class="form-control" autocomplete="off">
+                                        <select name="givenCategoryID" id="selectCategoryPro" required="required" class="form-control" autocomplete="off">
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Media:</th>
                                     <td>
-                                        <select name="givenMediaID" id="selectMediaID" required="required" class="form-control" autocomplete="off">
+                                        <select name="givenMediaID" id="selectMediaIDpro" required="required" class="form-control" autocomplete="off">
                                         </select>
                                     </td>
                                 </tr>
@@ -863,15 +863,12 @@ if (isset($GLOBALS["errorMessage"])) {
                 }
             </script>
             <script>
-                function getCategory()
-                {
-                    getCategoryInfo();
-                }
-            </script>
-            <script>
                 function getMediaInfo() {
                     var $displayMediaInformation = $('#selectMediaID');
                     $displayMediaInformation.empty();
+                    
+                    var $displayMediaInformationPro = $('#selectMediaIDpro');
+                    $displayMediaInformationPro.empty();
                     $(function () {
                         $.ajax({
                             type: 'GET',
@@ -881,7 +878,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
                                 $.each(data.mediaInfo, function (i, item) {
 
-
+                                    $displayMediaInformationPro.append('<option value="' + item.mediaID + '">' + item.mediaName + '</option>');
                                     $displayMediaInformation.append('<option value="' + item.mediaID + '">' + item.mediaName + '</option>');
 
                                 });
@@ -895,7 +892,9 @@ if (isset($GLOBALS["errorMessage"])) {
             <script>
                 function getCategoryInfo() {
                     var $displayCategoryInformation = $('#selectCategory');
+                    var $displayCategoryInformationPro = $('#selectCategoryPro');
                     $displayCategoryInformation.empty();
+                    $displayCategoryInformationPro.empty();
                     $(function () {
                         $.ajax({
                             type: 'GET',
@@ -905,8 +904,8 @@ if (isset($GLOBALS["errorMessage"])) {
 
                                 $.each(data.categoryInfo, function (i, item) {
 
-
                                     $displayCategoryInformation.append('<option value="' + item.categoryID + '">' + item.categoryName + '</option>');
+                                    $displayCategoryInformationPro.append('<option value="' + item.categoryID + '">' + item.categoryName + '</option>');
 
                                 });
 
