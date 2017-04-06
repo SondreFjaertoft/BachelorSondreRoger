@@ -31,13 +31,15 @@ if (isset($GLOBALS["errorMessage"])) {
                         <div class="">
                             <div class="col-xs-6 col-sm-6 col-md-12 text-center">
                                 <div class="pull-left">
-                                    <button class="btn btn-success btn-md" type="button" data-toggle="modal" data-target="#createUserModal"><span class="glyphicon glyphicon-user"></span> <br/>Opprett bruker</button>
+                                    <button class="btn btn-success btn-md" type="button" onclick="getMediaInfo();" data-toggle="modal" data-target="#createUserModal"><span class="glyphicon glyphicon-user"></span> <br/>Opprett bruker</button>
                                     <button class="btn btn-success btn-md" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Opprett produkt</button>
                                     <button class="btn btn-success btn-md" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
                                     <button class="btn btn-success btn-md" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Opprett kategori</button>
-                                    <button class="btn btn-success btn-md" onclick="getCategory()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
+
+                                    <button class="btn btn-success btn-md" onclick="getCategoryInfo()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
                                     <button class="btn btn-success btn-md" onclick="getStorageInfo()" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-flag"></span> <br/>Varetelling</button>
                                     <button class="btn btn-success btn-md" type="button" onclick="getStorageProduct()" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-barcode"></span> <br/>Varelevering</button>
+
                                 </div>
                                 <div class="pull-right">
                                     <a href="?page=editUser" class="btn btn-warning btn-md" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Rediger Profil</a>
@@ -244,7 +246,7 @@ if (isset($GLOBALS["errorMessage"])) {
                                     <tr>
                                         <th>Media:</th>
                                         <td>
-                                            <select name="givenMediaID" id="selectMediaID" required="required" class="form-control" autocomplete="off">
+                                            <select name="givenMediaID" id="selectMediaIDuser" required="required" class="form-control" autocomplete="off">
                                             </select>
                                         </td>
                                     </tr>
@@ -288,19 +290,19 @@ if (isset($GLOBALS["errorMessage"])) {
                                 </tr>
                                 <tr>
                                     <th>Pris:</th>
-                                    <td><input class="form-control" type="int" required="required" name="givenPrice" value="" autocomplete="off"></td>
+                                    <td><input class="form-control" type="number" required="required" name="givenPrice" value="" autocomplete="off"></td>
                                 </tr>
                                 <tr>
                                     <th>Kategori:</th>
                                     <td>
-                                        <select name="givenCategoryID" id="selectCategoryID" required="required" class="form-control" autocomplete="off">
+                                        <select name="givenCategoryID" id="selectCategoryPro" required="required" class="form-control" autocomplete="off">
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Media:</th>
                                     <td>
-                                        <select name="givenMediaID" id="selectMediaID" required="required" class="form-control" autocomplete="off">
+                                        <select name="givenMediaID" id="selectMediaIDpro" required="required" class="form-control" autocomplete="off">
                                         </select>
                                     </td>
                                 </tr>
@@ -395,7 +397,7 @@ if (isset($GLOBALS["errorMessage"])) {
                                                 </label>
                                             <td id="bordernone"><span class="label label-default" id="upload-file-info"></span></td>
                                             <td id="bordernone">
-                                                <select name="givenCategoryID" id="selectCategory" required="required" class="form-control" autocomplete="off">
+                                                <select name="givenCategoryID" id="selectCategoryMed" required="required" class="form-control" autocomplete="off">
                                                 </select>
                                             </td>
                                         </tr>
@@ -863,15 +865,13 @@ if (isset($GLOBALS["errorMessage"])) {
                 }
             </script>
             <script>
-                function getCategory()
-                {
-                    getCategoryInfo();
-                }
-            </script>
-            <script>
                 function getMediaInfo() {
-                    var $displayMediaInformation = $('#selectMediaID');
-                    $displayMediaInformation.empty();
+                    
+                    var $displayMediaInformationUser = $('#selectMediaIDuser');
+                    $displayMediaInformationUser.empty();
+                    
+                    var $displayMediaInformationPro = $('#selectMediaIDpro');
+                    $displayMediaInformationPro.empty();
                     $(function () {
                         $.ajax({
                             type: 'GET',
@@ -881,9 +881,8 @@ if (isset($GLOBALS["errorMessage"])) {
 
                                 $.each(data.mediaInfo, function (i, item) {
 
-
-                                    $displayMediaInformation.append('<option value="' + item.mediaID + '">' + item.mediaName + '</option>');
-
+                                    $displayMediaInformationPro.append('<option value="' + item.mediaID + '">' + item.mediaName + '</option>');
+                                    $displayMediaInformationUser.append('<option value="' + item.mediaID + '">' + item.mediaName + '</option>');
                                 });
 
 
@@ -894,8 +893,10 @@ if (isset($GLOBALS["errorMessage"])) {
             </script>
             <script>
                 function getCategoryInfo() {
-                    var $displayCategoryInformation = $('#selectCategory');
-                    $displayCategoryInformation.empty();
+                    var $displayCategoryInformationMed = $('#selectCategoryMed');
+                    var $displayCategoryInformationPro = $('#selectCategoryPro');
+                    $displayCategoryInformationMed.empty();
+                    $displayCategoryInformationPro.empty();
                     $(function () {
                         $.ajax({
                             type: 'GET',
@@ -905,8 +906,8 @@ if (isset($GLOBALS["errorMessage"])) {
 
                                 $.each(data.categoryInfo, function (i, item) {
 
-
-                                    $displayCategoryInformation.append('<option value="' + item.categoryID + '">' + item.categoryName + '</option>');
+                                    $displayCategoryInformationMed.append('<option value="' + item.categoryID + '">' + item.categoryName + '</option>');
+                                    $displayCategoryInformationPro.append('<option value="' + item.categoryID + '">' + item.categoryName + '</option>');
 
                                 });
 
@@ -993,7 +994,7 @@ $(document).ready(function()
 <!-- Get the selected storage, and POST this to retrive inventory-->
 <script>
     var givenStorageID;
-    $(function POSTfromStorageModal() {
+    $(function POSTfromStorageModals() {
         
         $('#chooseStorageContainer').on('change', function () {
             givenStorageID = $(this).find("option:selected").data('id');
@@ -1008,6 +1009,7 @@ $(document).ready(function()
                     dataType: 'json',
                     success: function (data) {
                         chosenStorageTemplate(data);
+                        rowColor();
                        
                     }
                 });
@@ -1033,9 +1035,9 @@ $(document).ready(function()
 <script id="chosenStorageTemplate" type="text/x-handlebars-template">
      
     {{#each storageProduct}}
-    <tr>
-    <td>{{productName}}</td>
-    <td>{{quantity}}</td>
+    <tr class="quantityColor">
+    <td class="quantityColor">{{productName}}</td>
+    <td class="quantityColor">{{quantity}}</td>
     </tr>
     {{/each}} 
 </script>
@@ -1086,21 +1088,20 @@ $(document).ready(function()
                         var bars = antall;
                         for(i = 0; i < bars.length; i++){
                         //You can check for bars[i].value and put your conditions here
-                        if(bars[i] <= 3)
+                        if(bars[i] >= 10)
                         {
-                            farge.push("#d9534f");
+                            //grønn
+                            farge.push("#5cb85c");
+                        }
+                        else if(bars[i] < 10 && bars[i] >=5)
+                        {
+                            //orange
+                            farge.push("#f0ad4e");
                         }
                         else if(bars[i] < 5)
                         {
-                            farge.push("#f0ad4e");
-                        }
-                        else if(bars[i] >= 10)
-                        {
-                            farge.push("#5cb85c");
-                        }
-                        else
-                        {
-                            farge.push("#f0ad4e");
+                            //rød
+                            farge.push("#d9534f");
                         }
                         }
                             window.myObjBar = new Chart(ctx, {
@@ -1314,6 +1315,42 @@ $(document).ready(function()
         var loggContainer = document.getElementById("allLastSaleContainer");
         loggContainer.innerHTML = loggTableGeneratedHTML;
     }
+</script>
+
+<script>
+function rowColor(){
+    
+// storageInformation    
+$('.quantityColor').filter(function(index){
+    return parseInt(this.innerHTML) >= 10;
+}).siblings().andSelf().attr('class', 'bg-success');
+
+$('.quantityColor').filter(function(index){
+    return parseInt(this.innerHTML) < 10 && parseInt(this.innerHTML) >= 5;
+}).siblings().andSelf().attr('class', 'bg-warning');
+
+$('.quantityColor').filter(function(index){
+    return parseInt(this.innerHTML) < 5;
+}).siblings().andSelf().attr('class', 'bg-danger');
+
+
+// stocktaking result
+// || 
+    
+$('.stockResult').filter(function(index){
+    return parseInt(this.innerHTML) >= 10 || parseInt(this.innerHTML) <= -10;
+}).siblings().andSelf().attr('class', 'bg-danger');
+
+$('.stockResult').filter(function(index){
+    return parseInt(this.innerHTML) < 10 && parseInt(this.innerHTML) >= 5 || parseInt(this.innerHTML) > -10 && parseInt(this.innerHTML) <= -5;
+}).siblings().andSelf().attr('class', 'bg-warning');
+
+$('.stockResult').filter(function(index){
+    return parseInt(this.innerHTML) < 5 || parseInt(this.innerHTML) > -5;
+}).siblings().andSelf().attr('class', 'bg-success');
+
+}
+
 </script>
 
 <script id="allLastSaleTemplate" type="text/x-handlebars-template">
