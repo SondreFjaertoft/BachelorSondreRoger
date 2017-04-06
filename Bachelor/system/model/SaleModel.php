@@ -16,6 +16,8 @@ class SaleModel {
     const SELECT_FROM_ID = "SELECT * FROM " . SaleModel::TABLE . " WHERE salesID = :givenSalesID";
     const SELECT_LAST_QUERY =  "SELECT salesID, customerNr, products.productName, sales.date, comment, storage.storageName, quantity FROM " . SaleModel::TABLE . 
             " INNER JOIN products ON sales.productID = products.productID INNER JOIN storage ON sales.storageID = storage.storageID WHERE userID = :givenUserID LIMIT 10";
+    const SELECT_ALL_LAST_QUERY =  "SELECT salesID, customerNr, products.productName, sales.date, comment, storage.storageName, quantity FROM " . SaleModel::TABLE . 
+            " INNER JOIN products ON sales.productID = products.productID INNER JOIN storage ON sales.storageID = storage.storageID LIMIT 10";
     
     public function __construct(PDO $dbConn) { 
       $this->dbConn = $dbConn;
@@ -26,8 +28,13 @@ class SaleModel {
       $this->mySales = $this->dbConn->prepare(SaleModel::SELECT_MY_SALES);
       $this->selFromID = $this->dbConn->prepare(SaleModel::SELECT_FROM_ID);
       $this->selLast = $this->dbConn->prepare(SaleModel::SELECT_LAST_QUERY);
+      $this->selAllLast = $this->dbConn->prepare(SaleModel::SELECT_ALL_LAST_QUERY);
     }
     
+    public function getAllLastSaleInfo() {
+        $this->selAllLast->execute();
+        return $this->selAllLast->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function getLastSaleInfo($givenUserID) {
         $this->selLast->execute(array("givenUserID" =>  $givenUserID));
         return $this->selLast->fetchAll(PDO::FETCH_ASSOC);

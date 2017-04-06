@@ -51,11 +51,14 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
     </div>
+    <?php }?>
+   
     
-    
-    
-    <div class="container">
+ 
+<div class="container">
+
     <div class="col-md-12">
+        <?php if ($_SESSION["userLevel"] == "Administrator") {?>
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -71,6 +74,32 @@ if (isset($GLOBALS["errorMessage"])) {
                     </thead>
                     <tbody id="lowInvContainer">
                     <!-- Handlebars -->
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+        <?php }?>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center"><b>Siste salg</b></h2>
+                </div>
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Selger</th>
+                            <th>KundeNR</th>
+                            <th>Lager</th>
+                            <th>Antall</th>
+                            <th>Kommentar</th>
+                            <th>Dato</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody id="allLastSaleContainer">
+                        <!-- Handlebars -->
                     </tbody>
                 </table>
             </div>
@@ -102,7 +131,9 @@ if (isset($GLOBALS["errorMessage"])) {
             
         </div>
     </div>
+        <?php if ($_SESSION["userLevel"] == "Administrator") {?>
         <div class="col-md-12">
+            
             <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -118,7 +149,7 @@ if (isset($GLOBALS["errorMessage"])) {
            
             
         </div>
- <?php }?>
+        <?php }?>
 
 
         <div class="col-md-12">
@@ -1250,6 +1281,49 @@ $(document).ready(function()
     <td>{{comment}}</td>
     <td>{{date}}</td>
     </tr>
+
+{{/each}}
+            
+  
+</script>
+<script>
+ $(function () {
+    $.ajax({
+        type: 'GET',
+        url: '?page=getAllLastSaleInfo',
+        dataType: 'json',
+        success: function (data) {
+            displayAllLastSaleTable(data);
+            
+        }
+    });
+});   
+</script>
+
+<script>
+    function displayAllLastSaleTable(data) {
+        var rawTemplate = document.getElementById("allLastSaleTemplate").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var loggTableGeneratedHTML = compiledTemplate(data);
+
+        var loggContainer = document.getElementById("allLastSaleContainer");
+        loggContainer.innerHTML = loggTableGeneratedHTML;
+    }
+</script>
+
+<script id="allLastSaleTemplate" type="text/x-handlebars-template">
+
+
+{{#each AllLastSaleInfo}}
+    <tr>
+    <td>{{username}}</td>
+    <td>{{customerNr}}</td>
+    <td>{{productName}}</td>
+    <td>{{storageName}}</td>
+    <td>{{quantity}}</td>
+    <td>{{comment}}</td>
+    <td>{{date}}</td>
+    
 
 {{/each}}
             

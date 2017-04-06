@@ -25,8 +25,11 @@ class SaleController extends Controller {
             $this->getResCount();
         } else if ($page == "saleSingle"){
             $this->saleSinglePage();
-        }elseif ($page == "getLastSaleInfo") {
+        }else if ($page == "getLastSaleInfo") {
             $this->getLastSaleInfo();
+        }else if ($page == "getAllLastSaleInfo")
+        {
+            $this->getAllLastSaleInfo();
         }
             
     }
@@ -53,6 +56,16 @@ class SaleController extends Controller {
 
         $data = json_encode(array("lastSaleInfo" => $saleInfo));
 
+        echo $data;
+    }
+    
+    private function getAllLastSaleInfo()
+    {
+        $saleModel = $GLOBALS["saleModel"];
+        $saleInfo = $saleModel->getAllLastSaleInfo();
+        
+        $data = json_encode(array("allLastSaleInfo" => $saleInfo));
+        
         echo $data;
     }
 

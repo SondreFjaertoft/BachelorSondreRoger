@@ -52,6 +52,7 @@ class Router {
                 case "getResCount" :
                 case "saleSingle" :  
                 case "getLastSaleInfo" :
+                case "getAllLastSaleInfo" :
                     return new SaleController();
                     
                 case "return" :
