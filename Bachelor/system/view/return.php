@@ -7,7 +7,7 @@
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group"> 
         
         <form id="returnProducts" action="?page=returnProduct" method="post">
-            <div class="col-sm-3 col-md-4">
+            <div class="col-sm-3 col-md-4 row">
             <label>Returner til:</label>
             <select name="toStorageID" form="returnProducts" id="returnRestrictionContainer" class="form-control">
 
@@ -31,22 +31,22 @@
         <br><br><br>
 
         <div>
-            <table class="table table-bordered table-striped table-responsive" id="commentContainer">
+            <table class="table table-responsive" id="commentContainer">
 
                 <tr>
-                    <th>Kundenr:   </th> 
-                    <td><input name="customerNumber" required="required" form="returnProducts" type="number" value=""/></td> 
+                    <th class="col-md-1" id="bordernone">Kundenr:   </th> 
+                    <td id="bordernone"><input class="form-control" name="customerNumber" required="required" form="returnProducts" type="number" value=""/></td> 
                 </tr>  
                 <tr>
-                    <th>kommentar:  </th>
-                    <td><input name="returnComment" required="required" form="returnProducts" type="text" value=""/></td>
+                    <th class="col-md-1">kommentar:  </th>
+                    <td><input class="form-control" name="returnComment" required="required" form="returnProducts" type="text" value=""/></td>
                 </tr>
 
             </table>
         </div>   
         
         <div>
-            <table class="table table-bordered table-striped table-responsive" id="returnQuantityContainer">
+            <table class="table table-responsive" id="returnQuantityContainer">
             
                 <!-- Lar deg velge antall enheter -->
 

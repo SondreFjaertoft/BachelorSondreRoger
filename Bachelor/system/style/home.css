@@ -11,7 +11,7 @@ html,body
  .sidebar .caret {
     float: right;
 }
-#loggTableContainer
+.fontSizeTableContainer
 {
     font-size: 12px;
 }

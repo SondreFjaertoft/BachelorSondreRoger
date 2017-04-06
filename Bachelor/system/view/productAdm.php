@@ -10,14 +10,14 @@
         <!-- SØK ETTER PRODUKT-->
         
         <form id="searchForProduct" class="form-inline" action="?page=getAllProductInfo" method="post">
-            <div class="form-group">
-                <div class="col-md-9">
+            <div class="form-group col-md-12 row">
+                
                     <input class="form-control" form="searchForProduct" type="text" name="givenProductSearchWord" value="" placeholder="Søk etter produkt..">  
                     <input class="form-control" form="searchForProduct" type="submit" value="Søk">
                     
                     <button onclick="UpdateProductTable()" class="btn btn-default " type="button">Alle producter</button>
-                </div>
-                <div class="col-md-1 col-md-offset-15">
+                
+                <div class="pull-right row">
                     <button class="btn btn-default" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal">Opprett Produkt</button>
                 </div>
             </div> 
@@ -25,16 +25,16 @@
 
 
         
-        <br>
+        <br><br><br>
 
          
         <!-- DISPLAY PRODUCT CONTAINER -->
         <br>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title text-center"><b>PRODUKTOVERSIKT</b></h3>
+                <h2 class="panel-title text-center"><b>Produktoversikt</b></h2>
             </div>
-        <table class="table table-bordered table-striped table-responsive"> 
+        <table class="table table-responsive"> 
              
             <tbody id="displayProductContainer">
 
@@ -161,16 +161,23 @@
                 </div>
                 
                 <div>
-                <table class="table table-striped table-bordered">
-                    <tbody>
-                        <tr> 
-                            <th>Lager med dette produktet: </th>
-                            <td id="productLocationContainer"> 
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Lager med dette produktet</th>
+                            <th>Antall</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody id="productLocationContainer">
+                         
+                            
+                             
                               
                                 <!-- Her kommer handlebars Template -->
                                 
-                            </td>
-                        </tr>        
+                            
+                                
                     </tbody>
                 </table>
                 </div>
@@ -292,14 +299,17 @@
 
 <!-- Display location of product, and quantity-->
 <script id="productLocationTemplate" type="text/x-handlebars-template">
-{{#each productLocation}}            
-    {{storageName}},   Antall:  {{quantity}}<br>
+{{#each productLocation}}
+<tr>
+    <td>{{storageName}}</td>
+    <td>{{quantity}}</td>
+</tr>
 {{/each}}      
 </script>
 
 <!-- Display what product you are deleting-->
 <script id="deleteProductTemplate" type="text/x-handlebars-template">
-    <p> Er du sikker på at du vil slette  <P>
+    <p> Er du sikker på at du vil slette:  <P>
 {{#each product}}
     {{productName}}
     <input type="hidden" form="deleteProduct" name="deleteProductID" value="{{productID}}">    

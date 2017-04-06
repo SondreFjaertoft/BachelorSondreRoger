@@ -7,8 +7,8 @@
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
         
         <form id="searchForSale" class="form-inline" action="?page=getMySales" method="post">
-            <div class="form-group">
-                <div class="col-md-12">
+            <div class="form-group col-md-12 row">
+                <div class="">
                     <input class="form-control" form="searchForSale" type="text" name="givenProductSearchWord" value="" placeholder="Søk etter salg.." autocomplete="off">  
                     <input class="form-control" form="searchForSale" type="submit" value="Søk">
                     
@@ -18,14 +18,14 @@
             </div> 
         </form>
         
-        <br>
+        <br><br><br>
         
     
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title text-center"><b>Mine Salg</b></h3> 
             </div>
-         <table class="table table-bordered table-striped table-responsive"> 
+         <table class="table table-responsive"> 
             
             <tbody id="mySalesContainer">
 
@@ -72,7 +72,7 @@
     {{#each sale}}    
     <input form="editSale" type="hidden" name="editSaleID" value="{{salesID}}">
     <tr>
-    <th id="bordernone">Kundenr: </th> 
+    <th id="bordernone">KundeNr: </th> 
     <td id="bordernone"><input class="form-control" form="editSale" required="required" type="text" name="editCustomerNr" value="{{customerNr}}" autocomplete="off"></td> 
     </tr>
     <tr>
@@ -84,12 +84,12 @@
 
 <script id="mySalesTemplate" type="text/x-handlebars-template">        
 <tr>
-    <th>kundeNr</th>        
+    <th>KundeNr</th>        
     <th>Produkt</th>
     <th>Lager</th>     
     <th>Antall</th>
     <th>Kommentar</th>
-    <th>dato</th> 
+    <th>Dato</th> 
     <th></th>    
 </tr>        
 {{#each mySales}}  
@@ -100,7 +100,7 @@
     <td>{{quantity}}</td>    
     <td>{{comment}}</td>    
     <td>{{date}}</td>   
-    <td><button id="redigerknapp" data-id="{{salesID}}" class="editSales" data-toggle="tooltip" title="rediger sales">
+    <td><button id="redigerknapp" data-id="{{salesID}}" class="editSales" data-toggle="tooltip" title="Rediger salg">
     <span class="glyphicon glyphicon-edit" style="color: green"></span>
     </button> </td>    
 <tr>

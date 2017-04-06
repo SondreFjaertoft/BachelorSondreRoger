@@ -22,7 +22,7 @@
         <br><br>
         
         </div>
-        <table class="table" id="loggTableContainer">
+        <table class="table fontSizeTableContainer" id="loggTableContainer">
                 <!-- Innhold fra Handlebars Template -->
         </table>
 
@@ -45,9 +45,9 @@
         <th>Differanse</th>
         <th>Brukernavn</th>
         <th>På bruker</th>
-        <th>produkt</th>    
-        <th>Kundenr</th>
-        <th>dato</th>            
+        <th>Produkt</th>    
+        <th>KundeNr</th>
+        <th>Dato</th>            
         </tr>
 </thead>
 <tbody id="tbodyid">

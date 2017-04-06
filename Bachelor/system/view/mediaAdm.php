@@ -16,18 +16,19 @@ $test = $GLOBALS["errorMessage"];
             
               
         <form id="searchForMedia" class="form-inline" action="?page=getAllMediaInfo" method="post">    
-            <div class="form-group">
-                <div class="col-md-9">
+            <div class="form-group col-md-12 row">
+                
                     <input class="form-control" form="searchForMedia" type="text" name="givenMediaSearchWord" value="" placeholder="Søk etter media..">  
                     <input class="form-control" form="searchForMedia" type="submit" value="Søk">
                     
                     <button onclick="UpdateMediaTable()" class="btn btn-default " type="button">Alle producter</button>
-                </div>
-                <div class="col-md-1 col-md-offset-15">
+                
+                <div class="pull-right">
                     <button class="btn btn-default" onclick="getCategoryInfo()" type="button" data-toggle="modal" data-target="#uploadImageModal">Last opp bilde</button>
                 </div>
             </div>
         </form>
+            <br><br>
             
             <div id="message">
                 <?php 
@@ -234,7 +235,7 @@ $test = $GLOBALS["errorMessage"];
 <!-- Display all images -->
 <script id="displayMediaTemplate" type="text/x-handlebars-template">
 {{#each mediaInfo}}
-<div class="col-md-2">
+<div class="col-md-3">
 
 <div class="img-border">
 <div class="caption">

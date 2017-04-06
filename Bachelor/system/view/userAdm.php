@@ -11,20 +11,21 @@
 
         <!-- SØK ETTER BRUKER  -->
         <form class="form-inline" id="searchForUser" action="?page=getUserInfo" method="post">
-            <div class="form-group">
-                <div class="col-md-9">
+            <div class="form-group col-md-12 row">
+                
                     <input class="form-control" form="searchForUser" type="text" name="givenUserSearchWord" value="" placeholder="Søk etter bruker..">  
                     <input class="form-control" form="searchForUser" type="submit" value="Søk">
                                              
                 <button onclick="UpdateUsersTable()" class="btn btn-default" type="button">Alle brukere</button>
-                </div>
              
-            <div class="col-md-1 col-md-offset-15">
+            <div class="pull-right row">
                 <button class="btn btn-default " onclick="getMediaInfo();" type="button" data-toggle="modal" data-target="#createUserModal">Opprett bruker</button>
-            </div>
-            </div>
             <button  id="setRestriction" onclick="getStorageInfo()" data-toggle="modal" data-target="#userRestrictionModal" class="btn btn-default" type="button">Velg Lager</button>
-        </form> 
+            </div>
+            </div>
+            
+        </form>
+        <br><br>
 
             <!-- OPPRETT BRUKER  -->
 
@@ -105,7 +106,7 @@
         <div class="panel-heading">
             <h3 class="panel-title text-center"><b>Brukeroversikt</b></h3>
         </div>
-        <table class="table table-bordered table-striped table-responsive">
+        <table class="table table-responsive">
             
             <tbody id="displayUserContainer">
 
@@ -368,7 +369,7 @@
             <td>{{email}}</td>
         </tr>
         <tr>
-            <th>Sist inlogget: </th>
+            <th>Sist innlogget: </th>
             <td>{{lastLogin}}</td>
         </tr>
         

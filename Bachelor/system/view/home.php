@@ -29,19 +29,19 @@ if (isset($GLOBALS["errorMessage"])) {
                     </div>
                     <div class="panel-body">
                         <div class="">
-                            <div class="col-xs-6 col-md-12 text-center">
-                                <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#createUserModal"><span class="glyphicon glyphicon-user"></span> <br/>Opprett bruker</button>
-                                <button class="btn btn-info btn-lg" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Opprett produkt</button>
-                                <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
-                                <button class="btn btn-info btn-lg" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Opprett kategori</button>
-                                <button class="btn btn-info btn-lg" onclick="getCategory()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
-                                <button class="btn btn-info btn-lg" onclick="getStorageInfo()" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varetelling</button>
-                                <button class="btn btn-info btn-lg" type="button" onclick="getStorageProduct()" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varelevering</button>
-
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a href="?page=editUser" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Rediger Profil</a>
-                                <a href="../" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-log-out"></span> <br/>Logg ut</a>
-                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-12 text-center">
+                                <button class="btn btn-info btn-md" type="button" data-toggle="modal" data-target="#createUserModal"><span class="glyphicon glyphicon-user"></span> <br/>Opprett bruker</button>
+                                <button class="btn btn-info btn-md" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Opprett produkt</button>
+                                <button class="btn btn-info btn-md" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
+                                <button class="btn btn-info btn-md" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Opprett kategori</button>
+                                <button class="btn btn-info btn-md" onclick="getCategory()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
+                                <button class="btn btn-info btn-md" onclick="getStorageInfo()" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varetelling</button>
+                                <button class="btn btn-info btn-md" type="button" onclick="getStorageProduct()" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varelevering</button>
+                                
+                                <a href="?page=editUser" class="btn btn-warning btn-md" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Rediger Profil</a>
+                                <a href="../" class="btn btn-danger btn-md" role="button"><span class="glyphicon glyphicon-log-out"></span> <br/>Logg ut</a>
+                                </div>
+                                
                         </div>
 
                     </div>
@@ -64,7 +64,7 @@ if (isset($GLOBALS["errorMessage"])) {
                 <div class="panel-heading">
                     <h2 class="panel-title text-center"><b>Snart tom lagerbeholdning</b></h2>
                 </div>
-                <table class="table">
+                <table class="table fontSizeTableContainer">
                     <thead>
                         <tr>
                             <th>Produkt</th>
@@ -80,17 +80,18 @@ if (isset($GLOBALS["errorMessage"])) {
             
         </div>
         <?php }?>
+        <?php if ($_SESSION["userLevel"] == "User") {?>
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h2 class="panel-title text-center"><b>Siste salg</b></h2>
                 </div>
                 
-                <table class="table">
+                <table class="table fontSizeTableContainer">
                     <thead>
                         <tr>
                             <th>Selger</th>
-                            <th>KundeNR</th>
+                            <th>KundeNr</th>
                             <th>Lager</th>
                             <th>Antall</th>
                             <th>Kommentar</th>
@@ -105,16 +106,17 @@ if (isset($GLOBALS["errorMessage"])) {
             </div>
             
         </div>
+        <?php }?>
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h2 class="panel-title text-center"><b>Dine siste salg</b></h2>
                     
                 </div>
-                <table class="table">
+                <table class="table fontSizeTableContainer">
                     <thead>
                         <tr>
-                            <th>KundeNR</th>
+                            <th>KundeNr</th>
                             <th>Produkt</th>
                             <th>Lager</th>
                             <th>Antall</th>
@@ -140,7 +142,7 @@ if (isset($GLOBALS["errorMessage"])) {
                     
                     <h2 class="panel-title text-center"><b>Siste hendeleser</b></h2>
                 </div>
-                <table class="table" id="loggTableContainer">
+                <table class="table fontSizeTableContainer" id="loggTableContainer">
                 <!-- Innhold fra Handlebars Template -->
                 </table>
                 
@@ -168,10 +170,10 @@ if (isset($GLOBALS["errorMessage"])) {
                 
 
                 
-                <table class="table table-bordered">
+                <table class="table table-bordered fontSizeTableContainer">
                     <thead>
                         <tr>
-                            <th>Produkt navn</th>
+                            <th>Produkt</th>
                             <th>Antall</th>
                         </tr>
                     </thead>
@@ -494,7 +496,7 @@ if (isset($GLOBALS["errorMessage"])) {
                                 </div>
                                 <br><br>
                                 <div>
-                                    <table class="table table-bordered table-striped table-responsive" id="deliveryQuantityContainer">
+                                    <table class="table table-responsive" id="deliveryQuantityContainer">
 
                                         <!-- Lar deg velge antall enheter -->
 
@@ -524,7 +526,7 @@ if (isset($GLOBALS["errorMessage"])) {
         <td>{{productName}}</td>
         <input name="deliveryProductID[]" id="{{productID}}" form="stockDelivery" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
-        <td><input name="deliveryQuantity[]" form="stockDelivery" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
+        <td><input class="form-control" name="deliveryQuantity[]" form="stockDelivery" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
         
         <td>
             <button id="redigerknapp" class="remove" data-toggle="tooltip" >
@@ -1140,17 +1142,17 @@ $(document).ready(function()
         <th>Type</th>
         <th>Beskrivelse</th>
         <th>Lagernavn</th>
-        <th>Fra lager</th>
-        <th>Til lager</th>      
+        <th>Til lager</th>
+        <th>Fra lager</th>      
         <th>Antall</th>
-        <th>Gammelt Antall</th>
-        <th>Nytt Antall</th>
+        <th>Gammelt antall</th>
+        <th>Nytt antall</th>
         <th>Differanse</th>
         <th>Brukernavn</th>
         <th>På bruker</th>
-        <th>produkt</th>    
-        <th>Kundenr</th>
-        <th>dato</th>            
+        <th>Produkt</th>    
+        <th>KundeNr</th>
+        <th>Dato</th>            
         </tr>
 </thead>
 <tbody id="tbodyid">

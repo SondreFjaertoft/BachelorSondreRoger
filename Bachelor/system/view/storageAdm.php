@@ -10,21 +10,21 @@
         <!-- SØK ETTER LAGER -->
 
         <form class="form-inline" id="searchForStorage" action="?page=getAllStorageInfo" method="post">
-            <div class="form-group">
-                <div class="col-md-9">
+            <div class="form-group col-md-12 row">
+                
                     <input class="form-control" form="searchForStorage"type="text" name="givenStorageSearchWord" value="" placeholder="Søk etter Lager..">  
                     <input class="form-control" form="searchForStorage" type="submit" value="Søk">
-
+                
                     <button onclick="UpdateStorageTable()" class="btn btn-default " type="button">Alle lagrer</button>
-                </div>
-                <div class="col-md-1 col-md-offset-15">
+                <div class="pull-right">
+                
                     <button class="btn btn-default" type="button" data-toggle="modal" data-target="#createStorageModal">Opprett Lager</button>
                 </div>
             </div> 
         </form>
 
 
-        <br>  
+        <br><br><br> 
 
         <!-- DISPLAY STORAGE CONTAINER -->
         <br>
@@ -32,7 +32,7 @@
             <div class="panel-heading">
                 <h3 class="panel-title text-center"><b>Lageroversikt</b></h3>
             </div>
-        <table class="table table-bordered table-striped table-responsive"> 
+        <table class="table table-responsive"> 
              
             <tbody id="displayStorageContainer">
 
@@ -354,7 +354,7 @@
     <td id="bordernone">{{storageID}}</td> 
     </tr>
     <tr>
-    <th class="col-md-1">lagernavn: </th>
+    <th class="col-md-1">Lagernavn: </th>
     <td>{{storageName}}</td>
     </tr>
     {{/each}}                

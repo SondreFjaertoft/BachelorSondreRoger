@@ -8,10 +8,10 @@
     <!-- DIV som holder på all informasjon til venstre på skjermen  -->
 
 
-    <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
+    <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group ">
 
         <form id="withdrawProducts" action="?page=withdrawProduct" method="post">
-        <div class="col-sm-3 col-md-4">
+        <div class="col-sm-3 col-md-4 row">
             <label>Uttak fra:</label>
             <select name="fromStorageID" form="withdrawProducts" id="withdrawrRestrictionContainer" class="form-control">
 
@@ -34,15 +34,15 @@
         <br><br><br>
 
         <div>
-            <table class="table table-bordered table-striped table-responsive" id="commentContainer" hidden>
+            <table class="table table-responsive" id="commentContainer" hidden>
 
                 <tr>
-                    <th>Kundenr:   </th> 
-                    <td><input name="customerNumber" required="required" form="withdrawProducts" type="number" value=""/></td> 
+                    <th id="bordernone" class="col-md-1">Kundenr:   </th> 
+                    <td id="bordernone"><input class="form-control" name="customerNumber" required="required" form="withdrawProducts" type="number" value=""/></td> 
                 </tr>  
                 <tr>
-                    <th>kommentar:  </th>
-                    <td><input name="withdrawComment" required="required" form="withdrawProducts" type="text" value=""/></td>
+                    <th id="bordernone">Kommentar:  </th>
+                    <td id="bordernone"><input class="form-control" name="withdrawComment" required="required" form="withdrawProducts" type="text" value=""/></td>
                 </tr>
 
             </table>
@@ -51,7 +51,7 @@
         <br>
         
         <div>
-            <table class="table table-bordered table-striped table-responsive" id="withdrawQuantityContainer">
+            <table class="table table-responsive" id="withdrawQuantityContainer">
 
                 <!-- Lar deg velge antall enheter -->
 
@@ -81,7 +81,7 @@
         <td>{{productName}}</td>
         <input name="withdrawProductID[]" id="{{productID}}" form="withdrawProducts" type="hidden" value="{{productID}}"/>
         <th>Antall:</th>
-        <td><input name="withdrawQuantity[]" form="withdrawProducts" required="required" type="number" min="1" max="{{quantity}}" value="" autocomplete="off"/></td> 
+        <td><input class="form-control" name="withdrawQuantity[]" form="withdrawProducts" required="required" type="number" min="1" max="{{quantity}}" value="" autocomplete="off"/></td> 
         <th>Tilgjengelig:</th>
         <td>{{quantity}} stk</td>    
          
