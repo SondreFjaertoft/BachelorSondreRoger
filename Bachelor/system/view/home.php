@@ -31,11 +31,11 @@ if (isset($GLOBALS["errorMessage"])) {
                         <div class="">
                             <div class="col-xs-6 col-sm-6 col-md-12 text-center">
                                 <div class="pull-left">
-                                    <button class="btn btn-success btn-md" type="button" data-toggle="modal" data-target="#createUserModal"><span class="glyphicon glyphicon-user"></span> <br/>Opprett bruker</button>
+                                    <button class="btn btn-success btn-md" type="button" onclick="getMediaInfo();" data-toggle="modal" data-target="#createUserModal"><span class="glyphicon glyphicon-user"></span> <br/>Opprett bruker</button>
                                     <button class="btn btn-success btn-md" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal"><span class="glyphicon glyphicon-shopping-cart"></span> <br/>Opprett produkt</button>
                                     <button class="btn btn-success btn-md" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
                                     <button class="btn btn-success btn-md" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Opprett kategori</button>
-                                    <button class="btn btn-success btn-md" onclick="getCategory()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
+                                    <button class="btn btn-success btn-md" onclick="getCategoryInfo()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
                                     <button class="btn btn-success btn-md" onclick="getStorageInfo()" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varetelling</button>
                                     <button class="btn btn-success btn-md" type="button" onclick="getStorageProduct()" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varelevering</button>
                                 </div>
@@ -244,7 +244,7 @@ if (isset($GLOBALS["errorMessage"])) {
                                     <tr>
                                         <th>Media:</th>
                                         <td>
-                                            <select name="givenMediaID" id="selectMediaID" required="required" class="form-control" autocomplete="off">
+                                            <select name="givenMediaID" id="selectMediaIDuser" required="required" class="form-control" autocomplete="off">
                                             </select>
                                         </td>
                                     </tr>
@@ -395,7 +395,7 @@ if (isset($GLOBALS["errorMessage"])) {
                                                 </label>
                                             <td id="bordernone"><span class="label label-default" id="upload-file-info"></span></td>
                                             <td id="bordernone">
-                                                <select name="givenCategoryID" id="selectCategory" required="required" class="form-control" autocomplete="off">
+                                                <select name="givenCategoryID" id="selectCategoryMed" required="required" class="form-control" autocomplete="off">
                                                 </select>
                                             </td>
                                         </tr>
@@ -864,8 +864,9 @@ if (isset($GLOBALS["errorMessage"])) {
             </script>
             <script>
                 function getMediaInfo() {
-                    var $displayMediaInformation = $('#selectMediaID');
-                    $displayMediaInformation.empty();
+                    
+                    var $displayMediaInformationUser = $('#selectMediaIDuser');
+                    $displayMediaInformationUser.empty();
                     
                     var $displayMediaInformationPro = $('#selectMediaIDpro');
                     $displayMediaInformationPro.empty();
@@ -879,8 +880,7 @@ if (isset($GLOBALS["errorMessage"])) {
                                 $.each(data.mediaInfo, function (i, item) {
 
                                     $displayMediaInformationPro.append('<option value="' + item.mediaID + '">' + item.mediaName + '</option>');
-                                    $displayMediaInformation.append('<option value="' + item.mediaID + '">' + item.mediaName + '</option>');
-
+                                    $displayMediaInformationUser.append('<option value="' + item.mediaID + '">' + item.mediaName + '</option>');
                                 });
 
 
@@ -891,9 +891,9 @@ if (isset($GLOBALS["errorMessage"])) {
             </script>
             <script>
                 function getCategoryInfo() {
-                    var $displayCategoryInformation = $('#selectCategory');
+                    var $displayCategoryInformationMed = $('#selectCategoryMed');
                     var $displayCategoryInformationPro = $('#selectCategoryPro');
-                    $displayCategoryInformation.empty();
+                    $displayCategoryInformationMed.empty();
                     $displayCategoryInformationPro.empty();
                     $(function () {
                         $.ajax({
@@ -904,7 +904,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
                                 $.each(data.categoryInfo, function (i, item) {
 
-                                    $displayCategoryInformation.append('<option value="' + item.categoryID + '">' + item.categoryName + '</option>');
+                                    $displayCategoryInformationMed.append('<option value="' + item.categoryID + '">' + item.categoryName + '</option>');
                                     $displayCategoryInformationPro.append('<option value="' + item.categoryID + '">' + item.categoryName + '</option>');
 
                                 });
