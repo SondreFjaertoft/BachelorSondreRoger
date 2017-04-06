@@ -5,6 +5,7 @@
 
     <div class="container">
         <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
+            <div id="success"></div>
             <form id="returnProducts" action="?page=returnProduct" method="post">
                 <div class="col-sm-3 col-md-4">
                     <label>Returner til: </label><div id="returnRestrictionContainer"></div>
@@ -218,9 +219,9 @@
                     $displayUsers.empty().append("Kunne ikke overføre");
                 },
                 success: function (data) {
-                    $('.product').remove();
                     $('.selectQuantity').remove();
                     $('#errorMessage').remove();
+                    successMessage();
                     updateReturn();
                 }
             });
@@ -228,6 +229,15 @@
         });
     });
 </script>
+
+<script>
+function successMessage() {    
+    $('<div class="alert alert-success"><strong>Registrert!</strong> Ditt uttak er registrert </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
 
 <script> 
 function updateReturn() {                            

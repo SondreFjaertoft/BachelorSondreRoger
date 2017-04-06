@@ -52,14 +52,15 @@ class UserController extends Controller {
         if(strlen($editPassword) < 50)
         {
         $hash = password_hash($editPassword, PASSWORD_DEFAULT);
-        $userEditInfo->editUser($editName, $editUsername, $hash, $editUserLevel, $editEmail, $editUserID, $editMediaID);
+        $edited = $userEditInfo->editUser($editName, $editUsername, $hash, $editUserLevel, $editEmail, $editUserID, $editMediaID);
         }
         else
         {    
-        $userEditInfo->editUser($editName, $editUsername, $editPassword, $editUserLevel, $editEmail, $editUserID, $editMediaID);
+        $edited = $userEditInfo->editUser($editName, $editUsername, $editPassword, $editUserLevel, $editEmail, $editUserID, $editMediaID);
         }
+        if($edited){
         echo json_encode("success");
-        
+        } else {return false;}
     }
 
     

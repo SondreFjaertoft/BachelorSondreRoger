@@ -24,8 +24,10 @@
             </div>
             </div>
             
+            
         </form>
         <br><br>
+        <div id="success"></div>
 
             <!-- OPPRETT BRUKER  -->
 
@@ -80,7 +82,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <p id="errorMessage"></p>
+                            <div id="error"></div>
                             <input class="btn btn-success" form="createUser" type="submit" value="Opprett bruker">
 
 
@@ -223,6 +225,7 @@
                 </div>
                 </div>
                 <div class="modal-footer">
+                    <div id="successRes"></div>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
             </div>
@@ -249,6 +252,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
+                    <div id="errorEdit"></div>
                     <input class="btn btn-success" type="submit" value="Lagre" form="editUser">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
                 </div>
@@ -463,14 +467,14 @@
                 data: data,
                 dataType: 'json',
                 error: function() {         
-                    var $displayError = $('#errorMessage');
-                    $displayError.empty().append("Brukernavn trolig i bruk");
+                    errorMessage();
                 },
                 success: function () {
                     $("#createUser")[0].reset();
                     $('#createUserModal').modal('hide');
                     $('#errorMessage').remove();
                     UpdateUsersTable();
+                    successMessageCreate();
                 }
             });
             return false;
@@ -478,6 +482,24 @@
     });
 
 </script>
+
+<script>
+function errorMessage() {    
+    $('<div class="alert alert-danger"><strong>Error!</strong> Opptatt brukernavn </div>').appendTo('#error')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script>
+
+<script>
+function successMessageCreate() {    
+    $('<div class="alert alert-success"><strong>Opprettet!</strong> Bruker er opprettet. </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
 
 
 <!-- SEARCH FOR USERS -->
@@ -614,6 +636,7 @@
                 data: {givenUserID: givenUserID, givenStorageID: givenStorageID},
                 dataType: 'json',
                 success: function () {
+                    successMessageRes();
                     POSTuserRestriction(givenUserID);
 
                 }
@@ -622,7 +645,16 @@
 
         });
     });               
-</script>                    
+</script>  
+
+<script>
+function successMessageRes() {    
+    $('<div class="alert alert-success"><strong>Slettet!</strong> Brukertilgang er slettet. </div>').appendTo('#successRes')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
 
 
 <script>
@@ -701,7 +733,7 @@
                 data: data,
                 dataType: 'json',
                 success: function (data) {
-
+                    successMessageDelete();
                     UpdateUsersTable();
                     $('#deleteUserModal').modal('hide');
 
@@ -713,6 +745,14 @@
 
 </script>
 
+<script>
+function successMessageDelete() {    
+    $('<div class="alert alert-success"><strong>Slettet!</strong> Bruker er slettet. </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
 
 
 <!-- EDIT USER -->
@@ -765,8 +805,12 @@
                 url: url,
                 data: data,
                 dataType: 'json',
+                error: function(){
+                    errorMessage();
+                },
                 success: function () {
                     $('#editUserModal').modal('hide');
+                    successMessageEdit();
                     UpdateUsersTable();
                 }
             });
@@ -775,6 +819,25 @@
     });
 
 </script>
+
+<script>
+function errorMessage() {    
+    $('<div class="alert alert-danger"><strong>Error!</strong> Opptatt brukernavn </div>').appendTo('#errorEdit')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script>
+
+
+<script>
+function successMessageEdit() {    
+    $('<div class="alert alert-success"><strong>Redigert!</strong> Bruker er redigert. </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script>    
 
 
 <!-- SET RESTRICTION -->
@@ -832,6 +895,7 @@
                 dataType: 'json',
                 success: function () {
                     $('#userRestrictionModal').modal('hide');
+                    successMessageAddRes();
                     UpdateUsersTable();
                 }
             });
@@ -840,6 +904,17 @@
     });
 
 </script>
+
+<script>
+function successMessageAddRes() {    
+    $('<div class="alert alert-success"><strong>Lagret!</strong> Brukertilgang er lagret. </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script>  
+
+
 
 <script>
  function getMediaInfo() {

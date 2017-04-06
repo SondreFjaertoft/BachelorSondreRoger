@@ -9,7 +9,7 @@
 
 
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group ">
-
+        <div id="success"></div>
         <form id="withdrawProducts" action="?page=withdrawProduct" method="post">
         <div class="col-sm-3 col-md-4 row">
             <label>Uttak fra:</label>
@@ -164,7 +164,6 @@ $('#withdrawButton').hide();
                         $('.selectQuantity').remove();
                         $('#withdrawButton').hide();
                         $('#commentContainer').hide();
-                
                     }
                 });
             } else {
@@ -258,6 +257,7 @@ $('#withdrawButton').hide();
                     $('.product').remove();
                     $('.selectQuantity').remove();
                     $('#errorMessage').remove();
+                    successMessage();
                     updateSale();
                 }
             });
@@ -265,6 +265,17 @@ $('#withdrawButton').hide();
         });
     });
 </script>
+
+<script>
+function successMessage() {    
+    $('<div class="alert alert-success"><strong>Registrert!</strong> Ditt uttak er registrert </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script>    
+
+
 
 <script> 
 function updateSale() {                            

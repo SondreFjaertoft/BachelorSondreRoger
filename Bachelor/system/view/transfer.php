@@ -4,8 +4,8 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <div class="container">
     <div class="col-sm-3 col-sm-offset-1 col-md-10 col-md-offset-1 form-group">
-
-
+        <div id="error"></div>
+        <div id="success"></div>
     <form id="transferProducts" action="?page=transferProduct" method="post">    
         <div class="col-sm-3 col-md-4">
             <label>Overfør Fra:</label>
@@ -17,14 +17,15 @@
         </div>
       
 
-        <div class="col-sm-3 col-md-4">   
+        <div class="col-sm-3 col-md-4">  
+            
             <label>Overfør Til:</label>
             <select name="toStorageID" form="transferProducts" id="toTransferRestrictionContainer" class="form-control update">
 
                 <!-- Her kommer Handlebars Template-->
                 
             </select>
-            <p id="errorMessage"></p>
+            
         </div>     
     
         <br><br><br><br>
@@ -244,19 +245,37 @@ $(function () {
                 data: data,
                 dataType: 'json',
                 error: function() {         
-                    var $displayUsers = $('#errorMessage');
-                    $displayUsers.empty().append("Du må velge et TIL lager");
+                    errorMessage();
                 },
                 success: function (data) {
                    $('.product').remove();
                    $('.selectQuantity').remove();
                    $('#errorMessage').remove();
+                   successMessage();
                    updateTransfer();
                 }
             });
             return false;
         });
      });    
+</script>
+
+<script>
+function successMessage() {    
+    $('<div class="alert alert-success"><strong>Registrert!</strong> Ditt uttak er registrert </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
+
+<script>
+function errorMessage() {    
+    $('<div class="alert alert-danger"><strong>Error!</strong> Du må velge TIL lager </div>').appendTo('#error')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
 </script>
 
 <script> 
