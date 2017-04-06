@@ -993,7 +993,7 @@ $(document).ready(function()
 <!-- Get the selected storage, and POST this to retrive inventory-->
 <script>
     var givenStorageID;
-    $(function POSTfromStorageModal() {
+    $(function POSTfromStorageModals() {
         
         $('#chooseStorageContainer').on('change', function () {
             givenStorageID = $(this).find("option:selected").data('id');
@@ -1008,6 +1008,7 @@ $(document).ready(function()
                     dataType: 'json',
                     success: function (data) {
                         chosenStorageTemplate(data);
+                        rowColor();
                        
                     }
                 });
@@ -1033,9 +1034,9 @@ $(document).ready(function()
 <script id="chosenStorageTemplate" type="text/x-handlebars-template">
      
     {{#each storageProduct}}
-    <tr>
-    <td>{{productName}}</td>
-    <td>{{quantity}}</td>
+    <tr class="quantityColor">
+    <td class="quantityColor">{{productName}}</td>
+    <td class="quantityColor">{{quantity}}</td>
     </tr>
     {{/each}} 
 </script>
@@ -1086,21 +1087,20 @@ $(document).ready(function()
                         var bars = antall;
                         for(i = 0; i < bars.length; i++){
                         //You can check for bars[i].value and put your conditions here
-                        if(bars[i] <= 3)
+                        if(bars[i] >= 10)
                         {
-                            farge.push("#d9534f");
+                            //grønn
+                            farge.push("#5cb85c");
+                        }
+                        else if(bars[i] < 10 && bars[i] >=5)
+                        {
+                            //orange
+                            farge.push("#f0ad4e");
                         }
                         else if(bars[i] < 5)
                         {
-                            farge.push("#f0ad4e");
-                        }
-                        else if(bars[i] >= 10)
-                        {
-                            farge.push("#5cb85c");
-                        }
-                        else
-                        {
-                            farge.push("#f0ad4e");
+                            //rød
+                            farge.push("#d9534f");
                         }
                         }
                             window.myObjBar = new Chart(ctx, {
@@ -1314,6 +1314,42 @@ $(document).ready(function()
         var loggContainer = document.getElementById("allLastSaleContainer");
         loggContainer.innerHTML = loggTableGeneratedHTML;
     }
+</script>
+
+<script>
+function rowColor(){
+    
+// storageInformation    
+$('.quantityColor').filter(function(index){
+    return parseInt(this.innerHTML) >= 10;
+}).siblings().andSelf().attr('class', 'bg-success');
+
+$('.quantityColor').filter(function(index){
+    return parseInt(this.innerHTML) < 10 && parseInt(this.innerHTML) >= 5;
+}).siblings().andSelf().attr('class', 'bg-warning');
+
+$('.quantityColor').filter(function(index){
+    return parseInt(this.innerHTML) < 5;
+}).siblings().andSelf().attr('class', 'bg-danger');
+
+
+// stocktaking result
+// || 
+    
+$('.stockResult').filter(function(index){
+    return parseInt(this.innerHTML) >= 10 || parseInt(this.innerHTML) <= -10;
+}).siblings().andSelf().attr('class', 'bg-danger');
+
+$('.stockResult').filter(function(index){
+    return parseInt(this.innerHTML) < 10 && parseInt(this.innerHTML) >= 5 || parseInt(this.innerHTML) > -10 && parseInt(this.innerHTML) <= -5;
+}).siblings().andSelf().attr('class', 'bg-warning');
+
+$('.stockResult').filter(function(index){
+    return parseInt(this.innerHTML) < 5 || parseInt(this.innerHTML) > -5;
+}).siblings().andSelf().attr('class', 'bg-success');
+
+}
+
 </script>
 
 <script id="allLastSaleTemplate" type="text/x-handlebars-template">

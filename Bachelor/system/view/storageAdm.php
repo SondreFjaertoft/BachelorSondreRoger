@@ -26,7 +26,6 @@
 
         <br><br>
         <div id="success"></div>
-        <div id="errorDelete"></div>
         <br> 
 
         <!-- DISPLAY STORAGE CONTAINER -->
@@ -236,6 +235,7 @@
                     
                 </p>    
             <div class="modal-footer">
+                <div id="errorDelete"></div>
                 <input form="deleteStorage" class="btn btn-success" type="submit" value="Slett">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
@@ -712,25 +712,20 @@ function successMessageStock() {
                         var bars = antall;
                         for(i = 0; i < bars.length; i++){
                         //You can check for bars[i].value and put your conditions here
-                        if(bars[i] >= -3)
+                        if(bars[i] >= 10 || bars[i] <= -10)
                         {
-                            farge.push("#5cb85c");
-                        }
-                        else if(bars[i] <= 3)
-                        {
-                            farge.push("#5cb85c");
-                        }
-                        else if(bars[i] >= 10)
-                        {
+                            //grønn
                             farge.push("#d9534f");
                         }
-                        else if(bars[i] <= -10)
+                        else if(bars[i] < 10 && bars[i] >=5 || bars[i] > -10 && bars[i] <= -5)
                         {
-                            farge.push("#d9534f");
-                        }
-                        else
-                        {
+                            //orange
                             farge.push("#f0ad4e");
+                        }
+                        else if(bars[i] < 5 || bars[i] > -5)
+                        {
+                            //rød
+                            farge.push("#5cb85c");
                         }
                         }
 
@@ -867,7 +862,7 @@ $(document).ready(function()
             var givenStorageID = $(this).attr('data-id');
             POSTstorageRestriction(givenStorageID);
             POSTstorageProduct(givenStorageID);
-            chartTest(givenStorageID);
+            chartInventory(givenStorageID);
             
             $.ajax({
                 type: 'POST',
@@ -890,7 +885,7 @@ $(document).ready(function()
 
 <!-- Get storageInventory from selected storage-->
 <script>
-    function chartTest(data) {
+    function chartInventory(data) {
          
         var givenStorageID = data;
        
@@ -937,21 +932,20 @@ $(document).ready(function()
                             var bars = antall;
                         for(i = 0; i < bars.length; i++){
                         //You can check for bars[i].value and put your conditions here
-                        if(bars[i] <= 3)
+                        if(bars[i] >= 10)
                         {
-                            farge.push("#d9534f");
+                            //grønn
+                            farge.push("#5cb85c");
+                        }
+                        else if(bars[i] < 10 && bars[i] >=5)
+                        {
+                            //orange
+                            farge.push("#f0ad4e");
                         }
                         else if(bars[i] < 5)
                         {
-                            farge.push("#f0ad4e");
-                        }
-                        else if(bars[i] >= 10)
-                        {
-                            farge.push("#5cb85c");
-                        }
-                        else
-                        {
-                            farge.push("#f0ad4e");
+                            //rød
+                            farge.push("#d9534f");
                         }
                         }
                             window.myObjBar = new Chart(ctx, {
