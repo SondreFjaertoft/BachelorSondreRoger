@@ -91,8 +91,6 @@ class UserController extends Controller {
     }
     
     
-    // FORESPØRSLER GJOR VED AJAX
-    
     private function getUserInfo() {
         $userInfo = $GLOBALS["userModel"];
           
@@ -157,10 +155,11 @@ class UserController extends Controller {
         $removeUserRestriction->deleteUserRestriction($removeUserID);
         
         $removeUser = $GLOBALS["userModel"];
-        $removeUser->removeUser($removeUserID);
+        $delited = $removeUser->removeUser($removeUserID);
         
-        
-        echo json_encode("success");
+        if($delited){
+        echo json_encode("success");} 
+        else {return false;}
     }
     
     private function deleteSingleRes(){

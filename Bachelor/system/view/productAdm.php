@@ -25,11 +25,12 @@
 
 
         
-        <br><br><br>
-
+        <br><br>
+        <div id="success"></div>
          
         <!-- DISPLAY PRODUCT CONTAINER -->
-        <br>
+        <br><br>
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h2 class="panel-title text-center"><b>Produktoversikt</b></h2>
@@ -99,7 +100,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-
+                    <div id="error"></div>
                     <input class="btn btn-success" form="createProduct" type="submit" value="Opprett Produkt">
                     
                     <button class="btn btn-danger" type="button" data-dismiss="modal">Avslutt</button>
@@ -132,6 +133,7 @@
                 </table>
             </div>
             <div class="modal-footer">
+                <div id="errorEdit"></div>
                 <input class="btn btn-success" type="submit" value="Lagre" form="editProduct">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Avslutt</button>
             </div>
@@ -461,7 +463,7 @@
                 data: data,
                 dataType: 'json',
                 success: function (data) {
-
+                    successMessageDelete();
                     UpdateProductTable();
                     $('#deleteProductModal').modal('hide');
 
@@ -472,6 +474,14 @@
     });
 
 </script>
+<script>
+function successMessageDelete() {    
+    $('<div class="alert alert-success"><strong>Slettet!</strong> Produkt er slettet. </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
 
 
 
@@ -593,8 +603,12 @@
                 url: url,
                 data: data,
                 dataType: 'json',
+                error: function(){
+                    errorMessageEdit();
+                },
                 success: function () {
                     $('#editProductModal').modal('hide');
+                    successMessageEdit();
                     UpdateProductTable();
                 }
             });
@@ -603,6 +617,24 @@
     });
 
 </script>
+
+<script>
+function successMessageEdit() {    
+    $('<div class="alert alert-success"><strong>Redigert!</strong> Produkt er redigert. </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
+
+<script>
+function errorMessageEdit() {    
+    $('<div class="alert alert-danger"><strong>Error!</strong> Opptatt produktnavn </div>').appendTo('#errorEdit')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
 
 
 
@@ -620,10 +652,14 @@
                 url: url,
                 data: data,
                 dataType: 'json',
+                error: function() {         
+                    errorMessage();
+                },
                 success: function () {
                     $("#createProduct")[0].reset();
                     $('#createProductModal').modal('hide');
                     UpdateProductTable();
+                    successMessageCreate();
                 }
             });
             return false;
@@ -631,6 +667,24 @@
     });
 
 </script>
+
+<script>
+function errorMessage() {    
+    $('<div class="alert alert-danger"><strong>Error!</strong> Opptatt brukernavn </div>').appendTo('#error')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script>
+
+<script>
+function successMessageCreate() {    
+    $('<div class="alert alert-success"><strong>Opprettet!</strong> Bruker er opprettet. </div>').appendTo('#success')
+            .delay(2000).fadeOut(500, function() {
+            $(this).remove();
+           });;
+}    
+</script> 
 
 
 <!-- SEARCH FOR PRODUCT -->

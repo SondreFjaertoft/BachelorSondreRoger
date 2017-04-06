@@ -52,9 +52,11 @@ class ProductController extends Controller {
         $setSessionID->setSession($sessionID);
         
         $productCreationInfo = $GLOBALS["productModel"];
-        $productCreationInfo->addProduct($givenProductName, $givenPrice, $givenCategoryID, $givenMediaID, $givenProductDate, $givenMacAdresse);
-
-        echo json_encode("success");
+        $added = $productCreationInfo->addProduct($givenProductName, $givenPrice, $givenCategoryID, $givenMediaID, $givenProductDate, $givenMacAdresse);
+        
+        if($added){
+        echo json_encode("success");} 
+        else {return false;}
     }
 
     private function editProductEngine() {
@@ -69,18 +71,22 @@ class ProductController extends Controller {
         $productEditInfo = $GLOBALS["productModel"];
         $sesionLog->setSession($sessionID);
         
-        $productEditInfo->editProduct($editProductName, $editProductID, $editPrice, $editCategoryID, $editMediaID);
-
-        echo json_encode("success");
+        $edited = $productEditInfo->editProduct($editProductName, $editProductID, $editPrice, $editCategoryID, $editMediaID);
+        
+        if($edited){
+        echo json_encode("success");} 
+        else {return false;}
     }
 
     private function deleteProductEngine() {
         $removeProductID = $_REQUEST["deleteProductID"];
 
         $removeProduct = $GLOBALS["productModel"];
-        $removeProduct->removeProduct($removeProductID);
+        $delited = $removeProduct->removeProduct($removeProductID);
         
-        echo json_encode("success");
+        if($delited){
+        echo json_encode("success");} 
+        else {return false;}
     }
     
     private function getAllProductInfo() {

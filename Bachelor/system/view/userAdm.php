@@ -806,7 +806,7 @@ function successMessageDelete() {
                 data: data,
                 dataType: 'json',
                 error: function(){
-                    errorMessage();
+                    errorMessageEdit();
                 },
                 success: function () {
                     $('#editUserModal').modal('hide');
@@ -821,7 +821,7 @@ function successMessageDelete() {
 </script>
 
 <script>
-function errorMessage() {    
+function errorMessageEdit() {    
     $('<div class="alert alert-danger"><strong>Error!</strong> Opptatt brukernavn </div>').appendTo('#errorEdit')
             .delay(2000).fadeOut(500, function() {
             $(this).remove();
