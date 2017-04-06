@@ -13,12 +13,12 @@
             <div class="form-group col-md-12 row">
                 
                     <input class="form-control" form="searchForProduct" type="text" name="givenProductSearchWord" value="" placeholder="Søk etter produkt..">  
-                    <input class="form-control" form="searchForProduct" type="submit" value="Søk">
+                    <input class="form-control btn btn-primary" form="searchForProduct" type="submit" value="Søk">
                     
-                    <button onclick="UpdateProductTable()" class="btn btn-default " type="button">Alle producter</button>
+                    <button onclick="UpdateProductTable()" class="btn btn-primary " type="button">Alle producter</button>
                 
                 <div class="pull-right row">
-                    <button class="btn btn-default" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal">Opprett Produkt</button>
+                    <button class="btn btn-success" onclick="createProductInfo();" type="button" data-toggle="modal" data-target="#createProductModal">Opprett Produkt</button>
                 </div>
             </div> 
         </form>
@@ -31,7 +31,7 @@
         <!-- DISPLAY PRODUCT CONTAINER -->
         <br><br>
 
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
             <div class="panel-heading">
                 <h2 class="panel-title text-center"><b>Produktoversikt</b></h2>
             </div>

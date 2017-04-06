@@ -56,6 +56,8 @@ html,body
 }
 .main {
     margin-top: 2%;
+    padding-right: 3%;
+    
 }
 
 .sidebar .sidebar-nav.navbar-collapse {

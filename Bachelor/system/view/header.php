@@ -67,7 +67,7 @@
                         <li><a href="?page=myReturns"><span class="glyphicon glyphicon-stats"></span> Dine Returer</a></li>
                            
                         <?php if ($_SESSION["userLevel"] == "Administrator") {?>
-                        <li><a href="?page=logg"><span class="glyphicon glyphicon-stats"></span> Logg</a></li>
+                        <li><a href="?page=logg"><span class="glyphicon glyphicon-paperclip"></span> Logg</a></li>
                         <li><a id="show-hide-toogle" href="#"><span class="glyphicon glyphicon-wrench"></span> Administrering<span class="caret"></span></a>
                         
                             <ul id="dropdown" class="nav nav-second-level" hidden>
@@ -75,13 +75,13 @@
                                     <a href="?page=userAdm"><span class="glyphicon glyphicon-user"></span> Bruker Administrering</a>
                                 </li>
                                 <li>
-                                    <a  href="?page=storageAdm"><span class="glyphicon glyphicon-th-list"></span> Lager Administrering</a>
+                                    <a  href="?page=storageAdm"><span class="glyphicon glyphicon-home"></span> Lager Administrering</a>
                                 </li>
                                 <li>
-                                    <a href="?page=productAdm"><span class="glyphicon glyphicon-th-list"></span> Produkt Administrering</a>
+                                    <a href="?page=productAdm"><span class="glyphicon glyphicon-shopping-cart"></span> Produkt Administrering</a>
                                 </li>
                                 <li>
-                                    <a href="?page=mediaAdm"><span class="glyphicon glyphicon-th-list"></span> Media Administrering</a>
+                                    <a href="?page=mediaAdm"><span class="glyphicon glyphicon-picture"></span> Media Administrering</a>
                                 </li>
                             </ul>
                   

@@ -10,9 +10,9 @@
             <div class="form-group">
                 <div class="col-md-12">
                     <input class="form-control" form="searchForLog" type="text" name="givenLogSearchWord" value="" placeholder="Søk etter hendelse.." autocomplete="off">  
-                    <input class="form-control" form="searchForLog" type="submit" value="Søk">
+                    <input class="form-control btn btn-primary" form="searchForLog" type="submit" value="Søk">
                     
-                    <button onclick="updateLogTable()" class="btn btn-default " type="button">All Logg</button>
+                    <button onclick="updateLogTable()" class="btn btn-primary " type="button">All Logg</button>
                 </div>
                 
             </div> 

@@ -19,12 +19,12 @@ $test = $GLOBALS["errorMessage"];
             <div class="form-group col-md-12 row">
                 
                     <input class="form-control" form="searchForMedia" type="text" name="givenMediaSearchWord" value="" placeholder="Søk etter media..">  
-                    <input class="form-control" form="searchForMedia" type="submit" value="Søk">
+                    <input class="form-control btn btn-primary" form="searchForMedia" type="submit" value="Søk">
                     
-                    <button onclick="UpdateMediaTable()" class="btn btn-default " type="button">Alle producter</button>
+                    <button onclick="UpdateMediaTable()" class="btn btn-primary " type="button">Alle producter</button>
                 
                 <div class="pull-right">
-                    <button class="btn btn-default" onclick="getCategoryInfo()" type="button" data-toggle="modal" data-target="#uploadImageModal">Last opp bilde</button>
+                    <button class="btn btn-success" onclick="getCategoryInfo()" type="button" data-toggle="modal" data-target="#uploadImageModal">Last opp bilde</button>
                 </div>
             </div>
         </form>
@@ -40,7 +40,7 @@ $test = $GLOBALS["errorMessage"];
                 ?>
               <br><br>
 
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title text-center"><b>Mediaoversikt</b></h3>
                 </div>       

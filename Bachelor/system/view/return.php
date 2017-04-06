@@ -55,7 +55,7 @@
             
             <input form="returnProducts" type="hidden" id="date" name="date">
             
-            <button form="returnProducts" type="submit" class="btn btn-default" id="returnButton">Overfør</button>
+            <button form="returnProducts" type="submit" class="btn btn-success" id="returnButton">Overfør</button>
             <p id="errorMessage"></p>
         </div> 
         </form>
@@ -77,14 +77,7 @@
         <td><input name="returnQuantity[]" form="returnProducts" required="required" type="number" min="1" max="1000" value="" autocomplete="off"/></td>  
         
         <td>
-            <button class="remove" data-toggle="tooltip" 
-                style="appearance: none;
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                outline: none;
-                border: 0;
-                background: transparent;
-                display: inline;">
+            <button id="redigerknapp" class="remove" data-toggle="tooltip">
                 <span class="glyphicon glyphicon-remove" style="color: red"></span>
             </button>
         </td>    
@@ -96,7 +89,7 @@
 <script id="returnProductTemplate" type="text/x-handlebars-template">
     <br>  
     {{#each storageProduct}} 
-    <button data-id="{{productID}}" class="btn btn-default product">{{productName}}</button>
+    <button data-id="{{productID}}" class="btn btn-primary product">{{productName}}</button>
     {{/each}} 
 </script>
 

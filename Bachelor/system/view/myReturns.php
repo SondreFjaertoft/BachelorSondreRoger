@@ -11,9 +11,9 @@
             <div class="form-group col-md-12 row">
                 <div class="">
                     <input class="form-control" form="searchForReturns" type="text" name="givenProductSearchWord" value="" placeholder="Søk etter returer.." autocomplete="off">  
-                    <input class="form-control" form="searchForReturns" type="submit" value="Søk">
+                    <input class="form-control btn btn-primary" form="searchForReturns" type="submit" value="Søk">
                     
-                    <button onclick="UpdateReturnsTable()" class="btn btn-default " type="button">Alle Returer</button>
+                    <button onclick="UpdateReturnsTable()" class="btn btn-primary " type="button">Alle Returer</button>
                 </div>
                 
             </div> 
@@ -22,7 +22,7 @@
         <br><br><br><br>
         
         
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title text-center"><b>Mine Returer</b></h3>
             </div>

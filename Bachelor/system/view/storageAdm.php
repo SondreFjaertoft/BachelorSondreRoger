@@ -13,12 +13,12 @@
             <div class="form-group col-md-12 row">
                 
                     <input class="form-control" form="searchForStorage"type="text" name="givenStorageSearchWord" value="" placeholder="Søk etter Lager..">  
-                    <input class="form-control" form="searchForStorage" type="submit" value="Søk">
+                    <input class="form-control btn btn-primary" form="searchForStorage" type="submit" value="Søk">
                 
-                    <button onclick="UpdateStorageTable()" class="btn btn-default " type="button">Alle lagrer</button>
+                    <button onclick="UpdateStorageTable()" class="btn btn-primary " type="button">Alle lagrer</button>
                 <div class="pull-right">
                 
-                    <button class="btn btn-default" type="button" data-toggle="modal" data-target="#createStorageModal">Opprett Lager</button>
+                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#createStorageModal">Opprett Lager</button>
                 </div>
             </div> 
         </form>
@@ -31,7 +31,7 @@
 
         <!-- DISPLAY STORAGE CONTAINER -->
         <br>
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title text-center"><b>Lageroversikt</b></h3>
             </div>

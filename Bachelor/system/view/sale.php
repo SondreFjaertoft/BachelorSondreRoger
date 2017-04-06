@@ -60,7 +60,7 @@
             
             <input form="withdrawProducts" type="hidden" id="date" name="date">
             
-            <button form="withdrawProducts" type="submit" class="btn btn-default" id="withdrawButton" hidden>Overfør</button>
+            <button form="withdrawProducts" type="submit" class="btn btn-success" id="withdrawButton" hidden>Overfør</button>
             <p id="errorMessage"></p>
         </div>
         </form>
@@ -110,7 +110,7 @@
 <script id="withdrawProductTemplate" type="text/x-handlebars-template">
     <br>  
     {{#each storageProduct}} 
-    <button data-id="{{productID}}" class="btn btn-default product">{{productName}}</button>
+    <button data-id="{{productID}}" class="btn btn-primary product">{{productName}}</button>
     {{/each}} 
 </script>
 

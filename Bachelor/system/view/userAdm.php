@@ -14,13 +14,13 @@
             <div class="form-group col-md-12 row">
                 
                     <input class="form-control" form="searchForUser" type="text" name="givenUserSearchWord" value="" placeholder="Søk etter bruker..">  
-                    <input class="form-control" form="searchForUser" type="submit" value="Søk">
+                    <input class="form-control btn btn-primary" form="searchForUser" type="submit" value="Søk">
                                              
-                <button onclick="UpdateUsersTable()" class="btn btn-default" type="button">Alle brukere</button>
+                <button onclick="UpdateUsersTable()" class="btn btn-primary" type="button">Alle brukere</button>
              
             <div class="pull-right row">
-                <button class="btn btn-default " onclick="getMediaInfo();" type="button" data-toggle="modal" data-target="#createUserModal">Opprett bruker</button>
-            <button  id="setRestriction" onclick="getStorageInfo()" data-toggle="modal" data-target="#userRestrictionModal" class="btn btn-default" type="button">Velg Lager</button>
+                <button class="btn btn-success " onclick="getMediaInfo();" type="button" data-toggle="modal" data-target="#createUserModal">Opprett bruker</button>
+                <button  id="setRestriction" onclick="getStorageInfo()" data-toggle="modal" data-target="#userRestrictionModal" class="btn btn-warning" type="button">Velg Lager</button>
             </div>
             </div>
             
@@ -104,9 +104,13 @@
     <br>
      <form action="?page=addRestriction" id="editRestriction" method="post">
 
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title text-center"><b>Brukeroversikt</b></h3>
+            <h3 class="panel-title text-center"><b>Brukeroversikt</b>
+                <div class="pull-right" style="margin-right: 3.3%">
+                    <b><span class="glyphicon glyphicon-wrench"></span></b>
+                </div>
+            </h3>
         </div>
         <table class="table table-responsive">
             

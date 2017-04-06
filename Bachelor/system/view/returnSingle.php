@@ -49,7 +49,7 @@
             
             <input form="returnProducts" type="hidden" id="date" name="date">
             
-            <button form="returnProducts" type="submit" class="btn btn-default" id="returnButton">Overfør</button>
+            <button form="returnProducts" type="submit" class="btn btn-success" id="returnButton">Overfør</button>
             <p id="errorMessage"></p>
         </div> 
         </form>
@@ -80,7 +80,7 @@
 <script id="returnProductTemplate" type="text/x-handlebars-template">
     <br>  
     {{#each storageProduct}} 
-    <button data-id="{{productID}}" class="btn btn-default product">{{productName}}</button>
+    <button data-id="{{productID}}" class="btn btn-primary product">{{productName}}</button>
     {{/each}} 
 </script>
 

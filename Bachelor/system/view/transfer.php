@@ -51,7 +51,7 @@
             
             
             
-            <button form="transferProducts" type="submit" class="btn btn-default" id="transferButton">Overfør</button>
+            <button form="transferProducts" type="submit" class="btn btn-success" id="transferButton">Overfør</button>
 
         </div>    
     </form>
@@ -96,7 +96,7 @@
 <script id="transferProductTemplate" type="text/x-handlebars-template">
 <br>
 {{#each storageProduct}}    
- <button data-id="{{productID}}" class="btn btn-default product">{{productName}}</button>
+ <button data-id="{{productID}}" class="btn btn-primary product">{{productName}}</button>
 {{/each}} 
 </script>
 

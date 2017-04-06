@@ -8,7 +8,7 @@ if (isset($GLOBALS["errorMessage"])) {
 
 
 
-<div class="col-sm-9 col-sm-offset-3 col-md-11 col-md-offset-2 main row">
+<div class="col-sm-9 col-sm-offset-3 col-md-11 col-md-offset-2 main">
     <div id="message">
         <?php
         if (isset($GLOBALS["errorMessage"])) {
@@ -36,8 +36,8 @@ if (isset($GLOBALS["errorMessage"])) {
                                     <button class="btn btn-success btn-md" type="button" data-toggle="modal" data-target="#createStorageModal"><span class="glyphicon glyphicon-home"></span> <br/>Opprett lager</button>
                                     <button class="btn btn-success btn-md" role="button" data-toggle="modal" data-target="#createCategoryModal"><span class="glyphicon glyphicon-folder-open"></span> <br/>Opprett kategori</button>
                                     <button class="btn btn-success btn-md" onclick="getCategory()" type="button" data-toggle="modal" data-target="#uploadImageModal"><span class="glyphicon glyphicon-picture"></span> <br/>Last opp bilde</button>
-                                    <button class="btn btn-success btn-md" onclick="getStorageInfo()" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varetelling</button>
-                                    <button class="btn btn-success btn-md" type="button" onclick="getStorageProduct()" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-picture"></span> <br/>Varelevering</button>
+                                    <button class="btn btn-success btn-md" onclick="getStorageInfo()" type="button" data-toggle="modal" data-target="#stockTakingModal"><span class="glyphicon glyphicon-flag"></span> <br/>Varetelling</button>
+                                    <button class="btn btn-success btn-md" type="button" onclick="getStorageProduct()" data-toggle="modal" data-target="#stockDeliveryModal"><span class="glyphicon glyphicon-barcode"></span> <br/>Varelevering</button>
                                 </div>
                                 <div class="pull-right">
                                     <a href="?page=editUser" class="btn btn-warning btn-md" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Rediger Profil</a>
