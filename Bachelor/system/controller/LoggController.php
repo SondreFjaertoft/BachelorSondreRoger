@@ -21,7 +21,15 @@ class LoggController extends Controller {
     
     private function getAllLoggInfo(){
         $loggModel = $GLOBALS["loggModel"];
-        $LoggInfo = $loggModel->getAllLoggInfo();
+        
+        if (isset($_POST['givenLogSearchWord'])) {
+            $givenLogSearchWord = "%{$_REQUEST["givenLogSearchWord"]}%";
+            $LoggInfo = $loggModel->getAllLoggInfo($givenLogSearchWord);
+        } else {
+            $givenLogSearchWord = "%%";
+            $LoggInfo = $loggModel->getAllLoggInfo($givenLogSearchWord);
+        }
+
         
         $data = json_encode(array("allLoggInfo" => $LoggInfo));
         echo $data;
